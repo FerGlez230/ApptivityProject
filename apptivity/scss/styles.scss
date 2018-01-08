@@ -1,0 +1,12 @@
+//Inicialización
+@import "compass";
+@import "compass/reset";
+//Jeet
+@import 'jeet/index.scss';
+//mixins
+@import "_mixins.scss";
+//Contenido de la página
+@import '_init.scss';
+@import '_home.scss';
+@import "include/_headerIndex.scss";
+
