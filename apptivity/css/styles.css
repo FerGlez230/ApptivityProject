@@ -86,16 +86,10 @@ div {
   clear: both; }
 
 .home h1 {
-  font-family: 'AardvarkCafe'; }
+  color: #3A3A3A;
+  font-size: 20px; }
 .home h2 {
-  font-family: 'Abstrec'; }
-.home h3 {
-  font-family: 'AYearWithoutRain'; }
-.home h4 {
-  font-family: 'Gabrielle'; }
-.home h5 {
-  font-family: 'Roboto-Regular'; }
-.home h6 {
-  font-family: 'Roboto-Light'; }
+  color: #353535;
+  font-size: 20px; }
 
 
