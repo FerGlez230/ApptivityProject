@@ -62,6 +62,10 @@ div{
 	box-sizing: border-box;
 }
 
+.contenedorComun{
+  @include column(30/34, $offset: 2/34, $gutter: 0);
+}
+
 .clearHelper{
   clear: both;
 }
