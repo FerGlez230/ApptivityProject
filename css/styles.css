@@ -1,0 +1,206 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font: inherit;
+  font-size: 100%;
+  vertical-align: baseline; }
+
+html {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  vertical-align: middle; }
+
+q, blockquote {
+  quotes: none; }
+  q:before, q:after, blockquote:before, blockquote:after {
+    content: "";
+    content: none; }
+
+a img {
+  border: none; }
+
+article, aside, details, figcaption, figure, footer, header, hgroup, main, menu, nav, section, summary {
+  display: block; }
+
+@font-face {
+  font-family: 'AardvarkCafe';
+  src: url("fonts/AardvarkCafe.eot?#iefix") format("embedded-opentype"), url("fonts/AardvarkCafe.woff") format("woff"), url("fonts/AardvarkCafe.ttf") format("truetype"), url("fonts/AardvarkCafe.svg#AardvarkCafe") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Abstrec';
+  src: url("fonts/Abstrecfonttfb.eot?#iefix") format("embedded-opentype"), url("fonts/Abstrecfonttfb.woff") format("woff"), url("fonts/Abstrecfonttfb.ttf") format("truetype"), url("fonts/Abstrecfonttfb.svg#Abstrecfonttfb") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'AYearWithoutRain';
+  src: url("fonts/AYearWithoutRain.eot?#iefix") format("embedded-opentype"), url("fonts/AYearWithoutRain.woff") format("woff"), url("fonts/AYearWithoutRain.ttf") format("truetype"), url("fonts/AYearWithoutRain.svg#AYearWithoutRain") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Gabrielle';
+  src: url("fonts/Gabrielle.eot?#iefix") format("embedded-opentype"), url("fonts/Gabrielle.woff") format("woff"), url("fonts/Gabrielle.ttf") format("truetype"), url("fonts/Gabrielle.svg#Gabrielle") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url("fonts/Roboto-Regular.eot?#iefix") format("embedded-opentype"), url("fonts/Roboto-Regular.woff") format("woff"), url("fonts/Roboto-Regular.ttf") format("truetype"), url("fonts/Roboto-Regular.svg#Roboto-Regular") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+@font-face {
+  font-family: 'Roboto-Light';
+  src: url("fonts/Roboto-Light.eot?#iefix") format("embedded-opentype"), url("fonts/Roboto-Light.woff") format("woff"), url("fonts/Roboto-Light.ttf") format("truetype"), url("fonts/Roboto-Light.svg#Roboto-Light") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+img {
+  max-width: 100%; }
+
+div {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+.contenedorComun {
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 88.23529%;
+  margin-left: 5.88235%;
+  margin-right: 0%; }
+  .contenedorComun::after {
+    content: '';
+    display: table;
+    clear: both; }
+  .contenedorComun:last-child {
+    margin-right: 0%; }
+
+.clearHelper {
+  clear: both; }
+
+.headerIndex {
+  padding-top: 15px; }
+  .headerIndex .centro {
+    -ms-display: flex;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+  .headerIndex .logo {
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 20%;
+    margin-left: 0%;
+    margin-right: 0%; }
+    .headerIndex .logo::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .headerIndex .logo:last-child {
+      margin-right: 0%; }
+    .headerIndex .logo .imagen {
+      float: left;
+      clear: none;
+      text-align: inherit;
+      width: 50%;
+      margin-left: 0%;
+      margin-right: 0%;
+      -webkit-transition: all .8s ease-in-out;
+      /* safari - Chrome*/
+      -moz-transition: all .8s ease-in-out;
+      /* Firefox */
+      -o-transition: all .8s ease-in-out;
+      /* Opera */
+      transition: all .8s ease-in-out; }
+      .headerIndex .logo .imagen::after {
+        content: '';
+        display: table;
+        clear: both; }
+      .headerIndex .logo .imagen:last-child {
+        margin-right: 0%; }
+    .headerIndex .logo .imagen:hover {
+      cursor: pointer;
+      -webkit-transform: rotate(360deg);
+      /* safari - Chrome*/
+      -moz-transform: rotate(360deg);
+      /* Firefox */
+      -o-transform: rotate(360deg);
+      /* Opera */
+      -ms-transform: rotate(360deg);
+      transform: rotate(360deg); }
+    .headerIndex .logo .texto {
+      float: left;
+      clear: none;
+      text-align: inherit;
+      width: 50%;
+      margin-left: 0%;
+      margin-right: 0%;
+      text-align: center; }
+      .headerIndex .logo .texto::after {
+        content: '';
+        display: table;
+        clear: both; }
+      .headerIndex .logo .texto:last-child {
+        margin-right: 0%; }
+      .headerIndex .logo .texto a {
+        font-family: 'AYearWithoutRain';
+        color: #EB363C;
+        font-size: 1.5em;
+        text-decoration: none; }
+  .headerIndex .menu {
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+    float: right; }
+    .headerIndex .menu::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .headerIndex .menu:last-child {
+      margin-right: 0%; }
+    .headerIndex .menu ul {
+      float: right;
+      cursor: default; }
+    .headerIndex .menu li {
+      display: inline-block;
+      padding-left: 25px;
+      padding-right: 25px; }
+    .headerIndex .menu a {
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      text-decoration: none;
+      font-family: 'AardvarkCafe';
+      color: #7F7F7F;
+      font-size: 1.5em; }
+    .headerIndex .menu a:hover {
+      color: #353535; }
+
+
