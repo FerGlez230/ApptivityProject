@@ -2,7 +2,7 @@
 {
 	.contenedor
 	{
-		@include column(1/3, $offset: 1/4, $gutter: 0);
+		@include column(1/3, $offset: 1/3, $gutter: 0);
 		li
 		{
 			margin-top: 1em;
