@@ -104,8 +104,10 @@ div {
   .headerIndex .centro {
     -ms-display: flex;
     display: -webkit-box;
+    display: -webkit-flex;
     display: flex;
     -webkit-box-align: center;
+    -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center; }
   .headerIndex .logo {
@@ -202,5 +204,147 @@ div {
       font-size: 1.5em; }
     .headerIndex .menu a:hover {
       color: #353535; }
+
+.headerRegistro .contenedorGeneral {
+  height: 9em; }
+  .headerRegistro .contenedorGeneral .contenedor {
+    height: 6.7em;
+    background-color: #FD9927; }
+    .headerRegistro .contenedorGeneral .contenedor .ubicar img {
+      max-width: 9em;
+      display: block;
+      margin: auto;
+      padding-top: 2em; }
+
+.RegistroUsuario .contenedor, .RegistroEstablecimiento .contenedor {
+  margin-top: 3%; }
+  .RegistroUsuario .contenedor h1, .RegistroEstablecimiento .contenedor h1 {
+    font-family: 'AardvarkCafe';
+    font-size: 2.5em;
+    color: #353535;
+    text-align: center; }
+  .RegistroUsuario .contenedor .contenedorformulario, .RegistroEstablecimiento .contenedor .contenedorformulario {
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 33.33333%;
+    margin-left: 33.33333%;
+    margin-right: 0%; }
+    .RegistroUsuario .contenedor .contenedorformulario::after, .RegistroEstablecimiento .contenedor .contenedorformulario::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .RegistroUsuario .contenedor .contenedorformulario:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario:last-child {
+      margin-right: 0%; }
+    .RegistroUsuario .contenedor .contenedorformulario li, .RegistroEstablecimiento .contenedor .contenedorformulario li {
+      margin-top: 1em;
+      margin-bottom: 1em; }
+    .RegistroUsuario .contenedor .contenedorformulario input, .RegistroEstablecimiento .contenedor .contenedorformulario input {
+      font-family: AYearWithoutRain;
+      font-size: 1em;
+      width: 18em;
+      display: block;
+      margin: auto; }
+    .RegistroUsuario .contenedor .contenedorformulario h2, .RegistroUsuario .contenedor .contenedorformulario h3, .RegistroEstablecimiento .contenedor .contenedorformulario h2, .RegistroEstablecimiento .contenedor .contenedorformulario h3 {
+      font-family: AYearWithoutRain;
+      font-size: 1em;
+      color: #757575;
+      text-align: center; }
+    .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario {
+      width: 18em;
+      height: 4em;
+      display: block;
+      margin: auto; }
+      .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario h3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario h3 {
+        padding-bottom: .5em;
+        font-size: .8em; }
+      .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario input {
+        width: 6.5em;
+        display: block;
+        margin: auto;
+        color: #757575; }
+      .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12 {
+        float: left;
+        clear: none;
+        text-align: inherit;
+        width: 50%;
+        margin-left: 0%;
+        margin-right: 0%;
+        padding-bottom: 1em; }
+        .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12::after {
+          content: '';
+          display: table;
+          clear: both; }
+        .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12:last-child {
+          margin-right: 0%; }
+    .RegistroUsuario .contenedor .contenedorformulario .contenedordias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias {
+      width: 18em;
+      display: block;
+      margin: auto; }
+      .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 {
+        float: left;
+        clear: none;
+        text-align: inherit;
+        width: 25%;
+        margin-left: 0%;
+        margin-right: 0%;
+        padding-bottom: 1em; }
+        .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4::after, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3::after {
+          content: '';
+          display: table;
+          clear: both; }
+        .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4:last-child, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3:last-child {
+          margin-right: 0%; }
+        .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 input, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 input {
+          background: #FFFFFF;
+          color: #757575;
+          border: 1px solid #757575;
+          border-radius: none;
+          width: 4em; }
+        .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 input:hover, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 input:hover {
+          background: #757575;
+          color: #FFFFFF; }
+      .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 {
+        float: left;
+        clear: none;
+        text-align: inherit;
+        width: 33.33333%;
+        margin-left: 0%;
+        margin-right: 0%; }
+        .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3::after {
+          content: '';
+          display: table;
+          clear: both; }
+        .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3:last-child {
+          margin-right: 0%; }
+    .RegistroUsuario .contenedor .contenedorformulario #agregarhorario, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario {
+      float: left;
+      clear: none;
+      text-align: inherit;
+      width: 20%;
+      margin-left: 60%;
+      margin-right: 0%; }
+      .RegistroUsuario .contenedor .contenedorformulario #agregarhorario::after, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario::after {
+        content: '';
+        display: table;
+        clear: both; }
+      .RegistroUsuario .contenedor .contenedorformulario #agregarhorario:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario:last-child {
+        margin-right: 0%; }
+      .RegistroUsuario .contenedor .contenedorformulario #agregarhorario input, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario input {
+        background: none;
+        color: #36A6F8;
+        font-size: 1em;
+        width: 7em;
+        border: none;
+        padding-bottom: 1em; }
+      .RegistroUsuario .contenedor .contenedorformulario #agregarhorario input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario input:hover {
+        text-decoration: underline; }
+    .RegistroUsuario .contenedor .contenedorformulario textarea, .RegistroEstablecimiento .contenedor .contenedorformulario textarea {
+      width: 18em;
+      font-family: AYearWithoutRain;
+      color: #757575;
+      display: block;
+      margin: auto;
+      font-size: 1em; }
 
 
