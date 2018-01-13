@@ -49,6 +49,10 @@ html(lang="es")
 								textarea( rows="10", placeholder="Descripción", name="descripcion", maxlength="1200")
 							li
 								h2 Ubicación del establecimiento
+							li 
+								input(type="button", value="Mapa", name="Mapa" onclick="FindMe()")
+								#map
+								#mapa
 							li
 								input(type='text', placeholder='Apellido paterno' name='ApellidoPaterno')
 							li
@@ -57,3 +61,5 @@ html(lang="es")
 								input(type='text', placeholder='Contraseña' name='Contrasena')
 							li
 								input(type='text', placeholder='Confirmar contraseña' name='ConfirmarContrasena')
+script(src='minjs/general-dist.js?version=' + version type='text/javascript')
+script( async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap")

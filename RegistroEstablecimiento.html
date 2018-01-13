@@ -85,6 +85,11 @@
               <li>
                 <h2>Ubicación del establecimiento</h2>
               </li>
+              <li> 
+                <input type="button" value="Mapa" name="Mapa" onclick="FindMe()">
+                <div id="map"></div>
+                <div id="mapa"></div>
+              </li>
               <li>
                 <input type="text" placeholder="Apellido paterno" name="ApellidoPaterno">
               </li>
@@ -104,3 +109,5 @@
     </div>
   </body>
 </html>
+<script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&amp;key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&amp;callback=initMap"></script>

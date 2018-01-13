@@ -346,5 +346,8 @@ div {
       display: block;
       margin: auto;
       font-size: 1em; }
+    .RegistroUsuario .contenedor .contenedorformulario #mapa, .RegistroEstablecimiento .contenedor .contenedorformulario #mapa {
+      height: 500px;
+      width: 700px; }
 
 
