@@ -1,0 +1,24 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body
+		include include/headerRegistro
+		.RegistroUsuario
+			.contenedor
+				h1 Inicia sesión 
+				.contenedorformulario
+					ul
+						li
+							input(type='text', placeholder='Username o correo electrónico' name='UsuarioCorreo')
+						li
+							input(type='text', placeholder='Contraseña' name='Username')
+						li 
+							#vinculo
+								input(type='checkbox', value='Acepto', name='TerminosYCondiciones')
+								h3 Si no tienes cuenta 									
+									a(href='https://www.youtube.com/?hl=es-419&gl=MX')  Registrate
+						li 
+							#registro
+									input(type='button', value='INICIAR SESIÓN →', name='InicioSesion')
+		include include/footer

@@ -27,13 +27,23 @@
           <form method="POST" action="" name="RegistroUsuarioFormulario">
             <ul>
               <li>
-                <input type="text" placeholder="Nombre" name="Nombre">
+                <input type="text" placeholder="Nombre de usuario" name="Usuario">
               </li>
               <li>
-                <input type="text" placeholder="Apellido paterno" name="ApellidoPaterno">
+                <div class="contenedorApellidos">
+                  <div id="apellidos">
+                    <input type="text" placeholder="Apellido paterno" name="ApellidoPaterno">
+                  </div>
+                  <div id="apellidos">
+                    <input type="text" placeholder="Apellido materno" name="ApellidoMaterno">
+                  </div>
+                </div>
               </li>
               <li>
-                <input type="text" placeholder="Apellido materno" name="ApellidoMaterno">
+                <input type="text" placeholder="Username" name="Username">
+              </li>
+              <li>
+                <input type="text" placeholder="Correo electrónico" name="CorreoElectronico">
               </li>
               <li>
                 <input type="text" placeholder="Contraseña" name="Contrasena">
@@ -41,10 +51,22 @@
               <li>
                 <input type="text" placeholder="Confirmar contraseña" name="ConfirmarContrasena">
               </li>
+              <li> 
+                <div id="vinculo">
+                  <input type="checkbox" value="Acepto" name="TerminosYCondiciones">
+                  <h3>Acepto los <a href="https://www.youtube.com/?hl=es-419&amp;gl=MX">términos y condiciones</a></h3>
+                </div>
+              </li>
+              <li> 
+                <div id="registro">
+                  <input type="button" value="REGISTRATE →" name="Registrar">
+                </div>
+              </li>
             </ul>
           </form>
         </div>
       </div>
     </div>
+    <div class="footer"></div>
   </body>
 </html>
