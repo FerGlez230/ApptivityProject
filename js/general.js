@@ -70,4 +70,15 @@ function FindMe()
 		})
 	}
 }
-
+function ValidarRegistroEstablecimiento()
+{
+	var Nombre=document.RegistroEstablecimientoFormulario.NombreEstablecimiento.value;
+	var Folio=document.RegistroEstablecimientoFormulario.Folio.value;
+	var Usuario=document.RegistroEstablecimientoFormulario.Usuario.value;
+	var ApellidoMaterno=document.RegistroEstablecimientoFormulario.ApellidoMaterno.value;
+	var ApellidoPaterno=document.RegistroEstablecimientoFormulario.ApellidoPaterno.value;
+	var Username=document.RegistroEstablecimientoFormulario.Username.value;
+	var CorreoElectronico=document.RegistroEstablecimientoFormulario.CorreoElectronico.value;
+	var Contrasena=document.RegistroEstablecimientoFormulario.Contrasena.value;
+	var ConfirmarContrasena=document.RegistroEstablecimientoFormulario.ConfirmarContrasena.value;
+}
