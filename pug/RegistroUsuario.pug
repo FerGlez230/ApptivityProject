@@ -6,17 +6,32 @@ html(lang="es")
 		include include/headerRegistro
 		.RegistroUsuario
 			.contenedor
-				h1 Registrate como usuario
-
-				form(method="POST" action="" name="RegistroUsuarioFormulario" )
-					ul
-						li
-							input(type='text', placeholder='Nombre' name='Nombre')
-						li
-							input(type='text', placeholder='Apellido paterno' name='ApellidoPaterno')
-						li
-							input(type='text', placeholder='Apellido materno' name='ApellidoMaterno')
-						li
-							input(type='text', placeholder='Contraseña' name='Contrasena')
-						li
-							input(type='text', placeholder='Confirmar contraseña' name='ConfirmarContrasena')
+				h1 Regístrate como usuario
+				.contenedorformulario
+					form(method="POST" action="" name="RegistroUsuarioFormulario" )
+						ul
+							li
+								input(type='text', placeholder='Nombre de usuario' name='Usuario')
+							li
+								.contenedorApellidos
+									#apellidos
+										input(type='text', placeholder='Apellido paterno' name='ApellidoPaterno')
+									#apellidos
+										input(type='text', placeholder='Apellido materno' name='ApellidoMaterno')
+							li
+								input(type='text', placeholder='Username' name='Username')
+							li
+								input(type='text', placeholder='Correo electrónico' name='CorreoElectronico')
+							li
+								input(type='text', placeholder='Contraseña' name='Contrasena')
+							li
+								input(type='text', placeholder='Confirmar contraseña' name='ConfirmarContrasena')
+							li 
+								#vinculo
+									input(type='checkbox', value='Acepto', name='TerminosYCondiciones')
+									h3 Acepto los 
+										a(href='https://www.youtube.com/?hl=es-419&gl=MX') términos y condiciones
+							li 
+								#registro
+									input(type='button', value='REGISTRATE →', name='Registrar')
+		include include/footer

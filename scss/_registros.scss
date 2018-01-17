@@ -1,13 +1,11 @@
-.RegistroUsuario
+.RegistroUsuario, .RegistroEstablecimiento
 {
+	overflow: hidden;
+	padding-bottom: 3%;
 	.contenedor
 	{
-		@include column(1/3, $offset: 1/3, $gutter: 0);
-		li
-		{
-			margin-top: 1em;
-			margin-bottom: 1em;
-		}
+		margin-top: 3%;
+
 		h1
 		{
 			font-family: 'AardvarkCafe';
@@ -15,7 +13,177 @@
 			color:$oscuro;
 			text-align: center;
 		}
-	}
-	
+		.contenedorformulario
+		{
+			@include column(1/3, $offset: 1/3, $gutter: 0);
+			li
+			{
+				margin-top: 1em;
+				margin-bottom: 1em;
+			}
+			input
+			{
+				font-family: AYearWithoutRain;
+				font-size: 1em;
+				width: 18em;
+				display: block;
+				margin: auto;
+			}
+			h2,h3
+			{
+				font-family: AYearWithoutRain;
+				font-size: 1em;
+				color: $gris;
+				text-align: center;
+			}
+			.contenedorhorario
+			{
+				width: 18em;
+				height: 4em;
+				display: block;
+				margin: auto;
 
+				h3
+				{
+					padding-bottom: .5em;
+					font-size: .8em;
+				}
+				input
+				{
+					width: 6.5em;	
+					display: block;
+					margin: auto;
+					color: $gris;
+
+				}
+				.parte12
+				{
+					@include column(1/2, $offset: 0, $gutter: 0);
+					padding-bottom: 1em;
+				}
+			}
+			.contenedordias
+			{
+				width: 18em;
+				display: block;
+				margin: auto;
+				.contenedor4, .contenedor3
+				{
+					@include column(1/4, $offset: 0, $gutter: 0);
+					input
+					{
+						background: $blanco;
+						color:$gris;
+						border: 1px solid $gris;
+						border-radius: none;
+						width: 4em;
+					}
+					input:hover
+					{
+						background: $gris;
+						color:$blanco;
+					}
+					padding-bottom: 1em;
+				}
+				.contenedor3
+				{
+					@include column(1/3, $offset: 0, $gutter: 0);
+				}
+			}
+			#agregarhorario
+			{
+				@include column(1/5, $offset: 3/5, $gutter: 0);
+				input
+				{
+					background: none;
+					color: $azul;
+					font-size: 1em;
+					width: 7em;
+					border: none;
+					padding-bottom: 1em;
+				}
+				input:hover
+				{
+					text-decoration: underline;
+				}
+			}
+			textarea
+			{
+				width: 18em;
+				font-family: AYearWithoutRain;
+				color: $gris;
+				display: block;
+				margin: auto;
+				font-size: 1em;
+			}
+			#mapa
+			{
+				height: 500px;
+				width: 700px;
+				display: block;
+				margin: auto;
+			}
+			.contenedorApellidos
+			{
+				//height: 2em;
+				width: 18em;
+				display: block;
+				margin: auto;
+				#apellidos
+				{
+					@include column(1/2, $offset: 0, $gutter: 0);
+					padding-bottom: 1em;
+					input
+					{
+						width:8.5em;
+					}
+				}
+			}
+
+			#vinculo
+			{
+				width: 18em;
+				display: block;
+				margin: auto;
+				input
+				{
+					display: inline-block;
+					width: 1em;
+				}
+				h3
+				{
+					display:inline-block;
+				}
+				a
+				{ 
+					text-decoration: none;
+					color: $azul;
+					display: inline-block;
+				}
+				a:hover
+				{
+					text-decoration: underline;
+				}
+			}
+			#registro
+			{
+				
+				input
+				{
+					background: $azul;
+					color:$oscuro;
+					border: 1px solid $azul;
+					border-radius: none;
+					width: 18em;
+					font-weight: 2em;
+				}
+				input:hover
+				{
+					background: $verde;
+					border-color: $verde;
+				}
+			}
+		}
+	}
 }
+

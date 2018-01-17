@@ -9,5 +9,12 @@
 @import '_init.scss';
 @import '_home.scss';
 @import "partial/_headerIndex.scss";
+<<<<<<< HEAD
 @import "partial/_headerRegistro.scss";
+=======
+//Registro
+@import 'partial/_headerRegistro.scss';
+@import '_registros.scss';
+@import 'partial/_footer.scss';
+>>>>>>> 099d56b81fd5d572dec28316521d440a2b9b192d
 

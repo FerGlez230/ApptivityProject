@@ -1,0 +1,82 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body
+		include include/headerRegistro
+		.RegistroUsuario
+			.contenedor
+				h1 Registra tu establecimiento
+				.contenedorformulario
+					form(method="POST" action="" name="RegistroEsatebleciemientoFormulario" )
+						ul
+							li
+								input(type='text', placeholder='Nombre del establecimiento' name='NombreEstablecimiento')
+							li
+								input(type='text', placeholder='Número de folio' name='Folio')
+							li
+								.contenedorhorario
+									.parte12
+										h2 Hora inicio
+										h3 (hrs:min am/pm)
+										input(type='time', name='HoraInicio', min="00:00", max="23:59", step="60")
+									.parte12
+										h2 Hora termino
+										h3 (hrs:min am/pm)
+										input(type='time', name='HoraTermino')
+							li
+								h2 Dias de operación
+							li
+								.contenedordias
+									.contenedor4
+										input(type="button", value="Lunes", name="lunes")
+									.contenedor4
+										input(type="button", value="Martes", name="martes")
+									.contenedor4
+										input(type="button", value="Miercoles", name="miercoles")
+									.contenedor4
+										input(type="button", value="Jueves", name="jueves")
+									.contenedor3
+										input(type="button", value="Viernes", name="viernes")
+									.contenedor3
+										input(type="button", value="Sábado", name="sabado")
+									.contenedor3
+										input(type="button", value="Domingo", name="domingo")
+							li 
+								#agregarhorario
+									input(type="button", value="Agregar horario", name="horario")
+							li
+								textarea( rows="10", placeholder="Descripción", name="descripcion", maxlength="1200")
+							li
+								h2 Ubicación del establecimiento
+							li 
+								input(type="button", value="Obtener mi ubicación actual", name="Mapa" onclick="FindMe()")
+								#map
+								#mapa
+							li
+								input(type='text', placeholder='Nombre de usuario' name='Usuario')
+							li
+								.contenedorApellidos
+									#apellidos
+										input(type='text', placeholder='Apellido paterno' name='ApellidoPaterno')
+									#apellidos
+										input(type='text', placeholder='Apellido materno' name='ApellidoMaterno')
+							li
+								input(type='text', placeholder='Username' name='Username')
+							li
+								input(type='text', placeholder='Correo electrónico' name='CorreoElectronico')
+							li
+								input(type='text', placeholder='Contraseña' name='Contrasena')
+							li
+								input(type='text', placeholder='Confirmar contraseña' name='ConfirmarContrasena')
+							li 
+								#vinculo
+									input(type='checkbox', value='Acepto', name='TerminosYCondiciones')
+									h3 Acepto los 
+										a(href='https://www.youtube.com/?hl=es-419&gl=MX') términos y condiciones
+							li 
+								#registro
+									input(type='button', value='REGISTRA TU ESTABLECIMIENTO →', name='Registrar')
+		include include/footer
+script(src='minjs/general-dist.js?version=' + version type='text/javascript')
+script( async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap")
