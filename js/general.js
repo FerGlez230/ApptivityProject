@@ -1,20 +1,8 @@
 //@prepros-prepend jquery-3.1.1.js
 
-<<<<<<< HEAD
 $(document).ready(function(){
-
   	$('body').css({ 'width': $(window).width() + "px" });
-
 });
-=======
-$(document).ready(
-	/*function(){
-  		alert("Hola");
- 		$('.headerIndex').css({ 'width': $(window).width() + "px" });
-	}*/
-
-);
-
 
 function FindMe()
 {
@@ -78,4 +66,3 @@ function FindMe()
 	}
 }
 
->>>>>>> 099d56b81fd5d572dec28316521d440a2b9b192d
