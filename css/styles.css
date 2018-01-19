@@ -100,6 +100,7 @@ div {
   clear: both; }
 
 .home .contenedor {
+  z-index: 1;
   padding-top: 30px;
   float: left;
   clear: none;
@@ -119,7 +120,8 @@ div {
   text-align: inherit;
   width: 50%;
   margin-left: 10%;
-  margin-right: 0%; }
+  margin-right: 0%;
+  position: relative; }
   .home .titulo::after {
     content: '';
     display: table;
@@ -349,7 +351,7 @@ div {
   .home .formularioUsuario form .right {
     float: right; }
   .home .formularioUsuario form .checka {
-    padding-top: 10px;
+    padding-top: 5px;
     -ms-display: flex;
     display: -webkit-box;
     display: flex;
@@ -364,6 +366,7 @@ div {
     .home .formularioUsuario form .checka input[type="checkbox"]:hover {
       cursor: pointer; }
     .home .formularioUsuario form .checka label {
+      font-size: 1em;
       font-family: 'AYearWithoutRain';
       color: #353535; }
     .home .formularioUsuario form .checka a {
@@ -372,6 +375,7 @@ div {
       -moz-transition: all 0.4s ease-in-out;
       -webkit-transition: all 0.4s ease-in-out;
       text-decoration: none;
+      font-size: 1em;
       font-family: 'AYearWithoutRain';
       color: #36A6F8;
       padding-left: 4px; }
@@ -381,11 +385,13 @@ div {
     float: left;
     clear: none;
     text-align: inherit;
-    width: 100%;
-    margin-left: 0%;
+    width: 60%;
+    margin-left: 20%;
     margin-right: 0%;
     padding-top: 10px;
-    text-align: center; }
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
     .home .formularioUsuario form .boton::after {
       content: '';
       display: table;
@@ -393,11 +399,43 @@ div {
     .home .formularioUsuario form .boton:last-child {
       margin-right: 0%; }
     .home .formularioUsuario form .boton input {
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      color: #000000;
       text-align: center;
-      width: 60%;
       background-color: #FD9927;
       border: 0px;
-      border-radius: 15px; }
+      border-radius: 10px; }
+      .home .formularioUsuario form .boton input:hover {
+        background-color: #7F7F7F;
+        color: #FFFFFF;
+        cursor: pointer; }
+  .home .formularioUsuario form .mensajeInicio {
+    padding-top: 7px;
+    padding-bottom: 20px;
+    text-align: center; }
+    .home .formularioUsuario form .mensajeInicio label {
+      font-size: .8em;
+      font-family: 'AYearWithoutRain';
+      color: #353535; }
+    .home .formularioUsuario form .mensajeInicio a {
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      text-decoration: none;
+      font-size: .8em;
+      font-family: 'AYearWithoutRain';
+      color: #36A6F8;
+      padding-left: 4px; }
+      .home .formularioUsuario form .mensajeInicio a:hover {
+        color: #3AC451; }
+.home .local {
+  position: absolute;
+  margin-top: 16%;
+  z-index: -1; }
 
 .headerIndex {
   padding-top: 15px; }
@@ -699,11 +737,23 @@ div {
         border-color: #3AC451; }
 
 .footer {
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
   height: 5em;
   background-color: #FD9927;
   width: 100%;
   /*position:relative; 
   bottom:0em; 
   left:0em; */ }
+  .footer::after {
+    content: '';
+    display: table;
+    clear: both; }
+  .footer:last-child {
+    margin-right: 0%; }
 
 
