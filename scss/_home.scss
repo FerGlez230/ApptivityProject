@@ -1,2 +1,90 @@
 .home{
+
+	.contenedor{
+		padding-top: 30px;
+		@include column(1, $offset: 0, $gutter: 0);
+	}
+
+	.titulo{
+		@include column(15/30, $offset: 3/30, $gutter: 0);
+
+		h1{
+			cursor: default;
+			padding-top: 30px;
+			font-family: 'AYearWithoutRain';
+			font-size: 2.6em;
+		}
+	}
+
+	.contenedorRegistro{
+		@include column(12/30, $offset: 0, $gutter: 0);
+		padding-top: 10px;
+		border-radius: 15px;
+		background-color: $suave;
+	}
+
+	.registro{
+		@include column(11/12, $offset: 1/24, $gutter: 0);
+	}
+
+	.registrate{
+		-ms-display: flex;
+		display: flex;
+		align-items: center;
+
+		.icono{
+			img{
+				width: 90%;	
+			}
+		}
+
+		.textoEstablecimiento{
+			padding-top: 4px;
+			h1{
+				cursor: default;
+				font-family: 'Abstrec';
+				font-size: 1em;
+				padding-bottom: 16px;
+				color: $negro;
+			}
+			
+			ul{
+				display:inline-block;
+			    margin-left:auto;
+			    margin-right:auto;
+			    text-align:center;
+				cursor: default;
+				max-width: auto;
+			}
+
+			li{
+				-ms-display: flex;
+				display: flex;
+				align-items: center;
+				display: inline-block;
+				font-family: 'Abstrec';
+			}
+
+			a{
+				text-decoration: none;
+				font-family: 'Abstrec';
+				color: $rojo;
+			}
+
+			i{
+				transition: all .4s ease-in-out;
+				font-size: 1.5em;
+				color: $rojo;
+			}
+
+			ul:hover{
+				i{
+					padding-left: 10px;
+				}
+			}
+
+		}
+
+	}
+
 }

@@ -8,22 +8,22 @@ html(lang="es")
 			.contenedor
 				h1 Registra tu establecimiento
 				.contenedorformulario
-					form(method="POST" action="" name="RegistroEstableciemientoFormulario" )
+					form(method="POST" action="" name="RegistroEstableciemientoFormulario" onsubmit="ValidarRegistroEstablecimiento()")
 						ul
 							li
 								input(type='text', placeholder='Nombre del establecimiento' name='NombreEstablecimiento')
 							li
-								input(type='text', placeholder='Número de folio' name='Folio')
+								input(type='text', placeholder='Número de folio' name='Folio' id="Folio")
 							li
 								.contenedorhorario
 									.parte12
 										h2 Hora inicio
 										h3 (hrs:min am/pm)
-										input(type='time', name='HoraInicio', min="00:00", max="23:59", step="60")
+										input(type='time', name='HoraInicio', min="00:00", max="23:59", step="60" id="HoraInicio")
 									.parte12
 										h2 Hora termino
 										h3 (hrs:min am/pm)
-										input(type='time', name='HoraTermino')
+										input(type='time', name='HoraTermino' id="HoraTermino")
 							li
 								h2 Dias de operación
 							li
@@ -76,7 +76,7 @@ html(lang="es")
 										a(href='https://www.youtube.com/?hl=es-419&gl=MX') términos y condiciones
 							li 
 								#registro
-									input(type='button', value='REGISTRA TU ESTABLECIMIENTO →', name='Registrar')
+									input(type='submit', value='REGISTRA TU ESTABLECIMIENTO →', name='Registrar')
 		include include/footer
 script(src='minjs/general-dist.js?version=' + version type='text/javascript')
 script( async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap")

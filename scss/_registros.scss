@@ -97,6 +97,7 @@
 				@include column(1/5, $offset: 3/5, $gutter: 0);
 				input
 				{
+					@include transition(0.4s);
 					background: none;
 					color: $azul;
 					font-size: 1em;
@@ -107,6 +108,7 @@
 				input:hover
 				{
 					text-decoration: underline;
+					cursor: pointer;
 				}
 			}
 			textarea
@@ -127,7 +129,6 @@
 			}
 			.contenedorApellidos
 			{
-				//height: 2em;
 				width: 18em;
 				display: block;
 				margin: auto;
@@ -172,6 +173,7 @@
 				
 				input
 				{
+					@include transition(0.4s);
 					background: $azul;
 					color:$oscuro;
 					border: 1px solid $azul;
@@ -183,6 +185,7 @@
 				{
 					background: $verde;
 					border-color: $verde;
+					cursor: pointer;
 				}
 			}
 		}

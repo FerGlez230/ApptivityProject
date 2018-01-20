@@ -24,25 +24,25 @@
       <div class="contenedor">
         <h1>Registra tu establecimiento</h1>
         <div class="contenedorformulario">
-          <form method="POST" action="" name="RegistroEstableciemientoFormulario">
+          <form method="POST" action="" name="RegistroEstableciemientoFormulario" onsubmit="ValidarRegistroEstablecimiento()">
             <ul>
               <li>
                 <input type="text" placeholder="Nombre del establecimiento" name="NombreEstablecimiento">
               </li>
               <li>
-                <input type="text" placeholder="Número de folio" name="Folio">
+                <input type="text" placeholder="Número de folio" name="Folio" id="Folio">
               </li>
               <li>
                 <div class="contenedorhorario">
                   <div class="parte12">
                     <h2>Hora inicio</h2>
                     <h3>(hrs:min am/pm)</h3>
-                    <input type="time" name="HoraInicio" min="00:00" max="23:59" step="60">
+                    <input type="time" name="HoraInicio" min="00:00" max="23:59" step="60" id="HoraInicio">
                   </div>
                   <div class="parte12">
                     <h2>Hora termino</h2>
                     <h3>(hrs:min am/pm)</h3>
-                    <input type="time" name="HoraTermino">
+                    <input type="time" name="HoraTermino" id="HoraTermino">
                   </div>
                 </div>
               </li>
@@ -123,7 +123,7 @@
               </li>
               <li> 
                 <div id="registro">
-                  <input type="button" value="REGISTRA TU ESTABLECIMIENTO →" name="Registrar">
+                  <input type="submit" value="REGISTRA TU ESTABLECIMIENTO →" name="Registrar">
                 </div>
               </li>
             </ul>
