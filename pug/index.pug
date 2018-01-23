@@ -13,7 +13,7 @@ html(lang="es")
 						.registrate
 							.icono
 								img(src="img/registro.png")
-							.textoEstablecimiento
+							.textoEstablecimiento.texto
 								h1 Publica tu Establecimiento
 								ul
 									li
@@ -21,6 +21,46 @@ html(lang="es")
 									li
 										a(href="")
 											i.fa.fa-angle-right(aria-hidden='true')
+						.opcion
+							.col922
+							.col422
+								h3 o Bien
+							.col922
+
+						.usuario
+							.icono
+								img(src="img/usuario.png")
+							.textoUsuario.texto
+								h1 Registra tu cuenta de Usuario
+
+						.formularioUsuario
+							form
+								.col11
+									input(type="text" name="nombre" placeholder="Nombre" id="Usuario")
+								.col12
+									input(type="text" name="app" placeholder="Apellido Paterno")
+								.col12
+									input.right(type="text" name="apm" placeholder="Apellido Materno")
+								.col11
+									input(type="text" name="usuario" placeholder="Nombre de Usuario")
+								.col11
+									input(type="email" name="email" placeholder="Correo Electrónico")
+								.col11
+									input(type="password" name="password" placeholder="Contraseña")
+								.checka.col11
+									input(type="checkbox" name="valida")
+									label Acepto los
+									a(href="#Termino") Términos y Condiciones
+								.boton
+									input(type="submit" name="registroUsuario" value="Regístrate como Usuario")
+								.mensajeInicio.col11
+									label O bien si ya tienes cuenta
+									a(href="#InicioSesion") Inicia Sesión
+		.local
+			img(src="img/local.jpg")
+
+		include include/footer
+
 
 
 

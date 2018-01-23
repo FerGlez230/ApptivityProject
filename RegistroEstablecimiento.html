@@ -24,13 +24,10 @@
       <div class="contenedor">
         <h1>Registra tu establecimiento</h1>
         <div class="contenedorformulario">
-          <form method="POST" action="" name="RegistroEstableciemientoFormulario" onsubmit="ValidarRegistroEstablecimiento()">
+          <form method="POST" action="" name="RegistroEstablecimientoFormulario" onsubmit="return ValidarRegistroEstablecimiento()">
             <ul>
               <li>
                 <input type="text" placeholder="Nombre del establecimiento" name="NombreEstablecimiento">
-              </li>
-              <li>
-                <input type="text" placeholder="Número de folio" name="Folio" id="Folio">
               </li>
               <li>
                 <div class="contenedorhorario">
@@ -47,30 +44,37 @@
                 </div>
               </li>
               <li>
-                <h2>Dias de operación</h2>
+                <h2>Operatividad de días</h2>
               </li>
               <li>
                 <div class="contenedordias">
                   <div class="contenedor4">
-                    <input type="button" value="Lunes" name="lunes">
+                    <input type="checkbox" value="Lunes" name="lunes" id="lunes">
+                    <label class="dias" for="lunes">Lunes    </label>
                   </div>
                   <div class="contenedor4">
-                    <input type="button" value="Martes" name="martes">
+                    <input type="checkbox" value="Martes" name="martes" id="martes">
+                    <label class="dias" for="martes">Martes   </label>
                   </div>
                   <div class="contenedor4">
-                    <input type="button" value="Miercoles" name="miercoles">
+                    <input type="checkbox" value="Miercoles" name="miercoles" id="miercoles">
+                    <label class="dias" for="miercoles">Miércoles</label>
                   </div>
                   <div class="contenedor4">
-                    <input type="button" value="Jueves" name="jueves">
+                    <input type="checkbox" value="Jueves" name="jueves" id="jueves">
+                    <label class="dias" for="jueves">Jueves</label>
                   </div>
                   <div class="contenedor3">
-                    <input type="button" value="Viernes" name="viernes">
+                    <input type="checkbox" value="Viernes" name="viernes" id="viernes">
+                    <label class="dias" for="viernes">Viernes</label>
                   </div>
                   <div class="contenedor3">
-                    <input type="button" value="Sábado" name="sabado">
+                    <input type="checkbox" value="Sábado" name="sabado" id="sabado">
+                    <label class="dias" for="sabado">Sábado</label>
                   </div>
                   <div class="contenedor3">
-                    <input type="button" value="Domingo" name="domingo">
+                    <input type="checkbox" value="Domingo" name="domingo" id="domingo">
+                    <label class="dias" for="domingo">Domingo</label>
                   </div>
                 </div>
               </li>
@@ -91,7 +95,7 @@
                 <div id="mapa"></div>
               </li>
               <li>
-                <input type="text" placeholder="Nombre de usuario" name="Usuario">
+                <input type="text" placeholder="Nombre de usuario" name="Usuario" id="Usuario">
               </li>
               <li>
                 <div class="contenedorApellidos">
@@ -110,10 +114,10 @@
                 <input type="text" placeholder="Correo electrónico" name="CorreoElectronico">
               </li>
               <li>
-                <input type="text" placeholder="Contraseña" name="Contrasena">
+                <input type="password" placeholder="Contraseña" name="Contrasena">
               </li>
               <li>
-                <input type="text" placeholder="Confirmar contraseña" name="ConfirmarContrasena">
+                <input type="password" placeholder="Confirmar contraseña" name="ConfirmarContrasena">
               </li>
               <li> 
                 <div id="vinculo">

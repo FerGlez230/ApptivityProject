@@ -8,12 +8,10 @@ html(lang="es")
 			.contenedor
 				h1 Registra tu establecimiento
 				.contenedorformulario
-					form(method="POST" action="" name="RegistroEstableciemientoFormulario" onsubmit="ValidarRegistroEstablecimiento()")
+					form(method="POST" action="" name="RegistroEstablecimientoFormulario" onsubmit="return ValidarRegistroEstablecimiento()")
 						ul
 							li
 								input(type='text', placeholder='Nombre del establecimiento' name='NombreEstablecimiento')
-							li
-								input(type='text', placeholder='Número de folio' name='Folio' id="Folio")
 							li
 								.contenedorhorario
 									.parte12
@@ -25,23 +23,30 @@ html(lang="es")
 										h3 (hrs:min am/pm)
 										input(type='time', name='HoraTermino' id="HoraTermino")
 							li
-								h2 Dias de operación
+								h2 Operatividad de días
 							li
 								.contenedordias
 									.contenedor4
-										input(type="button", value="Lunes", name="lunes")
+										input(type="checkbox", value="Lunes", name="lunes", id="lunes")
+										label(for="lunes", class="dias") Lunes    
 									.contenedor4
-										input(type="button", value="Martes", name="martes")
+										input(type="checkbox", value="Martes", name="martes" id="martes")
+										label(for="martes", class="dias") Martes   
 									.contenedor4
-										input(type="button", value="Miercoles", name="miercoles")
+										input(type="checkbox", value="Miercoles", name="miercoles", id="miercoles")
+										label(for="miercoles", class="dias") Miércoles
 									.contenedor4
-										input(type="button", value="Jueves", name="jueves")
+										input(type="checkbox", value="Jueves", name="jueves", id="jueves")
+										label(for="jueves", class="dias") Jueves
 									.contenedor3
-										input(type="button", value="Viernes", name="viernes")
+										input(type="checkbox", value="Viernes", name="viernes" id="viernes")
+										label(for="viernes", class="dias") Viernes
 									.contenedor3
-										input(type="button", value="Sábado", name="sabado")
+										input(type="checkbox", value="Sábado", name="sabado", id="sabado")
+										label(for="sabado", class="dias") Sábado
 									.contenedor3
-										input(type="button", value="Domingo", name="domingo")
+										input(type="checkbox", value="Domingo", name="domingo", id="domingo")
+										label(for="domingo", class="dias") Domingo
 							li 
 								#agregarhorario
 									input(type="button", value="Agregar horario", name="horario")
@@ -54,7 +59,7 @@ html(lang="es")
 								#map
 								#mapa
 							li
-								input(type='text', placeholder='Nombre de usuario' name='Usuario')
+								input(type='text', placeholder='Nombre de usuario' name='Usuario' id="Usuario")
 							li
 								.contenedorApellidos
 									#apellidos
@@ -66,9 +71,9 @@ html(lang="es")
 							li
 								input(type='text', placeholder='Correo electrónico' name='CorreoElectronico')
 							li
-								input(type='text', placeholder='Contraseña' name='Contrasena')
+								input(type='password', placeholder='Contraseña' name='Contrasena')
 							li
-								input(type='text', placeholder='Confirmar contraseña' name='ConfirmarContrasena')
+								input(type='password', placeholder='Confirmar contraseña' name='ConfirmarContrasena')
 							li 
 								#vinculo
 									input(type='checkbox', value='Acepto', name='TerminosYCondiciones')

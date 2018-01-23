@@ -100,6 +100,7 @@ div {
   clear: both; }
 
 .home .contenedor {
+  z-index: 1;
   padding-top: 30px;
   float: left;
   clear: none;
@@ -119,7 +120,8 @@ div {
   text-align: inherit;
   width: 50%;
   margin-left: 10%;
-  margin-right: 0%; }
+  margin-right: 0%;
+  position: relative; }
   .home .titulo::after {
     content: '';
     display: table;
@@ -163,22 +165,24 @@ div {
 .home .registrate {
   -ms-display: flex;
   display: -webkit-box;
-  display: -webkit-flex;
   display: flex;
   -webkit-box-align: center;
-  -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center; }
-  .home .registrate .icono img {
-    width: 90%; }
   .home .registrate .textoEstablecimiento {
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 81.81818%;
+    margin-left: 0%;
+    margin-right: 0%;
     padding-top: 4px; }
-    .home .registrate .textoEstablecimiento h1 {
-      cursor: default;
-      font-family: 'Abstrec';
-      font-size: 1em;
-      padding-bottom: 16px;
-      color: #000000; }
+    .home .registrate .textoEstablecimiento::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .home .registrate .textoEstablecimiento:last-child {
+      margin-right: 0%; }
     .home .registrate .textoEstablecimiento ul {
       display: inline-block;
       margin-left: auto;
@@ -189,10 +193,8 @@ div {
     .home .registrate .textoEstablecimiento li {
       -ms-display: flex;
       display: -webkit-box;
-      display: -webkit-flex;
       display: flex;
       -webkit-box-align: center;
-      -webkit-align-items: center;
       -ms-flex-align: center;
       align-items: center;
       display: inline-block;
@@ -209,16 +211,239 @@ div {
       color: #EB363C; }
     .home .registrate .textoEstablecimiento ul:hover i {
       padding-left: 10px; }
+.home .icono {
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 22.72727%;
+  margin-left: 0%;
+  margin-right: 0%; }
+  .home .icono::after {
+    content: '';
+    display: table;
+    clear: both; }
+  .home .icono:last-child {
+    margin-right: 0%; }
+  .home .icono img {
+    width: 90%; }
+.home .opcion {
+  -ms-display: flex;
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px; }
+  .home .opcion .col922 {
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 40.90909%;
+    margin-left: 0%;
+    margin-right: 0%;
+    padding-top: 1px;
+    background-color: #7F7F7F; }
+    .home .opcion .col922::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .home .opcion .col922:last-child {
+      margin-right: 0%; }
+  .home .opcion .col422 {
+    cursor: default;
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 18.18182%;
+    margin-left: 0%;
+    margin-right: 0%;
+    text-align: center; }
+    .home .opcion .col422::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .home .opcion .col422:last-child {
+      margin-right: 0%; }
+    .home .opcion .col422 h3 {
+      font-family: 'Abstrec';
+      font-size: .8em; }
+.home .texto h1 {
+  cursor: default;
+  font-family: 'Abstrec';
+  font-size: 1em;
+  padding-bottom: 16px;
+  color: #000000; }
+.home .textoUsuario {
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
+  padding-top: 10px; }
+  .home .textoUsuario::after {
+    content: '';
+    display: table;
+    clear: both; }
+  .home .textoUsuario:last-child {
+    margin-right: 0%; }
+.home .formularioUsuario {
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%; }
+  .home .formularioUsuario::after {
+    content: '';
+    display: table;
+    clear: both; }
+  .home .formularioUsuario:last-child {
+    margin-right: 0%; }
+  .home .formularioUsuario form input {
+    color: #353535;
+    display: block;
+    font-family: 'AYearWithoutRain';
+    letter-spacing: .1em;
+    border: none;
+    border: solid #7F7F7F 1px;
+    background-color: #FFFFFF;
+    font-size: 1.2em;
+    width: 100%;
+    padding: 5px;
+    padding-left: 10px;
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box; }
+  .home .formularioUsuario form .col11 {
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%; }
+    .home .formularioUsuario form .col11::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .home .formularioUsuario form .col11:last-child {
+      margin-right: 0%; }
+  .home .formularioUsuario form .col12 {
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 50%;
+    margin-left: 0%;
+    margin-right: 0%; }
+    .home .formularioUsuario form .col12::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .home .formularioUsuario form .col12:last-child {
+      margin-right: 0%; }
+    .home .formularioUsuario form .col12 input {
+      width: 98%; }
+  .home .formularioUsuario form .right {
+    float: right; }
+  .home .formularioUsuario form .checka {
+    padding-top: 5px;
+    -ms-display: flex;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center; }
+    .home .formularioUsuario form .checka input[type="checkbox"] {
+      display: inline-block;
+      width: 19px;
+      height: 19px;
+      margin-left: 0px; }
+    .home .formularioUsuario form .checka input[type="checkbox"]:hover {
+      cursor: pointer; }
+    .home .formularioUsuario form .checka label {
+      font-size: 1em;
+      font-family: 'AYearWithoutRain';
+      color: #353535; }
+    .home .formularioUsuario form .checka a {
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      text-decoration: none;
+      font-size: 1em;
+      font-family: 'AYearWithoutRain';
+      color: #36A6F8;
+      padding-left: 4px; }
+      .home .formularioUsuario form .checka a:hover {
+        color: #3AC451; }
+  .home .formularioUsuario form .boton {
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 0%;
+    padding-top: 10px;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center; }
+    .home .formularioUsuario form .boton::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .home .formularioUsuario form .boton:last-child {
+      margin-right: 0%; }
+    .home .formularioUsuario form .boton input {
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      color: #000000;
+      text-align: center;
+      background-color: #FD9927;
+      border: 0px;
+      border-radius: 10px; }
+      .home .formularioUsuario form .boton input:hover {
+        background-color: #7F7F7F;
+        color: #FFFFFF;
+        cursor: pointer; }
+  .home .formularioUsuario form .mensajeInicio {
+    padding-top: 7px;
+    padding-bottom: 20px;
+    text-align: center; }
+    .home .formularioUsuario form .mensajeInicio label {
+      font-size: .8em;
+      font-family: 'AYearWithoutRain';
+      color: #353535; }
+    .home .formularioUsuario form .mensajeInicio a {
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      text-decoration: none;
+      font-size: .8em;
+      font-family: 'AYearWithoutRain';
+      color: #36A6F8;
+      padding-left: 4px; }
+      .home .formularioUsuario form .mensajeInicio a:hover {
+        color: #3AC451; }
+.home .local {
+  position: absolute;
+  margin-top: 16%;
+  z-index: -1; }
 
 .headerIndex {
   padding-top: 15px; }
   .headerIndex .centro {
     -ms-display: flex;
     display: -webkit-box;
-    display: -webkit-flex;
     display: flex;
     -webkit-box-align: center;
-    -webkit-align-items: center;
     -ms-flex-align: center;
     align-items: center; }
   .headerIndex .logo {
@@ -366,17 +591,17 @@ div {
         margin-bottom: 1em; }
       .RegistroUsuario .contenedor .contenedorformulario input, .RegistroEstablecimiento .contenedor .contenedorformulario input {
         font-family: AYearWithoutRain;
-        font-size: 1em;
+        font-size: 1.2em;
         width: 18em;
         display: block;
         margin: auto; }
-      .RegistroUsuario .contenedor .contenedorformulario h2, .RegistroUsuario .contenedor .contenedorformulario h3, .RegistroEstablecimiento .contenedor .contenedorformulario h2, .RegistroEstablecimiento .contenedor .contenedorformulario h3 {
+      .RegistroUsuario .contenedor .contenedorformulario h2, .RegistroUsuario .contenedor .contenedorformulario h3, .RegistroUsuario .contenedor .contenedorformulario label, .RegistroEstablecimiento .contenedor .contenedorformulario h2, .RegistroEstablecimiento .contenedor .contenedorformulario h3, .RegistroEstablecimiento .contenedor .contenedorformulario label {
         font-family: AYearWithoutRain;
-        font-size: 1em;
+        font-size: 1.2em;
         color: #757575;
         text-align: center; }
       .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario {
-        width: 18em;
+        width: 20em;
         height: 4em;
         display: block;
         margin: auto; }
@@ -403,7 +628,7 @@ div {
           .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12:last-child {
             margin-right: 0%; }
       .RegistroUsuario .contenedor .contenedorformulario .contenedordias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias {
-        width: 18em;
+        width: 20em;
         display: block;
         margin: auto; }
         .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 {
@@ -421,6 +646,9 @@ div {
           .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4:last-child, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3:last-child {
             margin-right: 0%; }
           .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 input, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 input {
+            visibility: hidden;
+            display: inline-block; }
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 label, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 label, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 label, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 label {
             -o-transition: all 0.4s ease-in-out;
             transition: all 0.4s ease-in-out;
             -moz-transition: all 0.4s ease-in-out;
@@ -428,12 +656,18 @@ div {
             background: #FFFFFF;
             color: #757575;
             border: 1px solid #757575;
-            border-radius: none;
-            width: 4em; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 input:hover, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 input:hover {
+            border-radius: .15em;
+            width: 4em;
+            padding: .25em; }
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 label:hover, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 label:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 label:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 label:hover {
             background: #757575;
             color: #FFFFFF;
             cursor: pointer; }
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 input:checked + label.dias, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 input:checked + label.dias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 input:checked + label.dias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 input:checked + label.dias {
+            background: #36A6F8;
+            color: #FFFFFF;
+            cursor: pointer;
+            border: 1px solid #36A6F8; }
         .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 {
           float: left;
           clear: none;
@@ -467,7 +701,7 @@ div {
           -webkit-transition: all 0.4s ease-in-out;
           background: none;
           color: #36A6F8;
-          font-size: 1em;
+          font-size: 1.2em;
           width: 7em;
           border: none;
           padding-bottom: 1em; }
@@ -480,14 +714,14 @@ div {
         color: #757575;
         display: block;
         margin: auto;
-        font-size: 1em; }
+        font-size: 1.2em; }
       .RegistroUsuario .contenedor .contenedorformulario #mapa, .RegistroEstablecimiento .contenedor .contenedorformulario #mapa {
         height: 500px;
         width: 700px;
         display: block;
         margin: auto; }
       .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos {
-        width: 18em;
+        width: 22em;
         display: block;
         margin: auto; }
         .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos {
@@ -497,7 +731,8 @@ div {
           width: 50%;
           margin-left: 0%;
           margin-right: 0%;
-          padding-bottom: 1em; }
+          padding-bottom: 1em;
+          float: left; }
           .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos::after {
             content: '';
             display: table;
@@ -505,9 +740,9 @@ div {
           .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos:last-child {
             margin-right: 0%; }
           .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos input {
-            width: 8.5em; }
+            width: 95%; }
       .RegistroUsuario .contenedor .contenedorformulario #vinculo, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo {
-        width: 18em;
+        width: 20em;
         display: block;
         margin: auto; }
         .RegistroUsuario .contenedor .contenedorformulario #vinculo input, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo input {
@@ -529,20 +764,33 @@ div {
         background: #36A6F8;
         color: #353535;
         border: 1px solid #36A6F8;
-        border-radius: none;
+        border-radius: .3em;
         width: 18em;
         font-weight: 2em; }
       .RegistroUsuario .contenedor .contenedorformulario #registro input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #registro input:hover {
-        background: #3AC451;
-        border-color: #3AC451;
+        background: #757575;
+        border-color: #757575;
+        color: #FFFFFF;
         cursor: pointer; }
 
 .footer {
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
   height: 5em;
   background-color: #FD9927;
   width: 100%;
   /*position:relative; 
   bottom:0em; 
   left:0em; */ }
+  .footer::after {
+    content: '';
+    display: table;
+    clear: both; }
+  .footer:last-child {
+    margin-right: 0%; }
 
 
