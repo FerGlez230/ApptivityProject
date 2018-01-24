@@ -628,7 +628,7 @@ div {
           .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12:last-child {
             margin-right: 0%; }
       .RegistroUsuario .contenedor .contenedorformulario .contenedordias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias {
-        width: 20em;
+        width: 22em;
         display: block;
         margin: auto; }
         .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 {
@@ -648,7 +648,7 @@ div {
           .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 input, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 input {
             visibility: hidden;
             display: inline-block; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 label, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 label, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 label, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 label {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 label[for], .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 label[for], .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 label[for], .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 label[for] {
             -o-transition: all 0.4s ease-in-out;
             transition: all 0.4s ease-in-out;
             -moz-transition: all 0.4s ease-in-out;
@@ -657,8 +657,10 @@ div {
             color: #757575;
             border: 1px solid #757575;
             border-radius: .15em;
-            width: 4em;
-            padding: .25em; }
+            width: 3.5em;
+            padding: .25em;
+            position: relative;
+            display: inline-block; }
           .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 label:hover, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 label:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 label:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 label:hover {
             background: #757575;
             color: #FFFFFF;

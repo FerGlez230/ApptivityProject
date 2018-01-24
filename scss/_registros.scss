@@ -64,7 +64,7 @@
 			}
 			.contenedordias
 			{
-				width: 20em;
+				width: 22em;
 				display: block;
 				margin: auto;
 				.contenedor4, .contenedor3
@@ -75,15 +75,17 @@
 						visibility: hidden;
 						display: inline-block;
 					}
-					label
+					label[for]
 					{
 						@include transition(0.4s);
 						background: $blanco;
 						color:$gris;
 						border: 1px solid $gris;
 						border-radius: .15em;	
-						width: 4em;
+						width: 3.5em;
 						padding: .25em;
+						position: relative;
+						display: inline-block;
 					}
 					label:hover
 					{
