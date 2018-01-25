@@ -1,5 +1,7 @@
-//@prepros-prepend jquery-3.1.1.js
+/*$(document).ready(function()
+{
 
+<<<<<<< HEAD
 $(document).ready(function(){
   	//$('body').css({ 'width': $(window).width() + "px" });
   	
@@ -36,7 +38,95 @@ $(document).ready(function(){
     });
   	
 });
+=======
+  	$('body').css({ 'width': $(window).width() + "px" });
+});*/
+function ValidarRegistroEstablecimiento()
+{
+	var contador=true;
+	var NombreEstablecimiento=document.RegistroEstablecimiento.NombreEstablecimiento.value;
+	var Descripcion=document.RegistroEstablecimiento.Descripcion.value;
+	var Usuario=document.RegistroEstablecimiento.Usuario.value;
+	var ApellidoMaterno=document.RegistroEstablecimiento.ApellidoMaterno.value;
+	var ApellidoPaterno=document.RegistroEstablecimiento.ApellidoPaterno.value;
+	var Username=document.RegistroEstablecimiento.Username.value;
+	var CorreoElectronico=document.RegistroEstablecimiento.CorreoElectronico.value;
+	var Contrasena=document.RegistroEstablecimiento.Contrasena.value;
+	var ConfirmarContrasena=document.RegistroEstablecimiento.ConfirmarContrasena.value;
+	contador=ValidarTextComun(Usuario, "usuario");
+	contador=ValidarTextComun(ApellidoPaterno, "apellido paterno");
+	if(ApellidoMaterno!=""){contador=ValidarTextComun(ApellidoMaterno, "apellido materno");}
+	contador=ValidarCorreo(CorreoElectronico);
+	contador=ValidarContrasena(Contrasena);
+	contador=ContrasenasIguales(Contrasena, ConfirmarContrasena);
+	return contador;
+}
+function ValidarTextComun(Campo, NombreCampo)
+{
+	var Letras = /^[a-zA-Z]*$/;
+	if(!Campo.search(Letras))
+	{
+	}else
+	{
+		window.alert("El campo "+NombreCampo+" sólo permite caracteres de la A-Z");
+		return false;
+	}
+}
+function ValidarCorreo(Campo)
+{
+	var PatronCorreo=/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
+	if(Campo.search(PatronCorreo))
+	{
+		window.alert("Su correo probablemente tenga un error");
+		return false;
+	}
+}
+function ValidarContrasena(Campo)
+{
+	var PatronContrasena=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d]|[^ ]){8,}/;//Busca por lo menos una minuscula, mayúscula, dígito y por lo menos 8 caracteres
+	if(!Campo.search(PatronContrasena))
+	{
+	}else
+	{
+		alert("Su contraseña no coincide con alguno de los requisitos: \nUna mayúscula \nUna minúscula\nUna letra\nPor lo menos 8 caracteres\nSin espacios en blanco");
+		return false;
+	}
+}
+function ContrasenasIguales(Contrasena, Contrasena2)
+{
+	if(Contrasena!=Contrasena2)
+	{
+		window.alert("Las contraseñas no coinciden");
+		return false;
+	}
+}
+function NuevoHorario()
+{
+	var DiasSeleccionados= new Array();
+	var Registros=new Array();
+	var HoraInicio=document.RegistroEstablecimiento.HoraInicio.value;
+	var HoraTermino=document.RegistroEstablecimiento.HoraTermino.value;
+	var DiasCheck=document.getElementsByName('diasSemana');
+	if(HoraInicio>=HoraTermino)
+	{
+		window.alert("La hora de inicio no puede ser mayor a la hora de termino");
+		return false;
+	}
+	for(var i=0; i<7; i++)
+	{
+		if(DiasCheck[i].checked)
+		{
+			DiasSeleccionados[i]=i+1;
+			window.alert(DiasSeleccionados[i]);
+		}
+	}
+	/*for (var j = 0; j < DiasSeleccionados.length; j++) 
+	{
+		Registros[j]=(HoraInicio+HoraTermino+DiasSeleccionados[j]);
+	}*/
+>>>>>>> 749e22ec8b67cbbdc14f404417f5475777b2ef3c
 
+}
 function FindMe()
 {
 	var output=document.getElementById('map');//mostarmos si es compatible la geolocalización
@@ -46,7 +136,7 @@ function FindMe()
 		output.innerHTML="<br> Soporta geolocalización";
 	}else
 	{
-			output.innerHTML="<br> No soporta geolocalización";
+		output.innerHTML="<br> No soporta geolocalización";
 	}
 	navigator.geolocation.getCurrentPosition(localization,error);
 	function localization(posicion)
@@ -58,8 +148,8 @@ function FindMe()
 		var gLatLong= new google.maps.LatLng(latitude,longitude);
 		var objConfig=
 		{
-				zoom: 16,
-				center: gLatLong
+			zoom: 16,
+			center: gLatLong
 		}
 		var gMap= new google.maps.Map(outputmapa, objConfig);
 		var geocoder = new google.maps.Geocoder();//objeto para la geolocalización inversa
@@ -70,8 +160,7 @@ function FindMe()
 			map: gMap
 		}
 		var gMarker= new google.maps.Marker(objConfigMarker);
-		geocodeLatLng(geocoder,gMap,infowindow,gLatLong,gMarker);
-		  
+		geocodeLatLng(geocoder,gMap,infowindow,gLatLong,gMarker);  
 	}
 	function error()
 	{
@@ -79,11 +168,11 @@ function FindMe()
 	}
 	function geocodeLatLng(geocoder, gMap, infowindow, gLatLong, gMarker) 
 	{
-		geocoder.geocode({'location': gLatLong}, function(results, status) 
+		geocoder.geocode({'location': gLatLong}, function(results, status) //results y status son parte de los parametros que nos oferece la API
 		{
 			if (status =='OK') 
 			{
-				if (results[0])
+				if (results[0])//tomamos el primer resultado obtenido de la geolocalización inversa
 				{
 			 		infowindow.setContent(results[0].formatted_address);
 			 		infowindow.open(gMap, gMarker);

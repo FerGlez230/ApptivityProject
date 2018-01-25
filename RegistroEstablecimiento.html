@@ -24,63 +24,71 @@
       <div class="contenedor">
         <h1>Registra tu establecimiento</h1>
         <div class="contenedorformulario">
+<<<<<<< HEAD
           <form class="formData1" id="form1">
+=======
+          <form method="POST" action="" name="RegistroEstablecimiento" onsubmit="return ValidarRegistroEstablecimiento()">
+>>>>>>> 749e22ec8b67cbbdc14f404417f5475777b2ef3c
             <ul>
               <li>
-                <input type="text" placeholder="Nombre del establecimiento" name="NombreEstablecimiento">
-              </li>
-              <li>
-                <input type="text" placeholder="Número de folio" name="Folio">
+                <input type="text" placeholder="Nombre del establecimiento" name="NombreEstablecimiento" id="NombreEstablecimiento" required>
               </li>
               <li>
                 <div class="contenedorhorario">
                   <div class="parte12">
                     <h2>Hora inicio</h2>
                     <h3>(hrs:min am/pm)</h3>
-                    <input type="time" name="HoraInicio" min="00:00" max="23:59" step="60">
+                    <input type="time" name="HoraInicio" min="00:00" max="23:59" step="60" id="HoraInicio" required>
                   </div>
                   <div class="parte12">
                     <h2>Hora termino</h2>
                     <h3>(hrs:min am/pm)</h3>
-                    <input type="time" name="HoraTermino">
+                    <input type="time" name="HoraTermino" id="HoraTermino" required>
                   </div>
                 </div>
               </li>
               <li>
-                <h2>Dias de operación</h2>
+                <h2>Operatividad de días</h2>
               </li>
               <li>
                 <div class="contenedordias">
                   <div class="contenedor4">
-                    <input type="button" value="Lunes" name="lunes">
+                    <input type="checkbox" value="1" name="diasSemana" id="lunes">
+                    <label class="dias" for="lunes">Lunes    </label>
                   </div>
                   <div class="contenedor4">
-                    <input type="button" value="Martes" name="martes">
+                    <input type="checkbox" value="2" name="diasSemana" id="martes">
+                    <label class="dias" for="martes">Martes   </label>
                   </div>
                   <div class="contenedor4">
-                    <input type="button" value="Miercoles" name="miercoles">
+                    <input type="checkbox" value="3" name="diasSemana" id="miercoles">
+                    <label class="dias" for="miercoles">Miércoles</label>
                   </div>
                   <div class="contenedor4">
-                    <input type="button" value="Jueves" name="jueves">
+                    <input type="checkbox" value="4" name="diasSemana" id="jueves">
+                    <label class="dias" for="jueves">Jueves</label>
                   </div>
                   <div class="contenedor3">
-                    <input type="button" value="Viernes" name="viernes">
+                    <input type="checkbox" value="5" name="diasSemana" id="viernes">
+                    <label class="dias" for="viernes">Viernes</label>
                   </div>
                   <div class="contenedor3">
-                    <input type="button" value="Sábado" name="sabado">
+                    <input type="checkbox" value="6" name="diasSemana" id="sabado">
+                    <label class="dias" for="sabado">Sábado</label>
                   </div>
                   <div class="contenedor3">
-                    <input type="button" value="Domingo" name="domingo">
+                    <input type="checkbox" value="7" name="diasSemana" id="domingo">
+                    <label class="dias" for="domingo">Domingo</label>
                   </div>
                 </div>
               </li>
               <li> 
                 <div id="agregarhorario">
-                  <input type="button" value="Agregar horario" name="horario">
+                  <input type="button" value="Agregar horario" name="Horario" onclick="return NuevoHorario()">
                 </div>
               </li>
               <li>
-                <textarea rows="10" placeholder="Descripción" name="descripcion" maxlength="1200"></textarea>
+                <textarea rows="10" placeholder="Descripción" name="Descripcion" maxlength="1200" required></textarea>
               </li>
               <li>
                 <h2>Ubicación del establecimiento</h2>
@@ -91,12 +99,12 @@
                 <div id="mapa"></div>
               </li>
               <li>
-                <input type="text" placeholder="Nombre de usuario" name="Usuario">
+                <input type="text" placeholder="Nombre de usuario" name="Usuario" id="Usuario" required>
               </li>
               <li>
                 <div class="contenedorApellidos">
                   <div id="apellidos">
-                    <input type="text" placeholder="Apellido paterno" name="ApellidoPaterno">
+                    <input type="text" placeholder="Apellido paterno" name="ApellidoPaterno" required>
                   </div>
                   <div id="apellidos">
                     <input type="text" placeholder="Apellido materno" name="ApellidoMaterno">
@@ -104,26 +112,26 @@
                 </div>
               </li>
               <li>
-                <input type="text" placeholder="Username" name="Username">
+                <input type="text" placeholder="Username" name="Username" required>
               </li>
               <li>
-                <input type="text" placeholder="Correo electrónico" name="CorreoElectronico">
+                <input type="text" placeholder="Correo electrónico" name="CorreoElectronico" required>
               </li>
               <li>
-                <input type="text" placeholder="Contraseña" name="Contrasena">
+                <input type="password" placeholder="Contraseña" name="Contrasena">
               </li>
               <li>
-                <input type="text" placeholder="Confirmar contraseña" name="ConfirmarContrasena">
+                <input type="password" placeholder="Confirmar contraseña" name="ConfirmarContrasena" required>
               </li>
               <li> 
                 <div id="vinculo">
-                  <input type="checkbox" value="Acepto" name="TerminosYCondiciones">
+                  <input type="checkbox" value="Acepto" name="TerminosYCondiciones" required>
                   <h3>Acepto los <a href="https://www.youtube.com/?hl=es-419&amp;gl=MX">términos y condiciones</a></h3>
                 </div>
               </li>
               <li> 
                 <div id="registro">
-                  <input type="button" value="REGISTRA TU ESTABLECIMIENTO →" name="Registrar">
+                  <input type="submit" value="REGISTRA TU ESTABLECIMIENTO →" name="Registrar">
                 </div>
               </li>
             </ul>
