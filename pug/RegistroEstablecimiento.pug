@@ -2,12 +2,12 @@ doctype
 html(lang="es")
 	head
 		include include/head
-	body
+	body 
 		include include/headerRegistro
 		.RegistroUsuario
 			.contenedor
 				h1 Registra tu establecimiento
-				.contenedorformulario
+				.contenedorformulario 
 					form(method="POST" action="" name="RegistroEstablecimiento" onsubmit='return ValidarRegistroEstablecimiento()')
 						ul
 							li
@@ -78,10 +78,15 @@ html(lang="es")
 								#vinculo
 									input(type='checkbox', value='Acepto', name='TerminosYCondiciones' required)
 									h3 Acepto los 
-										a(href='https://www.youtube.com/?hl=es-419&gl=MX') términos y condiciones
+											a(href='https://www.youtube.com/?hl=es-419&gl=MX') términos y condiciones
 							li 
 								#registro
 									input(type='submit', value='REGISTRA TU ESTABLECIMIENTO →', name='Registrar')
+							li 
+									#vinculo
+										h3 Si ya tienes cuenta 
+											a(href='https://www.youtube.com/?hl=es-419&gl=MX') inicia sesión
+						
 		include include/footer
 script(src='minjs/general-dist.js?version=' + version type='text/javascript')
-script( async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap")
+script(async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap")

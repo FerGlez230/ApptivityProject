@@ -1,3 +1,5 @@
+@import url(jquery-ui.css);
+@import url(jquery-ui.multidatespicker.css);
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -552,6 +554,181 @@ div {
       margin: auto;
       padding-top: 2em; }
 
+.Promocion {
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
+  z-index: 1;
+  overflow: hidden;
+  padding-bottom: 3%;
+  margin-top: 3%; }
+  .Promocion::after {
+    content: '';
+    display: table;
+    clear: both; }
+  .Promocion:last-child {
+    margin-right: 0%; }
+  .Promocion h1 {
+    font-family: 'AardvarkCafe';
+    font-size: 2.5em;
+    color: #353535;
+    text-align: center; }
+  .Promocion .contenedorformulario {
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 33.33333%;
+    margin-left: 33.33333%;
+    margin-right: 0%; }
+    .Promocion .contenedorformulario::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .Promocion .contenedorformulario:last-child {
+      margin-right: 0%; }
+    .Promocion .contenedorformulario input, .Promocion .contenedorformulario textarea {
+      font-family: AYearWithoutRain;
+      font-size: 1.2em;
+      width: 18em;
+      display: block;
+      margin: auto;
+      margin-top: 1em; }
+    .Promocion .contenedorformulario h2, .Promocion .contenedorformulario label {
+      font-family: AYearWithoutRain;
+      font-size: 1.2em;
+      color: #757575;
+      text-align: center;
+      margin-top: 1em; }
+    .Promocion .contenedorformulario h3 {
+      font-family: AYearWithoutRain;
+      padding-bottom: .5em;
+      font-size: .8em;
+      color: #757575;
+      text-align: center; }
+    .Promocion .contenedorformulario .contenedorvarios {
+      width: 20em;
+      float: left;
+      clear: none;
+      text-align: inherit;
+      width: 100%;
+      margin-left: 0%;
+      margin-right: 0%;
+      display: block;
+      margin: auto; }
+      .Promocion .contenedorformulario .contenedorvarios::after {
+        content: '';
+        display: table;
+        clear: both; }
+      .Promocion .contenedorformulario .contenedorvarios:last-child {
+        margin-right: 0%; }
+      .Promocion .contenedorformulario .contenedorvarios h3 {
+        padding-bottom: .5em;
+        font-size: .8em; }
+      .Promocion .contenedorformulario .contenedorvarios input {
+        width: 6.5em;
+        display: block;
+        margin: auto;
+        color: #757575; }
+      .Promocion .contenedorformulario .contenedorvarios .parte12 {
+        float: left;
+        clear: none;
+        text-align: inherit;
+        width: 50%;
+        margin-left: 0%;
+        margin-right: 0%;
+        padding-bottom: 1em; }
+        .Promocion .contenedorformulario .contenedorvarios .parte12::after {
+          content: '';
+          display: table;
+          clear: both; }
+        .Promocion .contenedorformulario .contenedorvarios .parte12:last-child {
+          margin-right: 0%; }
+    .Promocion .contenedorformulario #agregarperiodo {
+      float: left;
+      clear: none;
+      text-align: inherit;
+      width: 40%;
+      margin-left: 55%;
+      margin-right: 0%; }
+      .Promocion .contenedorformulario #agregarperiodo::after {
+        content: '';
+        display: table;
+        clear: both; }
+      .Promocion .contenedorformulario #agregarperiodo:last-child {
+        margin-right: 0%; }
+      .Promocion .contenedorformulario #agregarperiodo input {
+        -o-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+        -moz-transition: all 0.4s ease-in-out;
+        -webkit-transition: all 0.4s ease-in-out;
+        background: none;
+        color: #36A6F8;
+        width: 7em;
+        border: none;
+        margin-bottom: 1em; }
+      .Promocion .contenedorformulario #agregarperiodo input:hover {
+        text-decoration: underline;
+        cursor: pointer; }
+    .Promocion .contenedorformulario .ImagenFile {
+      margin-top: 1em; }
+      .Promocion .contenedorformulario .ImagenFile input {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        margin: auto; }
+      .Promocion .contenedorformulario .ImagenFile label[for] {
+        -o-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+        -moz-transition: all 0.4s ease-in-out;
+        -webkit-transition: all 0.4s ease-in-out;
+        background: #757575;
+        color: #FFFFFF;
+        border: 1px solid #757575;
+        border-radius: .15em;
+        width: 9em;
+        padding: .25em;
+        padding-right: .6em;
+        padding-left: .6em;
+        position: relative;
+        display: block;
+        margin: auto; }
+      .Promocion .contenedorformulario .ImagenFile label:hover {
+        background: #36A6F8;
+        border-color: #36A6F8;
+        cursor: pointer; }
+      .Promocion .contenedorformulario .ImagenFile strong {
+        display: inline-block; }
+      .Promocion .contenedorformulario .ImagenFile span {
+        width: 200px;
+        display: inline-block;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        vertical-align: top; }
+    .Promocion .contenedorformulario .Aqui {
+      float: left;
+      clear: none;
+      text-align: inherit;
+      width: 100%;
+      margin-left: 0%;
+      margin-right: 0%;
+      padding-top: 1em; }
+      .Promocion .contenedorformulario .Aqui::after {
+        content: '';
+        display: table;
+        clear: both; }
+      .Promocion .contenedorformulario .Aqui:last-child {
+        margin-right: 0%; }
+      .Promocion .contenedorformulario .Aqui #calendario {
+        display: block;
+        margin: auto; }
+
 .headerRegistro .contenedorGeneral {
   height: 9em; }
   .headerRegistro .contenedorGeneral .contenedor {
@@ -564,8 +741,21 @@ div {
       padding-top: 2em; }
 
 .RegistroUsuario, .RegistroEstablecimiento {
+  float: left;
+  clear: none;
+  text-align: inherit;
+  width: 100%;
+  margin-left: 0%;
+  margin-right: 0%;
+  z-index: 1;
   overflow: hidden;
   padding-bottom: 3%; }
+  .RegistroUsuario::after, .RegistroEstablecimiento::after {
+    content: '';
+    display: table;
+    clear: both; }
+  .RegistroUsuario:last-child, .RegistroEstablecimiento:last-child {
+    margin-right: 0%; }
   .RegistroUsuario .contenedor, .RegistroEstablecimiento .contenedor {
     margin-top: 3%; }
     .RegistroUsuario .contenedor h1, .RegistroEstablecimiento .contenedor h1 {

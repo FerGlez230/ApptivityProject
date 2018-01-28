@@ -1,0 +1,145 @@
+.Promocion
+{
+	@include column(1, $offset: 0, $gutter: 0);
+	z-index: 1;
+	overflow: hidden;
+	padding-bottom: 3%;
+	margin-top: 3%;
+	h1
+	{
+		font-family: 'AardvarkCafe';
+		font-size: 2.5em;
+		color:$oscuro;
+		text-align: center;
+	}
+	.contenedorformulario
+	{
+		@include column(1/3, $offset: 1/3, $gutter: 0);
+		input, textarea
+		{
+			font-family: AYearWithoutRain;
+			font-size: 1.2em;
+			width: 18em;
+			display: block;
+			margin: auto;
+			margin-top: 1em;
+			//margin-bottom: 1em;
+		}
+		h2, label
+		{
+			font-family: AYearWithoutRain;
+			font-size: 1.2em;
+			color: $gris;
+			text-align: center;
+			margin-top: 1em;
+		}
+		h3
+		{
+			font-family: AYearWithoutRain;
+			padding-bottom: .5em;
+			font-size: .8em;
+			color: $gris;
+			text-align: center;
+		}
+		.contenedorvarios
+		{
+			width: 20em;
+			@include column(1, $offset: 0, $gutter: 0);
+			display: block;
+			margin: auto;
+			h3
+			{
+				padding-bottom: .5em;
+				font-size: .8em;
+			}
+			input
+			{
+				width: 6.5em;	
+				display: block;
+				margin: auto;
+				color: $gris;
+			}
+			.parte12
+			{
+				@include column(1/2, $offset: 0, $gutter: 0);
+				padding-bottom: 1em;
+			}
+		}
+		#agregarperiodo
+		{
+			@include column(2/5, $offset: 11/20, $gutter: 0);
+			input
+			{
+				@include transition(0.4s);
+				background: none;
+				color: $azul;
+				width: 7em;
+				border: none;
+				margin-bottom: 1em;
+			}
+			input:hover
+			{
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		}
+		.ImagenFile
+		{
+			margin-top: 1em;
+			input
+			{
+				width: 0.1px;
+				height: 0.1px;
+				opacity: 0;
+				overflow: hidden;
+				position: absolute;
+				margin: auto;
+			}
+			label[for]
+			{
+				@include transition(0.4s);
+				background: $gris;
+				color:$blanco;
+				border: 1px solid $gris;
+				border-radius: .15em;	
+				width: 9em;
+				padding: .25em;
+				padding-right: .6em;
+				padding-left:.6em;
+				position: relative;
+				display: block;
+				margin: auto;
+			}
+			label:hover
+			{
+				background: $azul;
+				border-color: $azul;
+				cursor: pointer;
+			}
+			strong
+			{
+				display: inline-block;
+			}
+			span
+			{
+				width: 200px;
+			    display: inline-block;
+			    text-overflow: ellipsis;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    vertical-align: top;
+			}
+		}
+		
+		.Aqui
+		{
+			@include column(1, $offset: 0, $gutter: 0);
+			padding-top: 1em;
+			#calendario
+			{
+				display: block;
+				margin: auto;
+			}
+		}
+	}
+}

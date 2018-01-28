@@ -1,8 +1,21 @@
-/*$(document).ready(function()
+//@prepros-prepend jquery-3.1.1.js
+//@prepros-prepend jquery-ui.js
+//@prepros-prepend slick.js
+//@prepros-prepend jquery-ui.multidatespicker.js
+
+$(document).ready(function()
 {
 
   	$('body').css({ 'width': $(window).width() + "px" });
-});*/
+});
+
+
+$('#calendario').multiDatesPicker({
+	minDate: 0, // today
+	maxDate: 30 // +30 days from today
+});
+
+
 function ValidarRegistroEstablecimiento()
 {
 	var contador=true;
@@ -86,7 +99,21 @@ function NuevoHorario()
 	{
 		Registros[j]=(HoraInicio+HoraTermino+DiasSeleccionados[j]);
 	}*/
-
+}
+function CargarMapaInicial()
+{
+	var latitude= posicion.coords.latitude;
+	var longitude= posicion.coords.longitude;
+	var outputmapa=document.getElementById('mapa');// div para conetenr el mapa	
+	outputmapa.innerHTML("Holiwis");
+	/*var gLatLong= new google.maps.LatLng(latitude,longitude);
+	var objConfig=
+	{
+		zoom: 16,
+		center: gLatLong
+	}
+	var gMap= new google.maps.Map(outputmapa, objConfig);*/
+	window.onload=CargarMapaInicial;
 }
 function FindMe()
 {

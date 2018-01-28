@@ -10,8 +10,12 @@
 @import '_home.scss';
 @import "partial/_headerIndex.scss";
 @import "partial/_headerRegistro.scss";
+@import "_PromocionEvento.scss";
 //Registro
 @import 'partial/_headerRegistro.scss';
 @import '_registros.scss';
 @import 'partial/_footer.scss';
+//js
+@import 'jquery-ui.css';
+@import 'jquery-ui.multidatespicker.css';
 
