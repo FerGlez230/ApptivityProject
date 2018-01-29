@@ -6,6 +6,44 @@
 $(document).ready(function()
 {
 
+<<<<<<< HEAD
+$(document).ready(function(){
+  	//$('body').css({ 'width': $(window).width() + "px" });
+  	
+  	$("body").on('submit','.formData1',function(e){
+        if($("#form1")[0].checkValidity()){
+            $(':input[type="submit"]').prop('disabled', 'disabled');
+            $(':input[type="submit"]').attr("disabled","disabled").css("cursor", "not-allowed").fadeTo(500,0.2);
+            var data = new FormData(this);
+            $.ajax({
+                url: "lib/recopilarDatos.php",
+                type: "post",
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(data){
+                    console.log(data);
+                    $(':input[type="submit"]').prop('abled', 'abled');
+                    $(':input[type="submit"]').attr("abled", "abled").css("cursor", "pointer").fadeTo(500, 1);
+                    if(data=="true"){
+                        alert("Data was sent, thank you");
+                    }
+                    else{
+                        alert("An error happened ):");
+                    }
+                }
+            });
+            return false;
+        }
+        else{
+            $("#validador1").click();
+            return false;
+        }
+    });
+  	
+});
+=======
   	$('body').css({ 'width': $(window).width() + "px" });
 });
 
@@ -134,6 +172,7 @@ function NuevoHorario()
 	{
 		Registros[j]=(HoraInicio+HoraTermino+DiasSeleccionados[j]);
 	}*/
+<<<<<<< HEAD
 }
 function CargarMapaInicial()
 {
@@ -149,6 +188,10 @@ function CargarMapaInicial()
 	}
 	var gMap= new google.maps.Map(outputmapa, objConfig);*/
 	window.onload=CargarMapaInicial;
+=======
+>>>>>>> 749e22ec8b67cbbdc14f404417f5475777b2ef3c
+
+>>>>>>> 3ecc9cd1f8bea6f179cca1de0696c70ffb4fc704
 }
 function FindMe()
 {
