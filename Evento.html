@@ -23,11 +23,26 @@
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="css/jquery-ui.multidatespicker.css" type="text/css">
     <div class="Promocion">
-      <h1>Agregar promoción</h1>
+      <h1>Agregar evento</h1>
       <div class="contenedorformulario">
-        <form method="POST" action="" name="Promocion" onsubmit="return ValidarPromocion()" enctype="multipart/form-data">
-          <input type="text" placeholder="Nombre de la promoción" name="NombrePromocion" id="NombrePromocion" required>
+        <form method="POST" action="" name="Evento" onsubmit="return ValidarEvento()" enctype="multipart/form-data">
+          <input type="text" placeholder="Nombre del evento" name="NombreEvento" id="NombreEvento" required>
           <textarea rows="10" placeholder="Descripción" name="Descripcion" maxlength="1200" required></textarea>
+          <h2>Rango de precios (pesos mexicanos)</h2>
+          <div class="contenedorvarios">
+            <div class="parte12">
+              <div class="izq">
+                <h2>Desde</h2>
+                <input type="text" name="PrecioInferior" id="PrecioInferior" required>
+              </div>
+            </div>
+            <div class="parte12">
+              <div class="der">
+                <h2>Hasta</h2>
+                <input type="text" name="PrecioSuperior" id="PrecioSuperior" required>
+              </div>
+            </div>
+          </div>
           <div class="contenedorvarios">
             <div class="ContenedorCalendario">
               <div id="calendario"></div>

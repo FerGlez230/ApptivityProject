@@ -7,11 +7,21 @@ html(lang="es")
 		link(rel='stylesheet', href='http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css')
 		link(rel='stylesheet', href='css/jquery-ui.multidatespicker.css', type='text/css' )
 		.Promocion
-			h1 Agregar promoción
+			h1 Agregar evento
 			.contenedorformulario
-				form(method="POST" action="" name="Promocion" onsubmit='return ValidarPromocion()' enctype="multipart/form-data")
-					input(type='text', placeholder='Nombre de la promoción' name='NombrePromocion' id="NombrePromocion" required)
+				form(method="POST" action="" name="Evento" onsubmit='return ValidarEvento()' enctype="multipart/form-data")
+					input(type='text', placeholder='Nombre del evento' name='NombreEvento' id="NombreEvento" required)
 					textarea( rows="10", placeholder="Descripción", name="Descripcion", maxlength="1200" required)
+					h2 Rango de precios (pesos mexicanos)
+					.contenedorvarios
+						.parte12
+							.izq
+								h2 Desde
+								input(type="text", name="PrecioInferior" id="PrecioInferior" required)
+						.parte12
+							.der
+								h2 Hasta
+								input(type="text", name="PrecioSuperior" id="PrecioSuperior" required)
 					.contenedorvarios
 						.ContenedorCalendario
 							#calendario

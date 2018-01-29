@@ -608,8 +608,25 @@ div {
       font-size: .8em;
       color: #757575;
       text-align: center; }
+    .Promocion .contenedorformulario input[type=submit] {
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -webkit-transition: all 0.4s ease-in-out;
+      font-weight: 500;
+      background: #36A6F8;
+      color: #FFFFFF;
+      border: 1px solid #36A6F8;
+      border-radius: .3em;
+      width: 18em;
+      padding: 0.625rem;
+      font-size: 1.2em; }
+    .Promocion .contenedorformulario input[type=submit]:hover {
+      background: #757575;
+      border-color: #757575;
+      color: #FFFFFF;
+      cursor: pointer; }
     .Promocion .contenedorformulario .contenedorvarios {
-      width: 20em;
       float: left;
       clear: none;
       text-align: inherit;
@@ -618,6 +635,23 @@ div {
       margin-right: 0%;
       display: block;
       margin: auto; }
+      .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario {
+        float: left;
+        clear: none;
+        text-align: inherit;
+        width: 66.66667%;
+        margin-left: 16.66667%;
+        margin-right: 0%;
+        padding-top: 1em; }
+        .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario::after {
+          content: '';
+          display: table;
+          clear: both; }
+        .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario:last-child {
+          margin-right: 0%; }
+        .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario #calendario {
+          display: block;
+          margin: auto; }
       .Promocion .contenedorformulario .contenedorvarios::after {
         content: '';
         display: table;
@@ -628,7 +662,7 @@ div {
         padding-bottom: .5em;
         font-size: .8em; }
       .Promocion .contenedorformulario .contenedorvarios input {
-        width: 6.5em;
+        width: 7em;
         display: block;
         margin: auto;
         color: #757575; }
@@ -646,6 +680,10 @@ div {
           clear: both; }
         .Promocion .contenedorformulario .contenedorvarios .parte12:last-child {
           margin-right: 0%; }
+        .Promocion .contenedorformulario .contenedorvarios .parte12 .izq {
+          padding-left: 1em; }
+        .Promocion .contenedorformulario .contenedorvarios .parte12 .der {
+          padding-right: 1em; }
     .Promocion .contenedorformulario #agregarperiodo {
       float: left;
       clear: none;
@@ -682,52 +720,51 @@ div {
         position: absolute;
         margin: auto; }
       .Promocion .contenedorformulario .ImagenFile label[for] {
-        -o-transition: all 0.4s ease-in-out;
-        transition: all 0.4s ease-in-out;
-        -moz-transition: all 0.4s ease-in-out;
-        -webkit-transition: all 0.4s ease-in-out;
-        background: #757575;
-        color: #FFFFFF;
-        border: 1px solid #757575;
-        border-radius: .15em;
-        width: 9em;
-        padding: .25em;
-        padding-right: .6em;
-        padding-left: .6em;
-        position: relative;
+        max-width: 76%;
+        font-size: 1.25rem;
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
         display: block;
-        margin: auto; }
-      .Promocion .contenedorformulario .ImagenFile label:hover {
-        background: #36A6F8;
-        border-color: #36A6F8;
-        cursor: pointer; }
-      .Promocion .contenedorformulario .ImagenFile strong {
-        display: inline-block; }
-      .Promocion .contenedorformulario .ImagenFile span {
-        width: 200px;
+        margin: auto;
+        overflow: hidden;
+        border: 1px solid #FD9927; }
+      .Promocion .contenedorformulario .ImagenFile label span {
+        width: 160px;
+        min-height: 1.2em;
         display: inline-block;
         -o-text-overflow: ellipsis;
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
-        vertical-align: top; }
-    .Promocion .contenedorformulario .Aqui {
-      float: left;
-      clear: none;
-      text-align: inherit;
-      width: 100%;
-      margin-left: 0%;
-      margin-right: 0%;
-      padding-top: 1em; }
-      .Promocion .contenedorformulario .Aqui::after {
-        content: '';
-        display: table;
-        clear: both; }
-      .Promocion .contenedorformulario .Aqui:last-child {
-        margin-right: 0%; }
-      .Promocion .contenedorformulario .Aqui #calendario {
-        display: block;
-        margin: auto; }
+        vertical-align: top;
+        padding: 0.625rem 1.5rem; }
+      .Promocion .contenedorformulario .ImagenFile label strong {
+        -o-transition: all 0.4s ease-in-out;
+        transition: all 0.4s ease-in-out;
+        -moz-transition: all 0.4s ease-in-out;
+        -webkit-transition: all 0.4s ease-in-out;
+        min-height: 1.1em;
+        display: inline-block;
+        background-color: #FD9927;
+        padding: 0.7rem 1.25rem;
+        color: #FFFFFF; }
+      .Promocion .contenedorformulario .ImagenFile label strong:hover {
+        background: #FEA53F;
+        border-color: #FEA53F;
+        cursor: pointer; }
+      .Promocion .contenedorformulario .ImagenFile label:hover {
+        border-color: #FEA53F; }
+      .Promocion .contenedorformulario .ImagenFile label svg {
+        width: 1em;
+        height: 1em;
+        vertical-align: middle;
+        fill: currentColor;
+        margin-top: -0.25em;
+        /* 4px */
+        margin-right: 0.25em;
+        /* 4px */ }
 
 .headerRegistro .contenedorGeneral {
   height: 9em; }

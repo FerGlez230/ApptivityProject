@@ -1,7 +1,7 @@
 //@prepros-prepend jquery-3.1.1.js
 //@prepros-prepend jquery-ui.js
 //@prepros-prepend slick.js
-//@prepros-prepend jquery-ui.multidatespicker.js
+//@prepros-prepend jquery-ui.multidatespicker-v1.6.6.js
 
 $(document).ready(function()
 {
@@ -11,10 +11,45 @@ $(document).ready(function()
 
 
 $('#calendario').multiDatesPicker({
-	minDate: 0, // today
-	maxDate: 30 // +30 days from today
+	minDate:0,//hoy
+	maxDate:365,// 1 año de vigencia
+	firstDay:0,
+	closeText: 'Cerrar',
+ 	prevText: 'Anterior',
+	nextText: 'Siguiente',
+	currentText: 'Hoy',
+	monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+	monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+	dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+	dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
+	dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+	weekHeader: 'Sm',
+	dateFormat: 'dd/mm/yy',
 });
+( function( $, window, document, undefined )
+{
+	$('.inputfile' ).each( function()
+	{
+		var $input	 = $( this ),
+			$label	 = $input.next( 'label' ),
+			labelVal = $label.html();
+		$input.on( 'change', function( e )
+		{
+			var fileName = '';
+			if( e.target.value )
+				fileName = e.target.value.split( '\\' ).pop();
 
+			if( fileName )
+				$label.find( 'span' ).html( fileName );
+			else
+				$label.html( labelVal );
+		});
+		// Firefox bug fix
+		$input
+		.on( 'focus', function(){ $input.addClass( 'has-focus' ); })
+		.on( 'blur', function(){ $input.removeClass( 'has-focus' ); });
+	});
+})( jQuery, window, document );
 
 function ValidarRegistroEstablecimiento()
 {

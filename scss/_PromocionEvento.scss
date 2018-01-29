@@ -41,9 +41,39 @@
 			color: $gris;
 			text-align: center;
 		}
-		.contenedorvarios
+		input[type=submit]
 		{
-			width: 20em;
+			@include transition(0.4s);
+			font-weight: 500;
+			background: $azul;
+			color:$blanco;
+			border: 1px solid $azul;
+			border-radius: .3em;
+			width: 18em;
+			//font-weight: 2em;
+			padding: 0.625rem;
+			font-size: 1.2em;
+		}
+		input[type=submit]:hover
+		{
+			background: $gris;
+			border-color: $gris;
+			color: $blanco;
+			cursor: pointer;
+		}
+		.contenedorvarios
+		{		
+			.ContenedorCalendario
+			{
+				@include column(2/3, $offset: 1/6, $gutter: 0);
+				padding-top: 1em;
+				#calendario
+				{
+					display: block;
+					margin: auto;
+				}
+			}
+			//width: 20em;
 			@include column(1, $offset: 0, $gutter: 0);
 			display: block;
 			margin: auto;
@@ -54,7 +84,7 @@
 			}
 			input
 			{
-				width: 6.5em;	
+				width: 7em;	
 				display: block;
 				margin: auto;
 				color: $gris;
@@ -63,6 +93,14 @@
 			{
 				@include column(1/2, $offset: 0, $gutter: 0);
 				padding-bottom: 1em;
+				.izq
+				{
+					padding-left: 1em;
+				}
+				.der 
+				{
+					padding-right: 1em;
+				}
 			}
 		}
 		#agregarperiodo
@@ -97,48 +135,57 @@
 			}
 			label[for]
 			{
-				@include transition(0.4s);
-				background: $gris;
-				color:$blanco;
-				border: 1px solid $gris;
-				border-radius: .15em;	
-				width: 9em;
-				padding: .25em;
-				padding-right: .6em;
-				padding-left:.6em;
-				position: relative;
-				display: block;
-				margin: auto;
+				max-width: 76%;
+			    font-size: 1.25rem;
+			    text-overflow: ellipsis;
+			    white-space: nowrap;
+			    cursor: pointer;
+			    display:block;
+			    margin: auto;
+			    overflow: hidden;
+			    border: 1px solid $naranja;	    
 			}
-			label:hover
+
+			label span 
 			{
-				background: $azul;
-				border-color: $azul;
-				cursor: pointer;
-			}
-			strong
-			{
-				display: inline-block;
-			}
-			span
-			{
-				width: 200px;
+			    width: 160px;
+			    min-height: 1.2em;
 			    display: inline-block;
 			    text-overflow: ellipsis;
 			    white-space: nowrap;
 			    overflow: hidden;
 			    vertical-align: top;
+			    padding: 0.625rem 1.5rem;
 			}
-		}
-		
-		.Aqui
-		{
-			@include column(1, $offset: 0, $gutter: 0);
-			padding-top: 1em;
-			#calendario
+			label strong
 			{
-				display: block;
-				margin: auto;
+				@include transition(0.4s);
+				min-height: 1.1em;
+				display: inline-block;
+				background-color: $naranja;
+				padding: 0.7rem 1.25rem;
+				color:$blanco;
+			}
+			label strong:hover
+			{
+				background: $naranjaclaro;
+				border-color: $naranjaclaro;
+				cursor: pointer;
+			}
+			label:hover
+			{
+				border-color:$naranjaclaro;
+			}
+			label svg 
+			{
+			    width: 1em;
+			    height: 1em;
+			    vertical-align: middle;
+			    fill: currentColor;
+			    margin-top: -0.25em;
+			    /* 4px */
+			    margin-right: 0.25em;
+			    /* 4px */
 			}
 		}
 	}
