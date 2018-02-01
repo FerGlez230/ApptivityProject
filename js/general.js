@@ -6,7 +6,6 @@
 $(document).ready(function()
 {
 
-<<<<<<< HEAD
 $(document).ready(function(){
   	//$('body').css({ 'width': $(window).width() + "px" });
   	
@@ -43,7 +42,6 @@ $(document).ready(function(){
     });
   	
 });
-=======
   	$('body').css({ 'width': $(window).width() + "px" });
 });
 
@@ -69,8 +67,7 @@ $('#calendario').multiDatesPicker({
 	$('.inputfile' ).each( function()
 	{
 		var $input	 = $( this ),
-			$label	 = $input.next( 'label' ),
-			labelVal = $label.html();
+			$label	 = $input.next( 'label' );
 		$input.on( 'change', function( e )
 		{
 			var fileName = '';
@@ -78,17 +75,21 @@ $('#calendario').multiDatesPicker({
 				fileName = e.target.value.split( '\\' ).pop();
 
 			if( fileName )
-				$label.find( 'span' ).html( fileName );
-			else
-				$label.html( labelVal );
+				$label.find('span').html(fileName);
 		});
-		// Firefox bug fix
-		$input
-		.on( 'focus', function(){ $input.addClass( 'has-focus' ); })
-		.on( 'blur', function(){ $input.removeClass( 'has-focus' ); });
 	});
 })( jQuery, window, document );
 
+function ValidarEvento()
+{
+	var contador=true;
+	var NombreEvento=document.Evento.NombreEvento.value;
+	var Descripcion=document.Evento.Descripcion.value;
+	var PrecioInferior=document.Evento.PrecioInferior.value;
+	var PrecioSuperior=document.Evento.PrecioSuperior.value;
+	contador=ValidarSoloNumeros(PrecioInferior, "precio inferior")
+	return contador;
+}
 function ValidarRegistroEstablecimiento()
 {
 	var contador=true;
@@ -117,6 +118,15 @@ function ValidarTextComun(Campo, NombreCampo)
 	}else
 	{
 		window.alert("El campo "+NombreCampo+" sólo permite caracteres de la A-Z");
+		return false;
+	}
+}
+function ValidarSoloNumeros(Campo, NombreCampo)
+{
+	var Numeros= /^[0-9]+([,][0-9]+)?$/;
+	if(Campo.search(Numeros))
+	{
+		window.alert("El campo" +NombreCampo+ " sólo acepta números");
 		return false;
 	}
 }
@@ -172,7 +182,6 @@ function NuevoHorario()
 	{
 		Registros[j]=(HoraInicio+HoraTermino+DiasSeleccionados[j]);
 	}*/
-<<<<<<< HEAD
 }
 function CargarMapaInicial()
 {
@@ -188,10 +197,6 @@ function CargarMapaInicial()
 	}
 	var gMap= new google.maps.Map(outputmapa, objConfig);*/
 	window.onload=CargarMapaInicial;
-=======
->>>>>>> 749e22ec8b67cbbdc14f404417f5475777b2ef3c
-
->>>>>>> 3ecc9cd1f8bea6f179cca1de0696c70ffb4fc704
 }
 function FindMe()
 {
@@ -226,7 +231,7 @@ function FindMe()
 			map: gMap
 		}
 		var gMarker= new google.maps.Marker(objConfigMarker);
-		geocodeLatLng(geocoder,gMap,infowindow,gLatLong,gMarker);  
+		geocodeLatLng(geocoder,gMap,infowindow,gLatLong,gMarker); 
 	}
 	function error()
 	{

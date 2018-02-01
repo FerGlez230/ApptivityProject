@@ -554,7 +554,7 @@ div {
       margin: auto;
       padding-top: 2em; }
 
-.Promocion {
+.Promocion, .Evento {
   float: left;
   clear: none;
   text-align: inherit;
@@ -565,50 +565,50 @@ div {
   overflow: hidden;
   padding-bottom: 3%;
   margin-top: 3%; }
-  .Promocion::after {
+  .Promocion::after, .Evento::after {
     content: '';
     display: table;
     clear: both; }
-  .Promocion:last-child {
+  .Promocion:last-child, .Evento:last-child {
     margin-right: 0%; }
-  .Promocion h1 {
+  .Promocion h1, .Evento h1 {
     font-family: 'AardvarkCafe';
     font-size: 2.5em;
     color: #353535;
     text-align: center; }
-  .Promocion .contenedorformulario {
+  .Promocion .contenedorformulario, .Evento .contenedorformulario {
     float: left;
     clear: none;
     text-align: inherit;
     width: 33.33333%;
     margin-left: 33.33333%;
     margin-right: 0%; }
-    .Promocion .contenedorformulario::after {
+    .Promocion .contenedorformulario::after, .Evento .contenedorformulario::after {
       content: '';
       display: table;
       clear: both; }
-    .Promocion .contenedorformulario:last-child {
+    .Promocion .contenedorformulario:last-child, .Evento .contenedorformulario:last-child {
       margin-right: 0%; }
-    .Promocion .contenedorformulario input, .Promocion .contenedorformulario textarea {
+    .Promocion .contenedorformulario input, .Promocion .contenedorformulario textarea, .Evento .contenedorformulario input, .Evento .contenedorformulario textarea {
       font-family: AYearWithoutRain;
       font-size: 1.2em;
       width: 18em;
       display: block;
       margin: auto;
       margin-top: 1em; }
-    .Promocion .contenedorformulario h2, .Promocion .contenedorformulario label {
+    .Promocion .contenedorformulario h2, .Promocion .contenedorformulario label, .Evento .contenedorformulario h2, .Evento .contenedorformulario label {
       font-family: AYearWithoutRain;
       font-size: 1.2em;
       color: #757575;
       text-align: center;
       margin-top: 1em; }
-    .Promocion .contenedorformulario h3 {
+    .Promocion .contenedorformulario h3, .Evento .contenedorformulario h3 {
       font-family: AYearWithoutRain;
       padding-bottom: .5em;
       font-size: .8em;
       color: #757575;
       text-align: center; }
-    .Promocion .contenedorformulario input[type=submit] {
+    .Promocion .contenedorformulario input[type=submit], .Evento .contenedorformulario input[type=submit] {
       -o-transition: all 0.4s ease-in-out;
       transition: all 0.4s ease-in-out;
       -moz-transition: all 0.4s ease-in-out;
@@ -621,12 +621,12 @@ div {
       width: 18em;
       padding: 0.625rem;
       font-size: 1.2em; }
-    .Promocion .contenedorformulario input[type=submit]:hover {
+    .Promocion .contenedorformulario input[type=submit]:hover, .Evento .contenedorformulario input[type=submit]:hover {
       background: #757575;
       border-color: #757575;
       color: #FFFFFF;
       cursor: pointer; }
-    .Promocion .contenedorformulario .contenedorvarios {
+    .Promocion .contenedorformulario .contenedorvarios, .Evento .contenedorformulario .contenedorvarios {
       float: left;
       clear: none;
       text-align: inherit;
@@ -635,7 +635,7 @@ div {
       margin-right: 0%;
       display: block;
       margin: auto; }
-      .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario {
+      .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario, .Evento .contenedorformulario .contenedorvarios .ContenedorCalendario {
         float: left;
         clear: none;
         text-align: inherit;
@@ -643,30 +643,30 @@ div {
         margin-left: 16.66667%;
         margin-right: 0%;
         padding-top: 1em; }
-        .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario::after {
+        .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario::after, .Evento .contenedorformulario .contenedorvarios .ContenedorCalendario::after {
           content: '';
           display: table;
           clear: both; }
-        .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario:last-child {
+        .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario:last-child, .Evento .contenedorformulario .contenedorvarios .ContenedorCalendario:last-child {
           margin-right: 0%; }
-        .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario #calendario {
+        .Promocion .contenedorformulario .contenedorvarios .ContenedorCalendario #calendario, .Evento .contenedorformulario .contenedorvarios .ContenedorCalendario #calendario {
           display: block;
           margin: auto; }
-      .Promocion .contenedorformulario .contenedorvarios::after {
+      .Promocion .contenedorformulario .contenedorvarios::after, .Evento .contenedorformulario .contenedorvarios::after {
         content: '';
         display: table;
         clear: both; }
-      .Promocion .contenedorformulario .contenedorvarios:last-child {
+      .Promocion .contenedorformulario .contenedorvarios:last-child, .Evento .contenedorformulario .contenedorvarios:last-child {
         margin-right: 0%; }
-      .Promocion .contenedorformulario .contenedorvarios h3 {
+      .Promocion .contenedorformulario .contenedorvarios h3, .Evento .contenedorformulario .contenedorvarios h3 {
         padding-bottom: .5em;
         font-size: .8em; }
-      .Promocion .contenedorformulario .contenedorvarios input {
+      .Promocion .contenedorformulario .contenedorvarios input, .Evento .contenedorformulario .contenedorvarios input {
         width: 7em;
         display: block;
         margin: auto;
         color: #757575; }
-      .Promocion .contenedorformulario .contenedorvarios .parte12 {
+      .Promocion .contenedorformulario .contenedorvarios .parte12, .Evento .contenedorformulario .contenedorvarios .parte12 {
         float: left;
         clear: none;
         text-align: inherit;
@@ -674,30 +674,30 @@ div {
         margin-left: 0%;
         margin-right: 0%;
         padding-bottom: 1em; }
-        .Promocion .contenedorformulario .contenedorvarios .parte12::after {
+        .Promocion .contenedorformulario .contenedorvarios .parte12::after, .Evento .contenedorformulario .contenedorvarios .parte12::after {
           content: '';
           display: table;
           clear: both; }
-        .Promocion .contenedorformulario .contenedorvarios .parte12:last-child {
+        .Promocion .contenedorformulario .contenedorvarios .parte12:last-child, .Evento .contenedorformulario .contenedorvarios .parte12:last-child {
           margin-right: 0%; }
-        .Promocion .contenedorformulario .contenedorvarios .parte12 .izq {
+        .Promocion .contenedorformulario .contenedorvarios .parte12 .izq, .Evento .contenedorformulario .contenedorvarios .parte12 .izq {
           padding-left: 1em; }
-        .Promocion .contenedorformulario .contenedorvarios .parte12 .der {
+        .Promocion .contenedorformulario .contenedorvarios .parte12 .der, .Evento .contenedorformulario .contenedorvarios .parte12 .der {
           padding-right: 1em; }
-    .Promocion .contenedorformulario #agregarperiodo {
+    .Promocion .contenedorformulario #agregarperiodo, .Evento .contenedorformulario #agregarperiodo {
       float: left;
       clear: none;
       text-align: inherit;
       width: 40%;
       margin-left: 55%;
       margin-right: 0%; }
-      .Promocion .contenedorformulario #agregarperiodo::after {
+      .Promocion .contenedorformulario #agregarperiodo::after, .Evento .contenedorformulario #agregarperiodo::after {
         content: '';
         display: table;
         clear: both; }
-      .Promocion .contenedorformulario #agregarperiodo:last-child {
+      .Promocion .contenedorformulario #agregarperiodo:last-child, .Evento .contenedorformulario #agregarperiodo:last-child {
         margin-right: 0%; }
-      .Promocion .contenedorformulario #agregarperiodo input {
+      .Promocion .contenedorformulario #agregarperiodo input, .Evento .contenedorformulario #agregarperiodo input {
         -o-transition: all 0.4s ease-in-out;
         transition: all 0.4s ease-in-out;
         -moz-transition: all 0.4s ease-in-out;
@@ -707,19 +707,19 @@ div {
         width: 7em;
         border: none;
         margin-bottom: 1em; }
-      .Promocion .contenedorformulario #agregarperiodo input:hover {
+      .Promocion .contenedorformulario #agregarperiodo input:hover, .Evento .contenedorformulario #agregarperiodo input:hover {
         text-decoration: underline;
         cursor: pointer; }
-    .Promocion .contenedorformulario .ImagenFile {
+    .Promocion .contenedorformulario .ImagenFile, .Evento .contenedorformulario .ImagenFile {
       margin-top: 1em; }
-      .Promocion .contenedorformulario .ImagenFile input {
+      .Promocion .contenedorformulario .ImagenFile input, .Evento .contenedorformulario .ImagenFile input {
         width: 0.1px;
         height: 0.1px;
         opacity: 0;
         overflow: hidden;
         position: absolute;
         margin: auto; }
-      .Promocion .contenedorformulario .ImagenFile label[for] {
+      .Promocion .contenedorformulario .ImagenFile label[for], .Evento .contenedorformulario .ImagenFile label[for] {
         max-width: 76%;
         font-size: 1.25rem;
         -o-text-overflow: ellipsis;
@@ -730,7 +730,7 @@ div {
         margin: auto;
         overflow: hidden;
         border: 1px solid #FD9927; }
-      .Promocion .contenedorformulario .ImagenFile label span {
+      .Promocion .contenedorformulario .ImagenFile label span, .Evento .contenedorformulario .ImagenFile label span {
         width: 160px;
         min-height: 1.2em;
         display: inline-block;
@@ -740,7 +740,7 @@ div {
         overflow: hidden;
         vertical-align: top;
         padding: 0.625rem 1.5rem; }
-      .Promocion .contenedorformulario .ImagenFile label strong {
+      .Promocion .contenedorformulario .ImagenFile label strong, .Evento .contenedorformulario .ImagenFile label strong {
         -o-transition: all 0.4s ease-in-out;
         transition: all 0.4s ease-in-out;
         -moz-transition: all 0.4s ease-in-out;
@@ -750,13 +750,13 @@ div {
         background-color: #FD9927;
         padding: 0.7rem 1.25rem;
         color: #FFFFFF; }
-      .Promocion .contenedorformulario .ImagenFile label strong:hover {
+      .Promocion .contenedorformulario .ImagenFile label strong:hover, .Evento .contenedorformulario .ImagenFile label strong:hover {
         background: #FEA53F;
         border-color: #FEA53F;
         cursor: pointer; }
-      .Promocion .contenedorformulario .ImagenFile label:hover {
+      .Promocion .contenedorformulario .ImagenFile label:hover, .Evento .contenedorformulario .ImagenFile label:hover {
         border-color: #FEA53F; }
-      .Promocion .contenedorformulario .ImagenFile label svg {
+      .Promocion .contenedorformulario .ImagenFile label svg, .Evento .contenedorformulario .ImagenFile label svg {
         width: 1em;
         height: 1em;
         vertical-align: middle;
