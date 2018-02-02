@@ -12,7 +12,7 @@
     <link type="text/css" rel="stylesheet" href="css/slick.css">
     <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
   </head>
-  <body> 
+  <body onload="CargarMapaInicial()">
     <div class="headerRegistro">
       <div class="contenedorGeneral">
         <div class="contenedor">
@@ -20,10 +20,9 @@
         </div>
       </div>
     </div>
-    <div class="RegistroUsuario">
+    <div class="RegistroEstablecimiento">
       <div class="contenedor">
         <h1>Registra tu establecimiento</h1>
-        <div class="contenedorformulario"> </div>
         <div class="contenedorformulario">
           <form class="formData1" id="form1"></form>
           <form method="POST" action="" name="RegistroEstablecimiento" onsubmit="return ValidarRegistroEstablecimiento()">
@@ -92,9 +91,11 @@
                 <h2>Ubicación del establecimiento</h2>
               </li>
               <li> 
-                <input type="button" value="Obtener mi ubicación actual" name="Mapa" onclick="FindMe()">
                 <div id="map"></div>
                 <div id="mapa"></div>
+                <div id="inputmapa">
+                  <input type="button" value="Obtener mi ubicación actual" name="Mapa" onclick="FindMe()">
+                </div>
               </li>
               <li>
                 <input type="text" placeholder="Nombre de usuario" name="Usuario" id="Usuario" required>

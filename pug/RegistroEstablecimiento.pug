@@ -2,12 +2,11 @@ doctype
 html(lang="es")
 	head
 		include include/head
-	body 
+	body(onload="CargarMapaInicial()")
 		include include/headerRegistro
-		.RegistroUsuario
+		.RegistroEstablecimiento
 			.contenedor
 				h1 Registra tu establecimiento
-				.contenedorformulario 
 				.contenedorformulario
 					form.formData1#form1()
 					form(method="POST" action="" name="RegistroEstablecimiento" onsubmit='return ValidarRegistroEstablecimiento()')
@@ -57,9 +56,10 @@ html(lang="es")
 							li
 								h2 Ubicación del establecimiento
 							li 
-								input(type="button", value="Obtener mi ubicación actual", name="Mapa" onclick="FindMe()")
 								#map
 								#mapa
+								#inputmapa
+									input(type="button", value="Obtener mi ubicación actual", name="Mapa" onclick="FindMe()")
 							li
 								input(type='text', placeholder='Nombre de usuario' name='Usuario' id="Usuario" required)
 							li

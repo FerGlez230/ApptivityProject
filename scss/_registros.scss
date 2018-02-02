@@ -124,7 +124,7 @@
 				}
 				input:hover
 				{
-					text-decoration: underline;
+					color: $naranja;
 					cursor: pointer;
 				}
 			}
@@ -140,9 +140,29 @@
 			#mapa
 			{
 				height: 500px;
-				width: 700px;
+				width: 444px;
 				display: block;
 				margin: auto;
+			}
+			#inputmapa
+			{
+				margin-top: 1em;
+				input
+				{
+					@include transition(0.4s);
+					background: $azul;
+					color:$oscuro;
+					border: 1px solid $azul;
+					width: 12em;
+					display: block;
+					margin: auto;
+					border-radius: .3em;
+				}
+				input:hover
+				{
+					background: $naranjaclaro;
+					border-color: $naranjaclaro;
+				}
 			}
 			.contenedorApellidos
 			{

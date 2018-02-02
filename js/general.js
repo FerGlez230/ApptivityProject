@@ -87,7 +87,7 @@ function ValidarEvento()
 	var Descripcion=document.Evento.Descripcion.value;
 	var PrecioInferior=document.Evento.PrecioInferior.value;
 	var PrecioSuperior=document.Evento.PrecioSuperior.value;
-	contador=ValidarSoloNumeros(PrecioInferior, "precio inferior")
+	contador=ValidarSoloNumeros(PrecioInferior, "precio inferior ")
 	return contador;
 }
 function ValidarRegistroEstablecimiento()
@@ -185,18 +185,35 @@ function NuevoHorario()
 }
 function CargarMapaInicial()
 {
-	var latitude= posicion.coords.latitude;
-	var longitude= posicion.coords.longitude;
 	var outputmapa=document.getElementById('mapa');// div para conetenr el mapa	
-	outputmapa.innerHTML("Holiwis");
-	/*var gLatLong= new google.maps.LatLng(latitude,longitude);
-	var objConfig=
+	navigator.geolocation.getCurrentPosition(localization,error);
+	function localization()
 	{
-		zoom: 16,
-		center: gLatLong
+		var latitude= 20.703004;
+		var longitude= -103.390141;
+
+		//output.innerHTML="<p> Latitud: "+latitude+"<br> Logitud: "+longitude+"</p>";
+		var gLatLong= new google.maps.LatLng(latitude,longitude);
+		var objConfig=
+		{
+			zoom: 16,
+			center: gLatLong
+		}
+		var gMap= new google.maps.Map(outputmapa, objConfig);
+		var geocoder = new google.maps.Geocoder();//objeto para la geolocalización inversa
+		var infowindow = new google.maps.InfoWindow();//ventana de información sobre la dirección decodificada
+		var objConfigMarker=
+		{
+			position: gLatLong,
+			map: gMap
+		}
+		var gMarker= new google.maps.Marker(objConfigMarker);
+		geocodeLatLng(geocoder,gMap,infowindow,gLatLong,gMarker); 
 	}
-	var gMap= new google.maps.Map(outputmapa, objConfig);*/
-	window.onload=CargarMapaInicial;
+	function error()
+	{
+		output.innerHTML="<br> No se pudo cargar el mapa inicial. Recargue la página";
+	}
 }
 function FindMe()
 {
@@ -204,10 +221,10 @@ function FindMe()
 	var outputmapa=document.getElementById('mapa');// div para conetenr el mapa
 	if(navigator.geolocation)
 	{
-		output.innerHTML="<br> Soporta geolocalización";
+		//output.innerHTML="<br> Soporta geolocalización";
 	}else
 	{
-		output.innerHTML="<br> No soporta geolocalización";
+		//output.innerHTML="<br> No soporta geolocalización";
 	}
 	navigator.geolocation.getCurrentPosition(localization,error);
 	function localization(posicion)

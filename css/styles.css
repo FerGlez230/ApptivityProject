@@ -935,7 +935,7 @@ div {
           border: none;
           padding-bottom: 1em; }
         .RegistroUsuario .contenedor .contenedorformulario #agregarhorario input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario input:hover {
-          text-decoration: underline;
+          color: #FD9927;
           cursor: pointer; }
       .RegistroUsuario .contenedor .contenedorformulario textarea, .RegistroEstablecimiento .contenedor .contenedorformulario textarea {
         width: 18em;
@@ -946,9 +946,26 @@ div {
         font-size: 1.2em; }
       .RegistroUsuario .contenedor .contenedorformulario #mapa, .RegistroEstablecimiento .contenedor .contenedorformulario #mapa {
         height: 500px;
-        width: 700px;
+        width: 444px;
         display: block;
         margin: auto; }
+      .RegistroUsuario .contenedor .contenedorformulario #inputmapa, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa {
+        margin-top: 1em; }
+        .RegistroUsuario .contenedor .contenedorformulario #inputmapa input, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa input {
+          -o-transition: all 0.4s ease-in-out;
+          transition: all 0.4s ease-in-out;
+          -moz-transition: all 0.4s ease-in-out;
+          -webkit-transition: all 0.4s ease-in-out;
+          background: #36A6F8;
+          color: #353535;
+          border: 1px solid #36A6F8;
+          width: 12em;
+          display: block;
+          margin: auto;
+          border-radius: .3em; }
+        .RegistroUsuario .contenedor .contenedorformulario #inputmapa input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa input:hover {
+          background: #FEA53F;
+          border-color: #FEA53F; }
       .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos {
         width: 22em;
         display: block;
