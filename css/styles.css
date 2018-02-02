@@ -77,6 +77,10 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   src: url("fonts/Roboto-Light.eot?#iefix") format("embedded-opentype"), url("fonts/Roboto-Light.woff") format("woff"), url("fonts/Roboto-Light.ttf") format("truetype"), url("fonts/Roboto-Light.svg#Roboto-Light") format("svg");
   font-weight: normal;
   font-style: normal; }
+html {
+  min-height: 100%;
+  position: relative; }
+
 img {
   max-width: 100%; }
 
@@ -777,7 +781,7 @@ div {
       margin: auto;
       padding-top: 2em; }
 
-.RegistroUsuario, .RegistroEstablecimiento {
+.RegistroUsuario, .RegistroEstablecimiento, .IniciarSesion {
   float: left;
   clear: none;
   text-align: inherit;
@@ -786,61 +790,62 @@ div {
   margin-right: 0%;
   z-index: 1;
   overflow: hidden;
-  padding-bottom: 3%; }
-  .RegistroUsuario::after, .RegistroEstablecimiento::after {
+  padding-bottom: 3%;
+  margin-bottom: 3em; }
+  .RegistroUsuario::after, .RegistroEstablecimiento::after, .IniciarSesion::after {
     content: '';
     display: table;
     clear: both; }
-  .RegistroUsuario:last-child, .RegistroEstablecimiento:last-child {
+  .RegistroUsuario:last-child, .RegistroEstablecimiento:last-child, .IniciarSesion:last-child {
     margin-right: 0%; }
-  .RegistroUsuario .contenedor, .RegistroEstablecimiento .contenedor {
+  .RegistroUsuario .contenedor, .RegistroEstablecimiento .contenedor, .IniciarSesion .contenedor {
     margin-top: 3%; }
-    .RegistroUsuario .contenedor h1, .RegistroEstablecimiento .contenedor h1 {
+    .RegistroUsuario .contenedor h1, .RegistroEstablecimiento .contenedor h1, .IniciarSesion .contenedor h1 {
       font-family: 'AardvarkCafe';
       font-size: 2.5em;
       color: #353535;
       text-align: center; }
-    .RegistroUsuario .contenedor .contenedorformulario, .RegistroEstablecimiento .contenedor .contenedorformulario {
+    .RegistroUsuario .contenedor .contenedorformulario, .RegistroEstablecimiento .contenedor .contenedorformulario, .IniciarSesion .contenedor .contenedorformulario {
       float: left;
       clear: none;
       text-align: inherit;
       width: 33.33333%;
       margin-left: 33.33333%;
       margin-right: 0%; }
-      .RegistroUsuario .contenedor .contenedorformulario::after, .RegistroEstablecimiento .contenedor .contenedorformulario::after {
+      .RegistroUsuario .contenedor .contenedorformulario::after, .RegistroEstablecimiento .contenedor .contenedorformulario::after, .IniciarSesion .contenedor .contenedorformulario::after {
         content: '';
         display: table;
         clear: both; }
-      .RegistroUsuario .contenedor .contenedorformulario:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario:last-child {
+      .RegistroUsuario .contenedor .contenedorformulario:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario:last-child, .IniciarSesion .contenedor .contenedorformulario:last-child {
         margin-right: 0%; }
-      .RegistroUsuario .contenedor .contenedorformulario li, .RegistroEstablecimiento .contenedor .contenedorformulario li {
+      .RegistroUsuario .contenedor .contenedorformulario li, .RegistroEstablecimiento .contenedor .contenedorformulario li, .IniciarSesion .contenedor .contenedorformulario li {
         margin-top: 1em;
         margin-bottom: 1em; }
-      .RegistroUsuario .contenedor .contenedorformulario input, .RegistroEstablecimiento .contenedor .contenedorformulario input {
+      .RegistroUsuario .contenedor .contenedorformulario input, .RegistroEstablecimiento .contenedor .contenedorformulario input, .IniciarSesion .contenedor .contenedorformulario input {
         font-family: AYearWithoutRain;
         font-size: 1.2em;
         width: 18em;
         display: block;
         margin: auto; }
-      .RegistroUsuario .contenedor .contenedorformulario h2, .RegistroUsuario .contenedor .contenedorformulario h3, .RegistroUsuario .contenedor .contenedorformulario label, .RegistroEstablecimiento .contenedor .contenedorformulario h2, .RegistroEstablecimiento .contenedor .contenedorformulario h3, .RegistroEstablecimiento .contenedor .contenedorformulario label {
+      .RegistroUsuario .contenedor .contenedorformulario h2, .RegistroUsuario .contenedor .contenedorformulario h3, .RegistroUsuario .contenedor .contenedorformulario label, .RegistroEstablecimiento .contenedor .contenedorformulario h2, .RegistroEstablecimiento .contenedor .contenedorformulario h3, .RegistroEstablecimiento .contenedor .contenedorformulario label, .IniciarSesion .contenedor .contenedorformulario h2, .IniciarSesion .contenedor .contenedorformulario h3, .IniciarSesion .contenedor .contenedorformulario label {
         font-family: AYearWithoutRain;
         font-size: 1.2em;
         color: #757575;
         text-align: center; }
-      .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario {
+      .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario, .IniciarSesion .contenedor .contenedorformulario .contenedorhorario {
         width: 20em;
         height: 4em;
         display: block;
         margin: auto; }
-        .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario h3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario h3 {
+        .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario h3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario h3, .IniciarSesion .contenedor .contenedorformulario .contenedorhorario h3 {
           padding-bottom: .5em;
           font-size: .8em; }
-        .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario input {
+        .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario input, .IniciarSesion .contenedor .contenedorformulario .contenedorhorario input {
           width: 6.5em;
           display: block;
           margin: auto;
           color: #757575; }
-        .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12 {
+        .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12, .IniciarSesion .contenedor .contenedorformulario .contenedorhorario .parte12 {
           float: left;
           clear: none;
           text-align: inherit;
@@ -848,17 +853,17 @@ div {
           margin-left: 0%;
           margin-right: 0%;
           padding-bottom: 1em; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12::after {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12::after, .IniciarSesion .contenedor .contenedorformulario .contenedorhorario .parte12::after {
             content: '';
             display: table;
             clear: both; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12:last-child {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedorhorario .parte12:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorhorario .parte12:last-child, .IniciarSesion .contenedor .contenedorformulario .contenedorhorario .parte12:last-child {
             margin-right: 0%; }
-      .RegistroUsuario .contenedor .contenedorformulario .contenedordias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias {
+      .RegistroUsuario .contenedor .contenedorformulario .contenedordias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias, .IniciarSesion .contenedor .contenedorformulario .contenedordias {
         width: 22em;
         display: block;
         margin: auto; }
-        .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 {
+        .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor4, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor3 {
           float: left;
           clear: none;
           text-align: inherit;
@@ -866,16 +871,16 @@ div {
           margin-left: 0%;
           margin-right: 0%;
           padding-bottom: 1em; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4::after, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3::after {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4::after, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3::after, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor4::after, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor3::after {
             content: '';
             display: table;
             clear: both; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4:last-child, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3:last-child {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4:last-child, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3:last-child, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor4:last-child, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor3:last-child {
             margin-right: 0%; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 input, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 input {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 input, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 input, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor4 input, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor3 input {
             visibility: hidden;
             display: inline-block; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 label[for], .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 label[for], .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 label[for], .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 label[for] {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 label[for], .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 label[for], .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 label[for], .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 label[for], .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor4 label[for], .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor3 label[for] {
             -o-transition: all 0.4s ease-in-out;
             transition: all 0.4s ease-in-out;
             -moz-transition: all 0.4s ease-in-out;
@@ -888,42 +893,42 @@ div {
             padding: .25em;
             position: relative;
             display: inline-block; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 label:hover, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 label:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 label:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 label:hover {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 label:hover, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 label:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 label:hover, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 label:hover, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor4 label:hover, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor3 label:hover {
             background: #757575;
             color: #FFFFFF;
             cursor: pointer; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 input:checked + label.dias, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 input:checked + label.dias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 input:checked + label.dias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 input:checked + label.dias {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor4 input:checked + label.dias, .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3 input:checked + label.dias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor4 input:checked + label.dias, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 input:checked + label.dias, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor4 input:checked + label.dias, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor3 input:checked + label.dias {
             background: #36A6F8;
             color: #FFFFFF;
             cursor: pointer;
             border: 1px solid #36A6F8; }
-        .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3 {
+        .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor3 {
           float: left;
           clear: none;
           text-align: inherit;
           width: 33.33333%;
           margin-left: 0%;
           margin-right: 0%; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3::after {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3::after, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor3::after {
             content: '';
             display: table;
             clear: both; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3:last-child {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedordias .contenedor3:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedordias .contenedor3:last-child, .IniciarSesion .contenedor .contenedorformulario .contenedordias .contenedor3:last-child {
             margin-right: 0%; }
-      .RegistroUsuario .contenedor .contenedorformulario #agregarhorario, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario {
+      .RegistroUsuario .contenedor .contenedorformulario #agregarhorario, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario, .IniciarSesion .contenedor .contenedorformulario #agregarhorario {
         float: left;
         clear: none;
         text-align: inherit;
         width: 20%;
         margin-left: 60%;
         margin-right: 0%; }
-        .RegistroUsuario .contenedor .contenedorformulario #agregarhorario::after, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario::after {
+        .RegistroUsuario .contenedor .contenedorformulario #agregarhorario::after, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario::after, .IniciarSesion .contenedor .contenedorformulario #agregarhorario::after {
           content: '';
           display: table;
           clear: both; }
-        .RegistroUsuario .contenedor .contenedorformulario #agregarhorario:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario:last-child {
+        .RegistroUsuario .contenedor .contenedorformulario #agregarhorario:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario:last-child, .IniciarSesion .contenedor .contenedorformulario #agregarhorario:last-child {
           margin-right: 0%; }
-        .RegistroUsuario .contenedor .contenedorformulario #agregarhorario input, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario input {
+        .RegistroUsuario .contenedor .contenedorformulario #agregarhorario input, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario input, .IniciarSesion .contenedor .contenedorformulario #agregarhorario input {
           -o-transition: all 0.4s ease-in-out;
           transition: all 0.4s ease-in-out;
           -moz-transition: all 0.4s ease-in-out;
@@ -934,24 +939,24 @@ div {
           width: 7em;
           border: none;
           padding-bottom: 1em; }
-        .RegistroUsuario .contenedor .contenedorformulario #agregarhorario input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario input:hover {
+        .RegistroUsuario .contenedor .contenedorformulario #agregarhorario input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #agregarhorario input:hover, .IniciarSesion .contenedor .contenedorformulario #agregarhorario input:hover {
           color: #FD9927;
           cursor: pointer; }
-      .RegistroUsuario .contenedor .contenedorformulario textarea, .RegistroEstablecimiento .contenedor .contenedorformulario textarea {
+      .RegistroUsuario .contenedor .contenedorformulario textarea, .RegistroEstablecimiento .contenedor .contenedorformulario textarea, .IniciarSesion .contenedor .contenedorformulario textarea {
         width: 18em;
         font-family: AYearWithoutRain;
         color: #757575;
         display: block;
         margin: auto;
         font-size: 1.2em; }
-      .RegistroUsuario .contenedor .contenedorformulario #mapa, .RegistroEstablecimiento .contenedor .contenedorformulario #mapa {
+      .RegistroUsuario .contenedor .contenedorformulario #mapa, .RegistroEstablecimiento .contenedor .contenedorformulario #mapa, .IniciarSesion .contenedor .contenedorformulario #mapa {
         height: 500px;
         width: 444px;
         display: block;
         margin: auto; }
-      .RegistroUsuario .contenedor .contenedorformulario #inputmapa, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa {
+      .RegistroUsuario .contenedor .contenedorformulario #inputmapa, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa, .IniciarSesion .contenedor .contenedorformulario #inputmapa {
         margin-top: 1em; }
-        .RegistroUsuario .contenedor .contenedorformulario #inputmapa input, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa input {
+        .RegistroUsuario .contenedor .contenedorformulario #inputmapa input, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa input, .IniciarSesion .contenedor .contenedorformulario #inputmapa input {
           -o-transition: all 0.4s ease-in-out;
           transition: all 0.4s ease-in-out;
           -moz-transition: all 0.4s ease-in-out;
@@ -963,14 +968,14 @@ div {
           display: block;
           margin: auto;
           border-radius: .3em; }
-        .RegistroUsuario .contenedor .contenedorformulario #inputmapa input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa input:hover {
+        .RegistroUsuario .contenedor .contenedorformulario #inputmapa input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa input:hover, .IniciarSesion .contenedor .contenedorformulario #inputmapa input:hover {
           background: #FEA53F;
           border-color: #FEA53F; }
-      .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos {
+      .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos, .IniciarSesion .contenedor .contenedorformulario .contenedorApellidos {
         width: 22em;
         display: block;
         margin: auto; }
-        .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos {
+        .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos, .IniciarSesion .contenedor .contenedorformulario .contenedorApellidos #apellidos {
           float: left;
           clear: none;
           text-align: inherit;
@@ -979,30 +984,30 @@ div {
           margin-right: 0%;
           padding-bottom: 1em;
           float: left; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos::after {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos::after, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos::after, .IniciarSesion .contenedor .contenedorformulario .contenedorApellidos #apellidos::after {
             content: '';
             display: table;
             clear: both; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos:last-child {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos:last-child, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos:last-child, .IniciarSesion .contenedor .contenedorformulario .contenedorApellidos #apellidos:last-child {
             margin-right: 0%; }
-          .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos input {
+          .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos #apellidos input, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos #apellidos input, .IniciarSesion .contenedor .contenedorformulario .contenedorApellidos #apellidos input {
             width: 95%; }
-      .RegistroUsuario .contenedor .contenedorformulario #vinculo, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo {
+      .RegistroUsuario .contenedor .contenedorformulario #vinculo, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo, .IniciarSesion .contenedor .contenedorformulario #vinculo {
         width: 20em;
         display: block;
         margin: auto; }
-        .RegistroUsuario .contenedor .contenedorformulario #vinculo input, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo input {
+        .RegistroUsuario .contenedor .contenedorformulario #vinculo input, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo input, .IniciarSesion .contenedor .contenedorformulario #vinculo input {
           display: inline-block;
           width: 1em; }
-        .RegistroUsuario .contenedor .contenedorformulario #vinculo h3, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo h3 {
+        .RegistroUsuario .contenedor .contenedorformulario #vinculo h3, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo h3, .IniciarSesion .contenedor .contenedorformulario #vinculo h3 {
           display: inline-block; }
-        .RegistroUsuario .contenedor .contenedorformulario #vinculo a, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo a {
+        .RegistroUsuario .contenedor .contenedorformulario #vinculo a, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo a, .IniciarSesion .contenedor .contenedorformulario #vinculo a {
           text-decoration: none;
           color: #36A6F8;
           display: inline-block; }
-        .RegistroUsuario .contenedor .contenedorformulario #vinculo a:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo a:hover {
+        .RegistroUsuario .contenedor .contenedorformulario #vinculo a:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #vinculo a:hover, .IniciarSesion .contenedor .contenedorformulario #vinculo a:hover {
           text-decoration: underline; }
-      .RegistroUsuario .contenedor .contenedorformulario #registro input, .RegistroEstablecimiento .contenedor .contenedorformulario #registro input {
+      .RegistroUsuario .contenedor .contenedorformulario #registro input, .RegistroEstablecimiento .contenedor .contenedorformulario #registro input, .IniciarSesion .contenedor .contenedorformulario #registro input {
         -o-transition: all 0.4s ease-in-out;
         transition: all 0.4s ease-in-out;
         -moz-transition: all 0.4s ease-in-out;
@@ -1013,7 +1018,7 @@ div {
         border-radius: .3em;
         width: 18em;
         font-weight: 2em; }
-      .RegistroUsuario .contenedor .contenedorformulario #registro input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #registro input:hover {
+      .RegistroUsuario .contenedor .contenedorformulario #registro input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #registro input:hover, .IniciarSesion .contenedor .contenedorformulario #registro input:hover {
         background: #757575;
         border-color: #757575;
         color: #FFFFFF;
@@ -1029,6 +1034,8 @@ div {
   height: 5em;
   background-color: #FD9927;
   width: 100%;
+  position: absolute;
+  bottom: 0;
   /*position:relative; 
   bottom:0em; 
   left:0em; */ }

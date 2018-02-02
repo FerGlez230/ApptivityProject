@@ -49,7 +49,7 @@ $(document).ready(function(){
 $('#calendario').multiDatesPicker({
 	minDate:0,//hoy
 	maxDate:365,// 1 año de vigencia
-	firstDay:0,
+	firstDay:0,//comienza en domingo
 	closeText: 'Cerrar',
  	prevText: 'Anterior',
 	nextText: 'Siguiente',
@@ -191,8 +191,6 @@ function CargarMapaInicial()
 	{
 		var latitude= 20.703004;
 		var longitude= -103.390141;
-
-		//output.innerHTML="<p> Latitud: "+latitude+"<br> Logitud: "+longitude+"</p>";
 		var gLatLong= new google.maps.LatLng(latitude,longitude);
 		var objConfig=
 		{
@@ -200,15 +198,6 @@ function CargarMapaInicial()
 			center: gLatLong
 		}
 		var gMap= new google.maps.Map(outputmapa, objConfig);
-		var geocoder = new google.maps.Geocoder();//objeto para la geolocalización inversa
-		var infowindow = new google.maps.InfoWindow();//ventana de información sobre la dirección decodificada
-		var objConfigMarker=
-		{
-			position: gLatLong,
-			map: gMap
-		}
-		var gMarker= new google.maps.Marker(objConfigMarker);
-		geocodeLatLng(geocoder,gMap,infowindow,gLatLong,gMarker); 
 	}
 	function error()
 	{

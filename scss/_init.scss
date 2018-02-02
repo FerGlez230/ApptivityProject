@@ -54,7 +54,11 @@ $gris: #757575;
 $azul:#36A6F8;
 $verde: #3AC451 ;
 //Espacios:
-
+html
+{
+  min-height: 100%;
+  position: relative;
+}
 body{
 }
 
