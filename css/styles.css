@@ -567,7 +567,7 @@ div {
   margin-right: 0%;
   z-index: 1;
   overflow: hidden;
-  padding-bottom: 3%;
+  padding-bottom: 3em;
   margin-top: 3%; }
   .Promocion::after, .Evento::after {
     content: '';
@@ -624,7 +624,8 @@ div {
       border-radius: .3em;
       width: 18em;
       padding: 0.625rem;
-      font-size: 1.2em; }
+      font-size: 1.2em;
+      margin-bottom: 3em; }
     .Promocion .contenedorformulario input[type=submit]:hover, .Evento .contenedorformulario input[type=submit]:hover {
       background: #757575;
       border-color: #757575;
