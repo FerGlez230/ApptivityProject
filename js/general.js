@@ -87,8 +87,17 @@ function ValidarEvento()
 	var Descripcion=document.Evento.Descripcion.value;
 	var PrecioInferior=document.Evento.PrecioInferior.value;
 	var PrecioSuperior=document.Evento.PrecioSuperior.value;
-	contador=ValidarSoloNumeros(PrecioInferior, "precio inferior ")
-	return contador;
+	contador=ValidarSoloNumeros(PrecioSuperior, " precio superior ")
+	if(contador==false){return contador;}
+	contador=ValidarSoloNumeros(PrecioInferior, " precio inferior ")
+	if(contador==false){return contador;}
+	if(PrecioInferior>PrecioSuperior)
+	{
+		alert("El precio inferior no puede ser mayor al superior");
+		return false;
+	}
+	contador=VerificarHorario(HoraInicio, HoraTermino);
+	if(contador==false){return contador;}
 }
 function ValidarRegistroEstablecimiento()
 {
@@ -103,12 +112,38 @@ function ValidarRegistroEstablecimiento()
 	var Contrasena=document.RegistroEstablecimiento.Contrasena.value;
 	var ConfirmarContrasena=document.RegistroEstablecimiento.ConfirmarContrasena.value;
 	contador=ValidarTextComun(Usuario, "usuario");
+	if(contador==false){return contador;}
 	contador=ValidarTextComun(ApellidoPaterno, "apellido paterno");
-	if(ApellidoMaterno!=""){contador=ValidarTextComun(ApellidoMaterno, "apellido materno");}
+	if(contador==false){return contador;}
+	if(ApellidoMaterno!=""){contador=ValidarTextComun(ApellidoMaterno, "apellido materno");if(contador==false){return contador;}}
 	contador=ValidarCorreo(CorreoElectronico);
+	if(contador==false){return contador;}
 	contador=ValidarContrasena(Contrasena);
+	if(contador==false){return contador;}
 	contador=ContrasenasIguales(Contrasena, ConfirmarContrasena);
-	return contador;
+	if(contador==false){return contador;}
+}
+function ValidarRegistroUsuario()
+{
+	var contador=true;
+	var Usuario=document.RegistroUsuario.Usuario.value;
+	var ApellidoMaterno=document.RegistroUsuario.ApellidoMaterno.value;
+	var ApellidoPaterno=document.RegistroUsuario.ApellidoPaterno.value;
+	var Username=document.RegistroUsuario.Username.value;
+	var CorreoElectronico=document.RegistroUsuario.CorreoElectronico.value;
+	var Contrasena=document.RegistroUsuario.Contrasena.value;
+	var ConfirmarContrasena=document.RegistroUsuario.ConfirmarContrasena.value;
+	contador=ValidarTextComun(Usuario, "usuario");
+	if(contador==false){return contador;}
+	contador=ValidarTextComun(ApellidoPaterno, "apellido paterno");
+	if(contador==false){return contador;}
+	if(ApellidoMaterno!=""){contador=ValidarTextComun(ApellidoMaterno, "apellido materno");if(contador==false){return contador;}}
+	contador=ValidarCorreo(CorreoElectronico);
+	if(contador==false){return contador;}
+	contador=ValidarContrasena(Contrasena);
+	if(contador==false){return contador;}
+	contador=ContrasenasIguales(Contrasena, ConfirmarContrasena);
+	if(contador==false){return contador;}
 }
 function ValidarTextComun(Campo, NombreCampo)
 {
@@ -126,7 +161,7 @@ function ValidarSoloNumeros(Campo, NombreCampo)
 	var Numeros= /^[0-9]+([,][0-9]+)?$/;
 	if(Campo.search(Numeros))
 	{
-		window.alert("El campo" +NombreCampo+ " sólo acepta números");
+		window.alert("El campo" +NombreCampo+ "sólo acepta números");
 		return false;
 	}
 }
@@ -164,12 +199,8 @@ function NuevoHorario()
 	var Registros=new Array();
 	var HoraInicio=document.RegistroEstablecimiento.HoraInicio.value;
 	var HoraTermino=document.RegistroEstablecimiento.HoraTermino.value;
+	VerificarHorario(HoraInicio, HoraTermino);
 	var DiasCheck=document.getElementsByName('diasSemana');
-	if(HoraInicio>=HoraTermino)
-	{
-		window.alert("La hora de inicio no puede ser mayor a la hora de termino");
-		return false;
-	}
 	for(var i=0; i<7; i++)
 	{
 		if(DiasCheck[i].checked)
@@ -182,6 +213,14 @@ function NuevoHorario()
 	{
 		Registros[j]=(HoraInicio+HoraTermino+DiasSeleccionados[j]);
 	}*/
+}
+function VerificarHorario(HoraInicio, HoraTermino)
+{
+	if(HoraInicio>=HoraTermino)
+	{
+		window.alert("La hora de inicio no puede ser mayor a la hora de termino");
+		return false;
+	}
 }
 function CargarMapaInicial()
 {

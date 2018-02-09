@@ -738,7 +738,7 @@ div {
       .Promocion .contenedorformulario .ImagenFile label span, .Evento .contenedorformulario .ImagenFile label span {
         width: 160px;
         min-height: 1.2em;
-        display: inline-block;
+        display: table-cell;
         -o-text-overflow: ellipsis;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -751,7 +751,7 @@ div {
         -moz-transition: all 0.4s ease-in-out;
         -webkit-transition: all 0.4s ease-in-out;
         min-height: 1.1em;
-        display: inline-block;
+        display: table-cell;
         background-color: #FD9927;
         padding: 0.7rem 1.25rem;
         color: #FFFFFF; }
