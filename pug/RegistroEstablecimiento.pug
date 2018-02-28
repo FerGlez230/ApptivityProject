@@ -61,6 +61,10 @@ html(lang="es")
 								#inputmapa
 									input(type="button", value="Obtener mi ubicación actual", name="Mapa" onclick="FindMe()")
 							li
+								input(type="text", placeholder="Ingrese ubicación (calle, núm, colonia)", id="address")
+								#inputmapa
+									input(type="button", value="Traducir direccion", name="MapaDir", id="MapaDir" onclick="FindMeByAddress()")
+							li
 								input(type='text', placeholder='Nombre de usuario' name='Usuario' id="Usuario" required)
 							li
 								.contenedorApellidos
@@ -90,4 +94,5 @@ html(lang="es")
 											a(href='https://www.youtube.com/?hl=es-419&gl=MX') inicia sesión				
 		include include/footer
 script(src='minjs/general-dist.js?version=' + version type='text/javascript')
-script(async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap")
+script(async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap&libraries=places")
+

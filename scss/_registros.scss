@@ -148,6 +148,7 @@
 			#inputmapa
 			{
 				margin-top: 1em;
+				margin-bottom: 1em;
 				input
 				{
 					@include transition(0.4s);
@@ -164,6 +165,9 @@
 					background: $naranjaclaro;
 					border-color: $naranjaclaro;
 				}
+			}
+			#margen {
+				margin-top: 1em;
 			}
 			.contenedorApellidos
 			{

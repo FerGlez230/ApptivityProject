@@ -8,7 +8,7 @@ html(lang="es")
 			.contenedor
 				h1 Regístrate como usuario
 				.contenedorformulario
-					form(method="POST" action="" name="RegistroUsuarioFormulario" )
+					form(method="POST" action="" name="RegistroUsuarioFormulario" onsubmit="return ValidarRegistroUsuario()")
 						ul
 							li
 								input(type='text', placeholder='Nombre de usuario' name='Usuario')
@@ -33,5 +33,5 @@ html(lang="es")
 										a(href='https://www.youtube.com/?hl=es-419&gl=MX') términos y condiciones
 							li 
 								#registro
-									input(type='button', value='REGISTRATE →', name='Registrar')
+									input(type='submit', value='REGISTRATE →', name='Registrar')
 		include include/footer

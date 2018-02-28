@@ -98,6 +98,12 @@
                 </div>
               </li>
               <li>
+                <input type="text" placeholder="Ingrese ubicación (calle, núm, colonia)" id="address">
+                <div id="inputmapa">
+                  <input type="button" value="Traducir direccion" name="MapaDir" id="MapaDir" onclick="FindMeByAddress()">
+                </div>
+              </li>
+              <li>
                 <input type="text" placeholder="Nombre de usuario" name="Usuario" id="Usuario" required>
               </li>
               <li>
@@ -147,4 +153,4 @@
   </body>
 </html>
 <script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&amp;key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&amp;callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&amp;key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&amp;callback=initMap&amp;libraries=places"></script>

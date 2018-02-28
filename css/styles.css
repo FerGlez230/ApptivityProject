@@ -956,7 +956,8 @@ div {
         display: block;
         margin: auto; }
       .RegistroUsuario .contenedor .contenedorformulario #inputmapa, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa, .IniciarSesion .contenedor .contenedorformulario #inputmapa {
-        margin-top: 1em; }
+        margin-top: 1em;
+        margin-bottom: 1em; }
         .RegistroUsuario .contenedor .contenedorformulario #inputmapa input, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa input, .IniciarSesion .contenedor .contenedorformulario #inputmapa input {
           -o-transition: all 0.4s ease-in-out;
           transition: all 0.4s ease-in-out;
@@ -972,6 +973,8 @@ div {
         .RegistroUsuario .contenedor .contenedorformulario #inputmapa input:hover, .RegistroEstablecimiento .contenedor .contenedorformulario #inputmapa input:hover, .IniciarSesion .contenedor .contenedorformulario #inputmapa input:hover {
           background: #FEA53F;
           border-color: #FEA53F; }
+      .RegistroUsuario .contenedor .contenedorformulario #margen, .RegistroEstablecimiento .contenedor .contenedorformulario #margen, .IniciarSesion .contenedor .contenedorformulario #margen {
+        margin-top: 1em; }
       .RegistroUsuario .contenedor .contenedorformulario .contenedorApellidos, .RegistroEstablecimiento .contenedor .contenedorformulario .contenedorApellidos, .IniciarSesion .contenedor .contenedorformulario .contenedorApellidos {
         width: 22em;
         display: block;

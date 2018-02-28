@@ -24,7 +24,7 @@
       <div class="contenedor">
         <h1>Regístrate como usuario</h1>
         <div class="contenedorformulario">
-          <form method="POST" action="" name="RegistroUsuarioFormulario">
+          <form method="POST" action="" name="RegistroUsuarioFormulario" onsubmit="return ValidarRegistroUsuario()">
             <ul>
               <li>
                 <input type="text" placeholder="Nombre de usuario" name="Usuario">
@@ -59,7 +59,7 @@
               </li>
               <li> 
                 <div id="registro">
-                  <input type="button" value="REGISTRATE →" name="Registrar">
+                  <input type="submit" value="REGISTRATE →" name="Registrar">
                 </div>
               </li>
             </ul>
