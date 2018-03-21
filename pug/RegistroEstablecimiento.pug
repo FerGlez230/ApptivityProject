@@ -9,7 +9,7 @@ html(lang="es")
 				h1 Registra tu establecimiento
 				.contenedorformulario
 					form.formData1#form1()
-					form(method="POST" action="" name="RegistroEstablecimiento" onsubmit='return ValidarRegistroEstablecimiento()')
+					form(method="POST" action="lib/RegistroEstablecimiento.php" name="RegistroEstablecimiento" onsubmit='return ValidarRegistroEstablecimiento()')
 						ul
 							li
 								input(type='text', placeholder='Nombre del establecimiento' name='NombreEstablecimiento' id="NombreEstablecimiento" required)
@@ -52,7 +52,7 @@ html(lang="es")
 								#agregarhorario
 									input(type="button", value="Agregar horario", name="Horario" onclick="return NuevoHorario()")
 							li
-								textarea( rows="10", placeholder="Descripción", name="Descripcion", maxlength="1200" required)
+								textarea( rows="10", placeholder="Descripción", name="Descripcion", id='Descripcion' maxlength="1200" required)
 							li
 								h2 Ubicación del establecimiento
 							li 
@@ -65,21 +65,21 @@ html(lang="es")
 								#inputmapa
 									input(type="button", value="Traducir direccion", name="MapaDir", id="MapaDir" onclick="FindMeByAddress()")
 							li
-								input(type='text', placeholder='Nombre de usuario' name='Usuario' id="Usuario" required)
+								input(type='text', placeholder='Nombre de usuario' name='UsuarioE' id='UsuarioE' required)
 							li
 								.contenedorApellidos
 									#apellidos
-										input(type='text', placeholder='Apellido paterno' name='ApellidoPaterno' required)
+										input(type='text', placeholder='Apellido paterno' name='ApellidoPaternoE' id= 'ApellidoPaternoE' required)
 									#apellidos
-										input(type='text', placeholder='Apellido materno' name='ApellidoMaterno')
+										input(type='text', placeholder='Apellido materno' name='ApellidoMaternoE' id= 'ApellidoMaternoE')
 							li
-								input(type='text', placeholder='Username' name='Username' required)
+								input(type='text', placeholder='Username' name='Username' id='Username' required)
 							li
-								input(type='text', placeholder='Correo electrónico' name='CorreoElectronico' required)
+								input(type='text', placeholder='Correo electrónico' name='CorreoElectronico' id='CorreoElectronico' required)
 							li
-								input(type='password', placeholder='Contraseña' name='Contrasena')
+								input(type='password', placeholder='Contraseña' name='ContrasenaE' id='ContrasenaE')
 							li
-								input(type='password', placeholder='Confirmar contraseña' name='ConfirmarContrasena' required)
+								input(type='password', placeholder='Confirmar contraseña' name='ConfirmarContrasenaE' required)
 							li 
 								#vinculo
 									input(type='checkbox', value='Acepto', name='TerminosYCondiciones' required)

@@ -9,7 +9,7 @@ $(document).ready(function()
 $(document).ready(function(){
   	//$('body').css({ 'width': $(window).width() + "px" });
   	
-  	$("body").on('submit','.formData1',function(e){
+  	/*$("body").on('submit','.formData1',function(e){
         if($("#form1")[0].checkValidity()){
             $(':input[type="submit"]').prop('disabled', 'disabled');
             $(':input[type="submit"]').attr("disabled","disabled").css("cursor", "not-allowed").fadeTo(500,0.2);
@@ -39,7 +39,7 @@ $(document).ready(function(){
             $("#validador1").click();
             return false;
         }
-    });
+    });*/
   	
 });
   	$('body').css({ 'width': $(window).width() + "px" });
@@ -80,6 +80,101 @@ $('#calendario').multiDatesPicker({
 	});
 })( jQuery, window, document );
 
+
+function CallMethodWebService(data,url) 
+{   
+	try
+    {
+    	 $.ajax({
+            type: 'POST',
+            url: 'http://localhost:15178/WebService.asmx/HelloWorld',            
+           // data: "{'Usuario':'" + "Roy Cruz" + "'}",
+            contentType: 'application/json; utf-8',
+            dataType: 'text',
+            success: function (data) {
+                if (data.d != null) {
+                    alert(data.d);
+                }
+            },
+            failure:  function (response) {
+                 alert(response.d);
+             }
+ 
+        }); 
+    }
+    catch (e)
+    {
+        alert('failed to call web service. Error: ' + e);
+    }  /*         
+    try
+    {
+
+       $.ajax({
+       	 //type: 'POST',
+    	 dataType: 'jsonp',
+    	 cache: false,
+         type: "POST",
+         url: "http://localhost:15178/WebService.asmx/devolverTodo",
+          //data: JSON.stringify({username: "jin", correo: "jin@gmail.com", password: "1423232", Nombre: "Jin", ApellidoPaterno: "Seok", ApellidoMaterno: "Kim"}),
+         contentType: "application/json; charset=utf-8",
+         //beforeSend: function(request) {
+      		//request.setRequestHeader("Access-Control-Allow-Origin", '*');
+   			 //},
+         success: function (response) {
+                 var names = response.d;
+                 alert(names);},
+         //dataType: "json",
+         failure:  function (response) {
+                 alert(response.d);
+             }
+      });
+    }
+    catch (e)
+    {
+        alert('failed to call web service. Error: ' + e);
+    }*/
+}
+function holaFuncion() 
+{   
+	//var datos=;        
+    try
+    {
+
+       $.ajax({
+       	 //type: 'POST',
+    	 dataType: 'jsonp',
+    	 cache: false,
+         method: "POST",
+         url: "http://localhost:15178/WebService.asmx/agregarCliente",
+         data: JSON.stringify([{username: "jin", correo: "jin@gmail.com", password: "1423232", Nombre: "Jin", ApellidoPaterno: "Seok", ApellidoMaterno: "Kim"}]), // if ur method take parameters
+         contentType: "application/json; charset=utf-8",
+         //beforeSend: function(request) {
+      		//request.setRequestHeader("Access-Control-Allow-Origin", '*');
+   			 //},
+         success: function (response) {
+                 var names = response.d;
+                 alert(names);},
+         //dataType: "json",
+         failure:  function (response) {
+                 alert(response.d);
+             }
+      });
+    }
+    catch (e)
+    {
+        alert('failed to call web service. Error: ' + e);
+    }
+}
+function SuccessTestService(response) {
+
+    alert(response);
+}
+
+
+function ajaxCallFailed(error) {
+        alert('error: ' + error);
+
+    }
 function ValidarEvento()
 {
 	var contador=true;
@@ -99,18 +194,62 @@ function ValidarEvento()
 	contador=VerificarHorario(HoraInicio, HoraTermino);
 	if(contador==false){return contador;}
 }
+function EnviarDatosRegistro()
+{
+	try
+    {
+    	 $.ajax({
+            method: 'POST',
+            url: 'http://localhost:15178/WebService.asmx/HelloWorld',            
+            data: "{'Usuario':'" + "Roy Cruz" + "'}",
+            contentType: 'application/json; utf-8',
+            dataType: 'json',
+            success: function (data) {
+                if (data.d != null) {
+                    alert(data.d);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {                
+            }
+ 
+        }); 
+      /* $.ajax({
+       	 //type: 'POST',
+    	 dataType: 'jsonp',
+    	 cache: false,
+         type: "POST",
+         url: "http://localhost:15178/WebService.asmx/agregarEstablecimiento",
+          data: JSON.stringify({username: "jin", correo: "jin@gmail.com", password: "1423232", Nombre: "Jin", ApellidoPaterno: "Seok", ApellidoMaterno: "Kim"}),
+         contentType: "application/json; charset=utf-8",
+         //beforeSend: function(request) {
+      		//request.setRequestHeader("Access-Control-Allow-Origin", '*');
+   			 //},
+         success: function (response) {
+                 var names = response.d;
+                 alert(names);},
+         //dataType: "json",
+         failure:  function (response) {
+                 alert(response.d);
+             }
+      });*/
+    }
+    catch (e)
+    {
+        alert('failed to call web service. Error: ' + e);
+    }
+}
 function ValidarRegistroEstablecimiento()
 {
 	var contador=true;
 	var NombreEstablecimiento=document.RegistroEstablecimiento.NombreEstablecimiento.value;
 	var Descripcion=document.RegistroEstablecimiento.Descripcion.value;
-	var Usuario=document.RegistroEstablecimiento.Usuario.value;
-	var ApellidoMaterno=document.RegistroEstablecimiento.ApellidoMaterno.value;
-	var ApellidoPaterno=document.RegistroEstablecimiento.ApellidoPaterno.value;
+	var Usuario=document.RegistroEstablecimiento.UsuarioE.value;
+	var ApellidoMaterno=document.RegistroEstablecimiento.ApellidoMaternoE.value;
+	var ApellidoPaterno=document.RegistroEstablecimiento.ApellidoPaternoE.value;
 	var Username=document.RegistroEstablecimiento.Username.value;
 	var CorreoElectronico=document.RegistroEstablecimiento.CorreoElectronico.value;
-	var Contrasena=document.RegistroEstablecimiento.Contrasena.value;
-	var ConfirmarContrasena=document.RegistroEstablecimiento.ConfirmarContrasena.value;
+	var Contrasena=document.RegistroEstablecimiento.ContrasenaE.value;
+	var ConfirmarContrasena=document.RegistroEstablecimiento.ConfirmarContrasenaE.value;
 	contador=ValidarTextComun(Usuario, "usuario");
 	if(contador==false){return contador;}
 	contador=ValidarTextComun(ApellidoPaterno, "apellido paterno");
@@ -127,6 +266,7 @@ function ValidarRegistroUsuario()
 {
 	var contador=true;
 	var Usuario=document.RegistroUsuario.Usuario.value;
+	window.alert("hola");
 	var ApellidoMaterno=document.RegistroUsuario.ApellidoMaterno.value;
 	var ApellidoPaterno=document.RegistroUsuario.ApellidoPaterno.value;
 	var Username=document.RegistroUsuario.Username.value;
@@ -144,6 +284,7 @@ function ValidarRegistroUsuario()
 	if(contador==false){return contador;}
 	contador=ContrasenasIguales(Contrasena, ConfirmarContrasena);
 	if(contador==false){return contador;}
+
 }
 function ValidarTextComun(Campo, NombreCampo)
 {
@@ -240,7 +381,7 @@ function CargarMapaInicial()
 	}
 	function error()
 	{
-		output.innerHTML="<br> No se pudo cargar el mapa inicial. Recargue la página";
+		//output.innerHTML="<br> No se pudo cargar el mapa inicial. Recargue la página";
 	}
 }
 function FindMeByAddress()

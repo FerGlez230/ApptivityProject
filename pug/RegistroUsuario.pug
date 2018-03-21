@@ -8,27 +8,27 @@ html(lang="es")
 			.contenedor
 				h1 Regístrate como usuario
 				.contenedorformulario
-					form(method="POST" action="" name="RegistroUsuarioFormulario" onsubmit="return ValidarRegistroUsuario()")
+					form(method="POST" action="" name="RegistroUsuario" onsubmit='return ValidarRegistroUsuario()')
 						ul
 							li
-								input(type='text', placeholder='Nombre de usuario' name='Usuario')
+								input(type='text', placeholder='Nombre de usuario' name='Usuario' id='Usuario' required)
 							li
 								.contenedorApellidos
 									#apellidos
-										input(type='text', placeholder='Apellido paterno' name='ApellidoPaterno')
+										input(type='text', placeholder='Apellido paterno' name='ApellidoPaterno' id='ApellidoPaterno' required)
 									#apellidos
-										input(type='text', placeholder='Apellido materno' name='ApellidoMaterno')
+										input(type='text', placeholder='Apellido materno' name='ApellidoMaterno'  id='ApellidoMaterno' required)
 							li
-								input(type='text', placeholder='Username' name='Username')
+								input(type='text', placeholder='Username' name='Username' id='Username' required)
 							li
-								input(type='text', placeholder='Correo electrónico' name='CorreoElectronico')
+								input(type='text', placeholder='Correo electrónico' name='CorreoElectronico' id='CorreoElectronico' required)
 							li
-								input(type='text', placeholder='Contraseña' name='Contrasena')
+								input(type='password', placeholder='Contraseña' name='Contrasena' id='Contrasena' required)
 							li
-								input(type='text', placeholder='Confirmar contraseña' name='ConfirmarContrasena')
+								input(type='password', placeholder='Confirmar contraseña' name='ConfirmarContrasena' id='ConfirmarContrasena' required)
 							li 
 								#vinculo
-									input(type='checkbox', value='Acepto', name='TerminosYCondiciones')
+									input(type='checkbox', value='Acepto', name='TerminosYCondiciones' required)
 									h3 Acepto los 
 										a(href='https://www.youtube.com/?hl=es-419&gl=MX') términos y condiciones
 							li 
