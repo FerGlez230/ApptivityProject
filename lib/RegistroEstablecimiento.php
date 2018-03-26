@@ -31,22 +31,40 @@
 		$correo= $_POST['CorreoElectronico'];
 		$password= $_POST['ContrasenaE'];
 
-		
-		$insertarLogin="INSERT into login (Username, Correo, Password) VALUES ('{$username}','{$correo}','{$password}')";
-		$resultado_insertarLogin=mysqli_query($conexion, $insertarLogin);
-		if($resultado_insertarLogin)
+		$comprobacionCorreo="SELECT Correo from login WHERE Correo='{$correo}'";
+		$resultado_comprobacionCorreo=mysqli_query($conexion, $comprobacionCorreo);
+		if($correoRes = mysqli_fetch_array($resultado_comprobacionCorreo))
 		{
-			$obtenerIdLogin="SELECT IdLogin from login WHERE Username='{$username}' AND Correo='{$correo}'";
-			$resultado_obtenerIdLogin=mysqli_query($conexion, $obtenerIdLogin);
-			if($row = mysqli_fetch_array($resultado_obtenerIdLogin))
-			{
-				echo $idLoginConsulta=$row[0];
-				$insertarUsuario="INSERT into usuario (Nombre, ApellidoPaterno, ApellidoMaterno,Tipo, Login) VALUES ('{$usuario}', '{$apellidoPaterno}', '{$apellidoMaterno}', '1', '{$idLoginConsulta}')";
-				$resultado_insertarUsuario=mysqli_query($conexion, $insertarUsuario);
-			}
-			
+			 $correoFinal=$correoRes[0];
 		}
-		mysqli_close($conexion);
-		//header('Location: //mipagina.php');
+		
+		if($correoFinal)
+		{
+			printf("<script type='text/javascript'>alert('El correo ingresado ya está registrado.'); </script>");
+			//printf("<script> window.location='/apptivity/RegistroEstablecimiento.html';</script>"); 	
+		}else{
+			$insertarLogin="INSERT into login (Username, Correo, Password) VALUES ('{$username}','{$correo}','{$password}')";
+			$resultado_insertarLogin=mysqli_query($conexion, $insertarLogin);
+			if($resultado_insertarLogin)
+			{
+				$obtenerIdLogin="SELECT IdLogin from login WHERE Username='{$username}' AND Correo='{$correo}'";
+				$resultado_obtenerIdLogin=mysqli_query($conexion, $obtenerIdLogin);
+				if($row = mysqli_fetch_array($resultado_obtenerIdLogin))
+				{
+					echo $idLoginConsulta=$row[0];
+					$insertarUsuario="INSERT into usuario (Nombre, ApellidoPaterno, ApellidoMaterno,Tipo, Login) VALUES ('{$usuario}', '{$apellidoPaterno}', '{$apellidoMaterno}', '1', '{$idLoginConsulta}')";
+					$resultado_insertarUsuario=mysqli_query($conexion, $insertarUsuario);
+				}
+				
+			}
+			mysqli_close($conexion);
+			//header('Location: /apptivity/index.html');
+			printf("<script type='text/javascript'>alert('Registro exitoso. Bienvenido a la comunidad Apptivity'); </script>");
+			printf("<script> window.location='/apptivity/index.html';</script>"); 
+		}
+	}else
+	{
+		printf("<script type='text/javascript'>alert('Algo salió mal. Reintente llenar el formulario.'); </script>");
+		printf("<script> window.location='/apptivity/RegistroEstablecimiento.html';</script>"); 
 	}
 ?>

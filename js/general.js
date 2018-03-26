@@ -194,6 +194,26 @@ function ValidarEvento()
 	contador=VerificarHorario(HoraInicio, HoraTermino);
 	if(contador==false){return contador;}
 }
+//OJO: hace falta validación de precios
+function ValidarEvento()
+{
+	var contador=true;
+	var NombrePromocion=document.Promocion.NombrePromocion.value;
+	var Descripcion=document.Promocion.DescripcionProm.value;
+	var PrecioInferior=document.Promocion.PrecioInferior.value;
+	var PrecioSuperior=document.Promocion.PrecioSuperior.value;
+	contador=ValidarSoloNumeros(PrecioSuperior, " precio superior ")
+	if(contador==false){return contador;}
+	contador=ValidarSoloNumeros(PrecioInferior, " precio inferior ")
+	if(contador==false){return contador;}
+	if(PrecioInferior>PrecioSuperior)
+	{
+		alert("El precio inferior no puede ser mayor al superior");
+		return false;
+	}
+	contador=VerificarHorario(HoraInicio, HoraTermino);
+	if(contador==false){return contador;}
+}
 function EnviarDatosRegistro()
 {
 	try

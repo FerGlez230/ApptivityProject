@@ -9,9 +9,9 @@ html(lang="es")
 		.Promocion
 			h1 Agregar promoción
 			.contenedorformulario
-				form(method="POST" action="" name="Promocion" onsubmit='return ValidarPromocion()' enctype="multipart/form-data")
+				form(method="POST" action="lib/InsertarPromocion.php" name="Promocion" onsubmit='return ValidarPromocion()' enctype="multipart/form-data")
 					input(type='text', placeholder='Nombre de la promoción' name='NombrePromocion' id="NombrePromocion" required)
-					textarea( rows="10", placeholder="Descripción", name="Descripcion", maxlength="1200" required)
+					textarea( rows="10", placeholder="Descripción", name="DescripcionProm", id='DescripcionProm' maxlength="1200" required)
 					.contenedorvarios
 						.ContenedorCalendario
 							#calendario
