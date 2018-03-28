@@ -1,0 +1,98 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body(onload="CargarMapaInicial()")
+		include include/headerRegistro
+		.RegistroEstablecimiento
+			.contenedor    
+				h1 Registra tu establecimiento
+				.contenedorformulario
+					form.formData1#form1()
+					form(method="POST" action="lib/establecimientoRegistro.php" name="RegistroEstablecimiento" onsubmit='return ValidarRegistroEstablecimiento()')
+						ul 
+							li
+								input(type='text', placeholder='Nombre del establecimiento' name='NombreEstablecimiento' id="NombreEstablecimiento" required)
+							li
+								.contenedorhorario
+									.parte12
+										h2 Hora inicio
+										h3 (hrs:min am/pm)
+										input(type='time', name='HoraInicio', min="00:00", max="23:59", step="60" id="HoraInicio" required)
+									.parte12
+										h2 Hora termino
+										h3 (hrs:min am/pm)
+										input(type='time', name='HoraTermino' id="HoraTermino" required)
+							li
+								h2 Operatividad de días
+							li
+								.contenedordias
+									.contenedor4
+										input(type="checkbox", value="1", name="diasSemana", id="lunes")
+										label(for="lunes", class="dias") Lunes    
+									.contenedor4
+										input(type="checkbox", value="2", name="diasSemana" id="martes")
+										label(for="martes", class="dias") Martes   
+									.contenedor4
+										input(type="checkbox", value="3", name="diasSemana", id="miercoles")
+										label(for="miercoles", class="dias") Miércoles
+									.contenedor4
+										input(type="checkbox", value="4", name="diasSemana", id="jueves")
+										label(for="jueves", class="dias") Jueves
+									.contenedor3
+										input(type="checkbox", value="5", name="diasSemana" id="viernes")
+										label(for="viernes", class="dias") Viernes
+									.contenedor3
+										input(type="checkbox", value="6", name="diasSemana", id="sabado")
+										label(for="sabado", class="dias") Sábado
+									.contenedor3
+										input(type="checkbox", value="7", name="diasSemana", id="domingo")
+										label(for="domingo", class="dias") Domingo
+							li 
+								#agregarhorario
+									input(type="button", value="Agregar horario", name="Horario" onclick="return NuevoHorario()")
+							li
+								textarea( rows="10", placeholder="Descripción", name="Descripcion", maxlength="1200" required)
+							li
+								h2 Ubicación del establecimiento
+							li 
+								#map
+								#mapa
+								#inputmapa
+									input(type="button", value="Obtener mi ubicación actual", name="Mapa" onclick="FindMe()")
+							li
+								input(type="text", placeholder="Ingrese ubicación (calle, núm, colonia)", id="address")
+								#inputmapa
+									input(type="button", value="Traducir direccion", name="MapaDir", id="MapaDir" onclick="FindMeByAddress()")
+							li
+								input(type='text', placeholder='Nombre de usuario' name='Usuario' id="Usuario" required)
+							li
+								.contenedorApellidos
+									#apellidos
+										input(type='text', placeholder='Apellido paterno' name='ApellidoPaterno' required)
+									#apellidos
+										input(type='text', placeholder='Apellido materno' name='ApellidoMaterno')
+							li
+								input(type='text', placeholder='Username' name='Username' required)
+							li
+								input(type='text', placeholder='Correo electrónico' name='CorreoElectronico' required)
+							li
+								input(type='password', placeholder='Contraseña' name='Contrasena')
+							li
+								input(type='password', placeholder='Confirmar contraseña' name='ConfirmarContrasena' required)
+							li 
+								#vinculo
+									input(type='checkbox', value='Acepto', name='TerminosYCondiciones' required)
+									h3 Acepto los 
+											a(href='https://www.youtube.com/?hl=es-419&gl=MX') términos y condiciones
+							li 
+								#registro
+									input(type='submit', value='REGISTRA TU ESTABLECIMIENTO →', name='Registrar')
+							li 
+									#vinculo
+										h3 Si ya tienes cuenta 
+											a.simple-ajax-popup-align-top(href="iniciarSesion") inicia sesión				
+		include include/footer
+
+		script(async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap&libraries=places")
+

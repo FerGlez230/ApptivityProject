@@ -1,0 +1,76 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body.evento
+		include include/headerEstablecimiento
+		.contenedorComun
+			.submenuEvent
+				.opcionF
+					h1 Eventos
+				.opcionS
+					a(href="registroEvento.html") Agregar Evento
+			.bloqueEvento
+				.ladear
+					.nombre
+						h1 Evento
+					.ilustracion
+						img(src="img/jr1.jpg")
+
+					.deleUp
+						.btn.updateE
+							a(href="registroEvento.html") Modificar
+								i.fa.fa-pencil(aria-hidden='true')
+						.btn.deleteE
+							a(href="registroEvento.html") Eliminar
+								i.fa.fa-trash(aria-hidden='true')
+
+						
+				.ladear.parte2
+					.informacion
+						h1 Descripción
+
+						.contenido
+							h2 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris placerat bibendum neque, dictum eleifend dolor accumsan eu. Aenean viverra varius consectetur. Nam nec lectus placerat, venenatis purus a, gravida tortor.
+
+						h1 Precio:
+
+						.contenido
+							h2 de $100 a $200 pesos
+
+						h1 Categorias:
+
+						.contenido.catCandy
+							.envoltura
+								h3 Conciertos
+							.envoltura
+								h3 Músical
+							.envoltura
+								h3 Cantantes
+
+						.informacion
+							h1 Horario:
+
+						.contenido
+							select(name='dias')
+								option(value='Días', selected='')
+									| Días
+								option(value='10/02/18')
+									| 10/02/18
+								option(value='11/02/18')
+									| 11/02/18
+								option(value='12/02/18')
+									| 12/02/18
+
+							select(name='hora')
+								option(value='Horario', selected='')
+									| Horario
+								option(value='08:00 - 7:00')
+									| 08:00 - 7:00
+								option(value='11:20 - 19:00')
+									| 11:20 - 19:00
+								option(value='13:00 - 04:00')
+									| 13:00 - 04:00
+							
+		
+		include include/footer
