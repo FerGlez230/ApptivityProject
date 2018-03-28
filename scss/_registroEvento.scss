@@ -1,0 +1,319 @@
+.registroEvento{
+	@include column(1, $offset: 0, $gutter: 0);
+
+	h1{
+		text-align: center;
+		padding-top: 30px;
+		padding-bottom: 30px;
+	    font-family: 'AardvarkCafe';
+	    font-size: 2.4em;
+	    color: $oscuro;
+	}
+	
+	.contenedorformulario{
+		@include column(1/3, $offset: 1/3, $gutter: 0);
+		text-align: center;
+		
+		input, textarea{
+			color: $oscuro;
+			display: block;
+			font-family: 'Roboto-Regular';
+			letter-spacing: .1em;
+			border: none;
+			border: solid $claro 1px;
+			background-color: $blanco;
+			font-size: 1.2em;
+			width: 100%;
+			padding: 5px;
+			padding-left: 10px;
+			margin-top: 0.3em;
+			margin-bottom: 0.3em;
+			box-sizing: border-box;
+			resize: none;
+		}
+
+		textarea{
+			font-family: 'Roboto-Light';
+			letter-spacing: 0em;
+		}
+
+		h2, label{
+			font-family: 'AYearWithoutRain';
+			font-size: 1.4em;
+			color: $oscuro;
+			text-align: center;
+			margin-top: 1em;
+		}
+
+		h3{
+			padding-top: 10px;
+			font-family: 'Roboto-Regular';
+			font-size: 1.2em;
+			color: $claro;
+		}
+		
+		h4{
+			font-family: 'Roboto-Light';
+			font-size: .8em;
+			padding-bottom: 8px;
+			color: $gris;
+			text-align: center;
+		}
+		
+		.contenedorvarios{	
+			@include column(1, $offset: 0, $gutter: 0);
+
+			.ContenedorCalendario{
+				text-align: center;
+				padding-top: 15px;
+				padding-bottom: 15px;
+				
+				#calendario{
+					text-align: center;
+					display: inline-block;
+					margin: auto;
+				}
+
+			}
+	
+			h4{
+				padding-bottom: .5em;
+				font-size: .8em;
+			}
+
+			input{
+				font-family: 'Roboto-Regular';
+				text-align: center;
+				width: 70%;	
+				display: block;
+				margin: auto;
+				color: $gris;
+				border: none;
+				border-bottom: solid $claro 1px;
+			}
+
+			.lne{
+				border: none;
+				border-bottom: solid $claro 1px;
+			}
+
+			.parte12{
+				@include column(1/2, $offset: 0, $gutter: 0);
+				padding-bottom: 1em;
+
+				h3{
+					padding-bottom: 4px;
+				}
+
+				.izq{
+					padding-left: 1em;
+				}
+
+				.der {
+					padding-right: 1em;
+				}
+			}
+
+			.agregarPeriodo{
+				text-align: right;
+				padding-top: 15px;
+				padding-bottom: 15px;
+
+				a{
+					@include transition(0.4s);
+					display: block;
+					font-family: 'AYearWithoutRain';
+					font-size: 1.1em;
+					color: $azul;
+					&:hover{
+						@include transition(0.4s);
+						cursor: pointer;
+						color: $verde;
+					}
+				}
+			}
+
+		}
+
+		.muestraHorario{
+			@include column(1, $offset: 0, $gutter: 0);
+			text-align: center;
+			padding-top: 10px;
+			display: none;
+			
+			table{
+			    border-collapse: collapse;
+			    display: inline-block;
+			    max-width: 100%;
+			}
+
+			td, th {
+			    border: 1px solid $oscuro;
+			    text-align: left;
+			    padding: 8px;
+			}
+
+			td{
+				font-family: 'Roboto-Regular';
+				font-size: 1em;
+			}
+
+			th{
+				font-family: 'AYearWithoutRain';
+				text-align: center;
+				font-size: 1.2em;
+				background-color: $claro;
+				color: $blanco;
+			}
+
+			.elimiFile{
+				a{
+					@include transition(0.4s);
+					font-family: 'AYearWithoutRain';
+					font-size: 1em;
+					color: $oscuro;
+					&:hover{
+						cursor: pointer;
+						@include transition(0.4s);
+						color: $rojo;
+					}
+				}
+			}
+
+			/*tr:nth-child(even) {
+			    background-color: $verde;
+			}*/
+
+		}
+
+		/*#agregarperiodo{
+			@include column(2/5, $offset: 11/20, $gutter: 0);
+			
+			input{
+				@include transition(0.4s);
+				background: none;
+				color: $azul;
+				width: 7em;
+				border: none;
+				margin-bottom: 1em;
+			}
+			
+			input:hover{
+				text-decoration: underline;
+				cursor: pointer;
+			}
+		}*/
+
+		.prevImage{
+			@include column(1, $offset: 0, $gutter: 0);
+			padding-top: 10px;
+			display: none;
+
+			.showImg{
+				position: relative;
+				text-align: center;
+				display: inline-block;
+				
+				img{
+					height: 100%;
+					max-width: 100%;
+					overflow: hidden;
+				}
+			}
+		}
+
+		.ImagenArchivo{
+			@include column(1, $offset: 0, $gutter: 0);
+			padding-top: 10px;
+
+			input{
+				width: 0.1px;
+				height: 0.1px;
+				opacity: 0;
+				overflow: hidden;
+				position: absolute;
+				margin: auto;
+			}
+
+			label[for]{
+				max-width: 76%;
+			    font-size: 1.25rem;
+			    text-overflow: ellipsis;
+			    white-space: nowrap;
+			    cursor: pointer;
+			    display:block;
+			    margin: auto;
+			    overflow: hidden;
+			    border: 1px solid $naranja;	    
+			}
+
+			label span {
+			    width: 70px;
+			    min-height: 1.2em;
+			    display: table-cell;
+			    text-overflow: ellipsis;
+			    white-space: nowrap;
+			    overflow: hidden;
+			    vertical-align: top;
+			    padding: 0.625rem 1.5rem;
+			}
+
+			label strong{
+				@include transition(0.4s);
+				min-height: 1.1em;
+				display: table-cell;
+				background-color: $naranja;
+				padding: 0.7rem 1.25rem;
+				color:$blanco;
+			}
+			
+			label strong:hover{
+				background: $naranjaclaro;
+				border-color: $naranjaclaro;
+				cursor: pointer;
+			}
+
+			label:hover{
+				border-color:$naranjaclaro;
+			}
+
+			label i{
+			    width: 1em;
+			    height: 1em;
+			    vertical-align: middle;
+			    fill: currentColor;
+			    padding-left: .3em;
+			    margin-top: -0.25em;
+			    /* 4px */
+			    margin-right: 0.25em;
+			    /* 4px */
+			}
+		}
+
+		.buttonRE{
+			@include column(2/3, $offset: 1/6, $gutter: 0);
+			text-align: center;
+			padding-top: 20px;
+			padding-bottom: 20px;
+
+			input{
+				@include transition(0.4s);
+				font-family: 'AYearWithoutRain';
+				background: $azul;
+				color: $blanco;
+				border: 1px solid $azul;
+				border-radius: 5px;
+				padding: 10px 20px 10px 20px;
+				font-size: 1.2em;
+				&:hover{
+					background: $gris;
+					border-color: $gris;
+					color: $blanco;
+					cursor: pointer;
+				}
+
+			}
+		}
+
+	}
+}

@@ -1,24 +1,17 @@
-doctype
-html(lang="es")
-	head
-		include include/head
-	body
-		include include/headerRegistro
-		.IniciarSesion
-			.contenedor
-				h1 Inicia sesión 
-				.contenedorformulario
-					ul
-						li
-							input(type='text', placeholder='Username o correo electrónico' name='UsuarioCorreo')
-						li
-							input(type='text', placeholder='Contraseña' name='Username')
-						li 
-							#vinculo
-								h3 Si no tienes cuenta 									
-									a(href='https://www.youtube.com/?hl=es-419&gl=MX')  Registrate
-						li 
-							#registro
-									input(type='button', value='INICIAR SESIÓN →', name='InicioSesion')
-		include include/footer
-script(src='minjs/general-dist.js?version=' + version type='text/javascript')
+.iniciarSesion
+	.contene
+		.logoI
+			img(src="img/logo_sin_fondo.png")
+		h1 Iniciar sesión
+		.contenformulario
+			form
+				ul
+					li
+						input(type='text', placeholder='Username o correo electrónico' name='UsuarioCorreo')
+					li
+						input(type='password', placeholder='Contraseña' name='passwordI')
+					li.registrar
+						input(type="submit" name="sesion" value="Iniciar Sesión")
+					li.vinculo
+						h3 Si no tienes cuenta 									
+							a(href='https://www.youtube.com/?hl=es-419&gl=MX')  Registrate

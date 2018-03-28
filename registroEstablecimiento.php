@@ -14,19 +14,18 @@
   </head>
   <body onload="CargarMapaInicial()">
     <div class="headerRegistro">
-      <div class="contenedorGeneral">
-        <div class="contenedor">
-          <div class="ubicar"><img id="EncabezadoRegistro" src="img/logo_contorno.png"></div>
-        </div>
+      <div class="contenedorGeneral"><img src="img/logo_contorno.png">
+        <div class="contenedorN"></div>
+        <div class="contenedorB"></div>
       </div>
     </div>
     <div class="RegistroEstablecimiento">
-      <div class="contenedor">
+      <div class="contenedor">   
         <h1>Registra tu establecimiento</h1>
         <div class="contenedorformulario">
           <form class="formData1" id="form1"></form>
-          <form method="POST" action="" name="RegistroEstablecimiento" onsubmit="return ValidarRegistroEstablecimiento()">
-            <ul>
+          <form method="POST" action="lib/establecimientoRegistro.php" name="RegistroEstablecimiento" onsubmit="return ValidarRegistroEstablecimiento()">
+            <ul> 
               <li>
                 <input type="text" placeholder="Nombre del establecimiento" name="NombreEstablecimiento" id="NombreEstablecimiento" required>
               </li>
@@ -141,7 +140,7 @@
               </li>
               <li> 
                 <div id="vinculo">
-                  <h3>Si ya tienes cuenta <a href="https://www.youtube.com/?hl=es-419&amp;gl=MX">inicia sesión				</a></h3>
+                  <h3>Si ya tienes cuenta <a class="simple-ajax-popup-align-top" href="iniciarSesion">inicia sesión				</a></h3>
                 </div>
               </li>
             </ul>
@@ -149,8 +148,9 @@
         </div>
       </div>
     </div>
-    <div class="footer"></div>
+    <div class="footer">
+      <script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
+    </div>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&amp;key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&amp;callback=initMap&amp;libraries=places"></script>
   </body>
 </html>
-<script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&amp;key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&amp;callback=initMap&amp;libraries=places"></script>

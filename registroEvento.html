@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Apptivity</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="img/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
+    <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="css/slick.css">
+    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
+  </head>
+  <body class="registroEvento">
+    <div class="headerEstablecimiento">
+      <div class="contenedorComun">
+        <div class="medio">
+          <div class="logoE medio">
+            <div class="imagen"><a href="index.html"><img src="img/logo_contorno.png"></a></div>
+            <div class="texto"><a href="inicioEstablecimiento.html">Apptivity</a></div>
+          </div>
+          <div class="menuE">
+            <ul>
+              <li><a href="evento.html">Eventos</a></li>
+              <li><a href="#Eventos">Promociones</a></li>
+              <li><a href="#Eventos">Resultados</a></li>
+            </ul>
+          </div>
+          <div class="usuario">
+            <div class="despliegueE">
+              <ul>
+                <li><a class="desbotonE" href="#" onclick="muestraLista()">Username</a>
+                  <div class="contenido" id="despliegoE"><a href="#MC">Mi cuenta</a><a href="#CS">Cerrar Sesión</a></div>
+                </li>
+                <li> <i class="fa fa-angle-down desbotonE" aria-hidden="true" onclick="muestraLista()"></i>
+                  <div class="contenido" id="despliegoE"><a href="#MC">Mi cuenta</a><a href="#CS">Cerrar Sesión</a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contenedorComun">
+      <h1>Agregar evento</h1>
+      <div class="contenedorformulario">
+        <form method="POST" action="" name="Evento" onsubmit="return ValidarEvento()" enctype="multipart/form-data">
+          <input type="text" placeholder="Nombre del evento" name="NombreEvento" id="NombreEvento" required>
+          <textarea rows="10" placeholder="Descripción" name="Descripcion" maxlength="1200" required></textarea>
+          <h2>Rango de precio (pesos mexicanos)</h2>
+          <div class="contenedorvarios">
+            <div class="parte12">
+              <div class="izq">
+                <h3>Desde:</h3>
+                <input class="lne" type="text" name="PrecioInferior" id="PrecioInferior" required>
+              </div>
+            </div>
+            <div class="parte12">
+              <div class="der">
+                <h3>Hasta:</h3>
+                <input class="lne" type="text" name="PrecioSuperior" id="PrecioSuperior" required>
+              </div>
+            </div>
+          </div>
+          <h2>Horario</h2>
+          <div class="muestraHorario">
+            <table>
+              <thead>
+                <tr>
+                  <th>No.</th>
+                  <th>Días</th>
+                  <th>Hr Inicio</th>
+                  <th>Hr Termino</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="contenedorvarios">
+            <div class="horario">
+              <div class="ContenedorCalendario">
+                <div id="calendario"></div>
+              </div>
+              <div class="parte12">
+                <div class="izq">
+                  <h3>Hora inicio:</h3>
+                  <h4>(hrs:min am/pm)</h4>
+                  <input type="time" name="HoraInicio" min="00:00" max="23:59" step="60" id="HoraInicio" required>
+                </div>
+              </div>
+              <div class="parte12">
+                <div class="der">
+                  <h3>Hora termino:</h3>
+                  <h4>(hrs:min am/pm)</h4>
+                  <input type="time" name="HoraTermino" id="HoraTermino" required>
+                </div>
+              </div>
+              <div class="agregarPeriodo"><a>Agregar nuevo Horario</a></div>
+            </div>
+          </div>
+          <h2>Imagen del evento</h2>
+          <div class="prevImage">
+            <div class="showImg"><img src="" id="imgExit"></div>
+          </div>
+          <div class="ImagenArchivo">
+            <input class="inputfile" type="file" name="fileInput" id="fileInput" value="Examinar" accept="image/png, .jpeg, .jpg, image/gif" required>
+            <label for="fileInput"> <strong>Examinar<i class="fa fa-upload" aria-hidden="true"></i></strong><span></span></label>
+          </div>
+          <div class="listaCategoria">
+            <ul>Categorias
+              <li>
+                <div class="subcategoria">
+                  <ul>
+                    <li> 
+                      <input type="checkbox" name="vehicle" value="Bike">
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="buttonRE">
+            <input type="submit" value="Agregar evento" id="AgregarEvento" name="AgregarEvento">
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="footer">
+      <script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
+    </div>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery-ui.multidatespicker.css" type="text/css">
+  </body>
+</html>

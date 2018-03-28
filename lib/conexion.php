@@ -10,5 +10,5 @@
 
 	$db = mysqli_select_db( $conexion, $baseDatos) or die ( "Upps! Pues va a ser que no se ha podido conectar a la base de datos" );
 
-	mysqli_close( $conexion );
+	
 ?>  

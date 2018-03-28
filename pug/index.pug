@@ -10,28 +10,34 @@ html(lang="es")
 					h1 PORQUE HAY TANTO POR HACER
 				.contenedorRegistro
 					.registro
-						.registrate
-							.icono
-								img(src="img/registro.png")
-							.textoEstablecimiento.texto
-								h1 Publica tu Establecimiento
-								ul
-									li
-										a(href="") REGISTRATE
-									li
-										a(href="")
-											i.fa.fa-angle-right(aria-hidden='true')
+
+						.iniciar
+							.texto
+								h1#textCount Ingresa con tu cuenta
+						
+						.formularioInicio
+							form
+								.col11
+									input(type="text" name="Vcorreo" placeholder="Correo Electrónico" id="Vcorreo")
+								.col11
+									input(type="password" name="Vpass" placeholder="Contraseña" id="Vpass")
+								.boton
+									input(type="submit" name="iniciaSesion" value="Iniciar Sesión")
+
 						.opcion
 							.col922
 							.col422
-								h3 o Bien
+								h3 o
 							.col922
 
 						.usuario
 							.icono
 								img(src="img/usuario.png")
 							.textoUsuario.texto
-								h1 Registra tu cuenta de Usuario
+								h1#textUser
+									| Registra tu cuenta
+									br
+									| de Usuario
 
 						.formularioUsuario
 							form
@@ -53,15 +59,30 @@ html(lang="es")
 									a(href="#Termino") Términos y Condiciones
 								.boton
 									input(type="submit" name="registroUsuario" value="Regístrate como Usuario")
-								.mensajeInicio.col11
+								//-.mensajeInicio.col11
 									label O bien si ya tienes cuenta
 									a(href="#InicioSesion") Inicia Sesión
+
+						.opcion
+							.col922
+							.col422
+								h3 o Bien
+							.col922
+
+						.registrate
+							.icono
+								img(src="img/registro.png")
+							.textoEstablecimiento.texto
+								h1 Publica tu Establecimiento
+								ul
+									li
+										a(href="registroEstablecimiento.php") REGISTRATE
+									li
+										a(href="")
+											i.fa.fa-angle-right(aria-hidden='true')
 		.local
 			img(src="img/local.jpg")
-
-		//include include/footer
-
+		.raro
 
 
-
-script(src='minjs/general-dist.js?version=' + version type='text/javascript')
+		include include/footer

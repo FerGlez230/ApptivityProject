@@ -5,12 +5,12 @@ html(lang="es")
 	body(onload="CargarMapaInicial()")
 		include include/headerRegistro
 		.RegistroEstablecimiento
-			.contenedor
+			.contenedor    
 				h1 Registra tu establecimiento
 				.contenedorformulario
 					form.formData1#form1()
-					form(method="POST" action="" name="RegistroEstablecimiento" onsubmit='return ValidarRegistroEstablecimiento()')
-						ul
+					form(method="POST" action="lib/establecimientoRegistro.php" name="RegistroEstablecimiento" onsubmit='return ValidarRegistroEstablecimiento()')
+						ul 
 							li
 								input(type='text', placeholder='Nombre del establecimiento' name='NombreEstablecimiento' id="NombreEstablecimiento" required)
 							li
@@ -91,8 +91,8 @@ html(lang="es")
 							li 
 									#vinculo
 										h3 Si ya tienes cuenta 
-											a(href='https://www.youtube.com/?hl=es-419&gl=MX') inicia sesión				
+											a.simple-ajax-popup-align-top(href="iniciarSesion") inicia sesión				
 		include include/footer
-script(src='minjs/general-dist.js?version=' + version type='text/javascript')
-script(async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap&libraries=places")
+
+		script(async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap&libraries=places")
 

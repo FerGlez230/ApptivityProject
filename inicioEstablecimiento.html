@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Apptivity</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="img/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
+    <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="css/slick.css">
+    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
+  </head>
+  <body class="inicioEstablecimiento">
+    <div class="headerEstablecimiento">
+      <div class="contenedorComun">
+        <div class="medio">
+          <div class="logoE medio">
+            <div class="imagen"><a href="index.html"><img src="img/logo_contorno.png"></a></div>
+            <div class="texto"><a href="inicioEstablecimiento.html">Apptivity</a></div>
+          </div>
+          <div class="menuE">
+            <ul>
+              <li><a href="evento.html">Eventos</a></li>
+              <li><a href="#Eventos">Promociones</a></li>
+              <li><a href="#Eventos">Resultados</a></li>
+            </ul>
+          </div>
+          <div class="usuario">
+            <div class="despliegueE">
+              <ul>
+                <li><a class="desbotonE" href="#" onclick="muestraLista()">Username</a>
+                  <div class="contenido" id="despliegoE"><a href="#MC">Mi cuenta</a><a href="#CS">Cerrar Sesión</a></div>
+                </li>
+                <li> <i class="fa fa-angle-down desbotonE" aria-hidden="true" onclick="muestraLista()"></i>
+                  <div class="contenido" id="despliegoE"><a href="#MC">Mi cuenta</a><a href="#CS">Cerrar Sesión</a></div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="contenedorComun">
+      <div class="contCont">
+        <form>
+          <div class="colum infor">
+            <h1>Nombre del establecimiento</h1>
+            <h2>mi24guel36@gmail.com</h2>
+            <div class="formuCamb">
+              <div class="col11">
+                <input type="text" name="rnombre" placeholder="R Nombre" id="Usuario">
+              </div>
+              <div class="col12">
+                <input type="text" name="rapp" placeholder="R Apellido Materno" id="Usuario">
+              </div>
+              <div class="col12">
+                <input class="right" type="text" name="rapm" placeholder="R Apellido Paterno" id="Usuario">
+              </div>
+              <div class="col11">
+                <input type="password" name="nombre" placeholder="Contraseña" id="Usuario">
+              </div>
+              <div class="col11">
+                <input type="password" name="nombre" placeholder="Nueva Contraseña" id="Usuario">
+              </div>
+              <div class="col11">
+                <input type="password" name="nombre" placeholder="Confirmar Contraseña" id="Usuario">
+              </div>
+              <div class="boton">
+                <input type="submit" name="guardar" value="Guardar Cambios">
+              </div>
+            </div>
+          </div>
+          <div class="colum color">
+            <div class="colimg"><img src="img/jr.jpg" id="imgSalida"></div>
+            <div class="formImage">
+              <div class="ImagenFile">
+                <input class="inputfile" type="file" name="file-input" id="file-input" value="Cambiarimagen" accept="image/png, .jpeg, .jpg, image/gif">
+                <label for="file-input"> <strong>Cambiar imagen<i class="fa fa-upload" aria-hidden="true"></i></strong><span></span></label>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="footer">
+      <script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
+    </div>
+  </body>
+</html>
