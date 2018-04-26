@@ -1,0 +1,126 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body.inEstablecimiento
+		include include/headerEstablecimiento
+		|<?php include 'lib/conexion.php';?>
+		.contenedorComun
+			h1 Modificar evento
+			|<?php $nombreEven = mysqli_fetch_array(mysqli_query($conexion, "SELECT evento.Nombre, evento.Descripcion, evento.PrecioMayor, evento.PrecioMenor FROM evento WHERE evento.IdEvento = 1")); ?>
+			.contenedorformulario
+				//form(method="POST" action="lib/insertarEvento.php" name="Evento" onsubmit='return ValidarEvento()' enctype="multipart/form-data")
+				form(method="POST" name="Evento" id="Evento" enctype="multipart/form-data" onsubmit="return enviarDatosEvento();")
+					
+
+					input(type='text', value="<?php echo $nombreEven[0] ?>",name='NombreEvento' id="NombreEvento" required)
+					textarea( rows="10", placeholder="Descripción", name="Descripcion", maxlength="1200" required)|<?php echo $nombreEven[1] ?>
+					
+					h2 Categorías
+
+					.listaCategoria
+					select(id="categorias", name="categorias[]" multiple='multiple') Categorías
+						|<?php
+						|	
+						|	$obtenerSubcategrias="SELECT subcategoria.IdSubcategoria, subcategoria.Nombre, categoria.IdCategoria, categoria.Nombre FROM subcategoria,categoria WHERE subcategoria.Categoria=categoria.IdCategoria ORDER BY subcategoria.Categoria, subcategoria.IdSubcategoria";
+						|	$resultado_obtenerSubcategorias=mysqli_query($conexion, $obtenerSubcategrias);
+						|	$categoriaActual=0;
+						|	while($subc = mysqli_fetch_array($resultado_obtenerSubcategorias))
+						|	{
+						|		if($categoriaActual!=$subc[2])
+						|		{
+						|	if($categoriaActual!=0)
+						|	                {
+						|	                  echo "</optgroup>";
+						|	                }
+						|			$categoria=utf8_encode($subc[3]);
+						|			echo "<optgroup label='$categoria'>";
+						|			$categoriaActual=$subc[2];
+						|		}
+						|			$subcategoria=utf8_encode($subc[1]);
+						|			echo "<option value='$subc[0]'>$subcategoria</option>";
+						|		
+						|	}	
+						|?>
+					
+
+					h2 Rango de precio (pesos mexicanos)
+					.contenedorvarios
+						.parte12
+							.izq
+								h3 Desde:
+								input.lne(type="text", name="PrecioInferior", value="<?php echo $nombreEven[3] ?>", id="PrecioInferior" required)
+						.parte12
+							.der
+								h3 Hasta:
+								input.lne(type="text", name="PrecioSuperior", value="<?php echo $nombreEven[2] ?>", id="PrecioSuperior" required)
+					
+					h2 Horario
+		
+					.muestraHorarioME
+						|<?php $duraE = mysqli_query($conexion, "SELECT duracionevento.Fecha, duracionevento.HoraInicio, duracionevento.HoraFin FROM duracionevento WHERE duracionevento.Evento = 1"); ?>
+						table(id="tabla")
+								thead
+									tr
+										th No.
+										th Días
+										th Hr Inicio
+										th Hr Termino
+										th
+								tbody
+									|<?php 
+									| $x=1;
+									| $hoy = strftime("%Y-%m-%d", time());
+									| $time1 = strtotime($hoy);
+									| while($fecha = mysqli_fetch_array($duraE)){
+									| $time2 = strtotime($fecha[0]);
+									| if($time2 <= $time1){
+									|  echo "<tr id='filaME$x'>";
+									|  echo "<td> $x </td>";
+									|  echo "<td> $fecha[0] </td>";
+									|  echo "<td> $fecha[1] </td>";
+									|  echo "<td> $fecha[2] </td>";
+									|  echo "<td> <div class='elimiFile'><a>Eliminar</a></div> </td>";
+									|  $x++;
+									| }
+									|}
+									|?>
+
+					.contenedorvarios
+						.horario
+							.ContenedorCalendario
+								#calendario
+							.parte12
+								.izq
+									h3 Hora inicio:
+									h4 ( hrs:min )
+									input(type='time', name='HoraInicioME', min="00:00", max="23:59", step="60" id="HoraInicioME" required)
+							.parte12
+								.der
+									h3 Hora termino:
+									h4 ( hrs:min )
+									input(type='time', name='HoraTerminoME' id="HoraTerminoME" required)
+							
+							.agregarPeriodoME
+								a(onclick="") Agregar Horario
+					
+					h2 Imagen del evento
+					
+					.prevImageME
+						.showImgME
+							img(src="", id='imgExitME')
+
+					.ImagenArchivo
+						input(type='file', name='fileInputME', id="fileInputME", value="Examinar" class="inputfile" accept="image/png, .jpeg, .jpg, image/gif" required)
+						label(for="fileInputME") 
+							strong Examinar
+								i.fa.fa-upload(aria-hidden='true')
+							span
+
+					.buttonRE
+						input(type="submit", value="MODIFICAR EVENTO", id="ModificarEvento", name="ModificarEvento" )
+		
+		include include/footer
+
+		script(src='js/multiple-select.js')
+		script(type='text/javascript', src='js/modificar.js')

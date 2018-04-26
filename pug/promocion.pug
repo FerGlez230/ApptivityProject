@@ -1,0 +1,93 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body.outEstablecimiento
+		include include/headerEstablecimiento
+		|<?php include 'lib/conexion.php';?>
+		.contenedorComun
+			.submenuEvent
+				.opcionF
+					h1 Promociones
+				.opcionS
+					a(href="registroPromocion.php") Agregar Promoción
+			.listaIni
+				.listaEventos
+					ul
+						|<?php
+						| 	
+						|
+						|	$obtenerPromociones="SELECT promocion.IdPromocion, promocion.Nombre FROM promocion WHERE Establecimiento='{$_SESSION['establecimiento']}' ORDER BY IdPromocion DESC";
+						|	$resultado_obtenerPromociones=mysqli_query($conexion, $obtenerPromociones);
+						|	while($promocion = mysqli_fetch_array($resultado_obtenerPromociones))
+						|	{		
+						|		echo "<div class='eventoTitulo'><h4><li id='$promocion[0]'> $promocion[1]</li></h4></div>";
+						|		$id=$promocion[0];
+						|            	$obtenerPromocion="SELECT Nombre, Descripcion, Imagen FROM Promocion WHERE IdPromocion=$id";
+						|            	$resultado_obtenerPromocion=mysqli_query($conexion, $obtenerPromocion);
+						|            	$Promocion = mysqli_fetch_array($resultado_obtenerPromocion);
+						|            	$ImagenF='/Imagenes/'.$Promocion[2];
+						|?>
+						|	
+						.bloqueEvento
+							.ladear1
+									.nombre
+										h1 <?php echo utf8_encode($Promocion[0]); ?>
+										
+									.ilustracion
+										img(src="<?php echo $ImagenF; ?>")
+
+									.deleUp 
+										.btn.updateE
+											form(name="ModificararPromocion" method="POST" action="lib/modificarPromocion.php")
+												|<?php echo "<input type='hidden' name='promocionModificar' value=$id>"; ?>
+												a
+													input(type="submit" name="Modificar" value="Modificar") 
+													i.fa.fa-pencil(aria-hidden='true')
+										.btn.deleteE
+											form(name="EliminarPromocion" method="POST" action="lib/borrarPromocion.php")
+												|<?php echo "<input type='hidden' name='promocionEliminar' value=$id>"; ?>
+												a
+													input(type="submit" name="Eliminar" value="Eliminar") 
+													i.fa.fa-trash(aria-hidden='true')
+
+							.ladear2.parte2
+									.informacion
+										h1 Descripción
+
+										.contenido.desc
+											h2 <?php echo utf8_encode($Promocion[1]); ?>
+
+
+										.informacion
+											h1 Horario:
+
+
+										.contenido
+												select(name='dias' id="diasPromocion")
+													option(value='-1')
+														|Dias
+													|<?php 
+													| $obtenerDuracion="SELECT IdDuracionPromocion, Fecha FROM duracionpromocion WHERE promocion='{$id}'";
+													|$resultado_obtenerDuracion=mysqli_query($conexion, $obtenerDuracion);
+													|while($dur = mysqli_fetch_array($resultado_obtenerDuracion))
+													|{
+													|	echo "<option value='$dur[0]'>$dur[1]</h3>";
+													|	echo "</div>";
+													|}
+													|?>
+												select(name='hora' id="horaPromocion")
+													option(value='-1', selected='')
+														| Horario
+													|<?php
+													|$obtenerDuracion="SELECT IdDuracionPromocion, HoraInicio, HoraFin FROM duracionpromocion WHERE promocion='{$id}'";
+													|$resultado_obtenerDuracion=mysqli_query($conexion, $obtenerDuracion);
+													|while($dur = mysqli_fetch_array($resultado_obtenerDuracion))
+													|{
+													|	echo "<option value='$dur[0]'>$dur[1]-$dur[2]</option>";
+													|}
+													|?>		
+						|<?php	}?>	
+	
+		include include/footer
+		script(type='text/javascript', src='js/despliegueEventoProm.js')

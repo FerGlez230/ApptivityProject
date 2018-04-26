@@ -1,0 +1,217 @@
+.outEstablecimiento{
+	@include column(1, $offset: 0, $gutter: 0);
+	padding-bottom: 30px;
+
+	.submenuEvent{
+		@include column(1, $offset: 0, $gutter: 0);
+		padding-top: 30px;
+		
+		.opcionF{
+			@include column(1, $offset: 0, $gutter: 0);
+			float: left;
+
+			h1{
+				font-family: 'AardvarkCafe';
+				font-size: 2.4em;
+				color: $oscuro;
+			}
+		}
+
+		.opcionS{ 
+			@include column(1, $offset: 0, $gutter: 0);
+			float: right;
+			text-align: right;
+			padding-right: 15px;
+
+			a{
+				@include transition(0.6s);
+				text-decoration: none;
+				display: inline-block;
+				padding: 10px 20px 10px 20px;
+				background-color: $naranja;
+				font-family: 'Roboto-Light';
+				color: $negro;
+				font-size: 1.1em;
+				border-radius: 3px;
+				&:hover{
+					@include transition(0.4s);
+					background-color: $gris;
+					color: $blanco;
+				}
+			}
+
+		}
+	}
+	.listaEventos{
+		@include column(1, $offset: 0, $gutter: 0);
+		padding-bottom: 30px;
+		li{
+			@include column(1/2, $offset: 0, $gutter: 0);
+			@include transition(0.6s);
+			font-family: 'Roboto-Regular';
+			font-size: 1.3em;
+			color: $oscuro;
+			padding-top: 5px;
+			padding-left: 15px;
+			padding-bottom: 5px;
+			margin-top: 10px;
+			background: $azulclaro;
+			border-radius: 5px;
+		}
+		
+		li:hover{
+			@include transition(0.6s);
+			color: $blanco;
+    		background: $azul;
+			cursor: pointer;
+		}
+
+		.open{
+    		li{
+    			color: $blanco;
+    			background: $aqua;
+    		}
+    	}
+	}
+	
+	.bloqueEvento{
+		@include column(1, $offset: 0, $gutter: 0);
+		display: none;
+		overflow: auto;
+		padding-top: 15px;
+		padding-bottom: 25px;
+
+		.ladear1{
+			@include column(1/3, $offset: 0, $gutter: 0);
+		}
+
+		.ladear2{
+			@include column(2/3, $offset: 0, $gutter: 0);
+		}
+		
+		.parte2{
+			padding-top: 35px;
+		}
+
+		.nombre{
+			h1{
+				font-family: 'AYearWithoutRain';
+				font-size: 1.6em;
+				color: $negro;
+				padding-top: 15px;
+				padding-bottom: 20px;
+			}
+		}
+
+		.informacion{
+			//@include column(9/10, $offset: 0, $gutter: 0);
+			padding-top: 15px;
+			padding-bottom: 15px;
+
+			h1{
+				font-family: 'Roboto-Regular';
+				font-size: 1.2em;
+			}
+		}
+		.ilustracion
+		{
+			img{
+			max-width: 255px;
+			max-height: 255px;
+			}
+		}
+		.contenido{
+			padding-top: 15px;
+			padding-bottom: 15px;
+			padding-left: 15px;
+			
+			h2{
+				font-family: 'Roboto-Regular';
+				font-size: .9em;
+				line-height: 18px;
+			}
+
+			select{
+				display: inline-block;
+	          	font-family: 'Roboto-Regular';
+				font-size: .9em;
+				color: $oscuro;
+	            width: 20%;  
+	            border: none;
+	            padding-bottom: 10px;
+	            padding-top: 10px;
+				background-color: transparent;
+	        }
+
+	        .envoltura{
+	        	@include transition(0.4s);
+	        	display: inline-block;
+	        	padding: 5px 10px 5px 10px;
+	        	margin-bottom: 10px;
+	        	background-color: $azulclaro;
+	        	font-family: 'Roboto-Regular';
+				font-size: .9em;
+				color: $blanco;
+				border-radius: 5px;
+				&:hover{
+					cursor: default;
+				}
+	        }
+
+		}
+
+		.desc{
+			text-align: justify;
+		}
+		
+		.catCandy{
+			padding-bottom: 0px;
+		}
+
+		.deleUp{
+			padding-top: 25px;
+			input{
+				text-decoration: none;
+				border: none;
+				background: none;
+				font-family: 'Roboto-Regular';
+				font-size: 1em;
+				color: $blanco;
+			}
+			.btn{
+				display: inline-block;
+				a{
+					@include transition(0.6s);
+					display: inline-block;
+					text-decoration: none;
+					padding: 8px 15px 8px 15px;
+					&:hover{
+						@include transition(0.4s);
+						background-color: $gris;
+					}
+				}
+
+				i{
+					padding-left: 10px;
+					color: $blanco;
+				}
+
+				border-radius: 3px;
+			}
+
+			.updateE{
+				background-color: $azulclaro;
+
+			}
+
+			.deleteE{
+				background-color: $naranja;
+			}
+
+		}
+		
+
+	}
+
+
+}

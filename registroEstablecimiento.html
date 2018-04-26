@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>Apptivity</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <link rel="shortcut icon" href="img/logo.ico" type="image/x-icon">
+    <link rel="icon" href="img/logo.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
+    <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
+    <link type="text/css" rel="stylesheet" href="css/slick.css">
+    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.multidatespicker.css">
+    <link type="text/css" rel="stylesheet" href="css/multiple-select.css">
+  </head>
+  <body onload="CargarMapaInicial()">
+    <div class="headerRegistro">
+      <div class="contenedorGeneral"><a href="index.html"><img src="img/logo_contorno.png"></a>
+        <div class="contenedorN"></div>
+        <div class="contenedorB"></div>
+      </div>
+    </div>
+    <div class="registroEstablecimiento">
+      <div class="contenedorComun">
+        <h1>Registra tu establecimiento</h1>
+        <div class="contenedorformulario">
+          <div class="vinculo">
+            <h3>Si ya tienes cuenta<a class="simple-ajax-popup-align-top" href="iniciarSesion.html">Inicia sesión</a></h3>
+          </div>
+          <form method="POST" action="" id="RegistroEstablecimiento" name="RegistroEstablecimiento" onsubmit="return enviarDatosEstablecimiento()">
+            <input type="text" placeholder="Nombre del establecimiento" name="NombreEstablecimiento" id="NombreEstablecimiento" required>
+            <input type="text" placeholder="Teléfono del establecimiento" name="TelefonoEstablecimiento" id="TelefonoEstablecimiento" required>
+            <textarea rows="10" placeholder="Descripción" name="DescripcionE" id="DescripcionE" maxlength="1200" required></textarea>
+            <h2>Operatividad de días y Horario</h2>
+            <div class="muestraTime">
+              <table id="tabla">
+                <thead>
+                  <tr>
+                    <th>No.</th>
+                    <th>Días</th>
+                    <th>Hr Inicio</th>
+                    <th>Hr Termino</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+            </div>
+            <input type="hidden" id="idDias" name="idDias" value="0">
+            <div class="contenedorDias">
+              <div class="contDay">
+                <div class="contenedor3">
+                  <input type="checkbox" value="Lunes" name="diasSemana" id="lunes">
+                  <label class="dias" for="lunes">Lunes    </label>
+                </div>
+                <div class="contenedor3">
+                  <input type="checkbox" value="Martes" name="diasSemana" id="martes">
+                  <label class="dias" for="martes">Martes   </label>
+                </div>
+                <div class="contenedor3">
+                  <input type="checkbox" value="Miércoles" name="diasSemana" id="miercoles">
+                  <label class="dias" for="miercoles">Miércoles</label>
+                </div>
+              </div>
+              <div class="contDay">
+                <div class="contenedor4">
+                  <input type="checkbox" value="Jueves" name="diasSemana" id="jueves">
+                  <label class="dias" for="jueves">Jueves</label>
+                </div>
+                <div class="contenedor4">
+                  <input type="checkbox" value="Viernes" name="diasSemana" id="viernes">
+                  <label class="dias" for="viernes">Viernes</label>
+                </div>
+                <div class="contenedor4">
+                  <input type="checkbox" value="Sábado" name="diasSemana" id="sabado">
+                  <label class="dias" for="sabado">Sábado</label>
+                </div>
+                <div class="contenedor4">
+                  <input type="checkbox" value="Domingo" name="diasSemana" id="domingo">
+                  <label class="dias" for="domingo">Domingo</label>
+                </div>
+              </div>
+            </div>
+            <div class="contenedorhorario">
+              <div class="parte12">
+                <h3>Hora inicio</h3>
+                <h4>( hrs:min )</h4>
+                <input type="time" name="HoraInicioE" min="00:00" max="23:59" step="60" id="HoraInicioE" required>
+              </div>
+              <div class="parte12">
+                <h3>Hora termino</h3>
+                <h4>( hrs:min )</h4>
+                <input type="time" name="HoraTerminoE" id="HoraTerminoE" required>
+              </div>
+            </div>
+            <div class="agregarHorario"><a onclick="">Agregar Horario</a></div>
+            <h2 class="mara">Ubicación del establecimiento</h2>
+            <div id="map"></div>
+            <div id="mapa"></div>
+            <input type="hidden" id="lat" name="lat">
+            <input type="hidden" id="lng" name="lng">
+            <input type="text" placeholder="Ingrese dirección (calle, núm, colonia)" id="address">
+            <div class="opcMap centro">
+              <div class="colM25"><a class="obtener" name="Mapa" onclick="FindMe()">Obtener mi ubicación actual</a></div>
+              <div class="colM15">
+                <h2>o	</h2>
+              </div>
+              <div class="colM25"><a class="traducir" name="MapaDir" id="MapaDir" onclick="FindMeByAddress()">Traducir dirección ingresada</a></div>
+            </div>
+            <h2>Datos del usuario</h2>
+            <div class="col11">
+              <input type="text" placeholder="Nombre de usuario" name="Usuario" id="Usuario" required>
+            </div>
+            <div class="col12">
+              <input type="text" placeholder="Apellido paterno" name="ApellidoPaterno" id="ApellidoPaterno" required>
+            </div>
+            <div class="col12">
+              <input class="right" type="text" placeholder="Apellido materno" name="ApellidoMaterno" id="ApellidoMaterno">
+            </div>
+            <div class="col11">
+              <input type="text" placeholder="Username" name="Username" id="Username" required>
+            </div>
+            <div class="col11">
+              <input type="text" placeholder="Correo electrónico" name="CorreoElectronico" id="CorreoElectronico" required>
+            </div>
+            <div class="col11">
+              <input type="password" placeholder="Contraseña" name="Contrasena" id="Contrasena">
+            </div>
+            <div class="col11">
+              <input type="password" placeholder="Confirmar contraseña" name="ConfirmarContrasena" id="ConfirmarContrasena" required>
+            </div>
+            <div class="checka col11">
+              <input type="checkbox" name="valida">
+              <label>Acepto los</label><a href="#Termino">Términos y Condiciones</a>
+            </div>
+            <div class="boton">
+              <input type="submit" value="REGISTRA TU ESTABLECIMIENTO" name="Registrar">
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
+    </div>
+    <script type="text/javascript" src="js/mapa.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&amp;key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&amp;callback=initMap&amp;libraries=places"></script>
+  </body>
+</html>

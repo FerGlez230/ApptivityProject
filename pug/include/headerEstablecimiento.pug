@@ -1,0 +1,32 @@
+|<?php session_start();?>
+|<?php if(!isset($_SESSION['nombre'])){header("location:/apptivity/index.html");}?>
+.headerUsuario
+	.contenedorComun
+		.medio
+			.logoE.medio
+				.imagen
+					a(href="cuentaEstablecimiento.php")
+						img(src="img/logo_contorno.png")
+				.texto
+					a(href="cuentaEstablecimiento.php") Apptivity
+			.menuE
+				ul
+					li
+						a(href="evento.php") Eventos
+					li
+						a(href="promocion.php") Promociones
+					li
+						a(href="resultados.php") Resultados
+			.usuario
+				nav.menD
+					ul
+						li
+							a(href='#') <?php echo $_SESSION['username'] ?>
+							i.fa.fa-angle-down(aria-hidden='true')
+							ul
+								li
+									a(href='cuentaEstablecimiento.php') Mi cuenta
+								li
+									a(href='lib/cerrarSesion.php') Cerrar Sesión
+
+					

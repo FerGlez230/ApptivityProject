@@ -1,0 +1,105 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body.resultado
+		include include/headerEstablecimiento
+		|<?php include 'lib/conexion.php'; ?>
+		.contenedorComun
+			.titulo
+				h1 Resultados
+			.contYesterday
+				h1 Resultados de ayer
+				.opcion
+					.indicador
+						a.showYes(onclik="") Ocultar
+						h2 gráfica
+				.yesterday
+					.bloqueInYes
+						.graficas
+							canvas#graficoYesterday
+						.estrellas
+							.titYes
+								h3 Puntuación
+					.simbologiaYes
+
+			.contWeek
+				h1 Recopilación semanal
+				.opcion
+					.indicador
+						a.showW(onclik="") Ocultar
+						h2 gráfica
+				.week
+					.bloqueInW
+						.graficas
+							canvas#graficoWeek
+						.estrellas
+							.titW
+								h3 Puntuación
+					.simbologiaW
+
+			.contMonth
+				h1 Información mensual
+				.opcion
+					.indicador
+						|<?php 
+						|	$month = date('m'); 
+						|	$year = date('Y');
+						|	$day = date("d", mktime(0,0,0, $month, 0, $year)); 
+						|	$anio = date('Y', mktime(0,0,0, $month-1, $day, $year));
+						|	$arrM = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+						|	$mes = (int)date('m', mktime(0,0,0, $month-1, $day, $year));
+						|?>
+						a.showM(onclik="") Ocultar
+						h2 gráfica de <?php echo $arrM[$mes-1] . " del " . $anio; ?>
+				.month
+					.bloqueInM
+						.graficas
+							canvas#graficoMonth
+						.estrellas
+							.titM
+								h3 Puntuación
+					.simbologiaM
+
+			.contYear
+				h1 Información anual
+				.opcion
+					.indicador
+						a.showY(onclik="") Ocultar
+						h2 gráfica del
+					.consulta
+						|<?php $sql_anio = mysqli_query($conexion, "SELECT DISTINCT YEAR(visitas.Fecha) AS Date FROM visitas INNER JOIN (SELECT evento.IdEvento FROM evento WHERE evento.Establecimiento = '{$_SESSION['establecimiento']}') as listE on listE.IdEvento = visitas.Evento"); ?>
+						select.selectYear
+							|<?php While($row_anio = mysqli_fetch_array($sql_anio, MYSQLI_ASSOC)) { ?>
+							|<?php echo '<option value ="' . $row_anio['Date'] . '">' . $row_anio['Date'] .'</option>';  ?>
+							|<?php } ?>
+				.anio
+					.bloqueInY
+						.graficas
+							canvas#graficoYear
+						.estrellas
+							.titY
+								h3 Puntuación
+					.simbologiaY
+
+			.contMultiYear
+				h1 Recopilación de años
+				.opcion
+					.indicador
+						a.showMY(onclik="") Ocultar
+						h2 gráfica
+				.multianio
+					.bloqueInMY
+						.graficas
+							canvas#graficoMultiYear
+						.estrellas
+							.titMY
+								h3 Puntuación
+					.simbologiaMY
+			//-.envio
+				form(method="POST" action="lib/enviarCorreo.php" name="envio")
+					input(type="submit", value="hola")
+
+		include include/footer
+		script(type='text/javascript', src='js/resultados.js')
+		script(src='https://canvasjs.com/assets/script/canvasjs.min.js')

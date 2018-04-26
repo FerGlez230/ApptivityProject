@@ -1,0 +1,17 @@
+.cambiarImagen
+	.contin
+		h1 Cambiar imagen
+		.formImage
+			form
+				.prevImage
+					.showImg
+						img(src="", id='salidaImagen')
+				.ImagenFile
+					input(type='file', name='fileinputI',id="fileinputI", value="Cambiarimagen", class="inputfile", accept="image/png, image/jpeg, image/jpg, image/gif" required)
+					label(for="fileinputI") 
+						strong Seleccionar imagen
+							i.fa.fa-upload(aria-hidden='true')
+						span
+				.bottonCI
+					input(type="submit" name="imagen" value="Cambiar Imagen")
+script(src='js/cambioImagen.js')

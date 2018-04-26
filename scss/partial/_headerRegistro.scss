@@ -1,0 +1,30 @@
+.headerRegistro{
+
+	.contenedorGeneral{
+		@include column(1, $offset: 0, $gutter: 0);
+		position: relative;
+		text-align: center;
+	}
+
+	.contenedorN{
+		height: 4.5em;
+		background-color: $naranja;
+	}
+
+	.contenedorB{
+		height: 4.5em;
+		background-color: $blanco;
+	}
+
+	img{
+		border-radius: 100%;
+		position: absolute;
+		top:0;
+		left:0;
+		right:0;
+		bottom:0;
+		margin: auto;
+		text-align: center;
+		max-width: 10%;
+	}
+}

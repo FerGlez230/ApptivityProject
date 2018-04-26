@@ -1,0 +1,83 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body.inEstablecimiento
+		include include/headerEstablecimiento
+		|<?php include 'lib/conexion.php';?>
+		.contenedorComun
+			h1 Modificar promoción 
+			|<?php $nombrePromo = mysqli_fetch_array(mysqli_query($conexion, "SELECT promocion.Nombre As nombre, promocion.Descripcion As descripcion FROM promocion WHERE promocion.Establecimiento = 1")); ?>
+			.contenedorformulario
+				form(method="POST" action="" name="Evento" onsubmit='return ValidarEvento()' enctype="multipart/form-data")
+					
+					input(type='text', value="<?php echo $nombrePromo['nombre'] ?>", name='NombrePromocion', id="NombrePromocion" required)
+					textarea(rows="10", name="DescripcionP", maxlength="1200" required)|<?php echo $nombrePromo['descripcion'] ?>
+					
+					h2 Horario
+					
+					.muestraHorarioMP
+						|<?php $duracion = mysqli_query($conexion, "SELECT duracionpromocion.Fecha, duracionpromocion.HoraInicio, duracionpromocion.HoraFin FROM duracionpromocion WHERE duracionpromocion.Promocion = 1"); ?>
+						table
+							thead
+								tr
+									th No.
+									th Días
+									th Hr Inicio
+									th Hr Termino
+									th
+							tbody
+								|<?php 
+								| $x=1;
+								| $hoy = strftime("%Y-%m-%d", time());
+								| $time1 = strtotime($hoy);
+								| while($fecha = mysqli_fetch_array($duracion)){
+								| $time2 = strtotime($fecha[0]);
+								| if($time2 <= $time1){
+								|  echo "<tr id='filaMP$x'>";
+								|  echo "<td> $x </td>";
+								|  echo "<td> $fecha[0] </td>";
+								|  echo "<td> $fecha[1] </td>";
+								|  echo "<td> $fecha[2] </td>";
+								|  echo "<td> <div class='elimiFile'><a>Eliminar</a></div> </td>";
+								|  $x++;
+								| }
+								|}
+								|?>
+
+					.contenedorvarios
+						.horario
+							.ContenedorCalendario
+								#calendario
+							.parte12
+								.izq
+									h3 Hora inicio:
+									h4 ( hrs:min )
+									input(type='time', name='HoraInicioMP', min="00:00", max="23:59", step="60" id="HoraInicioMP" required)
+							.parte12
+								.der
+									h3 Hora termino:
+									h4 ( hrs:min )
+									input(type='time', name='HoraTerminoMP' id="HoraTerminoMP" required)
+							
+							.agregarPeriodoMP
+								a(onclick="") Agregar Horario
+					
+					h2 Imagen del evento
+					
+					.prevImageMP
+						.showImgMP
+							img(src="", id='imgExitMP')
+
+					.ImagenArchivo
+						input(type='file', name='fileInputMP', id="fileInputMP", value="Examinar" class="inputfile" accept="image/png, .jpeg, .jpg, image/gif" required)
+						label(for="fileInputMP") 
+							strong Examinar
+								i.fa.fa-upload(aria-hidden='true')
+							span
+
+					.buttonRE
+						input(type="submit", value="MODIFICAR PROMOCIÓN", id="ModificarEvento", name="ModificarEvento")
+		
+		include include/footer
+		script(type='text/javascript', src='js/modificar.js')

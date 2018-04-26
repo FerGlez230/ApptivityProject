@@ -1,0 +1,28 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body.inicioUsuario
+		include include/headerCliente
+		.contenedorComun
+			.contCont
+				form(method="POST" action="lib/modificarEstablecimiento.php" name="modificarEstablecimiento" onsubmit='return ValidarCambioDatos()' enctype="multipart/form-data")
+					.colum.infor
+						h2 mi23guel36@gmail.com
+						.formuCamb
+							.col11
+
+								input(type="text" name="nombreU" value="<?php echo $_SESSION['nombre']?>" id="nombre")
+							.col12
+								input(type="text" name="appU" value="<?php echo $_SESSION['app']?>" id="app")
+							.col12
+								input.right(type="text" name="apmU" value="<?php echo $_SESSION['apm']?>" id="apm")
+							.col11
+								input(type="password" name="passU" placeholder="Contraseña" id="pass")
+							.col11
+								input(type="password" name="npassU" placeholder="Nueva contraseña" id="npass")
+							.col11
+								input(type="password" name="cpassU" placeholder="Confirmar nueva contraseña" id="cpass")
+							.boton
+								input(type="submit" name="guardarCliente" value="Guardar Cambios")
+		include include/footer

@@ -1,0 +1,34 @@
+//Inicialización
+@import "compass";
+@import "compass/reset";
+//Jeet
+@import 'jeet/index.scss';
+//mixins
+@import "_mixins.scss";
+//Contenido de la página
+@import '_init.scss';
+//index
+@import '_home.scss';
+@import "partial/_headerIndex.scss";
+//header con logo en medio
+@import "partial/_headerRegistro.scss";
+//Ambos usuarios
+@import "partial/_headerUsuario.scss";
+@import "_inicioUsuario.scss";
+//Establecimiento
+@import '_registroEstablecimiento.scss';
+@import '_outEstablecimiento.scss';
+@import "_inEstablecimiento.scss";
+@import "_resultados.scss";
+//Cliente
+@import "_listaEvento.scss";
+@import "_informaEvento.scss";
+//Pie de página
+@import 'partial/_footer.scss';
+//js
+@import 'jquery-ui.css';
+@import 'jquery-ui.multidatespicker.css';
+//MagicPopup
+@import '_mgp.scss';
+@import '_iniciarSesion.scss';
+@import '_cambiarImagen.scss';

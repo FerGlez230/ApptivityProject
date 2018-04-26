@@ -1,0 +1,36 @@
+.headerUsuario
+	.contenedorComun
+		.medio
+			.logoE.medio
+				.imagen
+					a(href="inicioCliente.php")
+						img(src="img/logo_contorno.png")
+				.texto
+					a(href="inicioCliente.php") Apptivity
+			.menuE
+				ul
+					li
+						a(href="topEvento.html") Mejores eventos
+					li.busqueda
+						form
+							input(type='text', placeholder='Evento' name='buscaEvento' id="buscaEvento" required)
+							button(type='submit')
+								i.fa.fa-search
+
+			.usuario
+				ul
+					li
+						.userImage
+							img(src="img/prueba.jpg")
+							a.ghost.simple-ajax-popup-align-top(href="cambiarImagen.html") Cambiar
+					li
+						nav.menD
+							ul
+								li
+									a(href='#') Usuario
+									i.fa.fa-angle-down(aria-hidden='true')
+									ul
+										li
+											a(href='inicioCliente.html') Mi cuenta
+										li
+											a(href='lib/cerrarSesion.php') Cerrar Sesión

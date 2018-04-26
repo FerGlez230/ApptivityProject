@@ -1,0 +1,72 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body.informaEvento
+		include include/headerCliente
+		.contenedorComun
+			.bloqueInfor
+				.colMitad
+					h1 Establecimiento
+					ul
+						li.encabeza
+							img(src="img/prueba.jpg")
+						li
+							h1 Nombre del establecimiento
+					.descInfo
+						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+					h2 Horario:
+
+					.contendo.blockTime
+						.diasE
+							ul
+								li
+									h3 Lunes
+								li 
+									h3 Martes
+								li
+									h3 Miércoles
+						.horasE
+							h3 07:00 - 16:00
+
+					h2 Ubicación:
+					
+					.contendo
+						#map
+						#mapa
+
+						h3 Juan Aldama, 10, El Briseño
+
+				.colMitad
+					h1 Evento
+					ul
+						li.encabeza
+							img(src="img/prueba.jpg")
+						li
+							h1 Nombre del evento
+					
+					.descInfo
+						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+					h2 Horario:
+
+					.contendo.blockTime
+						select(name='dias')
+							option(value='Días', selected='')
+						select(name='horas')
+							option(value='Horarios', selected='')
+
+					h2 Categorías:
+					.contendo.listCatt
+						ul
+							li
+								h3 Pulpo
+							li
+								h3 Cangrejo
+
+
+		include include/footer
+		script(type='text/javascript', src='js/informaEvento.js')
+		script(type='text/javascript', src='js/mapa.js')
+		script(async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap&libraries=places")

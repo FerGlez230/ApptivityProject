@@ -1,0 +1,356 @@
+.home{
+
+	.contenedor{
+		z-index: 1;
+		padding-top: 30px;
+		@include column(1, $offset: 0, $gutter: 0);
+	}
+
+	.titulo{
+		@include column(15/30, $offset: 3/30, $gutter: 0);
+		position: relative;
+
+		h1{
+			cursor: default;
+			padding-top: 30px;
+			font-family: 'AYearWithoutRain';
+			font-size: 2.6em;
+		}
+	}
+
+	.contenedorRegistro{
+		@include column(12/30, $offset: 0, $gutter: 0);
+		padding-top: 10px;
+		border-radius: 15px;
+		background-color: $suave;
+	}
+
+	.registro{
+		@include column(11/12, $offset: 1/24, $gutter: 0);
+	}
+
+	.registrate{
+		@include column(1, $offset: 0, $gutter: 0);
+		-ms-display: flex;
+		display: flex;
+		align-items: center;
+
+		.textoEstablecimiento{
+			@include column(18/22, $offset: 0, $gutter: 0);
+			padding-top: 10px;
+			
+			ul{
+				display: inline-block;
+			    margin-left: auto;
+			    margin-right: auto;
+			    text-align: center;
+				cursor: default;
+				max-width: auto;
+			}
+
+			li{
+				-ms-display: flex;
+				display: flex;
+				align-items: center;
+				display: inline-block;
+				font-family: 'AYearWithoutRain';
+			}
+
+			a{
+				@include transition(0.4s);
+				text-decoration: none;
+				display: inline-block;
+				color: $claro;
+				font-size: 1.3em;
+				&:hover{
+					@include transition(0.4s);
+					cursor: pointer;
+					color: $rojo;
+				}
+			}
+
+			i{
+				transition: all .4s ease-in-out;
+				font-size: 1em;
+				color: $claro;
+			}
+
+			ul:hover{
+				i{
+					padding-left: 10px;
+					color: $rojo;
+				}
+			}
+		}
+	}
+
+	.usuario{
+		@include column(1, $offset: 0, $gutter: 0);
+		-ms-display: flex;
+		display: flex;
+		align-items: center;
+	}
+
+
+	.icono{
+		@include column(5/22, $offset: 0, $gutter: 0);
+		img{
+			width: 90%;	
+		}
+	}
+
+	.opcion{
+		@include column(1, $offset: 0, $gutter: 0);
+		-ms-display: flex;
+	  	display: flex;
+	  	align-items: center;
+	  	justify-content: center;
+	  	padding-top: 10px;
+	  	padding-bottom: 10px;
+
+		.col922{
+			@include column(9/22, $offset: 0, $gutter: 0);
+			padding-top: 1px;
+			background-color: $claro;
+		}
+
+		.col422{
+			cursor: default;
+
+			@include column(4/22, $offset: 0, $gutter: 0);
+			text-align: center;
+			h3{
+				font-family: 'Abstrec';
+				font-size: .8em;
+			}
+		}
+	}
+
+	.texto{
+		h1{
+			@include transition(0.4s);
+			cursor: default;
+			font-family: 'Abstrec';
+			font-size: 1em;
+    		padding-bottom: 10px;
+			color: $negro;
+		}
+
+		#textCount{
+			display: inline-block;
+			&:hover{
+				cursor: pointer;
+				color: $naranja;
+			}
+		}
+	}
+
+	.textoUsuario{
+		@include column(18/22, $offset: 0, $gutter: 0);
+		padding-top: 10px;
+
+		h2{
+			@include transition(0.4s);
+			display: inline-block;
+			font-family: 'AYearWithoutRain';
+			color: $claro;
+			font-size: 1.3em;
+			&:hover{
+				@include transition(0.4s);
+				cursor: pointer;
+				color: $azul;
+			}
+		}
+	}
+
+	.formularioInicio{
+		@include column(1, $offset: 0, $gutter: 0);
+
+		form{
+
+			input{
+				color: $oscuro;
+				display: block;
+				font-family: 'AYearWithoutRain';
+				letter-spacing: .1em;
+				border: none;
+				border: solid $claro 1px;
+				background-color: $blanco;
+				font-size: 1.2em;
+				width: 100%;
+				padding: 5px;
+				padding-left: 10px;
+				margin-top: 0.3em;
+				margin-bottom: 0.3em;
+				box-sizing: border-box;
+			}
+
+			.col11{
+				@include column(1, $offset: 0, $gutter: 0);
+			}
+
+			.boton{
+				@include column(3/5, $offset: 1/5, $gutter: 0);
+				padding-top: 10px;
+				justify-content: center;
+				input{
+					@include transition(0.4s);
+					color: $negro;
+					text-align: center;
+					background-color: $naranja;
+					border: 0px;
+					border-radius: 10px;
+					&:hover{
+						background-color: $claro;
+						color: $blanco;
+						cursor: pointer;
+					}
+				}
+			}
+
+		}
+
+	}
+
+	.formularioUsuario{
+		@include column(1, $offset: 0, $gutter: 0);
+		display: none;
+
+		form{
+
+			input{
+				color: $oscuro;
+				display: block;
+				font-family: 'AYearWithoutRain';
+				letter-spacing: .1em;
+				border: none;
+				border: solid $claro 1px;
+				background-color: $blanco;
+				font-size: 1.2em;
+				width: 100%;
+				padding: 5px;
+				padding-left: 10px;
+				margin-top: 0.3em;
+				margin-bottom: 0.3em;
+				box-sizing: border-box;
+			}
+
+			.col11{
+				@include column(1, $offset: 0, $gutter: 0);
+			}
+
+			.col12{
+				@include column(1/2, $offset: 0, $gutter: 0);
+				input{
+					width: 98%;
+				}
+			}
+
+			.right{
+				float: right;
+			}
+
+			.checka{
+				padding-top: 5px;
+				-ms-display: flex;
+			  	display: flex;
+			  	align-items: center;
+
+				input[type="checkbox"] {
+				    display: inline-block;
+				    width: 19px;
+				    height: 19px;
+				    margin-left: 0px;
+				}
+
+				input[type="checkbox"]:hover {
+					cursor: pointer;
+				}
+
+				label{
+					font-size: 1em;
+					font-family: 'AYearWithoutRain';
+					color: $oscuro;
+				} 
+
+				a{
+					@include transition(0.4s);
+					text-decoration: none;
+					font-size: 1em;
+					font-family: 'AYearWithoutRain';
+					color: $azul;
+					padding-left: 4px;
+					
+					&:hover{
+						color: $verde;
+					}
+
+				}
+
+			}
+
+			.boton{
+				@include column(3/5, $offset: 1/5, $gutter: 0);
+				padding-top: 10px;
+				justify-content: center;
+				input{
+					@include transition(0.4s);
+					color: $negro;
+					text-align: center;
+					background-color: $azul;
+					border: 0px;
+					border-radius: 10px;
+					&:hover{
+						background-color: $claro;
+						color: $blanco;
+						cursor: pointer;
+					}
+				}
+			}
+
+			/*.mensajeInicio{
+				padding-top: 7px;
+				padding-bottom: 20px;
+				text-align: center;
+
+				label{
+					font-size: .8em;
+					font-family: 'AYearWithoutRain';
+					color: $oscuro;
+				} 
+
+				a{
+					@include transition(0.4s);
+					text-decoration: none;
+					font-size: .8em;
+					font-family: 'AYearWithoutRain';
+					color: $azul;
+					padding-left: 4px;
+					
+					&:hover{
+						color: $verde;
+					}
+
+				}
+			}*/
+
+		}
+	}
+
+	.iniciar{
+		text-align: center;
+		padding-top: 20px;
+	}
+
+	.local{
+		position: absolute;
+		margin-top: 16%;
+		z-index: -1;
+	}
+
+	.raro{
+		position: relative;
+		@include column(1, $offset: 0, $gutter: 0);
+	}
+
+} 

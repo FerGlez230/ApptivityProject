@@ -1,0 +1,117 @@
+doctype
+html(lang="es")
+	head
+		include include/head
+	body.outEstablecimiento
+		include include/headerEstablecimiento
+		.contenedorComun
+			.submenuEvent
+				.opcionF
+					h1 Eventos
+				.opcionS
+					a(href="registroEvento.php") Agregar Evento
+			.listaIni
+				.listaEventos
+					ul
+						|<?php
+						| 	
+						|	$servidor = "localhost";
+						|	$baseDatos = "apptivity";
+						|	$usuario = "root"; 
+						|	$password = "";
+						|	$conexion = mysqli_connect($servidor, $usuario, $password) or die ("No se ha podido conectar al servidor de de datos");
+						|	$db = mysqli_select_db( $conexion, $baseDatos) or die ( "Upps! Pues va a ser que no se ha podido conectar a la base de datos" );
+						|	$obtenerEventos="SELECT evento.IdEvento, evento.Nombre FROM evento WHERE Establecimiento='{$_SESSION['establecimiento']}' ORDER BY IdEvento DESC";
+						|	$resultado_obtenerEventos=mysqli_query($conexion, $obtenerEventos);
+						|	while($evento = mysqli_fetch_array($resultado_obtenerEventos))
+						|	{		
+						|		echo "<div class='eventoTitulo'><li id='$evento[0]'> $evento[1]</li></div>";
+						|		$id=$evento[0];
+						|            	$obtenerEvento="SELECT Nombre, Descripcion, PrecioMayor, PrecioMenor, Imagen FROM evento WHERE IdEvento=$id";
+						|            	$resultado_obtenerEvento=mysqli_query($conexion, $obtenerEvento);
+						|            	$Evento = mysqli_fetch_array($resultado_obtenerEvento);
+						|            	$ImagenF='/Imagenes/'.$Evento[4];
+						|?>
+						|	
+						.bloqueEvento
+							.ladear1
+									.nombre
+										h1 <?php echo utf8_encode($Evento[0]); ?>
+										
+									.ilustracion
+										img(src="<?php echo $ImagenF; ?>")
+
+									.deleUp 
+										.btn.updateE
+											form(name="ModificararEvento" method="POST" action="lib/modificarEvento.php")
+												|<?php echo "<input type='hidden' name='eventoModificar' value=$id>"; ?>
+												a
+													input(type="submit" name="Modificar" value="Modificar") 
+													i.fa.fa-pencil(aria-hidden='true')
+										.btn.deleteE
+											form(name="EliminarEvento" method="POST" action="lib/borrarEvento.php")
+												|<?php echo "<input type='hidden' name='eventoEliminar' value=$id>"; ?>
+												a
+													input(type="submit" name="Eliminar" value="Eliminar") 
+													i.fa.fa-trash(aria-hidden='true')
+
+							.ladear2.parte2
+									.informacion
+										h1 Descripción
+
+										.contenido.desc
+											h2 <?php echo utf8_encode($Evento[1]); ?>
+
+										h1 Precio:
+
+										.contenido
+											h2 de $ <?php echo $Evento[3]; ?> a $<?php echo $Evento[2]; ?>
+
+										h1 Categorias:
+
+										.contenido.catCandy
+											|<?php 
+											| $obtenerCategorias="SELECT subcategoria.Nombre FROM categoriaevento INNER JOIN subcategoria on categoriaevento.Subcategoria=subcategoria.IdSubcategoria and categoriaevento.Evento='{$id}'";
+											|$resultado_obtenerCategorias=mysqli_query($conexion, $obtenerCategorias);
+											|while($subc = mysqli_fetch_array($resultado_obtenerCategorias))
+											|{
+											|	echo "<div class='envoltura'>";
+											|	$sub=utf8_encode($subc[0]);
+											|	echo "<h3>$sub</h3>";
+											|	echo "</div>";
+											|}
+											|?>
+											
+
+										.informacion
+											h1 Horario:
+
+
+										.contenido
+												select(name='dias' id="diasEvento")
+													option(value='-1')
+														|Dias
+													|<?php 
+													| $obtenerDuracion="SELECT IdDuracionEvento, Fecha FROM duracionevento WHERE evento='{$id}'";
+													|$resultado_obtenerDuracion=mysqli_query($conexion, $obtenerDuracion);
+													|while($dur = mysqli_fetch_array($resultado_obtenerDuracion))
+													|{
+													|	echo "<option value='$dur[0]'>$dur[1]</h3>";
+													|	echo "</div>";
+													|}
+													|?>
+												select(name='hora' id="horaEvento")
+													option(value='-1', selected='')
+														| Horario
+													|<?php
+													|$obtenerDuracion="SELECT IdDuracionEvento, HoraInicio, HoraFin FROM duracionevento WHERE evento='{$id}'";
+													|$resultado_obtenerDuracion=mysqli_query($conexion, $obtenerDuracion);
+													|while($dur = mysqli_fetch_array($resultado_obtenerDuracion))
+													|{
+													|	echo "<option value='$dur[0]'>$dur[1]-$dur[2]</option>";
+													|}
+													|?>		
+						|<?php	}?>	
+	
+		include include/footer
+		script(type='text/javascript', src='js/despliegueEventoProm.js')
