@@ -52,8 +52,8 @@
       <div class="contenedorformulario">
         <!--form(method="POST" action="lib/insertarEvento.php" name="Evento" onsubmit='return ValidarEvento()' enctype="multipart/form-data")-->
         <form method="POST" name="Evento" id="Evento" enctype="multipart/form-data" onsubmit="return enviarDatosEvento();">
-          <input type="text" value="&lt;?php echo $nombreEven[0] ?&gt;" name="NombreEvento" id="NombreEvento" required>
-          <textarea rows="10" placeholder="Descripción" name="Descripcion" maxlength="1200" required><?php echo $nombreEven[1] ?></textarea>
+          <input type="text" value="<?php echo utf8_encode($nombreEven[0]); ?>" name="NombreEvento" id="NombreEvento" required>
+          <textarea rows="10" placeholder="Descripción" name="Descripcion" maxlength="1200" required><?php echo utf8_encode($nombreEven[1]); ?></textarea>
           <h2>Categorías</h2>
           <div class="listaCategoria"></div>
           <select id="categorias" name="categorias[]" multiple="multiple">
@@ -85,13 +85,13 @@
             <div class="parte12">
               <div class="izq">
                 <h3>Desde:</h3>
-                <input class="lne" type="text" name="PrecioInferior" value="&lt;?php echo $nombreEven[3] ?&gt;" id="PrecioInferior" required>
+                <input class="lne" type="text" name="PrecioInferior" value="<?php echo $nombreEven[3] ?>" id="PrecioInferior" required>
               </div>
             </div>
             <div class="parte12">
               <div class="der">
                 <h3>Hasta:</h3>
-                <input class="lne" type="text" name="PrecioSuperior" value="&lt;?php echo $nombreEven[2] ?&gt;" id="PrecioSuperior" required>
+                <input class="lne" type="text" name="PrecioSuperior" value="<?php echo $nombreEven[2] ?>" id="PrecioSuperior" required>
               </div>
             </div>
           </div>

@@ -80,7 +80,7 @@
                 <div class="ilustracion"><img src="&lt;?php echo $ImagenF; ?&gt;"></div>
                 <div class="deleUp"> 
                   <div class="btn updateE">
-                    <form name="ModificararPromocion" method="POST" action="lib/modificarPromocion.php"><?php echo "<input type='hidden' name='promocionModificar' value=$id>"; ?><a>
+                    <form name="ModificararPromocion" method="POST" action="modificaPromocion.php"><?php echo "<input type='hidden' name='promocionModificar' value=$id>"; ?><a>
                         <input type="submit" name="Modificar" value="Modificar"><i class="fa fa-pencil" aria-hidden="true"></i></a></form>
                   </div>
                   <div class="btn deleteE">

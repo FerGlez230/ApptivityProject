@@ -11,8 +11,8 @@ html(lang="es")
 			.contenedorformulario
 				form(method="POST" action="" name="Evento" onsubmit='return ValidarEvento()' enctype="multipart/form-data")
 					
-					input(type='text', value="<?php echo $nombrePromo['nombre'] ?>", name='NombrePromocion', id="NombrePromocion" required)
-					textarea(rows="10", name="DescripcionP", maxlength="1200" required)|<?php echo $nombrePromo['descripcion'] ?>
+					input(type='text', value="<?php echo utf8_encode($nombrePromo['nombre']); ?>", name='NombrePromocion', id="NombrePromocion" required)
+					textarea(rows="10", name="DescripcionP", maxlength="1200" required)|<?php echo utf8_encode($nombrePromo['descripcion']); ?>
 					
 					h2 Horario
 					

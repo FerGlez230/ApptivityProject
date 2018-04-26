@@ -51,8 +51,8 @@
       <h1>Modificar promoción </h1><?php $nombrePromo = mysqli_fetch_array(mysqli_query($conexion, "SELECT promocion.Nombre As nombre, promocion.Descripcion As descripcion FROM promocion WHERE promocion.Establecimiento = 1")); ?>
       <div class="contenedorformulario">
         <form method="POST" action="" name="Evento" onsubmit="return ValidarEvento()" enctype="multipart/form-data">
-          <input type="text" value="&lt;?php echo $nombrePromo['nombre'] ?&gt;" name="NombrePromocion" id="NombrePromocion" required>
-          <textarea rows="10" name="DescripcionP" maxlength="1200" required><?php echo $nombrePromo['descripcion'] ?></textarea>
+          <input type="text" value="<?php echo utf8_encode($nombrePromo['nombre']); ?>" name="NombrePromocion" id="NombrePromocion" required>
+          <textarea rows="10" name="DescripcionP" maxlength="1200" required><?php echo utf8_encode($nombrePromo['descripcion']); ?></textarea>
           <h2>Horario</h2>
           <div class="muestraHorarioMP"><?php $duracion = mysqli_query($conexion, "SELECT duracionpromocion.Fecha, duracionpromocion.HoraInicio, duracionpromocion.HoraFin FROM duracionpromocion WHERE duracionpromocion.Promocion = 1"); ?>
             <table>

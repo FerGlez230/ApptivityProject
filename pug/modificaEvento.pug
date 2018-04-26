@@ -13,8 +13,8 @@ html(lang="es")
 				form(method="POST" name="Evento" id="Evento" enctype="multipart/form-data" onsubmit="return enviarDatosEvento();")
 					
 
-					input(type='text', value="<?php echo $nombreEven[0] ?>",name='NombreEvento' id="NombreEvento" required)
-					textarea( rows="10", placeholder="Descripción", name="Descripcion", maxlength="1200" required)|<?php echo $nombreEven[1] ?>
+					input(type='text', value="<?php echo utf8_encode($nombreEven[0]); ?>",name='NombreEvento' id="NombreEvento" required)
+					textarea( rows="10", placeholder="Descripción", name="Descripcion", maxlength="1200" required)|<?php echo utf8_encode($nombreEven[1]); ?>
 					
 					h2 Categorías
 

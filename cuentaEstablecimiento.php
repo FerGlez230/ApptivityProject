@@ -55,13 +55,13 @@
             <h2><?php echo $_SESSION['correo'] ?></h2>
             <div class="formuCamb">
               <div class="col11">
-                <input type="text" name="nombre" value="&lt;?php echo $_SESSION['nombre']?&gt;" id="nombre">
+                <input type="text" name="nombre" value="<?php echo $_SESSION['nombre']?>" id="nombre">
               </div>
               <div class="col12">
-                <input type="text" name="app" value="&lt;?php echo $_SESSION['app']?&gt;" id="app">
+                <input type="text" name="app" value="<?php echo $_SESSION['app']?>" id="app">
               </div>
               <div class="col12">
-                <input class="right" type="text" name="apm" value="&lt;?php echo $_SESSION['apm']?&gt;" id="apm">
+                <input class="right" type="text" name="apm" value="<?php echo $_SESSION['apm']?>" id="apm">
               </div>
               <div class="col11">
                 <input type="password" name="pass" placeholder="Contraseña" id="pass">
@@ -78,7 +78,7 @@
             </div>
           </div>
           <div class="colum color">
-            <div class="colimg"><img src="/Imagenes/&lt;?php echo $_SESSION['img']?&gt;" id="imgSalida"></div>
+            <div class="colimg"><img src="/Imagenes/<?php echo $_SESSION['img']?>" id="imgSalida"></div>
             <div class="formImage">
               <div class="ImagenFile">
                 <input class="inputfile" type="file" name="file-input" id="file-input" value="Cambiarimagen" accept="image/png, image/jpeg, image/jpg, image/gif">

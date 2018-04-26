@@ -16,16 +16,18 @@
     <link type="text/css" rel="stylesheet" href="css/multiple-select.css">
   </head>
   <body class="inicioUsuario">
+    <?php session_start();?>
+    <?php if(!isset($_SESSION['nombre'])){header("location:/apptivity/index.html");}?>
     <div class="headerUsuario">
       <div class="contenedorComun">
         <div class="medio">
           <div class="logoE medio">
-            <div class="imagen"><a href="inicioCliente.php"><img src="img/logo_contorno.png"></a></div>
-            <div class="texto"><a href="inicioCliente.php">Apptivity</a></div>
+            <div class="imagen"><a href="cuentaCliente.php"><img src="img/logo_contorno.png"></a></div>
+            <div class="texto"><a href="cuentaCliente.php">Apptivity</a></div>
           </div>
           <div class="menuE">
             <ul>
-              <li><a href="topEvento.html">Mejores eventos</a></li>
+              <li><a href="topEvento.php">Mejores eventos</a></li>
               <li class="busqueda">
                 <form>
                   <input type="text" placeholder="Evento" name="buscaEvento" id="buscaEvento" required>
@@ -42,9 +44,9 @@
               <li>
                 <nav class="menD">
                   <ul>
-                    <li><a href="#">Usuario</a><i class="fa fa-angle-down" aria-hidden="true"></i>
+                    <li><a href="#"><?php echo $_SESSION['username'] ?></a><i class="fa fa-angle-down" aria-hidden="true"></i>
                       <ul>
-                        <li><a href="inicioCliente.html">Mi cuenta</a></li>
+                        <li><a href="cuentaCliente.php">Mi cuenta</a></li>
                         <li><a href="lib/cerrarSesion.php">Cerrar Sesión</a></li>
                       </ul>
                     </li>
@@ -63,13 +65,13 @@
             <h2>mi23guel36@gmail.com</h2>
             <div class="formuCamb">
               <div class="col11">
-                <input type="text" name="nombreU" value="&lt;?php echo $_SESSION['nombre']?&gt;" id="nombre">
+                <input type="text" name="nombreU" value="<?php echo $_SESSION['nombre']?>" id="nombre">
               </div>
               <div class="col12">
-                <input type="text" name="appU" value="&lt;?php echo $_SESSION['app']?&gt;" id="app">
+                <input type="text" name="appU" value="<?php echo $_SESSION['app']?>" id="app">
               </div>
               <div class="col12">
-                <input class="right" type="text" name="apmU" value="&lt;?php echo $_SESSION['apm']?&gt;" id="apm">
+                <input class="right" type="text" name="apmU" value="<?php echo $_SESSION['apm']?>" id="apm">
               </div>
               <div class="col11">
                 <input type="password" name="passU" placeholder="Contraseña" id="pass">

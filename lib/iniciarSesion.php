@@ -54,7 +54,6 @@
 						}
 						if($tipoUsuario==2)
 						{
-
 							echo("<script> window.location='/apptivity/cuentaCliente.php';</script>"); //cambiar esta direccion por la de popularidad
 						}
 					}

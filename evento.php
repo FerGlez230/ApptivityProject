@@ -85,7 +85,7 @@
                 <div class="ilustracion"><img src="&lt;?php echo $ImagenF; ?&gt;"></div>
                 <div class="deleUp"> 
                   <div class="btn updateE">
-                    <form name="ModificararEvento" method="POST" action="lib/modificarEvento.php"><?php echo "<input type='hidden' name='eventoModificar' value=$id>"; ?><a>
+                    <form name="ModificararEvento" method="POST" action="modificaEvento.php"><?php echo "<input type='hidden' name='eventoModificar' value=$id>"; ?><a>
                         <input type="submit" name="Modificar" value="Modificar"><i class="fa fa-pencil" aria-hidden="true"></i></a></form>
                   </div>
                   <div class="btn deleteE">
