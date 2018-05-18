@@ -8,7 +8,7 @@ html(lang="es")
 			.contCont
 				form(method="POST" action="lib/modificarEstablecimiento.php" name="modificarEstablecimiento" onsubmit='return ValidarCambioDatos()' enctype="multipart/form-data")
 					.colum.infor
-						h2 mi23guel36@gmail.com
+						h2|<?php echo $_SESSION['correo'] ?>
 						.formuCamb
 							.col11
 
@@ -26,3 +26,5 @@ html(lang="es")
 							.boton
 								input(type="submit" name="guardarCliente" value="Guardar Cambios")
 		include include/footer
+
+		script(type='text/javascript', src='js/listaEvento.js')

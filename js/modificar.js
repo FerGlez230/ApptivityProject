@@ -1,6 +1,14 @@
 //@prepros-prepend jquery-3.1.1.js
+//@prepros-prepend jquery-confirm.min.js
 
 $(document).ready(function(){
+
+	//$('.prevImageMP').css('display', 'block');
+
+	var anchorE = ($('.prevImageMP').width() / 15)*9;
+  	$('.showImgMP').css({ 'height': anchorE + "px" });
+  	$('.showImgMP').css({ 'width': anchorE + "px" });
+
 	$('.agregarPeriodoMP a').on("click", function(event){
 		event.preventDefault();
     	$(this).prop('disabled', false);
@@ -34,7 +42,13 @@ $(document).ready(function(){
 		 	$('.muestraHorarioMP table tbody').append(row); 
 		 	$('#calendario').multiDatesPicker('resetDates', 'picked');
 		}else{
-			alert("Ingrese datos antes");
+			$.alert({
+				icon: 'fa fa-warning',
+			    title: '¡Datos sin seleccionar!',
+			    content: 'Asegurese de haber seleccionado los días y, establecido una hora de inicio y fin.',
+			    boxWidth: '30%',
+    			useBootstrap: false,
+			});
 		}
     	
 	});
@@ -115,15 +129,60 @@ $(document).ready(function(){
 
 	function fileOnload4(e) {
 		var result = e.target.result;
-		
-		$('.prevImageMP').css('display', 'block');
-
-  		var anchorE = ($('.prevImageMP').width() / 15)*9;
-	  	$('.showImgMP').css({ 'height': anchorE + "px" });
-	  	$('.showImgMP').css({ 'width': anchorE + "px" });
 
 	  	$('#imgExitMP').attr("src",result);
 	}
+
+	$("#ModificarPromocion").submit(function(event){
+		event.preventDefault();
+		valores = new Array();
+		var cont = 0;
+		var dias = "";
+
+		$('#tabla tbody tr').each(function () {
+			var id=$(this).find('td').eq(0).html();
+			var hrI=$(this).find('td').eq(2).html();
+			var hrF=$(this).find('td').eq(3).html();
+			var id="#timep"
+		 	
+		 	id=id+cont+" option";
+			
+			$(id).each(function(){
+			   	dias+=$(this).attr('value')+',';
+			});
+			
+			cont++;
+			
+			valor=new Array(id, hrI, hrF, dias);
+			//alert(dias);
+			dias="";
+			
+			if(cont!=0){
+				valores.push(valor);
+			}
+		});
+
+		var formData = new FormData(document.getElementById("ModificarPromocion"));
+		formData.append("valores",JSON.stringify(valores));
+		//alert(formData);
+		$.ajax({
+        	async: false,
+	        type: "POST",
+	        url: "webService/modificarPromocion.php",
+	        data: formData,
+	        cache: false,
+	    	contentType: false,
+	    	processData: false,
+            success: function(data) {
+                alert(data);
+                $(location).attr('href','promocion.php');
+            },
+            error: function(data) {
+            	alert(data);
+        	}
+        });
+		return true;
+	});
 
 
 	$('.agregarPeriodoME a').on("click", function(event){

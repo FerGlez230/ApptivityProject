@@ -12,11 +12,11 @@ html(lang="es")
 						h3 Si ya tienes cuenta
 							a.simple-ajax-popup-align-top(href="iniciarSesion.html") Inicia sesión
 
-					form(method="POST" action="" id="RegistroEstablecimiento" name="RegistroEstablecimiento" onsubmit='return enviarDatosEstablecimiento()')
+					form(method="POST" action="" id="RegistroEstablecimiento" name="RegistroEstablecimiento")
 							
 						input(type='text', placeholder='Nombre del establecimiento' name='NombreEstablecimiento' id="NombreEstablecimiento" required)
 						input(type='text', placeholder='Teléfono del establecimiento' name='TelefonoEstablecimiento' id="TelefonoEstablecimiento" required)
-						textarea(rows="10", placeholder="Descripción", name="DescripcionE", id='DescripcionE' maxlength="1200" required)
+						textarea(rows="10", placeholder="Descripción", name="Descripcion", id='Descripcion' maxlength="1200" required)
 
 						h2 Operatividad de días y Horario
 
@@ -85,7 +85,7 @@ html(lang="es")
 								h2 o	
 								
 							.colM25
-								a.traducir(name="MapaDir", id="MapaDir" onclick="FindMeByAddress()") Traducir dirección ingresada
+								a.traducir(name="MapaDir", id="MapaDir" onclick="FindMeByAddress()") Obtener la dirección ingresada
 
 						h2 Datos del usuario
 
@@ -109,7 +109,7 @@ html(lang="es")
 							input(type='password', placeholder='Confirmar contraseña' name='ConfirmarContrasena' id='ConfirmarContrasena' required)
 						 
 						.checka.col11
-							input(type="checkbox" name="valida")
+							input(type="checkbox" name="valida" required)
 							label Acepto los
 							a(href="#Termino") Términos y Condiciones
 						 
@@ -118,5 +118,6 @@ html(lang="es")
 		include include/footer
 
 		script(type='text/javascript', src='js/mapa.js')
+		script(type='text/javascript', src='js/envioDatos.js')
 		script(async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap&libraries=places")
 

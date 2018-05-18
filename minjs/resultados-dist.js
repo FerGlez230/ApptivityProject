@@ -7457,10 +7457,14 @@
     }, typeof e === St && (t.jQuery = t.$ = rt), rt;
 }), $(document).ready(function() {
     function resultadoAnio(año) {
+        var datos = {
+            "año": año,
+            tipo: 3
+        };
         return $.ajax({
             type: "POST",
-            url: "lib/year.php",
-            data: "año=" + año,
+            url: "lib/resultados.php",
+            data: datos,
             success: function(data) {
                 var valores = eval(data), e = valores[0], f = valores[1], m = valores[2], a = valores[3], ma = valores[4], j = valores[5], jl = valores[6], ag = valores[7], s = valores[8], o = valores[9], n = valores[10], d = valores[11], estrellas = valores[12], total = e + f + m + a + ma + j + jl + ag + s + o + n + d;
                 if (total >= 1) {
@@ -7514,9 +7518,13 @@
         }), !1;
     }
     function resultadoMultiAnio() {
+        var datos = {
+            tipo: 4
+        };
         return $.ajax({
             type: "POST",
-            url: "lib/multiYear.php",
+            url: "lib/resultados.php",
+            data: datos,
             success: function(data) {
                 var valores = eval(data), anio = valores[0], estrellas = valores[2], total = 0;
                 if (anio.length - 1 > 1) {
@@ -7544,7 +7552,9 @@
                                 stacked: !0
                             } ]
                         },
-                        showTooltips: !1,
+                        sshowTooltips: !0,
+                        tooltipFillColor: "rgba(65,170,235,0.8)",
+                        tooltipTitleFontColor: "#1C1C1C",
                         intersect: !1,
                         responsive: !0,
                         animation: !0
@@ -7575,10 +7585,14 @@
         }), !1;
     }
     function resultadoYesterday(dia) {
+        var datos = {
+            dia: dia,
+            tipo: 0
+        };
         return $.ajax({
             type: "POST",
-            url: "lib/yesterday.php",
-            data: "dia=" + dia,
+            url: "lib/resultados.php",
+            data: datos,
             success: function(data) {
                 var valores = eval(data), evento = valores[0], visita = valores[1], estrellas = valores[2], fecha = valores[3], total = 0;
                 if (evento.length - 1 >= 1) {
@@ -7606,7 +7620,9 @@
                                 stacked: !0
                             } ]
                         },
-                        showTooltips: !1,
+                        showTooltips: !0,
+                        tooltipFillColor: "rgba(65,170,235,0.8)",
+                        tooltipTitleFontColor: "#1C1C1C",
                         intersect: !1,
                         responsive: !0,
                         animation: !0
@@ -7616,21 +7632,21 @@
                     for (var col = '<div class="starYes">', n = 1; n <= 7; n++) col += n <= numero ? '<i class="fa fa-star"></i>' : '<i class="fa fa-star-o"></i>';
                     col += "</div>", $(".titYes").append(col), $(".simboloYes").remove();
                     var sim = '<div class="simboloYes">';
-                    for (line = 0; line < evento.length - 1; line++) sim += '<div id="cuadroYes' + valores[0][line] + '"></div>', 
+                    for (line = 0; line < evento.length - 1; line++) sim += '<div id="cuadroYes' + line + '"></div>', 
                     sim += '<h1 class="titA">' + valores[0][line] + "</h1>";
                     sim += "</div>", $(".simbologiaYes").append(sim);
                     var iniB = "3px solid ";
                     for (line = 0; line < evento.length - 1; line++) {
                         var borde = iniB.concat(colorAlto[line]), tam = $(".titA").height();
-                        $("#cuadroYes" + valores[0][line]).css({
+                        $("#cuadroYes" + line).css({
                             height: tam + "px"
-                        }), $("#cuadroYes" + valores[0][line]).css({
+                        }), $("#cuadroYes" + line).css({
                             width: tam + "px"
-                        }), $("#cuadroYes" + valores[0][line]).css({
+                        }), $("#cuadroYes" + line).css({
                             "background-color": colorBajo[line]
-                        }), $("#cuadroYes" + valores[0][line]).css({
+                        }), $("#cuadroYes" + line).css({
                             border: borde
-                        }), $("#cuadroYes" + valores[0][line]).css({
+                        }), $("#cuadroYes" + line).css({
                             display: "inline-block"
                         });
                     }
@@ -7639,13 +7655,17 @@
         }), !1;
     }
     function resultadoWeek(day) {
+        var datos = {
+            dia: day,
+            tipo: 1
+        };
         return $.ajax({
             type: "POST",
-            url: "lib/week.php",
-            data: "dia=" + day,
+            url: "lib/resultados.php",
+            data: datos,
             success: function(data) {
-                var valores = eval(data), nombres = valores[0], visitas = valores[1], estrellas = valores[2], fecha = valores[3];
-                if (nombres.length - 1 >= 1) {
+                var valores = eval(data), nombres = valores[0], visitas = valores[1], estrellas = valores[2], fecha = valores[3], total = valores[4];
+                if (total > 0) {
                     $(".bloqueInW").css({
                         display: "flex"
                     });
@@ -7669,7 +7689,9 @@
                                 stacked: !0
                             } ]
                         },
-                        showTooltips: !1,
+                        showTooltips: !0,
+                        tooltipFillColor: "rgba(65,170,235,0.8)",
+                        tooltipTitleFontColor: "#1C1C1C",
                         intersect: !1,
                         responsive: !0,
                         animation: !0
@@ -7679,21 +7701,21 @@
                     for (var col = '<div class="starW">', n = 1; n <= 7; n++) col += n <= numero ? '<i class="fa fa-star"></i>' : '<i class="fa fa-star-o"></i>';
                     col += "</div>", $(".titW").append(col), $(".simboloW").remove();
                     var sim = '<div class="simboloW">';
-                    for (line = 0; line < nombres.length - 1; line++) sim += '<div id="cuadroW' + nombres[line] + '"></div>', 
+                    for (line = 0; line < nombres.length - 1; line++) sim += '<div id="cuadroW' + line + '"></div>', 
                     sim += '<h1 class="titA">' + nombres[line] + "</h1>";
                     sim += "</div>", $(".simbologiaW").append(sim);
                     var iniB = "3px solid ";
                     for (line = 0; line < nombres.length - 1; line++) {
                         var borde = iniB.concat(colorAlto[line]), tam = $(".titA").height();
-                        $("#cuadroW" + nombres[line]).css({
+                        $("#cuadroW" + line).css({
                             height: tam + "px"
-                        }), $("#cuadroW" + nombres[line]).css({
+                        }), $("#cuadroW" + line).css({
                             width: tam + "px"
-                        }), $("#cuadroW" + nombres[line]).css({
+                        }), $("#cuadroW" + line).css({
                             "background-color": colorBajo[line]
-                        }), $("#cuadroW" + nombres[line]).css({
+                        }), $("#cuadroW" + line).css({
                             border: borde
-                        }), $("#cuadroW" + nombres[line]).css({
+                        }), $("#cuadroW" + line).css({
                             display: "inline-block"
                         });
                     }
@@ -7702,14 +7724,18 @@
         }), !1;
     }
     function resultadoMonth() {
+        var datos = {
+            tipo: 2
+        };
         return $.ajax({
             type: "POST",
-            url: "lib/month.php",
+            url: "lib/resultados.php",
+            data: datos,
             success: function(data) {
                 var valores = eval(data), nombres = valores[0], visitas = valores[1], fin = valores[2], estrellas = valores[3];
                 if (nombres.length - 1 >= 1) {
-                    $(".bloqueInM").css({
-                        display: "flex"
+                    $(".contMonth").css({
+                        display: "block"
                     });
                     var total = 0, colorBajo = new Array(), colorAlto = new Array(), arreglo = new Array();
                     for (lineChartData = {}, lineChartData.labels = [], lineChartData.datasets = [], 
@@ -7717,9 +7743,10 @@
                         for (y = [], colorAlto[line] = inSintax.concat(red[line], ",", green[line], ",", blue[line], ", 1)"), 
                         colorBajo[line] = inSintax.concat(red[line], ",", green[line], ",", blue[line], ", 0.2)"), 
                         lineChartData.datasets.push({}), dataset = lineChartData.datasets[line], dataset.borderWidth = 2, 
-                        dataset.fillColor = colorBajo[line], dataset.strokeColor = colorAlto[line], dataset.highlightFill = colorBajo[line], 
-                        dataset.highlightStroke = colorAlto[line], dataset.data = [], x = 0; x < fin; x++) y.push(visitas[line][x]), 
-                        0 === line && lineChartData.labels.push(x + 1), total += parseInt(visitas[line][x]);
+                        dataset.tooltipFontColor = "#5ac3d0", dataset.fillColor = colorBajo[line], dataset.strokeColor = colorAlto[line], 
+                        dataset.highlightFill = colorBajo[line], dataset.highlightStroke = colorAlto[line], 
+                        dataset.data = [], x = 0; x < fin; x++) y.push(visitas[line][x]), 0 === line && lineChartData.labels.push(x + 1), 
+                        total += parseInt(visitas[line][x]);
                         lineChartData.datasets[line].data = y;
                     }
                     ctx = document.getElementById("graficoMonth").getContext("2d"), window.Mes = new Chart(ctx).Line(lineChartData, {
@@ -7729,7 +7756,9 @@
                                 stacked: !0
                             } ]
                         },
-                        showTooltips: !1,
+                        showTooltips: !0,
+                        tooltipFillColor: "rgba(65,170,235,0.8)",
+                        tooltipTitleFontColor: "#1C1C1C",
                         intersect: !1,
                         responsive: !0,
                         animation: !0
@@ -7739,25 +7768,25 @@
                     for (var col = '<div class="starM">', n = 1; n <= 7; n++) col += n <= numero ? '<i class="fa fa-star"></i>' : '<i class="fa fa-star-o"></i>';
                     col += "</div>", $(".titM").append(col), $(".simboloM").remove();
                     var sim = '<div class="simboloM">';
-                    for (line = 0; line < nombres.length - 1; line++) sim += '<div id="cuadroM' + nombres[line] + '"></div>', 
+                    for (line = 0; line < nombres.length - 1; line++) sim += '<div id="cuadroM' + line + '"></div>', 
                     sim += '<h1 class="titA">' + nombres[line] + "</h1>";
                     sim += "</div>", $(".simbologiaM").append(sim);
                     var iniB = "3px solid ";
                     for (line = 0; line < nombres.length - 1; line++) {
                         var borde = iniB.concat(colorAlto[line]), tam = $(".titA").height();
-                        $("#cuadroM" + nombres[line]).css({
+                        $("#cuadroM" + line).css({
                             height: tam + "px"
-                        }), $("#cuadroM" + nombres[line]).css({
+                        }), $("#cuadroM" + line).css({
                             width: tam + "px"
-                        }), $("#cuadroM" + nombres[line]).css({
+                        }), $("#cuadroM" + line).css({
                             "background-color": colorBajo[line]
-                        }), $("#cuadroM" + nombres[line]).css({
+                        }), $("#cuadroM" + line).css({
                             border: borde
-                        }), $("#cuadroM" + nombres[line]).css({
+                        }), $("#cuadroM" + line).css({
                             display: "inline-block"
                         });
                     }
-                } else $(".month").append("<p>No hay datos suficientes</p>");
+                }
             }
         }), !1;
     }

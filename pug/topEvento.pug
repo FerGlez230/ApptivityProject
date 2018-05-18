@@ -4,9 +4,22 @@ html(lang="es")
 		include include/head
 	body.listaEvento
 		include include/headerCliente
+		//-<?php include 'lib/listaEvento.php'; ?>
 		.contenedorComun
 			.informacionTop
-				.mitadC
+				.miniMenu
+					ul
+						li.seleccionEstado
+							p Mostrar eventos
+							select.optionState
+								option(value='1') actuales
+								option(value='2') pasados
+						li.busqueda
+							form
+								input(type='text', placeholder='buscar evento' name='buscaEvento' id="buscaEvento" required)
+								button(type='submit')
+									i.fa.fa-search
+				//-.mitadC
 					h1 Eventos más concurridos
 					.concurrencia
 						.lista
@@ -56,7 +69,7 @@ html(lang="es")
 											h1 25/10/16
 									.contenidoComen
 										p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-				.mitadC
+				//-.mitadC
 					h1 Eventos con más estrellas
 					.estrellado
 						.lista

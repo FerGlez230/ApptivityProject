@@ -16,7 +16,7 @@ html(lang="es")
 								h1#textCount Ingresa con tu cuenta
 						
 						.formularioInicio
-							form(method="POST" action="lib/iniciarSesion.php" name="IniciarSesion")
+							form(method="POST" name="IniciarSesion" id="IniciarSesion")
 								.col11
 									input(type="text" name="Vcorreo" placeholder="Correo Electrónico" id="Vcorreo")
 								.col11
@@ -38,23 +38,23 @@ html(lang="es")
 								h2#textUser Regístrate como Cliente
 
 						.formularioUsuario
-							form(method="POST" action="lib/registroCliente.php" name="RegistroCliente" onsubmit='return ValidarRegistroCliente()')
+							form(method="POST" name="RegistroCliente" id="RegistroCliente")
 								.col11
-									input(type="text" name="nombre" placeholder="Nombre" id="Usuario")
+									input(type="text" name="Cliente" placeholder="Nombre" id="Cliente" required)
 								.col12
-									input(type="text" name="app" placeholder="Apellido Paterno")
+									input(type="text" name="ApellidoPaterno" id="ApellidoPaterno" placeholder="Apellido Paterno" required)
 								.col12
-									input.right(type="text" name="apm" placeholder="Apellido Materno")
+									input.right(type="text" name="ApellidoMaterno" id="ApellidoMaterno" placeholder="Apellido Materno")
 								.col11
-									input(type="text" name="usuario" placeholder="Nombre de Usuario")
+									input(type="text" name="Username" id="Username" placeholder="Nombre de Usuario" required)
 								.col11
-									input(type="email" name="email" placeholder="Correo Electrónico")
+									input(type="email" name="CorreoElectronico" placeholder="Correo Electrónico" required)
 								.col11
-									input(type="password" name="password" placeholder="Contraseña")
+									input(type="password" name="Contrasena" placeholder="Contraseña" required)
 								.col11
-									input(type="password" name="Cpassword" placeholder="Confirmar Contraseña")
+									input(type="password" name="ConfirmarContrasena" placeholder="Confirmar Contraseña" required)
 								.checka.col11
-									input(type="checkbox" name="valida")
+									input(type="checkbox" name="valida" required)
 									label Acepto los
 									a(href="#Termino") Términos y Condiciones
 								.boton
@@ -85,3 +85,4 @@ html(lang="es")
 		.raro
 			
 		include include/footer
+		script(type='text/javascript', src='js/envioDatos.js')

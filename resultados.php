@@ -9,11 +9,10 @@
     <link rel="icon" href="img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
     <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
-    <link type="text/css" rel="stylesheet" href="css/slick.css">
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
     <link type="text/css" rel="stylesheet" href="css/jquery-ui.multidatespicker.css">
     <link type="text/css" rel="stylesheet" href="css/multiple-select.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-confirm.min.css">
   </head>
   <body class="resultado">
     <?php session_start();?>
@@ -46,7 +45,7 @@
           </div>
         </div>
       </div>
-    </div><?php include 'lib/conexion.php'; ?>
+    </div><?php include 'webService/conexion.php'; ?>
     <div class="contenedorComun">
       <div class="titulo">
         <h1>Resultados</h1>

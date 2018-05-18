@@ -1,180 +1,4 @@
-function enviarDatosEvento() {
-    if (0 != ValidarEvento()) {
-        valores = new Array();
-        var t = 0, e = "";
-        $("#tabla tbody tr").each(function() {
-            var i = $(this).find("td").eq(0).html(), n = $(this).find("td").eq(2).html(), s = $(this).find("td").eq(3).html();
-            i = (i = "#time") + t + " option", $(i).each(function() {
-                e += $(this).attr("value") + ",";
-            }), t++, valor = new Array(i, n, s, e), e = "", 0 != t && valores.push(valor);
-        });
-        var i = new FormData(document.getElementById("Evento"));
-        return i.append("valores", JSON.stringify(valores)), $.ajax({
-            async: !1,
-            type: "POST",
-            url: "lib/insertarEvento.php",
-            data: i,
-            cache: !1,
-            contentType: !1,
-            processData: !1,
-            success: function(t) {
-                alert("Enviando datos..."), alert(t);
-            },
-            error: function(t) {
-                alert("Error en la subida");
-            }
-        }), !0;
-    }
-    return !1;
-}
-
-function enviarDatosPromocion() {
-    valores = new Array();
-    var t = 0, e = "";
-    $("#tabla tbody tr").each(function() {
-        var i = $(this).find("td").eq(0).html(), n = $(this).find("td").eq(2).html(), s = $(this).find("td").eq(3).html();
-        i = (i = "#timep") + t + " option", $(i).each(function() {
-            e += $(this).attr("value") + ",";
-        }), t++, valor = new Array(i, n, s, e), e = "", 0 != t && valores.push(valor);
-    });
-    var i = new FormData(document.getElementById("Promocion"));
-    return i.append("valores", JSON.stringify(valores)), $.ajax({
-        async: !1,
-        type: "POST",
-        url: "lib/insertarPromocion.php",
-        data: i,
-        cache: !1,
-        contentType: !1,
-        processData: !1,
-        success: function(t) {
-            alert("Enviando datos..."), alert(t);
-        },
-        error: function(t) {
-            alert("Error en la subida");
-        }
-    }), !0;
-}
-
-function enviarDatosEstablecimiento() {
-    if (0 != ValidarRegistroEstablecimiento()) {
-        valores = new Array();
-        var t = 0, e = "";
-        $("#tabla tbody tr").each(function() {
-            var i = $(this).find("td").eq(0).html(), n = $(this).find("td").eq(2).html(), s = $(this).find("td").eq(3).html(), o = "#dias" + t + " option";
-            $(o).each(function() {
-                e += $(this).attr("value") + ",";
-            }), t++, "" != e && (valor = new Array(i, n, s, e)), e = "", valores.push(valor);
-        });
-        var i = new FormData(document.getElementById("RegistroEstablecimiento"));
-        return i.append("valores", JSON.stringify(valores)), $.ajax({
-            async: !1,
-            type: "POST",
-            url: "lib/registroEstablecimiento.php",
-            data: i,
-            cache: !1,
-            contentType: !1,
-            processData: !1,
-            success: function(t) {
-                alert("Enviando datos..."), alert(t), $(location).attr("href", "/apptivity/index.html");
-            },
-            error: function(t) {
-                alert("Error en la subida");
-            }
-        }), !0;
-    }
-    return !1;
-}
-
-function ValidarEvento() {
-    var t = !0, e = (document.Evento.NombreEvento.value, document.Evento.Descripcion.value, 
-    document.Evento.PrecioInferior.value), i = document.Evento.PrecioSuperior.value;
-    return 0 == (t = ValidarSoloNumeros(i, " precio superior ")) ? t : 0 == (t = ValidarSoloNumeros(e, " precio inferior ")) ? t : e > i ? (alert("El precio inferior no puede ser mayor al superior"), 
-    !1) : (t = VerificarHorario(HoraInicio, HoraTermino), 0 == t ? t : void 0);
-}
-
-function ValidarEvento() {
-    var t = !0, e = (document.Promocion.NombrePromocion.value, document.Promocion.DescripcionProm.value, 
-    document.Promocion.PrecioInferior.value), i = document.Promocion.PrecioSuperior.value;
-    return 0 == (t = ValidarSoloNumeros(i, " precio superior ")) ? t : 0 == (t = ValidarSoloNumeros(e, " precio inferior ")) ? t : e > i ? (alert("El precio inferior no puede ser mayor al superior"), 
-    !1) : (t = VerificarHorario(HoraInicio, HoraTermino), 0 == t ? t : void 0);
-}
-
-function EnviarDatosRegistro() {
-    try {
-        $.ajax({
-            method: "POST",
-            url: "http://localhost:15178/WebService.asmx/HelloWorld",
-            data: "{'Usuario':'Roy Cruz'}",
-            contentType: "application/json; utf-8",
-            dataType: "json",
-            success: function(t) {
-                null != t.d && alert(t.d);
-            },
-            error: function(t, e, i) {}
-        });
-    } catch (t) {
-        alert("failed to call web service. Error: " + t);
-    }
-}
-
-function ValidarRegistroEstablecimiento() {
-    var t = !0, e = (document.RegistroEstablecimiento.NombreEstablecimiento.value, document.RegistroEstablecimiento.Descripcion.value, 
-    document.RegistroEstablecimiento.Usuario.value), i = document.RegistroEstablecimiento.ApellidoMaterno.value, n = document.RegistroEstablecimiento.ApellidoPaterno.value, s = (document.RegistroEstablecimiento.Username.value, 
-    document.RegistroEstablecimiento.CorreoElectronico.value), o = document.RegistroEstablecimiento.Contrasena.value, a = document.RegistroEstablecimiento.ConfirmarContrasena.value;
-    return 0 == (t = ValidarTextComun(e, "usuario")) ? t : 0 == (t = ValidarTextComun(n, "apellido paterno")) ? t : "" != i && 0 == (t = ValidarTextComun(i, "apellido materno")) ? t : 0 == (t = ValidarCorreo(s)) ? t : 0 == (t = ValidarContrasena(o)) ? t : (t = ContrasenasIguales(o, a), 
-    0 == t ? t : void 0);
-}
-
-function ValidarRegistroUsuario() {
-    var t = !0, e = document.RegistroUsuario.Usuario.value;
-    window.alert("hola");
-    var i = document.RegistroUsuario.ApellidoMaterno.value, n = document.RegistroUsuario.ApellidoPaterno.value, s = (document.RegistroUsuario.Username.value, 
-    document.RegistroUsuario.CorreoElectronico.value), o = document.RegistroUsuario.Contrasena.value, a = document.RegistroUsuario.ConfirmarContrasena.value;
-    return 0 == (t = ValidarTextComun(e, "usuario")) ? t : 0 == (t = ValidarTextComun(n, "apellido paterno")) ? t : "" != i && 0 == (t = ValidarTextComun(i, "apellido materno")) ? t : 0 == (t = ValidarCorreo(s)) ? t : 0 == (t = ValidarContrasena(o)) ? t : (t = ContrasenasIguales(o, a), 
-    0 == t ? t : 0 == t ? t : void 0);
-}
-
-function ValidarTextComun(t, e) {
-    var i = /^[a-zA-Z]*$/;
-    if (t.search(i)) return window.alert("El campo " + e + " sólo permite caracteres de la A-Z"), 
-    !1;
-}
-
-function ValidarSoloNumeros(t, e) {
-    var i = /^[0-9]+([,][0-9]+)?$/;
-    if (t.search(i)) return window.alert("El campo" + e + "sólo acepta números"), !1;
-}
-
-function ValidarCorreo(t) {
-    var e = /^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-    if (t.search(e)) return window.alert("Su correo probablemente tenga un error"), 
-    !1;
-}
-
-function ValidarContrasena(t) {
-    var e = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d]|[^ ]){8,}/;
-    if (t.search(e)) return alert("Su contraseña no coincide con alguno de los requisitos: \nUna mayúscula \nUna minúscula\nUna letra\nPor lo menos 8 caracteres\nSin espacios en blanco"), 
-    !1;
-}
-
-function ContrasenasIguales(t, e) {
-    if (t != e) return window.alert("Las contraseñas no coinciden"), !1;
-}
-
-function NuevoHorario() {
-    var t = new Array();
-    new Array();
-    VerificarHorario(document.RegistroEstablecimiento.HoraInicio.value, document.RegistroEstablecimiento.HoraTermino.value);
-    for (var e = document.getElementsByName("diasSemana"), i = 0; i < 7; i++) e[i].checked && (t[i] = i + 1, 
-    window.alert(t[i]));
-}
-
-function VerificarHorario(t, e) {
-    if (t >= e) return window.alert("La hora de inicio no puede ser mayor a la hora de termino"), 
-    !1;
-}
-
-(function() {
+if (function() {
     "use strict";
     var t = this, e = t.Chart, i = function(t) {
         return this.canvas = t.canvas, this.ctx = t, this.width = t.canvas.width, this.height = t.canvas.height, 
@@ -250,7 +74,7 @@ function VerificarHorario(t, e) {
         if (Array.prototype.indexOf) return t.indexOf(e);
         for (var i = 0; i < t.length; i++) if (t[i] === e) return i;
         return -1;
-    }, u = (n.where = function(t, e) {
+    }, h = (n.where = function(t, e) {
         var i = [];
         return n.each(t, function(t) {
             e(t) && i.push(t);
@@ -273,9 +97,9 @@ function VerificarHorario(t, e) {
         }, n = function() {
             this.constructor = i;
         };
-        return n.prototype = e.prototype, i.prototype = new n(), i.extend = u, t && a(i.prototype, t), 
+        return n.prototype = e.prototype, i.prototype = new n(), i.extend = h, t && a(i.prototype, t), 
         i.__super__ = e.prototype, i;
-    }), h = n.noop = function() {}, c = n.uid = function() {
+    }), u = n.noop = function() {}, c = n.uid = function() {
         var t = 0;
         return function() {
             return "chart-" + t++;
@@ -295,9 +119,9 @@ function VerificarHorario(t, e) {
         return t;
     }, n.getDecimalPlaces = function(t) {
         return t % 1 != 0 && f(t) ? t.toString().split(".")[1].length : 0;
-    }), y = n.radians = function(t) {
+    }), b = n.radians = function(t) {
         return t * (Math.PI / 180);
-    }, b = (n.getAngleFromPoint = function(t, e) {
+    }, y = (n.getAngleFromPoint = function(t, e) {
         var i = e.x - t.x, n = e.y - t.y, s = Math.sqrt(i * i + n * n), o = 2 * Math.PI + Math.atan2(n, i);
         return 0 > i && 0 > n && (o += 2 * Math.PI), {
             angle: o,
@@ -322,8 +146,8 @@ function VerificarHorario(t, e) {
     }), x = (n.calculateScaleRange = function(t, e, i, n, s) {
         var o = Math.floor(e / (1.5 * i)), a = 2 >= o, r = m(t), l = g(t);
         r === l && (r += .5, l >= .5 && !n ? l -= .5 : r += .5);
-        for (var u = Math.abs(r - l), h = _(u), c = Math.ceil(r / (1 * Math.pow(10, h))) * Math.pow(10, h), d = n ? 0 : Math.floor(l / (1 * Math.pow(10, h))) * Math.pow(10, h), p = c - d, f = Math.pow(10, h), v = Math.round(p / f); (v > o || o > 2 * v) && !a; ) if (v > o) f *= 2, 
-        (v = Math.round(p / f)) % 1 != 0 && (a = !0); else if (s && h >= 0) {
+        for (var h = Math.abs(r - l), u = _(h), c = Math.ceil(r / (1 * Math.pow(10, u))) * Math.pow(10, u), d = n ? 0 : Math.floor(l / (1 * Math.pow(10, u))) * Math.pow(10, u), p = c - d, f = Math.pow(10, u), v = Math.round(p / f); (v > o || o > 2 * v) && !a; ) if (v > o) f *= 2, 
+        (v = Math.round(p / f)) % 1 != 0 && (a = !0); else if (s && u >= 0) {
             if (f / 2 % 1 != 0) break;
             f /= 2, v = Math.round(p / f);
         } else f /= 2, v = Math.round(p / f);
@@ -460,8 +284,8 @@ function VerificarHorario(t, e) {
         };
     }(), n.animationLoop = function(t, e, i, n, s, o) {
         var a = 0, r = w[i] || w.linear, l = function() {
-            var i = ++a / e, u = r(i);
-            t.call(o, u, i, a), n.call(o, u, i), e > a ? o.animationFrame = C(l) : s.apply(o);
+            var i = ++a / e, h = r(i);
+            t.call(o, h, i, a), n.call(o, h, i), e > a ? o.animationFrame = C(l) : s.apply(o);
         };
         C(l);
     }, n.getRelativePosition = function(t) {
@@ -474,7 +298,7 @@ function VerificarHorario(t, e) {
     }, n.addEvent = function(t, e, i) {
         t.addEventListener ? t.addEventListener(e, i) : t.attachEvent ? t.attachEvent("on" + e, i) : t["on" + e] = i;
     }), D = n.removeEvent = function(t, e, i) {
-        t.removeEventListener ? t.removeEventListener(e, i, !1) : t.detachEvent ? t.detachEvent("on" + e, i) : t["on" + e] = h;
+        t.removeEventListener ? t.removeEventListener(e, i, !1) : t.detachEvent ? t.detachEvent("on" + e, i) : t["on" + e] = u;
     }, T = (n.bindEvents = function(t, e, i) {
         t.events || (t.events = {}), s(e, function(e) {
             t.events[e] = function() {
@@ -531,7 +355,7 @@ function VerificarHorario(t, e) {
             "function" == typeof t && t.apply(this, Array.prototype.slice.call(arguments, 1)), 
             this;
         },
-        reflow: h,
+        reflow: u,
         render: function(t) {
             return t && this.reflow(), this.options.animation && !t ? n.animationLoop(this.draw, this.options.animationSteps, this.options.animationEasing, this.options.onAnimationProgress, this.options.onAnimationComplete, this) : (this.draw(), 
             this.options.onAnimationComplete.call(this)), this;
@@ -557,13 +381,13 @@ function VerificarHorario(t, e) {
                 t.length > 0) if (this.datasets && this.datasets.length > 1) {
                     for (var o, a, r = this.datasets.length - 1; r >= 0 && (o = this.datasets[r].points || this.datasets[r].bars || this.datasets[r].segments, 
                     -1 === (a = l(o, t[0]))); r--) ;
-                    var u = [], h = [], c = function() {
+                    var h = [], u = [], c = function() {
                         var t, e, i, s, o, r = [], l = [], c = [];
                         return n.each(this.datasets, function(e) {
                             (t = e.points || e.bars || e.segments)[a] && t[a].hasValue() && r.push(t[a]);
                         }), n.each(r, function(t) {
-                            l.push(t.x), c.push(t.y), u.push(n.template(this.options.multiTooltipTemplate, t)), 
-                            h.push({
+                            l.push(t.x), c.push(t.y), h.push(n.template(this.options.multiTooltipTemplate, t)), 
+                            u.push({
                                 fill: t._saved.fillColor || t.fillColor,
                                 stroke: t._saved.strokeColor || t.strokeColor
                             });
@@ -588,8 +412,8 @@ function VerificarHorario(t, e) {
                         titleFontStyle: this.options.tooltipTitleFontStyle,
                         titleFontSize: this.options.tooltipTitleFontSize,
                         cornerRadius: this.options.tooltipCornerRadius,
-                        labels: u,
-                        legendColors: h,
+                        labels: h,
+                        legendColors: u,
                         legendColorBackground: this.options.multiTooltipKeyBackground,
                         title: t[0].label,
                         chart: this.chart,
@@ -664,7 +488,7 @@ function VerificarHorario(t, e) {
         hasValue: function() {
             return f(this.value);
         }
-    }), i.Element.extend = u, i.Point = i.Element.extend({
+    }), i.Element.extend = h, i.Point = i.Element.extend({
         display: !0,
         inRange: function(t, e) {
             var i = this.hitDetectionRadius + this.radius;
@@ -806,13 +630,13 @@ function VerificarHorario(t, e) {
             this.xLabelRotation = 0, this.display) {
                 var n, s = F(this.ctx, this.font, this.xLabels);
                 this.xLabelWidth = s;
-                for (var o = Math.floor(this.calculateX(1) - this.calculateX(0)) - 6; this.xLabelWidth > o && 0 === this.xLabelRotation || this.xLabelWidth > o && this.xLabelRotation <= 90 && this.xLabelRotation > 0; ) n = Math.cos(y(this.xLabelRotation)), 
+                for (var o = Math.floor(this.calculateX(1) - this.calculateX(0)) - 6; this.xLabelWidth > o && 0 === this.xLabelRotation || this.xLabelWidth > o && this.xLabelRotation <= 90 && this.xLabelRotation > 0; ) n = Math.cos(b(this.xLabelRotation)), 
                 t = n * e, n * i, t + this.fontSize / 2 > this.yLabelWidth + 8 && (this.xScalePaddingLeft = t + this.fontSize / 2), 
                 this.xScalePaddingRight = this.fontSize / 2, this.xLabelRotation++, this.xLabelWidth = n * s;
-                this.xLabelRotation > 0 && (this.endPoint -= Math.sin(y(this.xLabelRotation)) * s + 3);
+                this.xLabelRotation > 0 && (this.endPoint -= Math.sin(b(this.xLabelRotation)) * s + 3);
             } else this.xLabelWidth = 0, this.xScalePaddingRight = this.padding, this.xScalePaddingLeft = this.padding;
         },
-        calculateYRange: h,
+        calculateYRange: u,
         drawingArea: function() {
             return this.startPoint - this.endPoint;
         },
@@ -838,13 +662,13 @@ function VerificarHorario(t, e) {
                 t.closePath()), t.lineWidth = this.lineWidth, t.strokeStyle = this.lineColor, t.beginPath(), 
                 t.moveTo(i - 5, r), t.lineTo(i, r), t.stroke(), t.closePath();
             }, this), s(this.xLabels, function(e, i) {
-                var n = this.calculateX(i) + b(this.lineWidth), s = this.calculateX(i - (this.offsetGridLines ? .5 : 0)) + b(this.lineWidth), o = this.xLabelRotation > 0, a = this.showVerticalLines;
+                var n = this.calculateX(i) + y(this.lineWidth), s = this.calculateX(i - (this.offsetGridLines ? .5 : 0)) + y(this.lineWidth), o = this.xLabelRotation > 0, a = this.showVerticalLines;
                 0 !== i || a || (a = !0), a && t.beginPath(), i > 0 ? (t.lineWidth = this.gridLineWidth, 
                 t.strokeStyle = this.gridLineColor) : (t.lineWidth = this.lineWidth, t.strokeStyle = this.lineColor), 
                 a && (t.moveTo(s, this.endPoint), t.lineTo(s, this.startPoint - 3), t.stroke(), 
                 t.closePath()), t.lineWidth = this.lineWidth, t.strokeStyle = this.lineColor, t.beginPath(), 
                 t.moveTo(s, this.endPoint), t.lineTo(s, this.endPoint + 5), t.stroke(), t.closePath(), 
-                t.save(), t.translate(n, o ? this.endPoint + 12 : this.endPoint + 8), t.rotate(-1 * y(this.xLabelRotation)), 
+                t.save(), t.translate(n, o ? this.endPoint + 12 : this.endPoint + 8), t.rotate(-1 * b(this.xLabelRotation)), 
                 t.font = this.font, t.textAlign = o ? "right" : "center", t.textBaseline = o ? "middle" : "top", 
                 t.fillText(e, 0, 0), t.restore();
             }, this));
@@ -871,16 +695,16 @@ function VerificarHorario(t, e) {
             return 2 * Math.PI / this.valuesCount;
         },
         setScaleSize: function() {
-            var t, e, i, n, s, o, a, r, l, u, h, c, d = g([ this.height / 2 - this.pointLabelFontSize - 5, this.width / 2 ]), p = this.width, m = 0;
+            var t, e, i, n, s, o, a, r, l, h, u, c, d = g([ this.height / 2 - this.pointLabelFontSize - 5, this.width / 2 ]), p = this.width, m = 0;
             for (this.ctx.font = I(this.pointLabelFontSize, this.pointLabelFontStyle, this.pointLabelFontFamily), 
             e = 0; e < this.valuesCount; e++) t = this.getPointPosition(e, d), i = this.ctx.measureText(x(this.templateString, {
                 value: this.labels[e]
             })).width + 5, 0 === e || e === this.valuesCount / 2 ? (n = i / 2, t.x + n > p && (p = t.x + n, 
             s = e), t.x - n < m && (m = t.x - n, a = e)) : e < this.valuesCount / 2 ? t.x + i > p && (p = t.x + i, 
             s = e) : e > this.valuesCount / 2 && t.x - i < m && (m = t.x - i, a = e);
-            l = m, u = Math.ceil(p - this.width), o = this.getIndexAngle(s), r = this.getIndexAngle(a), 
-            h = u / Math.sin(o + Math.PI / 2), c = l / Math.sin(r + Math.PI / 2), h = f(h) ? h : 0, 
-            c = f(c) ? c : 0, this.drawingArea = d - (c + h) / 2, this.setCenterPoint(c, h);
+            l = m, h = Math.ceil(p - this.width), o = this.getIndexAngle(s), r = this.getIndexAngle(a), 
+            u = h / Math.sin(o + Math.PI / 2), c = l / Math.sin(r + Math.PI / 2), u = f(u) ? u : 0, 
+            c = f(c) ? c : 0, this.drawingArea = d - (c + u) / 2, this.setCenterPoint(c, u);
         },
         setCenterPoint: function(t, e) {
             var i = this.width - e - this.drawingArea, n = t + this.drawingArea;
@@ -930,9 +754,9 @@ function VerificarHorario(t, e) {
                         var n = this.getPointPosition(e, this.calculateCenterOffset(this.max) + 5);
                         t.font = I(this.pointLabelFontSize, this.pointLabelFontStyle, this.pointLabelFontFamily), 
                         t.fillStyle = this.pointLabelFontColor;
-                        var o = this.labels.length, a = this.labels.length / 2, r = a / 2, l = r > e || e > o - r, u = e === r || e === o - r;
+                        var o = this.labels.length, a = this.labels.length / 2, r = a / 2, l = r > e || e > o - r, h = e === r || e === o - r;
                         t.textAlign = 0 === e ? "center" : e === a ? "center" : a > e ? "left" : "right", 
-                        t.textBaseline = u ? "middle" : l ? "bottom" : "top", t.fillText(this.labels[e], n.x, n.y);
+                        t.textBaseline = h ? "middle" : l ? "bottom" : "top", t.fillText(this.labels[e], n.x, n.y);
                     }
                 }
             }
@@ -952,7 +776,7 @@ function VerificarHorario(t, e) {
     i.noConflict = function() {
         return t.Chart = e, i;
     };
-}).call(this), function() {
+}.call(this), function() {
     "use strict";
     var t = this.Chart, e = t.helpers, i = {
         scaleBeginAtZero: !0,
@@ -1766,7 +1590,7 @@ function VerificarHorario(t, e) {
     function l(t) {
         throw t;
     }
-    function u(t, e, i) {
+    function h(t, e, i) {
         var n;
         try {
             t && pt.isFunction(n = t.promise) ? n.call(t).done(e).fail(i) : t && pt.isFunction(n = t.then) ? n.call(t, e, i) : e.call(void 0, t);
@@ -1774,8 +1598,8 @@ function VerificarHorario(t, e) {
             i.call(void 0, t);
         }
     }
-    function h() {
-        et.removeEventListener("DOMContentLoaded", h), t.removeEventListener("load", h), 
+    function u() {
+        et.removeEventListener("DOMContentLoaded", u), t.removeEventListener("load", u), 
         pt.ready();
     }
     function c() {
@@ -1800,20 +1624,20 @@ function VerificarHorario(t, e) {
             return n.cur();
         } : function() {
             return pt.css(t, e, "");
-        }, l = r(), u = i && i[3] || (pt.cssNumber[e] ? "" : "px"), h = (pt.cssNumber[e] || "px" !== u && +l) && zt.exec(pt.css(t, e));
-        if (h && h[3] !== u) {
-            u = u || h[3], i = i || [], h = +l || 1;
+        }, l = r(), h = i && i[3] || (pt.cssNumber[e] ? "" : "px"), u = (pt.cssNumber[e] || "px" !== h && +l) && jt.exec(pt.css(t, e));
+        if (u && u[3] !== h) {
+            h = h || u[3], i = i || [], u = +l || 1;
             do {
-                h /= o = o || ".5", pt.style(t, e, h + u);
+                u /= o = o || ".5", pt.style(t, e, u + h);
             } while (o !== (o = r() / l) && 1 !== o && --a);
         }
-        return i && (h = +h || +l || 0, s = i[1] ? h + (i[1] + 1) * i[2] : +i[2], n && (n.unit = u, 
-        n.start = h, n.end = s)), s;
+        return i && (u = +u || +l || 0, s = i[1] ? u + (i[1] + 1) * i[2] : +i[2], n && (n.unit = h, 
+        n.start = u, n.end = s)), s;
     }
     function m(t) {
-        var e, i = t.ownerDocument, n = t.nodeName, s = Bt[n];
+        var e, i = t.ownerDocument, n = t.nodeName, s = $t[n];
         return s || (e = i.body.appendChild(i.createElement(n)), s = pt.css(e, "display"), 
-        e.parentNode.removeChild(e), "none" === s && (s = "block"), Bt[n] = s, s);
+        e.parentNode.removeChild(e), "none" === s && (s = "block"), $t[n] = s, s);
     }
     function g(t, e) {
         for (var i, n, s = [], o = 0, a = t.length; o < a; o++) (n = t[o]).style && (i = n.style.display, 
@@ -1828,17 +1652,17 @@ function VerificarHorario(t, e) {
         return i = void 0 !== t.getElementsByTagName ? t.getElementsByTagName(e || "*") : void 0 !== t.querySelectorAll ? t.querySelectorAll(e || "*") : [], 
         void 0 === e || e && pt.nodeName(t, e) ? pt.merge([ t ], i) : i;
     }
-    function y(t, e) {
+    function b(t, e) {
         for (var i = 0, n = t.length; i < n; i++) Mt.set(t[i], "globalEval", !e || Mt.get(e[i], "globalEval"));
     }
-    function b(t, e, i, n, s) {
-        for (var o, a, r, l, u, h, c = e.createDocumentFragment(), d = [], p = 0, f = t.length; p < f; p++) if ((o = t[p]) || 0 === o) if ("object" === pt.type(o)) pt.merge(d, o.nodeType ? [ o ] : o); else if (Ut.test(o)) {
+    function y(t, e, i, n, s) {
+        for (var o, a, r, l, h, u, c = e.createDocumentFragment(), d = [], p = 0, f = t.length; p < f; p++) if ((o = t[p]) || 0 === o) if ("object" === pt.type(o)) pt.merge(d, o.nodeType ? [ o ] : o); else if (Vt.test(o)) {
             for (a = a || c.appendChild(e.createElement("div")), r = (qt.exec(o) || [ "", "" ])[1].toLowerCase(), 
-            l = Vt[r] || Vt._default, a.innerHTML = l[1] + pt.htmlPrefilter(o) + l[2], h = l[0]; h--; ) a = a.lastChild;
+            l = Xt[r] || Xt._default, a.innerHTML = l[1] + pt.htmlPrefilter(o) + l[2], u = l[0]; u--; ) a = a.lastChild;
             pt.merge(d, a.childNodes), (a = c.firstChild).textContent = "";
         } else d.push(e.createTextNode(o));
-        for (c.textContent = "", p = 0; o = d[p++]; ) if (n && pt.inArray(o, n) > -1) s && s.push(o); else if (u = pt.contains(o.ownerDocument, o), 
-        a = v(c.appendChild(o), "script"), u && y(a), i) for (h = 0; o = a[h++]; ) Yt.test(o.type || "") && i.push(o);
+        for (c.textContent = "", p = 0; o = d[p++]; ) if (n && pt.inArray(o, n) > -1) s && s.push(o); else if (h = pt.contains(o.ownerDocument, o), 
+        a = v(c.appendChild(o), "script"), h && b(a), i) for (u = 0; o = a[u++]; ) Yt.test(o.type || "") && i.push(o);
         return c;
     }
     function _() {
@@ -1878,38 +1702,38 @@ function VerificarHorario(t, e) {
         return e ? t.type = e[1] : t.removeAttribute("type"), t;
     }
     function S(t, e) {
-        var i, n, s, o, a, r, l, u;
+        var i, n, s, o, a, r, l, h;
         if (1 === e.nodeType) {
-            if (Mt.hasData(t) && (o = Mt.access(t), a = Mt.set(e, o), u = o.events)) {
+            if (Mt.hasData(t) && (o = Mt.access(t), a = Mt.set(e, o), h = o.events)) {
                 delete a.handle, a.events = {};
-                for (s in u) for (i = 0, n = u[s].length; i < n; i++) pt.event.add(e, s, u[s][i]);
+                for (s in h) for (i = 0, n = h[s].length; i < n; i++) pt.event.add(e, s, h[s][i]);
             }
             Nt.hasData(t) && (r = Nt.access(t), l = pt.extend({}, r), Nt.set(e, l));
         }
     }
     function E(t, e) {
         var i = e.nodeName.toLowerCase();
-        "input" === i && $t.test(t.type) ? e.checked = t.checked : "input" !== i && "textarea" !== i || (e.defaultValue = t.defaultValue);
+        "input" === i && Rt.test(t.type) ? e.checked = t.checked : "input" !== i && "textarea" !== i || (e.defaultValue = t.defaultValue);
     }
     function P(t, e, n, s) {
         e = st.apply([], e);
-        var o, a, r, l, u, h, c = 0, d = t.length, p = d - 1, f = e[0], m = pt.isFunction(f);
+        var o, a, r, l, h, u, c = 0, d = t.length, p = d - 1, f = e[0], m = pt.isFunction(f);
         if (m || d > 1 && "string" == typeof f && !dt.checkClone && te.test(f)) return t.each(function(i) {
             var o = t.eq(i);
             m && (e[0] = f.call(this, i, o.html())), P(o, e, n, s);
         });
-        if (d && (o = b(e, t[0].ownerDocument, !1, t, s), a = o.firstChild, 1 === o.childNodes.length && (o = a), 
+        if (d && (o = y(e, t[0].ownerDocument, !1, t, s), a = o.firstChild, 1 === o.childNodes.length && (o = a), 
         a || s)) {
-            for (l = (r = pt.map(v(o, "script"), D)).length; c < d; c++) u = o, c !== p && (u = pt.clone(u, !0, !0), 
-            l && pt.merge(r, v(u, "script"))), n.call(t[c], u, c);
-            if (l) for (h = r[r.length - 1].ownerDocument, pt.map(r, T), c = 0; c < l; c++) u = r[c], 
-            Yt.test(u.type || "") && !Mt.access(u, "globalEval") && pt.contains(h, u) && (u.src ? pt._evalUrl && pt._evalUrl(u.src) : i(u.textContent.replace(ie, ""), h));
+            for (l = (r = pt.map(v(o, "script"), D)).length; c < d; c++) h = o, c !== p && (h = pt.clone(h, !0, !0), 
+            l && pt.merge(r, v(h, "script"))), n.call(t[c], h, c);
+            if (l) for (u = r[r.length - 1].ownerDocument, pt.map(r, T), c = 0; c < l; c++) h = r[c], 
+            Yt.test(h.type || "") && !Mt.access(h, "globalEval") && pt.contains(u, h) && (h.src ? pt._evalUrl && pt._evalUrl(h.src) : i(h.textContent.replace(ie, ""), u));
         }
         return t;
     }
     function A(t, e, i) {
         for (var n, s = e ? pt.filter(e, t) : t, o = 0; null != (n = s[o]); o++) i || 1 !== n.nodeType || pt.cleanData(v(n)), 
-        n.parentNode && (i && pt.contains(n.ownerDocument, n) && y(v(n, "script")), n.parentNode.removeChild(n));
+        n.parentNode && (i && pt.contains(n.ownerDocument, n) && b(v(n, "script")), n.parentNode.removeChild(n));
         return t;
     }
     function I(t, e, i) {
@@ -1928,18 +1752,18 @@ function VerificarHorario(t, e) {
         };
     }
     function M(t) {
-        if (t in he) return t;
-        for (var e = t[0].toUpperCase() + t.slice(1), i = ue.length; i--; ) if ((t = ue[i] + e) in he) return t;
+        if (t in ue) return t;
+        for (var e = t[0].toUpperCase() + t.slice(1), i = he.length; i--; ) if ((t = he[i] + e) in ue) return t;
     }
     function N(t, e, i) {
-        var n = zt.exec(e);
+        var n = jt.exec(e);
         return n ? Math.max(0, n[2] - (i || 0)) + (n[3] || "px") : e;
     }
     function L(t, e, i, n, s) {
         var o, a = 0;
-        for (o = i === (n ? "border" : "content") ? 4 : "width" === e ? 1 : 0; o < 4; o += 2) "margin" === i && (a += pt.css(t, i + Rt[o], !0, s)), 
-        n ? ("content" === i && (a -= pt.css(t, "padding" + Rt[o], !0, s)), "margin" !== i && (a -= pt.css(t, "border" + Rt[o] + "Width", !0, s))) : (a += pt.css(t, "padding" + Rt[o], !0, s), 
-        "padding" !== i && (a += pt.css(t, "border" + Rt[o] + "Width", !0, s)));
+        for (o = i === (n ? "border" : "content") ? 4 : "width" === e ? 1 : 0; o < 4; o += 2) "margin" === i && (a += pt.css(t, i + zt[o], !0, s)), 
+        n ? ("content" === i && (a -= pt.css(t, "padding" + zt[o], !0, s)), "margin" !== i && (a -= pt.css(t, "border" + zt[o] + "Width", !0, s))) : (a += pt.css(t, "padding" + zt[o], !0, s), 
+        "padding" !== i && (a += pt.css(t, "border" + zt[o] + "Width", !0, s)));
         return a;
     }
     function H(t, e, i) {
@@ -1953,10 +1777,10 @@ function VerificarHorario(t, e) {
     function O(t, e, i, n, s) {
         return new O.prototype.init(t, e, i, n, s);
     }
-    function z() {
-        de && (t.requestAnimationFrame(z), pt.fx.tick());
+    function j() {
+        de && (t.requestAnimationFrame(j), pt.fx.tick());
     }
-    function R() {
+    function z() {
         return t.setTimeout(function() {
             ce = void 0;
         }), ce = pt.now();
@@ -1965,14 +1789,14 @@ function VerificarHorario(t, e) {
         var i, n = 0, s = {
             height: t
         };
-        for (e = e ? 1 : 0; n < 4; n += 2 - e) s["margin" + (i = Rt[n])] = s["padding" + i] = t;
+        for (e = e ? 1 : 0; n < 4; n += 2 - e) s["margin" + (i = zt[n])] = s["padding" + i] = t;
         return e && (s.opacity = s.width = t), s;
     }
-    function j(t, e, i) {
+    function B(t, e, i) {
         for (var n, s = (q.tweeners[e] || []).concat(q.tweeners["*"]), o = 0, a = s.length; o < a; o++) if (n = s[o].call(i, e, t)) return n;
     }
-    function B(t, e, i) {
-        var n, s, o, a, r, l, u, h, c = "width" in e || "height" in e, d = this, p = {}, f = t.style, m = t.nodeType && Wt(t), v = Mt.get(t, "fxshow");
+    function $(t, e, i) {
+        var n, s, o, a, r, l, h, u, c = "width" in e || "height" in e, d = this, p = {}, f = t.style, m = t.nodeType && Wt(t), v = Mt.get(t, "fxshow");
         i.queue || (null == (a = pt._queueHooks(t, "fx")).unqueued && (a.unqueued = 0, r = a.empty.fire, 
         a.empty.fire = function() {
             a.unqueued || r();
@@ -1990,23 +1814,23 @@ function VerificarHorario(t, e) {
         }
         if ((l = !pt.isEmptyObject(e)) || !pt.isEmptyObject(p)) {
             c && 1 === t.nodeType && (i.overflow = [ f.overflow, f.overflowX, f.overflowY ], 
-            null == (u = v && v.display) && (u = Mt.get(t, "display")), "none" === (h = pt.css(t, "display")) && (u ? h = u : (g([ t ], !0), 
-            u = t.style.display || u, h = pt.css(t, "display"), g([ t ]))), ("inline" === h || "inline-block" === h && null != u) && "none" === pt.css(t, "float") && (l || (d.done(function() {
-                f.display = u;
-            }), null == u && (h = f.display, u = "none" === h ? "" : h)), f.display = "inline-block")), 
+            null == (h = v && v.display) && (h = Mt.get(t, "display")), "none" === (u = pt.css(t, "display")) && (h ? u = h : (g([ t ], !0), 
+            h = t.style.display || h, u = pt.css(t, "display"), g([ t ]))), ("inline" === u || "inline-block" === u && null != h) && "none" === pt.css(t, "float") && (l || (d.done(function() {
+                f.display = h;
+            }), null == h && (u = f.display, h = "none" === u ? "" : u)), f.display = "inline-block")), 
             i.overflow && (f.overflow = "hidden", d.always(function() {
                 f.overflow = i.overflow[0], f.overflowX = i.overflow[1], f.overflowY = i.overflow[2];
             })), l = !1;
             for (n in p) l || (v ? "hidden" in v && (m = v.hidden) : v = Mt.access(t, "fxshow", {
-                display: u
+                display: h
             }), o && (v.hidden = !m), m && g([ t ], !0), d.done(function() {
                 m || g([ t ]), Mt.remove(t, "fxshow");
                 for (n in p) pt.style(t, n, p[n]);
-            })), l = j(m ? v[n] : 0, n, d), n in v || (v[n] = l.start, m && (l.end = l.start, 
+            })), l = B(m ? v[n] : 0, n, d), n in v || (v[n] = l.start, m && (l.end = l.start, 
             l.start = 0));
         }
     }
-    function $(t, e) {
+    function R(t, e) {
         var i, n, s, o, a;
         for (i in t) if (n = pt.camelCase(i), s = e[n], o = t[i], pt.isArray(o) && (s = o[1], 
         o = t[i] = o[0]), i !== n && (t[n] = o, delete t[i]), (a = pt.cssHooks[n]) && "expand" in a) {
@@ -2019,10 +1843,10 @@ function VerificarHorario(t, e) {
             delete l.elem;
         }), l = function() {
             if (s) return !1;
-            for (var e = ce || R(), i = Math.max(0, u.startTime + u.duration - e), n = 1 - (i / u.duration || 0), o = 0, a = u.tweens.length; o < a; o++) u.tweens[o].run(n);
-            return r.notifyWith(t, [ u, n, i ]), n < 1 && a ? i : (r.resolveWith(t, [ u ]), 
+            for (var e = ce || z(), i = Math.max(0, h.startTime + h.duration - e), n = 1 - (i / h.duration || 0), o = 0, a = h.tweens.length; o < a; o++) h.tweens[o].run(n);
+            return r.notifyWith(t, [ h, n, i ]), n < 1 && a ? i : (r.resolveWith(t, [ h ]), 
             !1);
-        }, u = r.promise({
+        }, h = r.promise({
             elem: t,
             props: pt.extend({}, e),
             opts: pt.extend(!0, {
@@ -2031,43 +1855,43 @@ function VerificarHorario(t, e) {
             }, i),
             originalProperties: e,
             originalOptions: i,
-            startTime: ce || R(),
+            startTime: ce || z(),
             duration: i.duration,
             tweens: [],
             createTween: function(e, i) {
-                var n = pt.Tween(t, u.opts, e, i, u.opts.specialEasing[e] || u.opts.easing);
-                return u.tweens.push(n), n;
+                var n = pt.Tween(t, h.opts, e, i, h.opts.specialEasing[e] || h.opts.easing);
+                return h.tweens.push(n), n;
             },
             stop: function(e) {
-                var i = 0, n = e ? u.tweens.length : 0;
+                var i = 0, n = e ? h.tweens.length : 0;
                 if (s) return this;
-                for (s = !0; i < n; i++) u.tweens[i].run(1);
-                return e ? (r.notifyWith(t, [ u, 1, 0 ]), r.resolveWith(t, [ u, e ])) : r.rejectWith(t, [ u, e ]), 
+                for (s = !0; i < n; i++) h.tweens[i].run(1);
+                return e ? (r.notifyWith(t, [ h, 1, 0 ]), r.resolveWith(t, [ h, e ])) : r.rejectWith(t, [ h, e ]), 
                 this;
             }
-        }), h = u.props;
-        for ($(h, u.opts.specialEasing); o < a; o++) if (n = q.prefilters[o].call(u, t, h, u.opts)) return pt.isFunction(n.stop) && (pt._queueHooks(u.elem, u.opts.queue).stop = pt.proxy(n.stop, n)), 
+        }), u = h.props;
+        for (R(u, h.opts.specialEasing); o < a; o++) if (n = q.prefilters[o].call(h, t, u, h.opts)) return pt.isFunction(n.stop) && (pt._queueHooks(h.elem, h.opts.queue).stop = pt.proxy(n.stop, n)), 
         n;
-        return pt.map(h, j, u), pt.isFunction(u.opts.start) && u.opts.start.call(t, u), 
+        return pt.map(u, B, h), pt.isFunction(h.opts.start) && h.opts.start.call(t, h), 
         pt.fx.timer(pt.extend(l, {
             elem: t,
-            anim: u,
-            queue: u.opts.queue
-        })), u.progress(u.opts.progress).done(u.opts.done, u.opts.complete).fail(u.opts.fail).always(u.opts.always);
+            anim: h,
+            queue: h.opts.queue
+        })), h.progress(h.opts.progress).done(h.opts.done, h.opts.complete).fail(h.opts.fail).always(h.opts.always);
     }
     function Y(t) {
         return (t.match(Et) || []).join(" ");
     }
-    function V(t) {
+    function X(t) {
         return t.getAttribute && t.getAttribute("class") || "";
     }
-    function U(t, e, i, n) {
+    function V(t, e, i, n) {
         var s;
         if (pt.isArray(e)) pt.each(e, function(e, s) {
-            i || ke.test(t) ? n(t, s) : U(t + "[" + ("object" == typeof s && null != s ? e : "") + "]", s, i, n);
-        }); else if (i || "object" !== pt.type(e)) n(t, e); else for (s in e) U(t + "[" + s + "]", e[s], i, n);
+            i || ke.test(t) ? n(t, s) : V(t + "[" + ("object" == typeof s && null != s ? e : "") + "]", s, i, n);
+        }); else if (i || "object" !== pt.type(e)) n(t, e); else for (s in e) V(t + "[" + s + "]", e[s], i, n);
     }
-    function X(t) {
+    function U(t) {
         return function(e, i) {
             "string" != typeof e && (i = e, e = "*");
             var n, s = 0, o = e.toLowerCase().match(Et) || [];
@@ -2079,9 +1903,9 @@ function VerificarHorario(t, e) {
         function s(r) {
             var l;
             return o[r] = !0, pt.each(t[r] || [], function(t, r) {
-                var u = r(e, i, n);
-                return "string" != typeof u || a || o[u] ? a ? !(l = u) : void 0 : (e.dataTypes.unshift(u), 
-                s(u), !1);
+                var h = r(e, i, n);
+                return "string" != typeof h || a || o[h] ? a ? !(l = h) : void 0 : (e.dataTypes.unshift(h), 
+                s(h), !1);
             }), l;
         }
         var o = {}, a = t === He;
@@ -2111,13 +1935,13 @@ function VerificarHorario(t, e) {
         }
         if (o) return o !== l[0] && l.unshift(o), i[o];
     }
-    function Z(t, e, i, n) {
-        var s, o, a, r, l, u = {}, h = t.dataTypes.slice();
-        if (h[1]) for (a in t.converters) u[a.toLowerCase()] = t.converters[a];
-        for (o = h.shift(); o; ) if (t.responseFields[o] && (i[t.responseFields[o]] = e), 
-        !l && n && t.dataFilter && (e = t.dataFilter(e, t.dataType)), l = o, o = h.shift()) if ("*" === o) o = l; else if ("*" !== l && l !== o) {
-            if (!(a = u[l + " " + o] || u["* " + o])) for (s in u) if ((r = s.split(" "))[1] === o && (a = u[l + " " + r[0]] || u["* " + r[0]])) {
-                !0 === a ? a = u[s] : !0 !== u[s] && (o = r[0], h.unshift(r[1]));
+    function J(t, e, i, n) {
+        var s, o, a, r, l, h = {}, u = t.dataTypes.slice();
+        if (u[1]) for (a in t.converters) h[a.toLowerCase()] = t.converters[a];
+        for (o = u.shift(); o; ) if (t.responseFields[o] && (i[t.responseFields[o]] = e), 
+        !l && n && t.dataFilter && (e = t.dataFilter(e, t.dataType)), l = o, o = u.shift()) if ("*" === o) o = l; else if ("*" !== l && l !== o) {
+            if (!(a = h[l + " " + o] || h["* " + o])) for (s in h) if ((r = s.split(" "))[1] === o && (a = h[l + " " + r[0]] || h["* " + r[0]])) {
+                !0 === a ? a = h[s] : !0 !== h[s] && (o = r[0], u.unshift(r[1]));
                 break;
             }
             if (!0 !== a) if (a && t.throws) e = a(e); else try {
@@ -2134,10 +1958,10 @@ function VerificarHorario(t, e) {
             data: e
         };
     }
-    function J(t) {
+    function Z(t) {
         return pt.isWindow(t) ? t : 9 === t.nodeType && t.defaultView;
     }
-    var tt = [], et = t.document, it = Object.getPrototypeOf, nt = tt.slice, st = tt.concat, ot = tt.push, at = tt.indexOf, rt = {}, lt = rt.toString, ut = rt.hasOwnProperty, ht = ut.toString, ct = ht.call(Object), dt = {}, pt = function(t, e) {
+    var tt = [], et = t.document, it = Object.getPrototypeOf, nt = tt.slice, st = tt.concat, ot = tt.push, at = tt.indexOf, rt = {}, lt = rt.toString, ht = rt.hasOwnProperty, ut = ht.toString, ct = ut.call(Object), dt = {}, pt = function(t, e) {
         return new pt.fn.init(t, e);
     }, ft = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, mt = /^-ms-/, gt = /-([a-z])/g, vt = function(t, e) {
         return e.toUpperCase();
@@ -2184,11 +2008,11 @@ function VerificarHorario(t, e) {
         sort: tt.sort,
         splice: tt.splice
     }, pt.extend = pt.fn.extend = function() {
-        var t, e, i, n, s, o, a = arguments[0] || {}, r = 1, l = arguments.length, u = !1;
-        for ("boolean" == typeof a && (u = a, a = arguments[r] || {}, r++), "object" == typeof a || pt.isFunction(a) || (a = {}), 
+        var t, e, i, n, s, o, a = arguments[0] || {}, r = 1, l = arguments.length, h = !1;
+        for ("boolean" == typeof a && (h = a, a = arguments[r] || {}, r++), "object" == typeof a || pt.isFunction(a) || (a = {}), 
         r === l && (a = this, r--); r < l; r++) if (null != (t = arguments[r])) for (e in t) i = a[e], 
-        a !== (n = t[e]) && (u && n && (pt.isPlainObject(n) || (s = pt.isArray(n))) ? (s ? (s = !1, 
-        o = i && pt.isArray(i) ? i : []) : o = i && pt.isPlainObject(i) ? i : {}, a[e] = pt.extend(u, o, n)) : void 0 !== n && (a[e] = n));
+        a !== (n = t[e]) && (h && n && (pt.isPlainObject(n) || (s = pt.isArray(n))) ? (s ? (s = !1, 
+        o = i && pt.isArray(i) ? i : []) : o = i && pt.isPlainObject(i) ? i : {}, a[e] = pt.extend(h, o, n)) : void 0 !== n && (a[e] = n));
         return a;
     }, pt.extend({
         expando: "jQuery" + ("3.1.1" + Math.random()).replace(/\D/g, ""),
@@ -2210,7 +2034,7 @@ function VerificarHorario(t, e) {
         },
         isPlainObject: function(t) {
             var e, i;
-            return !(!t || "[object Object]" !== lt.call(t)) && (!(e = it(t)) || "function" == typeof (i = ut.call(e, "constructor") && e.constructor) && ht.call(i) === ct);
+            return !(!t || "[object Object]" !== lt.call(t)) && (!(e = it(t)) || "function" == typeof (i = ht.call(e, "constructor") && e.constructor) && ut.call(i) === ct);
         },
         isEmptyObject: function(t) {
             var e;
@@ -2272,11 +2096,11 @@ function VerificarHorario(t, e) {
     pt.each("Boolean Number String Function Array Date RegExp Object Error Symbol".split(" "), function(t, e) {
         rt["[object " + e + "]"] = e.toLowerCase();
     });
-    var yt = function(t) {
+    var bt = function(t) {
         function e(t, e, i, n) {
-            var s, o, a, r, l, h, d, p = e && e.ownerDocument, f = e ? e.nodeType : 9;
+            var s, o, a, r, l, u, d, p = e && e.ownerDocument, f = e ? e.nodeType : 9;
             if (i = i || [], "string" != typeof t || !t || 1 !== f && 9 !== f && 11 !== f) return i;
-            if (!n && ((e ? e.ownerDocument || e : R) !== I && A(e), e = e || I, M)) {
+            if (!n && ((e ? e.ownerDocument || e : z) !== I && A(e), e = e || I, M)) {
                 if (11 !== f && (l = mt.exec(t))) if (s = l[1]) {
                     if (9 === f) {
                         if (!(a = e.getElementById(s))) return i;
@@ -2290,14 +2114,14 @@ function VerificarHorario(t, e) {
                 }
                 if (_.qsa && !q[t + " "] && (!N || !N.test(t))) {
                     if (1 !== f) p = e, d = t; else if ("object" !== e.nodeName.toLowerCase()) {
-                        for ((r = e.getAttribute("id")) ? r = r.replace(bt, _t) : e.setAttribute("id", r = z), 
-                        o = (h = k(t)).length; o--; ) h[o] = "#" + r + " " + c(h[o]);
-                        d = h.join(","), p = gt.test(t) && u(e.parentNode) || e;
+                        for ((r = e.getAttribute("id")) ? r = r.replace(yt, _t) : e.setAttribute("id", r = j), 
+                        o = (u = k(t)).length; o--; ) u[o] = "#" + r + " " + c(u[o]);
+                        d = u.join(","), p = gt.test(t) && h(e.parentNode) || e;
                     }
                     if (d) try {
                         return G.apply(i, p.querySelectorAll(d)), i;
                     } catch (t) {} finally {
-                        r === z && e.removeAttribute("id");
+                        r === j && e.removeAttribute("id");
                     }
                 }
             }
@@ -2311,7 +2135,7 @@ function VerificarHorario(t, e) {
             return t;
         }
         function n(t) {
-            return t[z] = !0, t;
+            return t[j] = !0, t;
         }
         function s(t) {
             var e = I.createElement("fieldset");
@@ -2344,27 +2168,27 @@ function VerificarHorario(t, e) {
                 });
             });
         }
-        function u(t) {
+        function h(t) {
             return t && void 0 !== t.getElementsByTagName && t;
         }
-        function h() {}
+        function u() {}
         function c(t) {
             for (var e = 0, i = t.length, n = ""; e < i; e++) n += t[e].value;
             return n;
         }
         function d(t, e, i) {
-            var n = e.dir, s = e.next, o = s || n, a = i && "parentNode" === o, r = j++;
+            var n = e.dir, s = e.next, o = s || n, a = i && "parentNode" === o, r = B++;
             return e.first ? function(e, i, s) {
                 for (;e = e[n]; ) if (1 === e.nodeType || a) return t(e, i, s);
                 return !1;
             } : function(e, i, l) {
-                var u, h, c, d = [ W, r ];
+                var h, u, c, d = [ W, r ];
                 if (l) {
                     for (;e = e[n]; ) if ((1 === e.nodeType || a) && t(e, i, l)) return !0;
-                } else for (;e = e[n]; ) if (1 === e.nodeType || a) if (c = e[z] || (e[z] = {}), 
-                h = c[e.uniqueID] || (c[e.uniqueID] = {}), s && s === e.nodeName.toLowerCase()) e = e[n] || e; else {
-                    if ((u = h[o]) && u[0] === W && u[1] === r) return d[2] = u[2];
-                    if (h[o] = d, d[2] = t(e, i, l)) return !0;
+                } else for (;e = e[n]; ) if (1 === e.nodeType || a) if (c = e[j] || (e[j] = {}), 
+                u = c[e.uniqueID] || (c[e.uniqueID] = {}), s && s === e.nodeName.toLowerCase()) e = e[n] || e; else {
+                    if ((h = u[o]) && h[0] === W && h[1] === r) return d[2] = h[2];
+                    if (u[o] = d, d[2] = t(e, i, l)) return !0;
                 }
                 return !1;
             };
@@ -2380,87 +2204,87 @@ function VerificarHorario(t, e) {
             return n;
         }
         function m(t, e, i, n, s) {
-            for (var o, a = [], r = 0, l = t.length, u = null != e; r < l; r++) (o = t[r]) && (i && !i(o, n, s) || (a.push(o), 
-            u && e.push(r)));
+            for (var o, a = [], r = 0, l = t.length, h = null != e; r < l; r++) (o = t[r]) && (i && !i(o, n, s) || (a.push(o), 
+            h && e.push(r)));
             return a;
         }
         function g(t, e, i, s, o, a) {
-            return s && !s[z] && (s = g(s)), o && !o[z] && (o = g(o, a)), n(function(n, a, r, l) {
-                var u, h, c, d = [], p = [], g = a.length, v = n || f(e || "*", r.nodeType ? [ r ] : r, []), y = !t || !n && e ? v : m(v, d, t, r, l), b = i ? o || (n ? t : g || s) ? [] : a : y;
-                if (i && i(y, b, r, l), s) for (u = m(b, p), s(u, [], r, l), h = u.length; h--; ) (c = u[h]) && (b[p[h]] = !(y[p[h]] = c));
+            return s && !s[j] && (s = g(s)), o && !o[j] && (o = g(o, a)), n(function(n, a, r, l) {
+                var h, u, c, d = [], p = [], g = a.length, v = n || f(e || "*", r.nodeType ? [ r ] : r, []), b = !t || !n && e ? v : m(v, d, t, r, l), y = i ? o || (n ? t : g || s) ? [] : a : b;
+                if (i && i(b, y, r, l), s) for (h = m(y, p), s(h, [], r, l), u = h.length; u--; ) (c = h[u]) && (y[p[u]] = !(b[p[u]] = c));
                 if (n) {
                     if (o || t) {
                         if (o) {
-                            for (u = [], h = b.length; h--; ) (c = b[h]) && u.push(y[h] = c);
-                            o(null, b = [], u, l);
+                            for (h = [], u = y.length; u--; ) (c = y[u]) && h.push(b[u] = c);
+                            o(null, y = [], h, l);
                         }
-                        for (h = b.length; h--; ) (c = b[h]) && (u = o ? Z(n, c) : d[h]) > -1 && (n[u] = !(a[u] = c));
+                        for (u = y.length; u--; ) (c = y[u]) && (h = o ? J(n, c) : d[u]) > -1 && (n[h] = !(a[h] = c));
                     }
-                } else b = m(b === a ? b.splice(g, b.length) : b), o ? o(null, a, b, l) : G.apply(a, b);
+                } else y = m(y === a ? y.splice(g, y.length) : y), o ? o(null, a, y, l) : G.apply(a, y);
             });
         }
         function v(t) {
             for (var e, i, n, s = t.length, o = x.relative[t[0].type], a = o || x.relative[" "], r = o ? 1 : 0, l = d(function(t) {
                 return t === e;
-            }, a, !0), u = d(function(t) {
-                return Z(e, t) > -1;
-            }, a, !0), h = [ function(t, i, n) {
-                var s = !o && (n || i !== S) || ((e = i).nodeType ? l(t, i, n) : u(t, i, n));
+            }, a, !0), h = d(function(t) {
+                return J(e, t) > -1;
+            }, a, !0), u = [ function(t, i, n) {
+                var s = !o && (n || i !== S) || ((e = i).nodeType ? l(t, i, n) : h(t, i, n));
                 return e = null, s;
-            } ]; r < s; r++) if (i = x.relative[t[r].type]) h = [ d(p(h), i) ]; else {
-                if ((i = x.filter[t[r].type].apply(null, t[r].matches))[z]) {
+            } ]; r < s; r++) if (i = x.relative[t[r].type]) u = [ d(p(u), i) ]; else {
+                if ((i = x.filter[t[r].type].apply(null, t[r].matches))[j]) {
                     for (n = ++r; n < s && !x.relative[t[n].type]; n++) ;
-                    return g(r > 1 && p(h), r > 1 && c(t.slice(0, r - 1).concat({
+                    return g(r > 1 && p(u), r > 1 && c(t.slice(0, r - 1).concat({
                         value: " " === t[r - 2].type ? "*" : ""
                     })).replace(ot, "$1"), i, r < n && v(t.slice(r, n)), n < s && v(t = t.slice(n)), n < s && c(t));
                 }
-                h.push(i);
+                u.push(i);
             }
-            return p(h);
+            return p(u);
         }
-        function y(t, i) {
-            var s = i.length > 0, o = t.length > 0, a = function(n, a, r, l, u) {
-                var h, c, d, p = 0, f = "0", g = n && [], v = [], y = S, b = n || o && x.find.TAG("*", u), _ = W += null == y ? 1 : Math.random() || .1, w = b.length;
-                for (u && (S = a === I || a || u); f !== w && null != (h = b[f]); f++) {
-                    if (o && h) {
-                        for (c = 0, a || h.ownerDocument === I || (A(h), r = !M); d = t[c++]; ) if (d(h, a || I, r)) {
-                            l.push(h);
+        function b(t, i) {
+            var s = i.length > 0, o = t.length > 0, a = function(n, a, r, l, h) {
+                var u, c, d, p = 0, f = "0", g = n && [], v = [], b = S, y = n || o && x.find.TAG("*", h), _ = W += null == b ? 1 : Math.random() || .1, w = y.length;
+                for (h && (S = a === I || a || h); f !== w && null != (u = y[f]); f++) {
+                    if (o && u) {
+                        for (c = 0, a || u.ownerDocument === I || (A(u), r = !M); d = t[c++]; ) if (d(u, a || I, r)) {
+                            l.push(u);
                             break;
                         }
-                        u && (W = _);
+                        h && (W = _);
                     }
-                    s && ((h = !d && h) && p--, n && g.push(h));
+                    s && ((u = !d && u) && p--, n && g.push(u));
                 }
                 if (p += f, s && f !== p) {
                     for (c = 0; d = i[c++]; ) d(g, v, a, r);
                     if (n) {
-                        if (p > 0) for (;f--; ) g[f] || v[f] || (v[f] = X.call(l));
+                        if (p > 0) for (;f--; ) g[f] || v[f] || (v[f] = U.call(l));
                         v = m(v);
                     }
-                    G.apply(l, v), u && !n && v.length > 0 && p + i.length > 1 && e.uniqueSort(l);
+                    G.apply(l, v), h && !n && v.length > 0 && p + i.length > 1 && e.uniqueSort(l);
                 }
-                return u && (W = _, S = y), g;
+                return h && (W = _, S = b), g;
             };
             return s ? n(a) : a;
         }
-        var b, _, x, w, C, k, D, T, S, E, P, A, I, F, M, N, L, H, O, z = "sizzle" + 1 * new Date(), R = t.document, W = 0, j = 0, B = i(), $ = i(), q = i(), Y = function(t, e) {
+        var y, _, x, w, C, k, D, T, S, E, P, A, I, F, M, N, L, H, O, j = "sizzle" + 1 * new Date(), z = t.document, W = 0, B = 0, $ = i(), R = i(), q = i(), Y = function(t, e) {
             return t === e && (P = !0), 0;
-        }, V = {}.hasOwnProperty, U = [], X = U.pop, K = U.push, G = U.push, Q = U.slice, Z = function(t, e) {
+        }, X = {}.hasOwnProperty, V = [], U = V.pop, K = V.push, G = V.push, Q = V.slice, J = function(t, e) {
             for (var i = 0, n = t.length; i < n; i++) if (t[i] === e) return i;
             return -1;
-        }, J = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped", tt = "[\\x20\\t\\r\\n\\f]", et = "(?:\\\\.|[\\w-]|[^\0-\\xa0])+", it = "\\[" + tt + "*(" + et + ")(?:" + tt + "*([*^$|!~]?=)" + tt + "*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + et + "))|)" + tt + "*\\]", nt = ":(" + et + ")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|" + it + ")*)|.*)\\)|)", st = new RegExp(tt + "+", "g"), ot = new RegExp("^" + tt + "+|((?:^|[^\\\\])(?:\\\\.)*)" + tt + "+$", "g"), at = new RegExp("^" + tt + "*," + tt + "*"), rt = new RegExp("^" + tt + "*([>+~]|" + tt + ")" + tt + "*"), lt = new RegExp("=" + tt + "*([^\\]'\"]*?)" + tt + "*\\]", "g"), ut = new RegExp(nt), ht = new RegExp("^" + et + "$"), ct = {
+        }, Z = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped", tt = "[\\x20\\t\\r\\n\\f]", et = "(?:\\\\.|[\\w-]|[^\0-\\xa0])+", it = "\\[" + tt + "*(" + et + ")(?:" + tt + "*([*^$|!~]?=)" + tt + "*(?:'((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\"|(" + et + "))|)" + tt + "*\\]", nt = ":(" + et + ")(?:\\((('((?:\\\\.|[^\\\\'])*)'|\"((?:\\\\.|[^\\\\\"])*)\")|((?:\\\\.|[^\\\\()[\\]]|" + it + ")*)|.*)\\)|)", st = new RegExp(tt + "+", "g"), ot = new RegExp("^" + tt + "+|((?:^|[^\\\\])(?:\\\\.)*)" + tt + "+$", "g"), at = new RegExp("^" + tt + "*," + tt + "*"), rt = new RegExp("^" + tt + "*([>+~]|" + tt + ")" + tt + "*"), lt = new RegExp("=" + tt + "*([^\\]'\"]*?)" + tt + "*\\]", "g"), ht = new RegExp(nt), ut = new RegExp("^" + et + "$"), ct = {
             ID: new RegExp("^#(" + et + ")"),
             CLASS: new RegExp("^\\.(" + et + ")"),
             TAG: new RegExp("^(" + et + "|[*])"),
             ATTR: new RegExp("^" + it),
             PSEUDO: new RegExp("^" + nt),
             CHILD: new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\(" + tt + "*(even|odd|(([+-]|)(\\d*)n|)" + tt + "*(?:([+-]|)" + tt + "*(\\d+)|))" + tt + "*\\)|)", "i"),
-            bool: new RegExp("^(?:" + J + ")$", "i"),
+            bool: new RegExp("^(?:" + Z + ")$", "i"),
             needsContext: new RegExp("^" + tt + "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + tt + "*((?:-\\d)?\\d*)" + tt + "*\\)|)(?=[^-]|$)", "i")
-        }, dt = /^(?:input|select|textarea|button)$/i, pt = /^h\d$/i, ft = /^[^{]+\{\s*\[native \w/, mt = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/, gt = /[+~]/, vt = new RegExp("\\\\([\\da-f]{1,6}" + tt + "?|(" + tt + ")|.)", "ig"), yt = function(t, e, i) {
+        }, dt = /^(?:input|select|textarea|button)$/i, pt = /^h\d$/i, ft = /^[^{]+\{\s*\[native \w/, mt = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/, gt = /[+~]/, vt = new RegExp("\\\\([\\da-f]{1,6}" + tt + "?|(" + tt + ")|.)", "ig"), bt = function(t, e, i) {
             var n = "0x" + e - 65536;
             return n !== n || i ? e : n < 0 ? String.fromCharCode(n + 65536) : String.fromCharCode(n >> 10 | 55296, 1023 & n | 56320);
-        }, bt = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\0-\x1f\x7f-\uFFFF\w-]/g, _t = function(t, e) {
+        }, yt = /([\0-\x1f\x7f]|^-?\d)|^-$|[^\0-\x1f\x7f-\uFFFF\w-]/g, _t = function(t, e) {
             return e ? "\0" === t ? "�" : t.slice(0, -1) + "\\" + t.charCodeAt(t.length - 1).toString(16) + " " : "\\" + t;
         }, xt = function() {
             A();
@@ -2471,10 +2295,10 @@ function VerificarHorario(t, e) {
             next: "legend"
         });
         try {
-            G.apply(U = Q.call(R.childNodes), R.childNodes), U[R.childNodes.length].nodeType;
+            G.apply(V = Q.call(z.childNodes), z.childNodes), V[z.childNodes.length].nodeType;
         } catch (t) {
             G = {
-                apply: U.length ? function(t, e) {
+                apply: V.length ? function(t, e) {
                     K.apply(t, Q.call(e));
                 } : function(t, e) {
                     for (var i = t.length, n = 0; t[i++] = e[n++]; ) ;
@@ -2486,17 +2310,17 @@ function VerificarHorario(t, e) {
             var e = t && (t.ownerDocument || t).documentElement;
             return !!e && "HTML" !== e.nodeName;
         }, A = e.setDocument = function(t) {
-            var e, i, n = t ? t.ownerDocument || t : R;
+            var e, i, n = t ? t.ownerDocument || t : z;
             return n !== I && 9 === n.nodeType && n.documentElement ? (I = n, F = I.documentElement, 
-            M = !C(I), R !== I && (i = I.defaultView) && i.top !== i && (i.addEventListener ? i.addEventListener("unload", xt, !1) : i.attachEvent && i.attachEvent("onunload", xt)), 
+            M = !C(I), z !== I && (i = I.defaultView) && i.top !== i && (i.addEventListener ? i.addEventListener("unload", xt, !1) : i.attachEvent && i.attachEvent("onunload", xt)), 
             _.attributes = s(function(t) {
                 return t.className = "i", !t.getAttribute("className");
             }), _.getElementsByTagName = s(function(t) {
                 return t.appendChild(I.createComment("")), !t.getElementsByTagName("*").length;
             }), _.getElementsByClassName = ft.test(I.getElementsByClassName), _.getById = s(function(t) {
-                return F.appendChild(t).id = z, !I.getElementsByName || !I.getElementsByName(z).length;
+                return F.appendChild(t).id = j, !I.getElementsByName || !I.getElementsByName(j).length;
             }), _.getById ? (x.filter.ID = function(t) {
-                var e = t.replace(vt, yt);
+                var e = t.replace(vt, bt);
                 return function(t) {
                     return t.getAttribute("id") === e;
                 };
@@ -2506,7 +2330,7 @@ function VerificarHorario(t, e) {
                     return i ? [ i ] : [];
                 }
             }) : (x.filter.ID = function(t) {
-                var e = t.replace(vt, yt);
+                var e = t.replace(vt, bt);
                 return function(t) {
                     var i = void 0 !== t.getAttributeNode && t.getAttributeNode("id");
                     return i && i.value === e;
@@ -2532,11 +2356,11 @@ function VerificarHorario(t, e) {
             }, x.find.CLASS = _.getElementsByClassName && function(t, e) {
                 if (void 0 !== e.getElementsByClassName && M) return e.getElementsByClassName(t);
             }, L = [], N = [], (_.qsa = ft.test(I.querySelectorAll)) && (s(function(t) {
-                F.appendChild(t).innerHTML = "<a id='" + z + "'></a><select id='" + z + "-\r\\' msallowcapture=''><option selected=''></option></select>", 
+                F.appendChild(t).innerHTML = "<a id='" + j + "'></a><select id='" + j + "-\r\\' msallowcapture=''><option selected=''></option></select>", 
                 t.querySelectorAll("[msallowcapture^='']").length && N.push("[*^$]=" + tt + "*(?:''|\"\")"), 
-                t.querySelectorAll("[selected]").length || N.push("\\[" + tt + "*(?:value|" + J + ")"), 
-                t.querySelectorAll("[id~=" + z + "-]").length || N.push("~="), t.querySelectorAll(":checked").length || N.push(":checked"), 
-                t.querySelectorAll("a#" + z + "+*").length || N.push(".#.+[+~]");
+                t.querySelectorAll("[selected]").length || N.push("\\[" + tt + "*(?:value|" + Z + ")"), 
+                t.querySelectorAll("[id~=" + j + "-]").length || N.push("~="), t.querySelectorAll(":checked").length || N.push(":checked"), 
+                t.querySelectorAll("a#" + j + "+*").length || N.push(".#.+[+~]");
             }), s(function(t) {
                 t.innerHTML = "<a href='' disabled='disabled'></a><select disabled='disabled'><option/></select>";
                 var e = I.createElement("input");
@@ -2557,16 +2381,16 @@ function VerificarHorario(t, e) {
                 if (t === e) return P = !0, 0;
                 var i = !t.compareDocumentPosition - !e.compareDocumentPosition;
                 return i || (i = (t.ownerDocument || t) === (e.ownerDocument || e) ? t.compareDocumentPosition(e) : 1, 
-                1 & i || !_.sortDetached && e.compareDocumentPosition(t) === i ? t === I || t.ownerDocument === R && O(R, t) ? -1 : e === I || e.ownerDocument === R && O(R, e) ? 1 : E ? Z(E, t) - Z(E, e) : 0 : 4 & i ? -1 : 1);
+                1 & i || !_.sortDetached && e.compareDocumentPosition(t) === i ? t === I || t.ownerDocument === z && O(z, t) ? -1 : e === I || e.ownerDocument === z && O(z, e) ? 1 : E ? J(E, t) - J(E, e) : 0 : 4 & i ? -1 : 1);
             } : function(t, e) {
                 if (t === e) return P = !0, 0;
                 var i, n = 0, s = t.parentNode, o = e.parentNode, r = [ t ], l = [ e ];
-                if (!s || !o) return t === I ? -1 : e === I ? 1 : s ? -1 : o ? 1 : E ? Z(E, t) - Z(E, e) : 0;
+                if (!s || !o) return t === I ? -1 : e === I ? 1 : s ? -1 : o ? 1 : E ? J(E, t) - J(E, e) : 0;
                 if (s === o) return a(t, e);
                 for (i = t; i = i.parentNode; ) r.unshift(i);
                 for (i = e; i = i.parentNode; ) l.unshift(i);
                 for (;r[n] === l[n]; ) n++;
-                return n ? a(r[n], l[n]) : r[n] === R ? -1 : l[n] === R ? 1 : 0;
+                return n ? a(r[n], l[n]) : r[n] === z ? -1 : l[n] === z ? 1 : 0;
             }, I) : I;
         }, e.matches = function(t, i) {
             return e(t, null, null, i);
@@ -2580,10 +2404,10 @@ function VerificarHorario(t, e) {
             return (t.ownerDocument || t) !== I && A(t), O(t, e);
         }, e.attr = function(t, e) {
             (t.ownerDocument || t) !== I && A(t);
-            var i = x.attrHandle[e.toLowerCase()], n = i && V.call(x.attrHandle, e.toLowerCase()) ? i(t, e, !M) : void 0;
+            var i = x.attrHandle[e.toLowerCase()], n = i && X.call(x.attrHandle, e.toLowerCase()) ? i(t, e, !M) : void 0;
             return void 0 !== n ? n : _.attributes || !M ? t.getAttribute(e) : (n = t.getAttributeNode(e)) && n.specified ? n.value : null;
         }, e.escape = function(t) {
-            return (t + "").replace(bt, _t);
+            return (t + "").replace(yt, _t);
         }, e.error = function(t) {
             throw new Error("Syntax error, unrecognized expression: " + t);
         }, e.uniqueSort = function(t) {
@@ -2626,7 +2450,7 @@ function VerificarHorario(t, e) {
             },
             preFilter: {
                 ATTR: function(t) {
-                    return t[1] = t[1].replace(vt, yt), t[3] = (t[3] || t[4] || t[5] || "").replace(vt, yt), 
+                    return t[1] = t[1].replace(vt, bt), t[3] = (t[3] || t[4] || t[5] || "").replace(vt, bt), 
                     "~=" === t[2] && (t[3] = " " + t[3] + " "), t.slice(0, 4);
                 },
                 CHILD: function(t) {
@@ -2636,13 +2460,13 @@ function VerificarHorario(t, e) {
                 },
                 PSEUDO: function(t) {
                     var e, i = !t[6] && t[2];
-                    return ct.CHILD.test(t[0]) ? null : (t[3] ? t[2] = t[4] || t[5] || "" : i && ut.test(i) && (e = k(i, !0)) && (e = i.indexOf(")", i.length - e) - i.length) && (t[0] = t[0].slice(0, e), 
+                    return ct.CHILD.test(t[0]) ? null : (t[3] ? t[2] = t[4] || t[5] || "" : i && ht.test(i) && (e = k(i, !0)) && (e = i.indexOf(")", i.length - e) - i.length) && (t[0] = t[0].slice(0, e), 
                     t[2] = i.slice(0, e)), t.slice(0, 3));
                 }
             },
             filter: {
                 TAG: function(t) {
-                    var e = t.replace(vt, yt).toLowerCase();
+                    var e = t.replace(vt, bt).toLowerCase();
                     return "*" === t ? function() {
                         return !0;
                     } : function(t) {
@@ -2650,8 +2474,8 @@ function VerificarHorario(t, e) {
                     };
                 },
                 CLASS: function(t) {
-                    var e = B[t + " "];
-                    return e || (e = new RegExp("(^|" + tt + ")" + t + "(" + tt + "|$)")) && B(t, function(t) {
+                    var e = $[t + " "];
+                    return e || (e = new RegExp("(^|" + tt + ")" + t + "(" + tt + "|$)")) && $(t, function(t) {
                         return e.test("string" == typeof t.className && t.className || void 0 !== t.getAttribute && t.getAttribute("class") || "");
                     });
                 },
@@ -2666,7 +2490,7 @@ function VerificarHorario(t, e) {
                     return 1 === n && 0 === s ? function(t) {
                         return !!t.parentNode;
                     } : function(e, i, l) {
-                        var u, h, c, d, p, f, m = o !== a ? "nextSibling" : "previousSibling", g = e.parentNode, v = r && e.nodeName.toLowerCase(), y = !l && !r, b = !1;
+                        var h, u, c, d, p, f, m = o !== a ? "nextSibling" : "previousSibling", g = e.parentNode, v = r && e.nodeName.toLowerCase(), b = !l && !r, y = !1;
                         if (g) {
                             if (o) {
                                 for (;m; ) {
@@ -2675,23 +2499,23 @@ function VerificarHorario(t, e) {
                                 }
                                 return !0;
                             }
-                            if (f = [ a ? g.firstChild : g.lastChild ], a && y) {
-                                for (b = (p = (u = (h = (c = (d = g)[z] || (d[z] = {}))[d.uniqueID] || (c[d.uniqueID] = {}))[t] || [])[0] === W && u[1]) && u[2], 
-                                d = p && g.childNodes[p]; d = ++p && d && d[m] || (b = p = 0) || f.pop(); ) if (1 === d.nodeType && ++b && d === e) {
-                                    h[t] = [ W, p, b ];
+                            if (f = [ a ? g.firstChild : g.lastChild ], a && b) {
+                                for (y = (p = (h = (u = (c = (d = g)[j] || (d[j] = {}))[d.uniqueID] || (c[d.uniqueID] = {}))[t] || [])[0] === W && h[1]) && h[2], 
+                                d = p && g.childNodes[p]; d = ++p && d && d[m] || (y = p = 0) || f.pop(); ) if (1 === d.nodeType && ++y && d === e) {
+                                    u[t] = [ W, p, y ];
                                     break;
                                 }
-                            } else if (y && (b = p = (u = (h = (c = (d = e)[z] || (d[z] = {}))[d.uniqueID] || (c[d.uniqueID] = {}))[t] || [])[0] === W && u[1]), 
-                            !1 === b) for (;(d = ++p && d && d[m] || (b = p = 0) || f.pop()) && ((r ? d.nodeName.toLowerCase() !== v : 1 !== d.nodeType) || !++b || (y && ((h = (c = d[z] || (d[z] = {}))[d.uniqueID] || (c[d.uniqueID] = {}))[t] = [ W, b ]), 
+                            } else if (b && (y = p = (h = (u = (c = (d = e)[j] || (d[j] = {}))[d.uniqueID] || (c[d.uniqueID] = {}))[t] || [])[0] === W && h[1]), 
+                            !1 === y) for (;(d = ++p && d && d[m] || (y = p = 0) || f.pop()) && ((r ? d.nodeName.toLowerCase() !== v : 1 !== d.nodeType) || !++y || (b && ((u = (c = d[j] || (d[j] = {}))[d.uniqueID] || (c[d.uniqueID] = {}))[t] = [ W, y ]), 
                             d !== e)); ) ;
-                            return (b -= s) === n || b % n == 0 && b / n >= 0;
+                            return (y -= s) === n || y % n == 0 && y / n >= 0;
                         }
                     };
                 },
                 PSEUDO: function(t, i) {
                     var s, o = x.pseudos[t] || x.setFilters[t.toLowerCase()] || e.error("unsupported pseudo: " + t);
-                    return o[z] ? o(i) : o.length > 1 ? (s = [ t, t, "", i ], x.setFilters.hasOwnProperty(t.toLowerCase()) ? n(function(t, e) {
-                        for (var n, s = o(t, i), a = s.length; a--; ) t[n = Z(t, s[a])] = !(e[n] = s[a]);
+                    return o[j] ? o(i) : o.length > 1 ? (s = [ t, t, "", i ], x.setFilters.hasOwnProperty(t.toLowerCase()) ? n(function(t, e) {
+                        for (var n, s = o(t, i), a = s.length; a--; ) t[n = J(t, s[a])] = !(e[n] = s[a]);
                     }) : function(t) {
                         return o(t, 0, s);
                     }) : o;
@@ -2700,7 +2524,7 @@ function VerificarHorario(t, e) {
             pseudos: {
                 not: n(function(t) {
                     var e = [], i = [], s = D(t.replace(ot, "$1"));
-                    return s[z] ? n(function(t, e, i, n) {
+                    return s[j] ? n(function(t, e, i, n) {
                         for (var o, a = s(t, null, n, []), r = t.length; r--; ) (o = a[r]) && (t[r] = !(e[r] = o));
                     }) : function(t, n, o) {
                         return e[0] = t, s(e, null, o, i), e[0] = null, !i.pop();
@@ -2712,12 +2536,12 @@ function VerificarHorario(t, e) {
                     };
                 }),
                 contains: n(function(t) {
-                    return t = t.replace(vt, yt), function(e) {
+                    return t = t.replace(vt, bt), function(e) {
                         return (e.textContent || e.innerText || w(e)).indexOf(t) > -1;
                     };
                 }),
                 lang: n(function(t) {
-                    return ht.test(t || "") || e.error("unsupported lang: " + t), t = t.replace(vt, yt).toLowerCase(), 
+                    return ut.test(t || "") || e.error("unsupported lang: " + t), t = t.replace(vt, bt).toLowerCase(), 
                     function(e) {
                         var i;
                         do {
@@ -2793,36 +2617,36 @@ function VerificarHorario(t, e) {
                 })
             }
         }).pseudos.nth = x.pseudos.eq;
-        for (b in {
+        for (y in {
             radio: !0,
             checkbox: !0,
             file: !0,
             password: !0,
             image: !0
-        }) x.pseudos[b] = function(t) {
+        }) x.pseudos[y] = function(t) {
             return function(e) {
                 return "input" === e.nodeName.toLowerCase() && e.type === t;
             };
-        }(b);
-        for (b in {
+        }(y);
+        for (y in {
             submit: !0,
             reset: !0
-        }) x.pseudos[b] = function(t) {
+        }) x.pseudos[y] = function(t) {
             return function(e) {
                 var i = e.nodeName.toLowerCase();
                 return ("input" === i || "button" === i) && e.type === t;
             };
-        }(b);
-        return h.prototype = x.filters = x.pseudos, x.setFilters = new h(), k = e.tokenize = function(t, i) {
-            var n, s, o, a, r, l, u, h = $[t + " "];
-            if (h) return i ? 0 : h.slice(0);
-            for (r = t, l = [], u = x.preFilter; r; ) {
+        }(y);
+        return u.prototype = x.filters = x.pseudos, x.setFilters = new u(), k = e.tokenize = function(t, i) {
+            var n, s, o, a, r, l, h, u = R[t + " "];
+            if (u) return i ? 0 : u.slice(0);
+            for (r = t, l = [], h = x.preFilter; r; ) {
                 n && !(s = at.exec(r)) || (s && (r = r.slice(s[0].length) || r), l.push(o = [])), 
                 n = !1, (s = rt.exec(r)) && (n = s.shift(), o.push({
                     value: n,
                     type: s[0].replace(ot, " ")
                 }), r = r.slice(n.length));
-                for (a in x.filter) !(s = ct[a].exec(r)) || u[a] && !(s = u[a](s)) || (n = s.shift(), 
+                for (a in x.filter) !(s = ct[a].exec(r)) || h[a] && !(s = h[a](s)) || (n = s.shift(), 
                 o.push({
                     value: n,
                     type: a,
@@ -2830,28 +2654,28 @@ function VerificarHorario(t, e) {
                 }), r = r.slice(n.length));
                 if (!n) break;
             }
-            return i ? r.length : r ? e.error(t) : $(t, l).slice(0);
+            return i ? r.length : r ? e.error(t) : R(t, l).slice(0);
         }, D = e.compile = function(t, e) {
             var i, n = [], s = [], o = q[t + " "];
             if (!o) {
-                for (e || (e = k(t)), i = e.length; i--; ) (o = v(e[i]))[z] ? n.push(o) : s.push(o);
-                (o = q(t, y(s, n))).selector = t;
+                for (e || (e = k(t)), i = e.length; i--; ) (o = v(e[i]))[j] ? n.push(o) : s.push(o);
+                (o = q(t, b(s, n))).selector = t;
             }
             return o;
         }, T = e.select = function(t, e, i, n) {
-            var s, o, a, r, l, h = "function" == typeof t && t, d = !n && k(t = h.selector || t);
+            var s, o, a, r, l, u = "function" == typeof t && t, d = !n && k(t = u.selector || t);
             if (i = i || [], 1 === d.length) {
                 if ((o = d[0] = d[0].slice(0)).length > 2 && "ID" === (a = o[0]).type && 9 === e.nodeType && M && x.relative[o[1].type]) {
-                    if (!(e = (x.find.ID(a.matches[0].replace(vt, yt), e) || [])[0])) return i;
-                    h && (e = e.parentNode), t = t.slice(o.shift().value.length);
+                    if (!(e = (x.find.ID(a.matches[0].replace(vt, bt), e) || [])[0])) return i;
+                    u && (e = e.parentNode), t = t.slice(o.shift().value.length);
                 }
-                for (s = ct.needsContext.test(t) ? 0 : o.length; s-- && (a = o[s], !x.relative[r = a.type]); ) if ((l = x.find[r]) && (n = l(a.matches[0].replace(vt, yt), gt.test(o[0].type) && u(e.parentNode) || e))) {
+                for (s = ct.needsContext.test(t) ? 0 : o.length; s-- && (a = o[s], !x.relative[r = a.type]); ) if ((l = x.find[r]) && (n = l(a.matches[0].replace(vt, bt), gt.test(o[0].type) && h(e.parentNode) || e))) {
                     if (o.splice(s, 1), !(t = n.length && c(o))) return G.apply(i, n), i;
                     break;
                 }
             }
-            return (h || D(t, d))(n, e, !M, i, !e || gt.test(t) && u(e.parentNode) || e), i;
-        }, _.sortStable = z.split("").sort(Y).join("") === z, _.detectDuplicates = !!P, 
+            return (u || D(t, d))(n, e, !M, i, !e || gt.test(t) && h(e.parentNode) || e), i;
+        }, _.sortStable = j.split("").sort(Y).join("") === j, _.detectDuplicates = !!P, 
         A(), _.sortDetached = s(function(t) {
             return 1 & t.compareDocumentPosition(I.createElement("fieldset"));
         }), s(function(t) {
@@ -2864,14 +2688,14 @@ function VerificarHorario(t, e) {
             if (!i && "input" === t.nodeName.toLowerCase()) return t.defaultValue;
         }), s(function(t) {
             return null == t.getAttribute("disabled");
-        }) || o(J, function(t, e, i) {
+        }) || o(Z, function(t, e, i) {
             var n;
             if (!i) return !0 === t[e] ? e.toLowerCase() : (n = t.getAttributeNode(e)) && n.specified ? n.value : null;
         }), e;
     }(t);
-    pt.find = yt, pt.expr = yt.selectors, pt.expr[":"] = pt.expr.pseudos, pt.uniqueSort = pt.unique = yt.uniqueSort, 
-    pt.text = yt.getText, pt.isXMLDoc = yt.isXML, pt.contains = yt.contains, pt.escapeSelector = yt.escape;
-    var bt = function(t, e, i) {
+    pt.find = bt, pt.expr = bt.selectors, pt.expr[":"] = pt.expr.pseudos, pt.uniqueSort = pt.unique = bt.uniqueSort, 
+    pt.text = bt.getText, pt.isXMLDoc = bt.isXML, pt.contains = bt.contains, pt.escapeSelector = bt.escape;
+    var yt = function(t, e, i) {
         for (var n = [], s = void 0 !== i; (t = t[e]) && 9 !== t.nodeType; ) if (1 === t.nodeType) {
             if (s && pt(t).is(i)) break;
             n.push(t);
@@ -2956,10 +2780,10 @@ function VerificarHorario(t, e) {
             return e && 11 !== e.nodeType ? e : null;
         },
         parents: function(t) {
-            return bt(t, "parentNode");
+            return yt(t, "parentNode");
         },
         parentsUntil: function(t, e, i) {
-            return bt(t, "parentNode", i);
+            return yt(t, "parentNode", i);
         },
         next: function(t) {
             return o(t, "nextSibling");
@@ -2968,16 +2792,16 @@ function VerificarHorario(t, e) {
             return o(t, "previousSibling");
         },
         nextAll: function(t) {
-            return bt(t, "nextSibling");
+            return yt(t, "nextSibling");
         },
         prevAll: function(t) {
-            return bt(t, "previousSibling");
+            return yt(t, "previousSibling");
         },
         nextUntil: function(t, e, i) {
-            return bt(t, "nextSibling", i);
+            return yt(t, "nextSibling", i);
         },
         prevUntil: function(t, e, i) {
-            return bt(t, "previousSibling", i);
+            return yt(t, "previousSibling", i);
         },
         siblings: function(t) {
             return _t((t.parentNode || {}).firstChild, t);
@@ -2998,17 +2822,17 @@ function VerificarHorario(t, e) {
     var Et = /[^\x20\t\r\n\f]+/g;
     pt.Callbacks = function(t) {
         t = "string" == typeof t ? a(t) : pt.extend({}, t);
-        var e, i, n, s, o = [], r = [], l = -1, u = function() {
+        var e, i, n, s, o = [], r = [], l = -1, h = function() {
             for (s = t.once, n = e = !0; r.length; l = -1) for (i = r.shift(); ++l < o.length; ) !1 === o[l].apply(i[0], i[1]) && t.stopOnFalse && (l = o.length, 
             i = !1);
             t.memory || (i = !1), e = !1, s && (o = i ? [] : "");
-        }, h = {
+        }, u = {
             add: function() {
                 return o && (i && !e && (l = o.length - 1, r.push(i)), function e(i) {
                     pt.each(i, function(i, n) {
-                        pt.isFunction(n) ? t.unique && h.has(n) || o.push(n) : n && n.length && "string" !== pt.type(n) && e(n);
+                        pt.isFunction(n) ? t.unique && u.has(n) || o.push(n) : n && n.length && "string" !== pt.type(n) && e(n);
                     });
-                }(arguments), i && !e && u()), this;
+                }(arguments), i && !e && h()), this;
             },
             remove: function() {
                 return pt.each(arguments, function(t, e) {
@@ -3034,17 +2858,17 @@ function VerificarHorario(t, e) {
                 return !!s;
             },
             fireWith: function(t, i) {
-                return s || (i = [ t, (i = i || []).slice ? i.slice() : i ], r.push(i), e || u()), 
+                return s || (i = [ t, (i = i || []).slice ? i.slice() : i ], r.push(i), e || h()), 
                 this;
             },
             fire: function() {
-                return h.fireWith(this, arguments), this;
+                return u.fireWith(this, arguments), this;
             },
             fired: function() {
                 return !!n;
             }
         };
-        return h;
+        return u;
     }, pt.extend({
         Deferred: function(e) {
             var i = [ [ "notify", "progress", pt.Callbacks("memory"), pt.Callbacks("memory"), 2 ], [ "resolve", "done", pt.Callbacks("once memory"), pt.Callbacks("once memory"), 0, "resolved" ], [ "reject", "fail", pt.Callbacks("once memory"), pt.Callbacks("once memory"), 1, "rejected" ] ], n = "pending", s = {
@@ -3072,20 +2896,20 @@ function VerificarHorario(t, e) {
                 then: function(e, n, s) {
                     function o(e, i, n, s) {
                         return function() {
-                            var u = this, h = arguments, c = function() {
+                            var h = this, u = arguments, c = function() {
                                 var t, c;
                                 if (!(e < a)) {
-                                    if ((t = n.apply(u, h)) === i.promise()) throw new TypeError("Thenable self-resolution");
+                                    if ((t = n.apply(h, u)) === i.promise()) throw new TypeError("Thenable self-resolution");
                                     c = t && ("object" == typeof t || "function" == typeof t) && t.then, pt.isFunction(c) ? s ? c.call(t, o(a, i, r, s), o(a, i, l, s)) : (a++, 
-                                    c.call(t, o(a, i, r, s), o(a, i, l, s), o(a, i, r, i.notifyWith))) : (n !== r && (u = void 0, 
-                                    h = [ t ]), (s || i.resolveWith)(u, h));
+                                    c.call(t, o(a, i, r, s), o(a, i, l, s), o(a, i, r, i.notifyWith))) : (n !== r && (h = void 0, 
+                                    u = [ t ]), (s || i.resolveWith)(h, u));
                                 }
                             }, d = s ? c : function() {
                                 try {
                                     c();
                                 } catch (t) {
-                                    pt.Deferred.exceptionHook && pt.Deferred.exceptionHook(t, d.stackTrace), e + 1 >= a && (n !== l && (u = void 0, 
-                                    h = [ t ]), i.rejectWith(u, h));
+                                    pt.Deferred.exceptionHook && pt.Deferred.exceptionHook(t, d.stackTrace), e + 1 >= a && (n !== l && (h = void 0, 
+                                    u = [ t ]), i.rejectWith(h, u));
                                 }
                             };
                             e ? d() : (pt.Deferred.getStackHook && (d.stackTrace = pt.Deferred.getStackHook()), 
@@ -3117,8 +2941,8 @@ function VerificarHorario(t, e) {
                     n[t] = this, s[t] = arguments.length > 1 ? nt.call(arguments) : i, --e || o.resolveWith(n, s);
                 };
             };
-            if (e <= 1 && (u(t, o.done(a(i)).resolve, o.reject), "pending" === o.state() || pt.isFunction(s[i] && s[i].then))) return o.then();
-            for (;i--; ) u(s[i], a(i), o.reject);
+            if (e <= 1 && (h(t, o.done(a(i)).resolve, o.reject), "pending" === o.state() || pt.isFunction(s[i] && s[i].then))) return o.then();
+            for (;i--; ) h(s[i], a(i), o.reject);
             return o.promise();
         }
     });
@@ -3144,18 +2968,18 @@ function VerificarHorario(t, e) {
         ready: function(t) {
             (!0 === t ? --pt.readyWait : pt.isReady) || (pt.isReady = !0, !0 !== t && --pt.readyWait > 0 || At.resolveWith(et, [ pt ]));
         }
-    }), pt.ready.then = At.then, "complete" === et.readyState || "loading" !== et.readyState && !et.documentElement.doScroll ? t.setTimeout(pt.ready) : (et.addEventListener("DOMContentLoaded", h), 
-    t.addEventListener("load", h));
+    }), pt.ready.then = At.then, "complete" === et.readyState || "loading" !== et.readyState && !et.documentElement.doScroll ? t.setTimeout(pt.ready) : (et.addEventListener("DOMContentLoaded", u), 
+    t.addEventListener("load", u));
     var It = function(t, e, i, n, s, o, a) {
-        var r = 0, l = t.length, u = null == i;
+        var r = 0, l = t.length, h = null == i;
         if ("object" === pt.type(i)) {
             s = !0;
             for (r in i) It(t, e, r, i[r], !0, o, a);
-        } else if (void 0 !== n && (s = !0, pt.isFunction(n) || (a = !0), u && (a ? (e.call(t, n), 
-        e = null) : (u = e, e = function(t, e, i) {
-            return u.call(pt(t), i);
+        } else if (void 0 !== n && (s = !0, pt.isFunction(n) || (a = !0), h && (a ? (e.call(t, n), 
+        e = null) : (h = e, e = function(t, e, i) {
+            return h.call(pt(t), i);
         })), e)) for (;r < l; r++) e(t[r], i, a ? n : n.call(t[r], r, e(t[r], i)));
-        return s ? t : u ? e.call(t) : l ? e(t[0], i) : o;
+        return s ? t : h ? e.call(t) : l ? e(t[0], i) : o;
     }, Ft = function(t) {
         return 1 === t.nodeType || 9 === t.nodeType || !+t.nodeType;
     };
@@ -3286,15 +3110,15 @@ function VerificarHorario(t, e) {
             return r(), s.promise(e);
         }
     });
-    var Ot = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source, zt = new RegExp("^(?:([+-])=|)(" + Ot + ")([a-z%]*)$", "i"), Rt = [ "Top", "Right", "Bottom", "Left" ], Wt = function(t, e) {
+    var Ot = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source, jt = new RegExp("^(?:([+-])=|)(" + Ot + ")([a-z%]*)$", "i"), zt = [ "Top", "Right", "Bottom", "Left" ], Wt = function(t, e) {
         return "none" === (t = e || t).style.display || "" === t.style.display && pt.contains(t.ownerDocument, t) && "none" === pt.css(t, "display");
-    }, jt = function(t, e, i, n) {
+    }, Bt = function(t, e, i, n) {
         var s, o, a = {};
         for (o in e) a[o] = t.style[o], t.style[o] = e[o];
         s = i.apply(t, n || []);
         for (o in e) t.style[o] = a[o];
         return s;
-    }, Bt = {};
+    }, $t = {};
     pt.fn.extend({
         show: function() {
             return g(this, !0);
@@ -3308,7 +3132,7 @@ function VerificarHorario(t, e) {
             });
         }
     });
-    var $t = /^(?:checkbox|radio)$/i, qt = /<([a-z][^\/\0>\x20\t\r\n\f]+)/i, Yt = /^$|\/(?:java|ecma)script/i, Vt = {
+    var Rt = /^(?:checkbox|radio)$/i, qt = /<([a-z][^\/\0>\x20\t\r\n\f]+)/i, Yt = /^$|\/(?:java|ecma)script/i, Xt = {
         option: [ 1, "<select multiple='multiple'>", "</select>" ],
         thead: [ 1, "<table>", "</table>" ],
         col: [ 2, "<table><colgroup>", "</colgroup></table>" ],
@@ -3316,26 +3140,26 @@ function VerificarHorario(t, e) {
         td: [ 3, "<table><tbody><tr>", "</tr></tbody></table>" ],
         _default: [ 0, "", "" ]
     };
-    Vt.optgroup = Vt.option, Vt.tbody = Vt.tfoot = Vt.colgroup = Vt.caption = Vt.thead, 
-    Vt.th = Vt.td;
-    var Ut = /<|&#?\w+;/;
+    Xt.optgroup = Xt.option, Xt.tbody = Xt.tfoot = Xt.colgroup = Xt.caption = Xt.thead, 
+    Xt.th = Xt.td;
+    var Vt = /<|&#?\w+;/;
     !function() {
         var t = et.createDocumentFragment().appendChild(et.createElement("div")), e = et.createElement("input");
         e.setAttribute("type", "radio"), e.setAttribute("checked", "checked"), e.setAttribute("name", "t"), 
         t.appendChild(e), dt.checkClone = t.cloneNode(!0).cloneNode(!0).lastChild.checked, 
         t.innerHTML = "<textarea>x</textarea>", dt.noCloneChecked = !!t.cloneNode(!0).lastChild.defaultValue;
     }();
-    var Xt = et.documentElement, Kt = /^key/, Gt = /^(?:mouse|pointer|contextmenu|drag|drop)|click/, Qt = /^([^.]*)(?:\.(.+)|)/;
+    var Ut = et.documentElement, Kt = /^key/, Gt = /^(?:mouse|pointer|contextmenu|drag|drop)|click/, Qt = /^([^.]*)(?:\.(.+)|)/;
     pt.event = {
         global: {},
         add: function(t, e, i, n, s) {
-            var o, a, r, l, u, h, c, d, p, f, m, g = Mt.get(t);
-            if (g) for (i.handler && (i = (o = i).handler, s = o.selector), s && pt.find.matchesSelector(Xt, s), 
+            var o, a, r, l, h, u, c, d, p, f, m, g = Mt.get(t);
+            if (g) for (i.handler && (i = (o = i).handler, s = o.selector), s && pt.find.matchesSelector(Ut, s), 
             i.guid || (i.guid = pt.guid++), (l = g.events) || (l = g.events = {}), (a = g.handle) || (a = g.handle = function(e) {
                 return void 0 !== pt && pt.event.triggered !== e.type ? pt.event.dispatch.apply(t, arguments) : void 0;
-            }), u = (e = (e || "").match(Et) || [ "" ]).length; u--; ) p = m = (r = Qt.exec(e[u]) || [])[1], 
+            }), h = (e = (e || "").match(Et) || [ "" ]).length; h--; ) p = m = (r = Qt.exec(e[h]) || [])[1], 
             f = (r[2] || "").split(".").sort(), p && (c = pt.event.special[p] || {}, p = (s ? c.delegateType : c.bindType) || p, 
-            c = pt.event.special[p] || {}, h = pt.extend({
+            c = pt.event.special[p] || {}, u = pt.extend({
                 type: p,
                 origType: m,
                 data: n,
@@ -3345,47 +3169,47 @@ function VerificarHorario(t, e) {
                 needsContext: s && pt.expr.match.needsContext.test(s),
                 namespace: f.join(".")
             }, o), (d = l[p]) || ((d = l[p] = []).delegateCount = 0, c.setup && !1 !== c.setup.call(t, n, f, a) || t.addEventListener && t.addEventListener(p, a)), 
-            c.add && (c.add.call(t, h), h.handler.guid || (h.handler.guid = i.guid)), s ? d.splice(d.delegateCount++, 0, h) : d.push(h), 
+            c.add && (c.add.call(t, u), u.handler.guid || (u.handler.guid = i.guid)), s ? d.splice(d.delegateCount++, 0, u) : d.push(u), 
             pt.event.global[p] = !0);
         },
         remove: function(t, e, i, n, s) {
-            var o, a, r, l, u, h, c, d, p, f, m, g = Mt.hasData(t) && Mt.get(t);
+            var o, a, r, l, h, u, c, d, p, f, m, g = Mt.hasData(t) && Mt.get(t);
             if (g && (l = g.events)) {
-                for (u = (e = (e || "").match(Et) || [ "" ]).length; u--; ) if (r = Qt.exec(e[u]) || [], 
+                for (h = (e = (e || "").match(Et) || [ "" ]).length; h--; ) if (r = Qt.exec(e[h]) || [], 
                 p = m = r[1], f = (r[2] || "").split(".").sort(), p) {
                     for (c = pt.event.special[p] || {}, d = l[p = (n ? c.delegateType : c.bindType) || p] || [], 
-                    r = r[2] && new RegExp("(^|\\.)" + f.join("\\.(?:.*\\.|)") + "(\\.|$)"), a = o = d.length; o--; ) h = d[o], 
-                    !s && m !== h.origType || i && i.guid !== h.guid || r && !r.test(h.namespace) || n && n !== h.selector && ("**" !== n || !h.selector) || (d.splice(o, 1), 
-                    h.selector && d.delegateCount--, c.remove && c.remove.call(t, h));
+                    r = r[2] && new RegExp("(^|\\.)" + f.join("\\.(?:.*\\.|)") + "(\\.|$)"), a = o = d.length; o--; ) u = d[o], 
+                    !s && m !== u.origType || i && i.guid !== u.guid || r && !r.test(u.namespace) || n && n !== u.selector && ("**" !== n || !u.selector) || (d.splice(o, 1), 
+                    u.selector && d.delegateCount--, c.remove && c.remove.call(t, u));
                     a && !d.length && (c.teardown && !1 !== c.teardown.call(t, f, g.handle) || pt.removeEvent(t, p, g.handle), 
                     delete l[p]);
-                } else for (p in l) pt.event.remove(t, p + e[u], i, n, !0);
+                } else for (p in l) pt.event.remove(t, p + e[h], i, n, !0);
                 pt.isEmptyObject(l) && Mt.remove(t, "handle events");
             }
         },
         dispatch: function(t) {
-            var e, i, n, s, o, a, r = pt.event.fix(t), l = new Array(arguments.length), u = (Mt.get(this, "events") || {})[r.type] || [], h = pt.event.special[r.type] || {};
+            var e, i, n, s, o, a, r = pt.event.fix(t), l = new Array(arguments.length), h = (Mt.get(this, "events") || {})[r.type] || [], u = pt.event.special[r.type] || {};
             for (l[0] = r, e = 1; e < arguments.length; e++) l[e] = arguments[e];
-            if (r.delegateTarget = this, !h.preDispatch || !1 !== h.preDispatch.call(this, r)) {
-                for (a = pt.event.handlers.call(this, r, u), e = 0; (s = a[e++]) && !r.isPropagationStopped(); ) for (r.currentTarget = s.elem, 
+            if (r.delegateTarget = this, !u.preDispatch || !1 !== u.preDispatch.call(this, r)) {
+                for (a = pt.event.handlers.call(this, r, h), e = 0; (s = a[e++]) && !r.isPropagationStopped(); ) for (r.currentTarget = s.elem, 
                 i = 0; (o = s.handlers[i++]) && !r.isImmediatePropagationStopped(); ) r.rnamespace && !r.rnamespace.test(o.namespace) || (r.handleObj = o, 
                 r.data = o.data, void 0 !== (n = ((pt.event.special[o.origType] || {}).handle || o.handler).apply(s.elem, l)) && !1 === (r.result = n) && (r.preventDefault(), 
                 r.stopPropagation()));
-                return h.postDispatch && h.postDispatch.call(this, r), r.result;
+                return u.postDispatch && u.postDispatch.call(this, r), r.result;
             }
         },
         handlers: function(t, e) {
-            var i, n, s, o, a, r = [], l = e.delegateCount, u = t.target;
-            if (l && u.nodeType && !("click" === t.type && t.button >= 1)) for (;u !== this; u = u.parentNode || this) if (1 === u.nodeType && ("click" !== t.type || !0 !== u.disabled)) {
-                for (o = [], a = {}, i = 0; i < l; i++) void 0 === a[s = (n = e[i]).selector + " "] && (a[s] = n.needsContext ? pt(s, this).index(u) > -1 : pt.find(s, this, null, [ u ]).length), 
+            var i, n, s, o, a, r = [], l = e.delegateCount, h = t.target;
+            if (l && h.nodeType && !("click" === t.type && t.button >= 1)) for (;h !== this; h = h.parentNode || this) if (1 === h.nodeType && ("click" !== t.type || !0 !== h.disabled)) {
+                for (o = [], a = {}, i = 0; i < l; i++) void 0 === a[s = (n = e[i]).selector + " "] && (a[s] = n.needsContext ? pt(s, this).index(h) > -1 : pt.find(s, this, null, [ h ]).length), 
                 a[s] && o.push(n);
                 o.length && r.push({
-                    elem: u,
+                    elem: h,
                     handlers: o
                 });
             }
-            return u = this, l < e.length && r.push({
-                elem: u,
+            return h = this, l < e.length && r.push({
+                elem: h,
                 handlers: e.slice(l)
             }), r;
         },
@@ -3539,17 +3363,17 @@ function VerificarHorario(t, e) {
             });
         }
     });
-    var Zt = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([a-z][^\/\0>\x20\t\r\n\f]*)[^>]*)\/>/gi, Jt = /<script|<style|<link/i, te = /checked\s*(?:[^=]|=\s*.checked.)/i, ee = /^true\/(.*)/, ie = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g;
+    var Jt = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([a-z][^\/\0>\x20\t\r\n\f]*)[^>]*)\/>/gi, Zt = /<script|<style|<link/i, te = /checked\s*(?:[^=]|=\s*.checked.)/i, ee = /^true\/(.*)/, ie = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g;
     pt.extend({
         htmlPrefilter: function(t) {
-            return t.replace(Zt, "<$1></$2>");
+            return t.replace(Jt, "<$1></$2>");
         },
         clone: function(t, e, i) {
             var n, s, o, a, r = t.cloneNode(!0), l = pt.contains(t.ownerDocument, t);
             if (!(dt.noCloneChecked || 1 !== t.nodeType && 11 !== t.nodeType || pt.isXMLDoc(t))) for (a = v(r), 
             n = 0, s = (o = v(t)).length; n < s; n++) E(o[n], a[n]);
             if (e) if (i) for (o = o || v(t), a = a || v(r), n = 0, s = o.length; n < s; n++) S(o[n], a[n]); else S(t, r);
-            return (a = v(r, "script")).length > 0 && y(a, !l && v(t, "script")), r;
+            return (a = v(r, "script")).length > 0 && b(a, !l && v(t, "script")), r;
         },
         cleanData: function(t) {
             for (var e, i, n, s = pt.event.special, o = 0; void 0 !== (i = t[o]); o++) if (Ft(i)) {
@@ -3611,7 +3435,7 @@ function VerificarHorario(t, e) {
             return It(this, function(t) {
                 var e = this[0] || {}, i = 0, n = this.length;
                 if (void 0 === t && 1 === e.nodeType) return e.innerHTML;
-                if ("string" == typeof t && !Jt.test(t) && !Vt[(qt.exec(t) || [ "", "" ])[1].toLowerCase()]) {
+                if ("string" == typeof t && !Zt.test(t) && !Xt[(qt.exec(t) || [ "", "" ])[1].toLowerCase()]) {
                     t = pt.htmlPrefilter(t);
                     try {
                         for (;i < n; i++) 1 === (e = this[i] || {}).nodeType && (pt.cleanData(v(e, !1)), 
@@ -3650,10 +3474,10 @@ function VerificarHorario(t, e) {
         function e() {
             if (r) {
                 r.style.cssText = "box-sizing:border-box;position:relative;display:block;margin:auto;border:1px;padding:1px;top:1%;width:50%", 
-                r.innerHTML = "", Xt.appendChild(a);
+                r.innerHTML = "", Ut.appendChild(a);
                 var e = t.getComputedStyle(r);
                 i = "1%" !== e.top, o = "2px" === e.marginLeft, n = "4px" === e.width, r.style.marginRight = "50%", 
-                s = "4px" === e.marginRight, Xt.removeChild(a), r = null;
+                s = "4px" === e.marginRight, Ut.removeChild(a), r = null;
             }
         }
         var i, n, s, o, a = et.createElement("div"), r = et.createElement("div");
@@ -3681,7 +3505,7 @@ function VerificarHorario(t, e) {
     }, le = {
         letterSpacing: "0",
         fontWeight: "400"
-    }, ue = [ "Webkit", "Moz", "ms" ], he = et.createElement("div").style;
+    }, he = [ "Webkit", "Moz", "ms" ], ue = et.createElement("div").style;
     pt.extend({
         cssHooks: {
             opacity: {
@@ -3716,7 +3540,7 @@ function VerificarHorario(t, e) {
                 var s, o, a, r = pt.camelCase(e), l = t.style;
                 if (e = pt.cssProps[r] || (pt.cssProps[r] = M(r) || r), a = pt.cssHooks[e] || pt.cssHooks[r], 
                 void 0 === i) return a && "get" in a && void 0 !== (s = a.get(t, !1, n)) ? s : l[e];
-                "string" === (o = typeof i) && (s = zt.exec(i)) && s[1] && (i = f(t, e, s), o = "number"), 
+                "string" === (o = typeof i) && (s = jt.exec(i)) && s[1] && (i = f(t, e, s), o = "number"), 
                 null != i && i === i && ("number" === o && (i += s && s[3] || (pt.cssNumber[r] ? "" : "px")), 
                 dt.clearCloneStyle || "" !== i || 0 !== e.indexOf("background") || (l[e] = "inherit"), 
                 a && "set" in a && void 0 === (i = a.set(t, i, n)) || (l[e] = i));
@@ -3731,18 +3555,18 @@ function VerificarHorario(t, e) {
     }), pt.each([ "height", "width" ], function(t, e) {
         pt.cssHooks[e] = {
             get: function(t, i, n) {
-                if (i) return !ae.test(pt.css(t, "display")) || t.getClientRects().length && t.getBoundingClientRect().width ? H(t, e, n) : jt(t, re, function() {
+                if (i) return !ae.test(pt.css(t, "display")) || t.getClientRects().length && t.getBoundingClientRect().width ? H(t, e, n) : Bt(t, re, function() {
                     return H(t, e, n);
                 });
             },
             set: function(t, i, n) {
                 var s, o = n && oe(t), a = n && L(t, e, n, "border-box" === pt.css(t, "boxSizing", !1, o), o);
-                return a && (s = zt.exec(i)) && "px" !== (s[3] || "px") && (t.style[e] = i, i = pt.css(t, e)), 
+                return a && (s = jt.exec(i)) && "px" !== (s[3] || "px") && (t.style[e] = i, i = pt.css(t, e)), 
                 N(t, i, a);
             }
         };
     }), pt.cssHooks.marginLeft = F(dt.reliableMarginLeft, function(t, e) {
-        if (e) return (parseFloat(I(t, "marginLeft")) || t.getBoundingClientRect().left - jt(t, {
+        if (e) return (parseFloat(I(t, "marginLeft")) || t.getBoundingClientRect().left - Bt(t, {
             marginLeft: 0
         }, function() {
             return t.getBoundingClientRect().left;
@@ -3754,7 +3578,7 @@ function VerificarHorario(t, e) {
     }, function(t, e) {
         pt.cssHooks[t + e] = {
             expand: function(i) {
-                for (var n = 0, s = {}, o = "string" == typeof i ? i.split(" ") : [ i ]; n < 4; n++) s[t + Rt[n] + e] = o[n] || o[n - 2] || o[0];
+                for (var n = 0, s = {}, o = "string" == typeof i ? i.split(" ") : [ i ]; n < 4; n++) s[t + zt[n] + e] = o[n] || o[n - 2] || o[0];
                 return s;
             }
         }, ne.test(t) || (pt.cssHooks[t + e].set = N);
@@ -3814,7 +3638,7 @@ function VerificarHorario(t, e) {
         tweeners: {
             "*": [ function(t, e) {
                 var i = this.createTween(t, e);
-                return f(i.elem, t, zt.exec(e), i), i;
+                return f(i.elem, t, jt.exec(e), i), i;
             } ]
         },
         tweener: function(t, e) {
@@ -3822,7 +3646,7 @@ function VerificarHorario(t, e) {
             for (var i, n = 0, s = t.length; n < s; n++) i = t[n], q.tweeners[i] = q.tweeners[i] || [], 
             q.tweeners[i].unshift(e);
         },
-        prefilters: [ B ],
+        prefilters: [ $ ],
         prefilter: function(t, e) {
             e ? q.prefilters.unshift(t) : q.prefilters.push(t);
         }
@@ -3902,7 +3726,7 @@ function VerificarHorario(t, e) {
     }, pt.fx.timer = function(t) {
         pt.timers.push(t), t() ? pt.fx.start() : pt.timers.pop();
     }, pt.fx.interval = 13, pt.fx.start = function() {
-        de || (de = t.requestAnimationFrame ? t.requestAnimationFrame(z) : t.setInterval(pt.fx.tick, pt.fx.interval));
+        de || (de = t.requestAnimationFrame ? t.requestAnimationFrame(j) : t.setInterval(pt.fx.tick, pt.fx.interval));
     }, pt.fx.stop = function() {
         t.cancelAnimationFrame ? t.cancelAnimationFrame(de) : t.clearInterval(de), de = null;
     }, pt.fx.speeds = {
@@ -3965,7 +3789,7 @@ function VerificarHorario(t, e) {
             s;
         };
     });
-    var ve = /^(?:input|select|textarea|button)$/i, ye = /^(?:a|area)$/i;
+    var ve = /^(?:input|select|textarea|button)$/i, be = /^(?:a|area)$/i;
     pt.fn.extend({
         prop: function(t, e) {
             return It(this, pt.prop, t, e, arguments.length > 1);
@@ -3985,7 +3809,7 @@ function VerificarHorario(t, e) {
             tabIndex: {
                 get: function(t) {
                     var e = pt.find.attr(t, "tabindex");
-                    return e ? parseInt(e, 10) : ve.test(t.nodeName) || ye.test(t.nodeName) && t.href ? 0 : -1;
+                    return e ? parseInt(e, 10) : ve.test(t.nodeName) || be.test(t.nodeName) && t.href ? 0 : -1;
                 }
             }
         },
@@ -4008,9 +3832,9 @@ function VerificarHorario(t, e) {
         addClass: function(t) {
             var e, i, n, s, o, a, r, l = 0;
             if (pt.isFunction(t)) return this.each(function(e) {
-                pt(this).addClass(t.call(this, e, V(this)));
+                pt(this).addClass(t.call(this, e, X(this)));
             });
-            if ("string" == typeof t && t) for (e = t.match(Et) || []; i = this[l++]; ) if (s = V(i), 
+            if ("string" == typeof t && t) for (e = t.match(Et) || []; i = this[l++]; ) if (s = X(i), 
             n = 1 === i.nodeType && " " + Y(s) + " ") {
                 for (a = 0; o = e[a++]; ) n.indexOf(" " + o + " ") < 0 && (n += o + " ");
                 s !== (r = Y(n)) && i.setAttribute("class", r);
@@ -4020,10 +3844,10 @@ function VerificarHorario(t, e) {
         removeClass: function(t) {
             var e, i, n, s, o, a, r, l = 0;
             if (pt.isFunction(t)) return this.each(function(e) {
-                pt(this).removeClass(t.call(this, e, V(this)));
+                pt(this).removeClass(t.call(this, e, X(this)));
             });
             if (!arguments.length) return this.attr("class", "");
-            if ("string" == typeof t && t) for (e = t.match(Et) || []; i = this[l++]; ) if (s = V(i), 
+            if ("string" == typeof t && t) for (e = t.match(Et) || []; i = this[l++]; ) if (s = X(i), 
             n = 1 === i.nodeType && " " + Y(s) + " ") {
                 for (a = 0; o = e[a++]; ) for (;n.indexOf(" " + o + " ") > -1; ) n = n.replace(" " + o + " ", " ");
                 s !== (r = Y(n)) && i.setAttribute("class", r);
@@ -4033,20 +3857,20 @@ function VerificarHorario(t, e) {
         toggleClass: function(t, e) {
             var i = typeof t;
             return "boolean" == typeof e && "string" === i ? e ? this.addClass(t) : this.removeClass(t) : pt.isFunction(t) ? this.each(function(i) {
-                pt(this).toggleClass(t.call(this, i, V(this), e), e);
+                pt(this).toggleClass(t.call(this, i, X(this), e), e);
             }) : this.each(function() {
                 var e, n, s, o;
-                if ("string" === i) for (n = 0, s = pt(this), o = t.match(Et) || []; e = o[n++]; ) s.hasClass(e) ? s.removeClass(e) : s.addClass(e); else void 0 !== t && "boolean" !== i || ((e = V(this)) && Mt.set(this, "__className__", e), 
+                if ("string" === i) for (n = 0, s = pt(this), o = t.match(Et) || []; e = o[n++]; ) s.hasClass(e) ? s.removeClass(e) : s.addClass(e); else void 0 !== t && "boolean" !== i || ((e = X(this)) && Mt.set(this, "__className__", e), 
                 this.setAttribute && this.setAttribute("class", e || !1 === t ? "" : Mt.get(this, "__className__") || ""));
             });
         },
         hasClass: function(t) {
             var e, i, n = 0;
-            for (e = " " + t + " "; i = this[n++]; ) if (1 === i.nodeType && (" " + Y(V(i)) + " ").indexOf(e) > -1) return !0;
+            for (e = " " + t + " "; i = this[n++]; ) if (1 === i.nodeType && (" " + Y(X(i)) + " ").indexOf(e) > -1) return !0;
             return !1;
         }
     });
-    var be = /\r/g;
+    var ye = /\r/g;
     pt.fn.extend({
         val: function(t) {
             var e, i, n, s = this[0];
@@ -4058,7 +3882,7 @@ function VerificarHorario(t, e) {
                     })), (e = pt.valHooks[this.type] || pt.valHooks[this.nodeName.toLowerCase()]) && "set" in e && void 0 !== e.set(this, s, "value") || (this.value = s));
                 });
                 if (s) return (e = pt.valHooks[s.type] || pt.valHooks[s.nodeName.toLowerCase()]) && "get" in e && void 0 !== (i = e.get(s, "value")) ? i : (i = s.value, 
-                "string" == typeof i ? i.replace(be, "") : null == i ? "" : i);
+                "string" == typeof i ? i.replace(ye, "") : null == i ? "" : i);
             }
         }
     }), pt.extend({
@@ -4096,9 +3920,9 @@ function VerificarHorario(t, e) {
     var _e = /^(?:focusinfocus|focusoutblur)$/;
     pt.extend(pt.event, {
         trigger: function(e, i, n, s) {
-            var o, a, r, l, u, h, c, d = [ n || et ], p = ut.call(e, "type") ? e.type : e, f = ut.call(e, "namespace") ? e.namespace.split(".") : [];
+            var o, a, r, l, h, u, c, d = [ n || et ], p = ht.call(e, "type") ? e.type : e, f = ht.call(e, "namespace") ? e.namespace.split(".") : [];
             if (a = r = n = n || et, 3 !== n.nodeType && 8 !== n.nodeType && !_e.test(p + pt.event.triggered) && (p.indexOf(".") > -1 && (p = (f = p.split(".")).shift(), 
-            f.sort()), u = p.indexOf(":") < 0 && "on" + p, e = e[pt.expando] ? e : new pt.Event(p, "object" == typeof e && e), 
+            f.sort()), h = p.indexOf(":") < 0 && "on" + p, e = e[pt.expando] ? e : new pt.Event(p, "object" == typeof e && e), 
             e.isTrigger = s ? 2 : 3, e.namespace = f.join("."), e.rnamespace = e.namespace ? new RegExp("(^|\\.)" + f.join("\\.(?:.*\\.|)") + "(\\.|$)") : null, 
             e.result = void 0, e.target || (e.target = n), i = null == i ? [ e ] : pt.makeArray(i, [ e ]), 
             c = pt.event.special[p] || {}, s || !c.trigger || !1 !== c.trigger.apply(n, i))) {
@@ -4108,10 +3932,10 @@ function VerificarHorario(t, e) {
                     r === (n.ownerDocument || et) && d.push(r.defaultView || r.parentWindow || t);
                 }
                 for (o = 0; (a = d[o++]) && !e.isPropagationStopped(); ) e.type = o > 1 ? l : c.bindType || p, 
-                (h = (Mt.get(a, "events") || {})[e.type] && Mt.get(a, "handle")) && h.apply(a, i), 
-                (h = u && a[u]) && h.apply && Ft(a) && (e.result = h.apply(a, i), !1 === e.result && e.preventDefault());
-                return e.type = p, s || e.isDefaultPrevented() || c._default && !1 !== c._default.apply(d.pop(), i) || !Ft(n) || u && pt.isFunction(n[p]) && !pt.isWindow(n) && ((r = n[u]) && (n[u] = null), 
-                pt.event.triggered = p, n[p](), pt.event.triggered = void 0, r && (n[u] = r)), e.result;
+                (u = (Mt.get(a, "events") || {})[e.type] && Mt.get(a, "handle")) && u.apply(a, i), 
+                (u = h && a[h]) && u.apply && Ft(a) && (e.result = u.apply(a, i), !1 === e.result && e.preventDefault());
+                return e.type = p, s || e.isDefaultPrevented() || c._default && !1 !== c._default.apply(d.pop(), i) || !Ft(n) || h && pt.isFunction(n[p]) && !pt.isWindow(n) && ((r = n[h]) && (n[h] = null), 
+                pt.event.triggered = p, n[p](), pt.event.triggered = void 0, r && (n[h] = r)), e.result;
             }
         },
         simulate: function(t, e, i) {
@@ -4177,7 +4001,7 @@ function VerificarHorario(t, e) {
         };
         if (pt.isArray(t) || t.jquery && !pt.isPlainObject(t)) pt.each(t, function() {
             s(this.name, this.value);
-        }); else for (i in t) U(i, t[i], e, s);
+        }); else for (i in t) V(i, t[i], e, s);
         return n.join("&");
     }, pt.fn.extend({
         serialize: function() {
@@ -4189,7 +4013,7 @@ function VerificarHorario(t, e) {
                 return t ? pt.makeArray(t) : this;
             }).filter(function() {
                 var t = this.type;
-                return this.name && !pt(this).is(":disabled") && Se.test(this.nodeName) && !Te.test(t) && (this.checked || !$t.test(t));
+                return this.name && !pt(this).is(":disabled") && Se.test(this.nodeName) && !Te.test(t) && (this.checked || !Rt.test(t));
             }).map(function(t, e) {
                 var i = pt(this).val();
                 return null == i ? null : pt.isArray(i) ? pt.map(i, function(t) {
@@ -4204,8 +4028,8 @@ function VerificarHorario(t, e) {
             }).get();
         }
     });
-    var Ee = /%20/g, Pe = /#.*$/, Ae = /([?&])_=[^&]*/, Ie = /^(.*?):[ \t]*([^\r\n]*)$/gm, Fe = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/, Me = /^(?:GET|HEAD)$/, Ne = /^\/\//, Le = {}, He = {}, Oe = "*/".concat("*"), ze = et.createElement("a");
-    ze.href = xe.href, pt.extend({
+    var Ee = /%20/g, Pe = /#.*$/, Ae = /([?&])_=[^&]*/, Ie = /^(.*?):[ \t]*([^\r\n]*)$/gm, Fe = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/, Me = /^(?:GET|HEAD)$/, Ne = /^\/\//, Le = {}, He = {}, Oe = "*/".concat("*"), je = et.createElement("a");
+    je.href = xe.href, pt.extend({
         active: 0,
         lastModified: {},
         etag: {},
@@ -4248,44 +4072,44 @@ function VerificarHorario(t, e) {
         ajaxSetup: function(t, e) {
             return e ? G(G(t, pt.ajaxSettings), e) : G(pt.ajaxSettings, t);
         },
-        ajaxPrefilter: X(Le),
-        ajaxTransport: X(He),
+        ajaxPrefilter: U(Le),
+        ajaxTransport: U(He),
         ajax: function(e, i) {
             function n(e, i, n, r) {
-                var u, d, p, _, x, w = i;
-                h || (h = !0, l && t.clearTimeout(l), s = void 0, a = r || "", C.readyState = e > 0 ? 4 : 0, 
-                u = e >= 200 && e < 300 || 304 === e, n && (_ = Q(f, C, n)), _ = Z(f, _, C, u), 
-                u ? (f.ifModified && ((x = C.getResponseHeader("Last-Modified")) && (pt.lastModified[o] = x), 
+                var h, d, p, _, x, w = i;
+                u || (u = !0, l && t.clearTimeout(l), s = void 0, a = r || "", C.readyState = e > 0 ? 4 : 0, 
+                h = e >= 200 && e < 300 || 304 === e, n && (_ = Q(f, C, n)), _ = J(f, _, C, h), 
+                h ? (f.ifModified && ((x = C.getResponseHeader("Last-Modified")) && (pt.lastModified[o] = x), 
                 (x = C.getResponseHeader("etag")) && (pt.etag[o] = x)), 204 === e || "HEAD" === f.type ? w = "nocontent" : 304 === e ? w = "notmodified" : (w = _.state, 
-                d = _.data, u = !(p = _.error))) : (p = w, !e && w || (w = "error", e < 0 && (e = 0))), 
-                C.status = e, C.statusText = (i || w) + "", u ? v.resolveWith(m, [ d, w, C ]) : v.rejectWith(m, [ C, w, p ]), 
-                C.statusCode(b), b = void 0, c && g.trigger(u ? "ajaxSuccess" : "ajaxError", [ C, f, u ? d : p ]), 
-                y.fireWith(m, [ C, w ]), c && (g.trigger("ajaxComplete", [ C, f ]), --pt.active || pt.event.trigger("ajaxStop")));
+                d = _.data, h = !(p = _.error))) : (p = w, !e && w || (w = "error", e < 0 && (e = 0))), 
+                C.status = e, C.statusText = (i || w) + "", h ? v.resolveWith(m, [ d, w, C ]) : v.rejectWith(m, [ C, w, p ]), 
+                C.statusCode(y), y = void 0, c && g.trigger(h ? "ajaxSuccess" : "ajaxError", [ C, f, h ? d : p ]), 
+                b.fireWith(m, [ C, w ]), c && (g.trigger("ajaxComplete", [ C, f ]), --pt.active || pt.event.trigger("ajaxStop")));
             }
             "object" == typeof e && (i = e, e = void 0), i = i || {};
-            var s, o, a, r, l, u, h, c, d, p, f = pt.ajaxSetup({}, i), m = f.context || f, g = f.context && (m.nodeType || m.jquery) ? pt(m) : pt.event, v = pt.Deferred(), y = pt.Callbacks("once memory"), b = f.statusCode || {}, _ = {}, x = {}, w = "canceled", C = {
+            var s, o, a, r, l, h, u, c, d, p, f = pt.ajaxSetup({}, i), m = f.context || f, g = f.context && (m.nodeType || m.jquery) ? pt(m) : pt.event, v = pt.Deferred(), b = pt.Callbacks("once memory"), y = f.statusCode || {}, _ = {}, x = {}, w = "canceled", C = {
                 readyState: 0,
                 getResponseHeader: function(t) {
                     var e;
-                    if (h) {
+                    if (u) {
                         if (!r) for (r = {}; e = Ie.exec(a); ) r[e[1].toLowerCase()] = e[2];
                         e = r[t.toLowerCase()];
                     }
                     return null == e ? null : e;
                 },
                 getAllResponseHeaders: function() {
-                    return h ? a : null;
+                    return u ? a : null;
                 },
                 setRequestHeader: function(t, e) {
-                    return null == h && (t = x[t.toLowerCase()] = x[t.toLowerCase()] || t, _[t] = e), 
+                    return null == u && (t = x[t.toLowerCase()] = x[t.toLowerCase()] || t, _[t] = e), 
                     this;
                 },
                 overrideMimeType: function(t) {
-                    return null == h && (f.mimeType = t), this;
+                    return null == u && (f.mimeType = t), this;
                 },
                 statusCode: function(t) {
                     var e;
-                    if (t) if (h) C.always(t[C.status]); else for (e in t) b[e] = [ b[e], t[e] ];
+                    if (t) if (u) C.always(t[C.status]); else for (e in t) y[e] = [ y[e], t[e] ];
                     return this;
                 },
                 abort: function(t) {
@@ -4296,15 +4120,15 @@ function VerificarHorario(t, e) {
             if (v.promise(C), f.url = ((e || f.url || xe.href) + "").replace(Ne, xe.protocol + "//"), 
             f.type = i.method || i.type || f.method || f.type, f.dataTypes = (f.dataType || "*").toLowerCase().match(Et) || [ "" ], 
             null == f.crossDomain) {
-                u = et.createElement("a");
+                h = et.createElement("a");
                 try {
-                    u.href = f.url, u.href = u.href, f.crossDomain = ze.protocol + "//" + ze.host != u.protocol + "//" + u.host;
+                    h.href = f.url, h.href = h.href, f.crossDomain = je.protocol + "//" + je.host != h.protocol + "//" + h.host;
                 } catch (t) {
                     f.crossDomain = !0;
                 }
             }
             if (f.data && f.processData && "string" != typeof f.data && (f.data = pt.param(f.data, f.traditional)), 
-            K(Le, f, i, C), h) return C;
+            K(Le, f, i, C), u) return C;
             (c = pt.event && f.global) && 0 == pt.active++ && pt.event.trigger("ajaxStart"), 
             f.type = f.type.toUpperCase(), f.hasContent = !Me.test(f.type), o = f.url.replace(Pe, ""), 
             f.hasContent ? f.data && f.processData && 0 === (f.contentType || "").indexOf("application/x-www-form-urlencoded") && (f.data = f.data.replace(Ee, "+")) : (p = f.url.slice(o.length), 
@@ -4313,16 +4137,16 @@ function VerificarHorario(t, e) {
             pt.etag[o] && C.setRequestHeader("If-None-Match", pt.etag[o])), (f.data && f.hasContent && !1 !== f.contentType || i.contentType) && C.setRequestHeader("Content-Type", f.contentType), 
             C.setRequestHeader("Accept", f.dataTypes[0] && f.accepts[f.dataTypes[0]] ? f.accepts[f.dataTypes[0]] + ("*" !== f.dataTypes[0] ? ", " + Oe + "; q=0.01" : "") : f.accepts["*"]);
             for (d in f.headers) C.setRequestHeader(d, f.headers[d]);
-            if (f.beforeSend && (!1 === f.beforeSend.call(m, C, f) || h)) return C.abort();
-            if (w = "abort", y.add(f.complete), C.done(f.success), C.fail(f.error), s = K(He, f, i, C)) {
-                if (C.readyState = 1, c && g.trigger("ajaxSend", [ C, f ]), h) return C;
+            if (f.beforeSend && (!1 === f.beforeSend.call(m, C, f) || u)) return C.abort();
+            if (w = "abort", b.add(f.complete), C.done(f.success), C.fail(f.error), s = K(He, f, i, C)) {
+                if (C.readyState = 1, c && g.trigger("ajaxSend", [ C, f ]), u) return C;
                 f.async && f.timeout > 0 && (l = t.setTimeout(function() {
                     C.abort("timeout");
                 }, f.timeout));
                 try {
-                    h = !1, s.send(_, n);
+                    u = !1, s.send(_, n);
                 } catch (t) {
-                    if (h) throw t;
+                    if (u) throw t;
                     n(-1, t);
                 }
             } else n(-1, "No Transport");
@@ -4391,7 +4215,7 @@ function VerificarHorario(t, e) {
             return new t.XMLHttpRequest();
         } catch (t) {}
     };
-    var Re = {
+    var ze = {
         0: 200,
         1223: 204
     }, We = pt.ajaxSettings.xhr();
@@ -4405,7 +4229,7 @@ function VerificarHorario(t, e) {
                 for (a in s) r.setRequestHeader(a, s[a]);
                 i = function(t) {
                     return function() {
-                        i && (i = n = r.onload = r.onerror = r.onabort = r.onreadystatechange = null, "abort" === t ? r.abort() : "error" === t ? "number" != typeof r.status ? o(0, "error") : o(r.status, r.statusText) : o(Re[r.status] || r.status, r.statusText, "text" !== (r.responseType || "text") || "string" != typeof r.responseText ? {
+                        i && (i = n = r.onload = r.onerror = r.onabort = r.onreadystatechange = null, "abort" === t ? r.abort() : "error" === t ? "number" != typeof r.status ? o(0, "error") : o(r.status, r.statusText) : o(ze[r.status] || r.status, r.statusText, "text" !== (r.responseType || "text") || "string" != typeof r.responseText ? {
                             binary: r.response
                         } : {
                             text: r.responseText
@@ -4460,24 +4284,24 @@ function VerificarHorario(t, e) {
             };
         }
     });
-    var je = [], Be = /(=)\?(?=&|$)|\?\?/;
+    var Be = [], $e = /(=)\?(?=&|$)|\?\?/;
     pt.ajaxSetup({
         jsonp: "callback",
         jsonpCallback: function() {
-            var t = je.pop() || pt.expando + "_" + we++;
+            var t = Be.pop() || pt.expando + "_" + we++;
             return this[t] = !0, t;
         }
     }), pt.ajaxPrefilter("json jsonp", function(e, i, n) {
-        var s, o, a, r = !1 !== e.jsonp && (Be.test(e.url) ? "url" : "string" == typeof e.data && 0 === (e.contentType || "").indexOf("application/x-www-form-urlencoded") && Be.test(e.data) && "data");
+        var s, o, a, r = !1 !== e.jsonp && ($e.test(e.url) ? "url" : "string" == typeof e.data && 0 === (e.contentType || "").indexOf("application/x-www-form-urlencoded") && $e.test(e.data) && "data");
         if (r || "jsonp" === e.dataTypes[0]) return s = e.jsonpCallback = pt.isFunction(e.jsonpCallback) ? e.jsonpCallback() : e.jsonpCallback, 
-        r ? e[r] = e[r].replace(Be, "$1" + s) : !1 !== e.jsonp && (e.url += (Ce.test(e.url) ? "&" : "?") + e.jsonp + "=" + s), 
+        r ? e[r] = e[r].replace($e, "$1" + s) : !1 !== e.jsonp && (e.url += (Ce.test(e.url) ? "&" : "?") + e.jsonp + "=" + s), 
         e.converters["script json"] = function() {
             return a || pt.error(s + " was not called"), a[0];
         }, e.dataTypes[0] = "json", o = t[s], t[s] = function() {
             a = arguments;
         }, n.always(function() {
             void 0 === o ? pt(t).removeProp(s) : t[s] = o, e[s] && (e.jsonpCallback = i.jsonpCallback, 
-            je.push(s)), a && pt.isFunction(o) && o(a[0]), a = o = void 0;
+            Be.push(s)), a && pt.isFunction(o) && o(a[0]), a = o = void 0;
         }), "script";
     }), dt.createHTMLDocument = function() {
         var t = et.implementation.createHTMLDocument("").body;
@@ -4487,7 +4311,7 @@ function VerificarHorario(t, e) {
         "boolean" == typeof e && (i = e, e = !1);
         var n, s, o;
         return e || (dt.createHTMLDocument ? ((n = (e = et.implementation.createHTMLDocument("")).createElement("base")).href = et.location.href, 
-        e.head.appendChild(n)) : e = et), s = wt.exec(t), o = !i && [], s ? [ e.createElement(s[1]) ] : (s = b([ t ], e, o), 
+        e.head.appendChild(n)) : e = et), s = wt.exec(t), o = !i && [], s ? [ e.createElement(s[1]) ] : (s = y([ t ], e, o), 
         o && o.length && pt(o).remove(), pt.merge([], s.childNodes));
     }, pt.fn.load = function(t, e, i) {
         var n, s, o, a = this, r = t.indexOf(" ");
@@ -4514,12 +4338,12 @@ function VerificarHorario(t, e) {
         }).length;
     }, pt.offset = {
         setOffset: function(t, e, i) {
-            var n, s, o, a, r, l, u = pt.css(t, "position"), h = pt(t), c = {};
-            "static" === u && (t.style.position = "relative"), r = h.offset(), o = pt.css(t, "top"), 
-            l = pt.css(t, "left"), ("absolute" === u || "fixed" === u) && (o + l).indexOf("auto") > -1 ? (a = (n = h.position()).top, 
+            var n, s, o, a, r, l, h = pt.css(t, "position"), u = pt(t), c = {};
+            "static" === h && (t.style.position = "relative"), r = u.offset(), o = pt.css(t, "top"), 
+            l = pt.css(t, "left"), ("absolute" === h || "fixed" === h) && (o + l).indexOf("auto") > -1 ? (a = (n = u.position()).top, 
             s = n.left) : (a = parseFloat(o) || 0, s = parseFloat(l) || 0), pt.isFunction(e) && (e = e.call(t, i, pt.extend({}, r))), 
             null != e.top && (c.top = e.top - r.top + a), null != e.left && (c.left = e.left - r.left + s), 
-            "using" in e ? e.using.call(t, c) : h.css(c);
+            "using" in e ? e.using.call(t, c) : u.css(c);
         }
     }, pt.fn.extend({
         offset: function(t) {
@@ -4528,7 +4352,7 @@ function VerificarHorario(t, e) {
             });
             var e, i, n, s, o = this[0];
             if (o) return o.getClientRects().length ? (n = o.getBoundingClientRect(), n.width || n.height ? (s = o.ownerDocument, 
-            i = J(s), e = s.documentElement, {
+            i = Z(s), e = s.documentElement, {
                 top: n.top + i.pageYOffset - e.clientTop,
                 left: n.left + i.pageXOffset - e.clientLeft
             }) : n) : {
@@ -4555,7 +4379,7 @@ function VerificarHorario(t, e) {
         offsetParent: function() {
             return this.map(function() {
                 for (var t = this.offsetParent; t && "static" === pt.css(t, "position"); ) t = t.offsetParent;
-                return t || Xt;
+                return t || Ut;
             });
         }
     }), pt.each({
@@ -4565,7 +4389,7 @@ function VerificarHorario(t, e) {
         var i = "pageYOffset" === e;
         pt.fn[t] = function(n) {
             return It(this, function(t, n, s) {
-                var o = J(t);
+                var o = Z(t);
                 if (void 0 === s) return o ? o[e] : t[n];
                 o ? o.scrollTo(i ? o.pageXOffset : s, i ? s : o.pageYOffset) : t[n] = s;
             }, t, n, arguments.length);
@@ -4608,9 +4432,9 @@ function VerificarHorario(t, e) {
     }), pt.parseJSON = JSON.parse, "function" == typeof define && define.amd && define("jquery", [], function() {
         return pt;
     });
-    var $e = t.jQuery, qe = t.$;
+    var Re = t.jQuery, qe = t.$;
     return pt.noConflict = function(e) {
-        return t.$ === pt && (t.$ = qe), e && t.jQuery === pt && (t.jQuery = $e), pt;
+        return t.$ === pt && (t.$ = qe), e && t.jQuery === pt && (t.jQuery = Re), pt;
     }, e || (t.jQuery = t.$ = pt), pt;
 }), function(t, e) {
     "object" == typeof module && "object" == typeof module.exports ? module.exports = t.document ? e(t, !0) : function(t) {
@@ -4645,7 +4469,7 @@ function VerificarHorario(t, e) {
     }
     function o(t) {
         var e = _t[t] = {};
-        return ot.each(t.match(bt) || [], function(t, i) {
+        return ot.each(t.match(yt) || [], function(t, i) {
             e[i] = !0;
         }), e;
     }
@@ -4669,19 +4493,19 @@ function VerificarHorario(t, e) {
         }
         return i;
     }
-    function u(t) {
+    function h(t) {
         var e;
         for (e in t) if (("data" !== e || !ot.isEmptyObject(t[e])) && "toJSON" !== e) return !1;
         return !0;
     }
-    function h(t, e, i, n) {
+    function u(t, e, i, n) {
         if (ot.acceptData(t)) {
-            var s, o, a = ot.expando, r = t.nodeType, l = r ? ot.cache : t, u = r ? t[a] : t[a] && a;
-            if (u && l[u] && (n || l[u].data) || void 0 !== i || "string" != typeof e) return u || (u = r ? t[a] = X.pop() || ot.guid++ : a), 
-            l[u] || (l[u] = r ? {} : {
+            var s, o, a = ot.expando, r = t.nodeType, l = r ? ot.cache : t, h = r ? t[a] : t[a] && a;
+            if (h && l[h] && (n || l[h].data) || void 0 !== i || "string" != typeof e) return h || (h = r ? t[a] = U.pop() || ot.guid++ : a), 
+            l[h] || (l[h] = r ? {} : {
                 toJSON: ot.noop
-            }), ("object" == typeof e || "function" == typeof e) && (n ? l[u] = ot.extend(l[u], e) : l[u].data = ot.extend(l[u].data, e)), 
-            o = l[u], n || (o.data || (o.data = {}), o = o.data), void 0 !== i && (o[ot.camelCase(e)] = i), 
+            }), ("object" == typeof e || "function" == typeof e) && (n ? l[h] = ot.extend(l[h], e) : l[h].data = ot.extend(l[h].data, e)), 
+            o = l[h], n || (o.data || (o.data = {}), o = o.data), void 0 !== i && (o[ot.camelCase(e)] = i), 
             "string" == typeof e ? null == (s = o[e]) && (s = o[ot.camelCase(e)]) : s = o, s;
         }
     }
@@ -4693,9 +4517,9 @@ function VerificarHorario(t, e) {
                     ot.isArray(e) ? e = e.concat(ot.map(e, ot.camelCase)) : e in n ? e = [ e ] : (e = ot.camelCase(e), 
                     e = e in n ? [ e ] : e.split(" ")), s = e.length;
                     for (;s--; ) delete n[e[s]];
-                    if (i ? !u(n) : !ot.isEmptyObject(n)) return;
+                    if (i ? !h(n) : !ot.isEmptyObject(n)) return;
                 }
-                (i || (delete a[r].data, u(a[r]))) && (o ? ot.cleanData([ t ], !0) : nt.deleteExpando || a != a.window ? delete a[r] : a[r] = null);
+                (i || (delete a[r].data, h(a[r]))) && (o ? ot.cleanData([ t ], !0) : nt.deleteExpando || a != a.window ? delete a[r] : a[r] = null);
             }
         }
     }
@@ -4723,14 +4547,14 @@ function VerificarHorario(t, e) {
     function v(t) {
         At.test(t.type) && (t.defaultChecked = t.checked);
     }
-    function y(t, e) {
+    function b(t, e) {
         return ot.nodeName(t, "table") && ot.nodeName(11 !== e.nodeType ? e : e.firstChild, "tr") ? t.getElementsByTagName("tbody")[0] || t.appendChild(t.ownerDocument.createElement("tbody")) : t;
     }
-    function b(t) {
+    function y(t) {
         return t.type = (null !== ot.find.attr(t, "type")) + "/" + t.type, t;
     }
     function _(t) {
-        var e = Ut.exec(t.type);
+        var e = Vt.exec(t.type);
         return e ? t.type = e[1] : t.removeAttribute("type"), t;
     }
     function x(t, e) {
@@ -4754,7 +4578,7 @@ function VerificarHorario(t, e) {
                 for (n in s.events) ot.removeEvent(e, n, s.handle);
                 e.removeAttribute(ot.expando);
             }
-            "script" === i && e.text !== t.text ? (b(e).text = t.text, _(e)) : "object" === i ? (e.parentNode && (e.outerHTML = t.outerHTML), 
+            "script" === i && e.text !== t.text ? (y(e).text = t.text, _(e)) : "object" === i ? (e.parentNode && (e.outerHTML = t.outerHTML), 
             nt.html5Clone && t.innerHTML && !ot.trim(e.innerHTML) && (e.innerHTML = t.innerHTML)) : "input" === i && At.test(t.type) ? (e.defaultChecked = e.checked = t.checked, 
             e.value !== t.value && (e.value = t.value)) : "option" === i ? e.defaultSelected = e.selected = t.defaultSelected : ("input" === i || "textarea" === i) && (e.defaultValue = t.defaultValue);
         }
@@ -4764,10 +4588,10 @@ function VerificarHorario(t, e) {
         return n.detach(), s;
     }
     function D(t) {
-        var e = mt, i = Zt[t];
+        var e = mt, i = Jt[t];
         return i || ("none" !== (i = k(t, e)) && i || (Qt = (Qt || ot("<iframe frameborder='0' width='0' height='0'/>")).appendTo(e.documentElement), 
         (e = (Qt[0].contentWindow || Qt[0].contentDocument).document).write(), e.close(), 
-        i = k(t, e), Qt.detach()), Zt[t] = i), i;
+        i = k(t, e), Qt.detach()), Jt[t] = i), i;
     }
     function T(t, e) {
         return {
@@ -4800,7 +4624,7 @@ function VerificarHorario(t, e) {
         return a;
     }
     function I(t, e, i) {
-        var n = !0, s = "width" === e ? t.offsetWidth : t.offsetHeight, o = Jt(t), a = nt.boxSizing() && "border-box" === ot.css(t, "boxSizing", !1, o);
+        var n = !0, s = "width" === e ? t.offsetWidth : t.offsetHeight, o = Zt(t), a = nt.boxSizing() && "border-box" === ot.css(t, "boxSizing", !1, o);
         if (0 >= s || null == s) {
             if ((0 > (s = te(t, e, o)) || null == s) && (s = t.style[e]), ie.test(s)) return s;
             n = a && (nt.boxSizingReliable() || s === t.style[e]), s = parseFloat(s) || 0;
@@ -4823,10 +4647,10 @@ function VerificarHorario(t, e) {
         return e && (n.opacity = n.width = t), n;
     }
     function L(t, e, i) {
-        for (var n, s = (ye[e] || []).concat(ye["*"]), o = 0, a = s.length; a > o; o++) if (n = s[o].call(i, e, t)) return n;
+        for (var n, s = (be[e] || []).concat(be["*"]), o = 0, a = s.length; a > o; o++) if (n = s[o].call(i, e, t)) return n;
     }
     function H(t, e, i) {
-        var n, s, o, a, r, l, u, h, c = this, d = {}, p = t.style, f = t.nodeType && Et(t), m = ot._data(t, "fxshow");
+        var n, s, o, a, r, l, h, u, c = this, d = {}, p = t.style, f = t.nodeType && Et(t), m = ot._data(t, "fxshow");
         i.queue || (null == (r = ot._queueHooks(t, "fx")).unqueued && (r.unqueued = 0, l = r.empty.fire, 
         r.empty.fire = function() {
             r.unqueued || l();
@@ -4835,7 +4659,7 @@ function VerificarHorario(t, e) {
                 r.unqueued--, ot.queue(t, "fx").length || r.empty.fire();
             });
         })), 1 === t.nodeType && ("height" in e || "width" in e) && (i.overflow = [ p.overflow, p.overflowX, p.overflowY ], 
-        u = ot.css(t, "display"), h = D(t.nodeName), "none" === u && (u = h), "inline" === u && "none" === ot.css(t, "float") && (nt.inlineBlockNeedsLayout && "inline" !== h ? p.zoom = 1 : p.display = "inline-block")), 
+        h = ot.css(t, "display"), u = D(t.nodeName), "none" === h && (h = u), "inline" === h && "none" === ot.css(t, "float") && (nt.inlineBlockNeedsLayout && "inline" !== u ? p.zoom = 1 : p.display = "inline-block")), 
         i.overflow && (p.overflow = "hidden", nt.shrinkWrapBlocks() || c.always(function() {
             p.overflow = i.overflow[0], p.overflowX = i.overflow[1], p.overflowY = i.overflow[2];
         }));
@@ -4867,15 +4691,15 @@ function VerificarHorario(t, e) {
             for (i in o) i in t || (t[i] = o[i], e[i] = s);
         } else e[n] = s;
     }
-    function z(t, e, i) {
+    function j(t, e, i) {
         var n, s, o = 0, a = ve.length, r = ot.Deferred().always(function() {
             delete l.elem;
         }), l = function() {
             if (s) return !1;
-            for (var e = de || M(), i = Math.max(0, u.startTime + u.duration - e), n = 1 - (i / u.duration || 0), o = 0, a = u.tweens.length; a > o; o++) u.tweens[o].run(n);
-            return r.notifyWith(t, [ u, n, i ]), 1 > n && a ? i : (r.resolveWith(t, [ u ]), 
+            for (var e = de || M(), i = Math.max(0, h.startTime + h.duration - e), n = 1 - (i / h.duration || 0), o = 0, a = h.tweens.length; a > o; o++) h.tweens[o].run(n);
+            return r.notifyWith(t, [ h, n, i ]), 1 > n && a ? i : (r.resolveWith(t, [ h ]), 
             !1);
-        }, u = r.promise({
+        }, h = r.promise({
             elem: t,
             props: ot.extend({}, e),
             opts: ot.extend(!0, {
@@ -4887,28 +4711,28 @@ function VerificarHorario(t, e) {
             duration: i.duration,
             tweens: [],
             createTween: function(e, i) {
-                var n = ot.Tween(t, u.opts, e, i, u.opts.specialEasing[e] || u.opts.easing);
-                return u.tweens.push(n), n;
+                var n = ot.Tween(t, h.opts, e, i, h.opts.specialEasing[e] || h.opts.easing);
+                return h.tweens.push(n), n;
             },
             stop: function(e) {
-                var i = 0, n = e ? u.tweens.length : 0;
+                var i = 0, n = e ? h.tweens.length : 0;
                 if (s) return this;
-                for (s = !0; n > i; i++) u.tweens[i].run(1);
-                return e ? r.resolveWith(t, [ u, e ]) : r.rejectWith(t, [ u, e ]), this;
+                for (s = !0; n > i; i++) h.tweens[i].run(1);
+                return e ? r.resolveWith(t, [ h, e ]) : r.rejectWith(t, [ h, e ]), this;
             }
-        }), h = u.props;
-        for (O(h, u.opts.specialEasing); a > o; o++) if (n = ve[o].call(u, t, h, u.opts)) return n;
-        return ot.map(h, L, u), ot.isFunction(u.opts.start) && u.opts.start.call(t, u), 
+        }), u = h.props;
+        for (O(u, h.opts.specialEasing); a > o; o++) if (n = ve[o].call(h, t, u, h.opts)) return n;
+        return ot.map(u, L, h), ot.isFunction(h.opts.start) && h.opts.start.call(t, h), 
         ot.fx.timer(ot.extend(l, {
             elem: t,
-            anim: u,
-            queue: u.opts.queue
-        })), u.progress(u.opts.progress).done(u.opts.done, u.opts.complete).fail(u.opts.fail).always(u.opts.always);
+            anim: h,
+            queue: h.opts.queue
+        })), h.progress(h.opts.progress).done(h.opts.done, h.opts.complete).fail(h.opts.fail).always(h.opts.always);
     }
-    function R(t) {
+    function z(t) {
         return function(e, i) {
             "string" != typeof e && (i = e, e = "*");
-            var n, s = 0, o = e.toLowerCase().match(bt) || [];
+            var n, s = 0, o = e.toLowerCase().match(yt) || [];
             if (ot.isFunction(i)) for (;n = o[s++]; ) "+" === n.charAt(0) ? (n = n.slice(1) || "*", 
             (t[n] = t[n] || []).unshift(i)) : (t[n] = t[n] || []).push(i);
         };
@@ -4917,20 +4741,20 @@ function VerificarHorario(t, e) {
         function s(r) {
             var l;
             return o[r] = !0, ot.each(t[r] || [], function(t, r) {
-                var u = r(e, i, n);
-                return "string" != typeof u || a || o[u] ? a ? !(l = u) : void 0 : (e.dataTypes.unshift(u), 
-                s(u), !1);
+                var h = r(e, i, n);
+                return "string" != typeof h || a || o[h] ? a ? !(l = h) : void 0 : (e.dataTypes.unshift(h), 
+                s(h), !1);
             }), l;
         }
-        var o = {}, a = t === Be;
+        var o = {}, a = t === $e;
         return s(e.dataTypes[0]) || !o["*"] && s("*");
     }
-    function j(t, e) {
+    function B(t, e) {
         var i, n, s = ot.ajaxSettings.flatOptions || {};
         for (n in e) void 0 !== e[n] && ((s[n] ? t : i || (i = {}))[n] = e[n]);
         return i && ot.extend(!0, t, i), t;
     }
-    function B(t, e, i) {
+    function $(t, e, i) {
         for (var n, s, o, a, r = t.contents, l = t.dataTypes; "*" === l[0]; ) l.shift(), 
         void 0 === s && (s = t.mimeType || e.getResponseHeader("Content-Type"));
         if (s) for (a in r) if (r[a] && r[a].test(s)) {
@@ -4949,13 +4773,13 @@ function VerificarHorario(t, e) {
         }
         return o ? (o !== l[0] && l.unshift(o), i[o]) : void 0;
     }
-    function $(t, e, i, n) {
-        var s, o, a, r, l, u = {}, h = t.dataTypes.slice();
-        if (h[1]) for (a in t.converters) u[a.toLowerCase()] = t.converters[a];
-        for (o = h.shift(); o; ) if (t.responseFields[o] && (i[t.responseFields[o]] = e), 
-        !l && n && t.dataFilter && (e = t.dataFilter(e, t.dataType)), l = o, o = h.shift()) if ("*" === o) o = l; else if ("*" !== l && l !== o) {
-            if (!(a = u[l + " " + o] || u["* " + o])) for (s in u) if ((r = s.split(" "))[1] === o && (a = u[l + " " + r[0]] || u["* " + r[0]])) {
-                !0 === a ? a = u[s] : !0 !== u[s] && (o = r[0], h.unshift(r[1]));
+    function R(t, e, i, n) {
+        var s, o, a, r, l, h = {}, u = t.dataTypes.slice();
+        if (u[1]) for (a in t.converters) h[a.toLowerCase()] = t.converters[a];
+        for (o = u.shift(); o; ) if (t.responseFields[o] && (i[t.responseFields[o]] = e), 
+        !l && n && t.dataFilter && (e = t.dataFilter(e, t.dataType)), l = o, o = u.shift()) if ("*" === o) o = l; else if ("*" !== l && l !== o) {
+            if (!(a = h[l + " " + o] || h["* " + o])) for (s in h) if ((r = s.split(" "))[1] === o && (a = h[l + " " + r[0]] || h["* " + r[0]])) {
+                !0 === a ? a = h[s] : !0 !== h[s] && (o = r[0], u.unshift(r[1]));
                 break;
             }
             if (!0 !== a) if (a && t.throws) e = a(e); else try {
@@ -4983,17 +4807,17 @@ function VerificarHorario(t, e) {
             return new t.XMLHttpRequest();
         } catch (t) {}
     }
-    function V() {
+    function X() {
         try {
             return new t.ActiveXObject("Microsoft.XMLHTTP");
         } catch (t) {}
     }
-    function U(t) {
+    function V(t) {
         return ot.isWindow(t) ? t : 9 === t.nodeType && (t.defaultView || t.parentWindow);
     }
-    var X = [], K = X.slice, G = X.concat, Q = X.push, Z = X.indexOf, J = {}, tt = J.toString, et = J.hasOwnProperty, it = "".trim, nt = {}, st = "1.11.0", ot = function(t, e) {
+    var U = [], K = U.slice, G = U.concat, Q = U.push, J = U.indexOf, Z = {}, tt = Z.toString, et = Z.hasOwnProperty, it = "".trim, nt = {}, st = "1.11.0", ot = function(t, e) {
         return new ot.fn.init(t, e);
-    }, at = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, rt = /^-ms-/, lt = /-([\da-z])/gi, ut = function(t, e) {
+    }, at = /^[\s\uFEFF\xA0]+|[\s\uFEFF\xA0]+$/g, rt = /^-ms-/, lt = /-([\da-z])/gi, ht = function(t, e) {
         return e.toUpperCase();
     };
     ot.fn = ot.prototype = {
@@ -5036,14 +4860,14 @@ function VerificarHorario(t, e) {
             return this.prevObject || this.constructor(null);
         },
         push: Q,
-        sort: X.sort,
-        splice: X.splice
+        sort: U.sort,
+        splice: U.splice
     }, ot.extend = ot.fn.extend = function() {
-        var t, e, i, n, s, o, a = arguments[0] || {}, r = 1, l = arguments.length, u = !1;
-        for ("boolean" == typeof a && (u = a, a = arguments[r] || {}, r++), "object" == typeof a || ot.isFunction(a) || (a = {}), 
+        var t, e, i, n, s, o, a = arguments[0] || {}, r = 1, l = arguments.length, h = !1;
+        for ("boolean" == typeof a && (h = a, a = arguments[r] || {}, r++), "object" == typeof a || ot.isFunction(a) || (a = {}), 
         r === l && (a = this, r--); l > r; r++) if (null != (s = arguments[r])) for (n in s) t = a[n], 
-        i = s[n], a !== i && (u && i && (ot.isPlainObject(i) || (e = ot.isArray(i))) ? (e ? (e = !1, 
-        o = t && ot.isArray(t) ? t : []) : o = t && ot.isPlainObject(t) ? t : {}, a[n] = ot.extend(u, o, i)) : void 0 !== i && (a[n] = i));
+        i = s[n], a !== i && (h && i && (ot.isPlainObject(i) || (e = ot.isArray(i))) ? (e ? (e = !1, 
+        o = t && ot.isArray(t) ? t : []) : o = t && ot.isPlainObject(t) ? t : {}, a[n] = ot.extend(h, o, i)) : void 0 !== i && (a[n] = i));
         return a;
     }, ot.extend({
         expando: "jQuery" + (st + Math.random()).replace(/\D/g, ""),
@@ -5082,7 +4906,7 @@ function VerificarHorario(t, e) {
             return void 0 === e || et.call(t, e);
         },
         type: function(t) {
-            return null == t ? t + "" : "object" == typeof t || "function" == typeof t ? J[tt.call(t)] || "object" : typeof t;
+            return null == t ? t + "" : "object" == typeof t || "function" == typeof t ? Z[tt.call(t)] || "object" : typeof t;
         },
         globalEval: function(e) {
             e && ot.trim(e) && (t.execScript || function(e) {
@@ -5090,7 +4914,7 @@ function VerificarHorario(t, e) {
             })(e);
         },
         camelCase: function(t) {
-            return t.replace(rt, "ms-").replace(lt, ut);
+            return t.replace(rt, "ms-").replace(lt, ht);
         },
         nodeName: function(t, e) {
             return t.nodeName && t.nodeName.toLowerCase() === e.toLowerCase();
@@ -5115,7 +4939,7 @@ function VerificarHorario(t, e) {
         inArray: function(t, e, i) {
             var n;
             if (e) {
-                if (Z) return Z.call(e, t, i);
+                if (J) return J.call(e, t, i);
                 for (n = e.length, i = i ? 0 > i ? Math.max(0, n + i) : i : 0; n > i; i++) if (i in e && e[i] === t) return i;
             }
             return -1;
@@ -5147,12 +4971,12 @@ function VerificarHorario(t, e) {
         },
         support: nt
     }), ot.each("Boolean Number String Function Array Date RegExp Object Error".split(" "), function(t, e) {
-        J["[object " + e + "]"] = e.toLowerCase();
+        Z["[object " + e + "]"] = e.toLowerCase();
     });
-    var ht = function(t) {
+    var ut = function(t) {
         function e(t, e, i, n) {
-            var s, o, a, r, u, d, p, f, m, g;
-            if ((e ? e.ownerDocument || e : z) !== A && P(e), e = e || A, i = i || [], !t || "string" != typeof t) return i;
+            var s, o, a, r, h, d, p, f, m, g;
+            if ((e ? e.ownerDocument || e : j) !== A && P(e), e = e || A, i = i || [], !t || "string" != typeof t) return i;
             if (1 !== (r = e.nodeType) && 9 !== r) return [];
             if (F && !n) {
                 if (s = gt.exec(t)) if (a = s[1]) {
@@ -5168,8 +4992,8 @@ function VerificarHorario(t, e) {
                 }
                 if (x.qsa && (!M || !M.test(t))) {
                     if (f = p = O, m = e, g = 9 === r && t, 1 === r && "object" !== e.nodeName.toLowerCase()) {
-                        for (d = h(t), (p = e.getAttribute("id")) ? f = p.replace(yt, "\\$&") : e.setAttribute("id", f), 
-                        f = "[id='" + f + "'] ", u = d.length; u--; ) d[u] = f + c(d[u]);
+                        for (d = u(t), (p = e.getAttribute("id")) ? f = p.replace(bt, "\\$&") : e.setAttribute("id", f), 
+                        f = "[id='" + f + "'] ", h = d.length; h--; ) d[h] = f + c(d[h]);
                         m = vt.test(t) && l(e.parentNode) || e, g = d.join(",");
                     }
                     if (g) try {
@@ -5179,7 +5003,7 @@ function VerificarHorario(t, e) {
                     }
                 }
             }
-            return b(t.replace(at, "$1"), e, i, n);
+            return y(t.replace(at, "$1"), e, i, n);
         }
         function i() {
             function t(i, n) {
@@ -5205,7 +5029,7 @@ function VerificarHorario(t, e) {
             for (var i = t.split("|"), n = t.length; n--; ) w.attrHandle[i[n]] = e;
         }
         function a(t, e) {
-            var i = e && t, n = i && 1 === t.nodeType && 1 === e.nodeType && (~e.sourceIndex || V) - (~t.sourceIndex || V);
+            var i = e && t, n = i && 1 === t.nodeType && 1 === e.nodeType && (~e.sourceIndex || X) - (~t.sourceIndex || X);
             if (n) return n;
             if (i) for (;i = i.nextSibling; ) if (i === e) return -1;
             return t ? 1 : -1;
@@ -5220,17 +5044,17 @@ function VerificarHorario(t, e) {
         function l(t) {
             return t && typeof t.getElementsByTagName !== Y && t;
         }
-        function u() {}
-        function h(t, i) {
-            var n, s, o, a, r, l, u, h = B[t + " "];
-            if (h) return i ? 0 : h.slice(0);
-            for (r = t, l = [], u = w.preFilter; r; ) {
+        function h() {}
+        function u(t, i) {
+            var n, s, o, a, r, l, h, u = $[t + " "];
+            if (u) return i ? 0 : u.slice(0);
+            for (r = t, l = [], h = w.preFilter; r; ) {
                 (!n || (s = rt.exec(r))) && (s && (r = r.slice(s[0].length) || r), l.push(o = [])), 
                 n = !1, (s = lt.exec(r)) && (n = s.shift(), o.push({
                     value: n,
                     type: s[0].replace(at, " ")
                 }), r = r.slice(n.length));
-                for (a in w.filter) !(s = dt[a].exec(r)) || u[a] && !(s = u[a](s)) || (n = s.shift(), 
+                for (a in w.filter) !(s = dt[a].exec(r)) || h[a] && !(s = h[a](s)) || (n = s.shift(), 
                 o.push({
                     value: n,
                     type: a,
@@ -5238,7 +5062,7 @@ function VerificarHorario(t, e) {
                 }), r = r.slice(n.length));
                 if (!n) break;
             }
-            return i ? r.length : r ? e.error(t) : B(t, l).slice(0);
+            return i ? r.length : r ? e.error(t) : $(t, l).slice(0);
         }
         function c(t) {
             for (var e = 0, i = t.length, n = ""; i > e; e++) n += t[e].value;
@@ -5249,12 +5073,12 @@ function VerificarHorario(t, e) {
             return e.first ? function(e, i, o) {
                 for (;e = e[n]; ) if (1 === e.nodeType || s) return t(e, i, o);
             } : function(e, i, a) {
-                var r, l, u = [ R, o ];
+                var r, l, h = [ z, o ];
                 if (a) {
                     for (;e = e[n]; ) if ((1 === e.nodeType || s) && t(e, i, a)) return !0;
                 } else for (;e = e[n]; ) if (1 === e.nodeType || s) {
-                    if (l = e[O] || (e[O] = {}), (r = l[n]) && r[0] === R && r[1] === o) return u[2] = r[2];
-                    if (l[n] = u, u[2] = t(e, i, a)) return !0;
+                    if (l = e[O] || (e[O] = {}), (r = l[n]) && r[0] === z && r[1] === o) return h[2] = r[2];
+                    if (l[n] = h, h[2] = t(e, i, a)) return !0;
                 }
             };
         }
@@ -5265,55 +5089,55 @@ function VerificarHorario(t, e) {
             } : t[0];
         }
         function f(t, e, i, n, s) {
-            for (var o, a = [], r = 0, l = t.length, u = null != e; l > r; r++) (o = t[r]) && (!i || i(o, n, s)) && (a.push(o), 
-            u && e.push(r));
+            for (var o, a = [], r = 0, l = t.length, h = null != e; l > r; r++) (o = t[r]) && (!i || i(o, n, s)) && (a.push(o), 
+            h && e.push(r));
             return a;
         }
         function m(t, e, i, s, o, a) {
             return s && !s[O] && (s = m(s)), o && !o[O] && (o = m(o, a)), n(function(n, a, r, l) {
-                var u, h, c, d = [], p = [], m = a.length, g = n || y(e || "*", r.nodeType ? [ r ] : r, []), v = !t || !n && e ? g : f(g, d, t, r, l), b = i ? o || (n ? t : m || s) ? [] : a : v;
-                if (i && i(v, b, r, l), s) for (u = f(b, p), s(u, [], r, l), h = u.length; h--; ) (c = u[h]) && (b[p[h]] = !(v[p[h]] = c));
+                var h, u, c, d = [], p = [], m = a.length, g = n || b(e || "*", r.nodeType ? [ r ] : r, []), v = !t || !n && e ? g : f(g, d, t, r, l), y = i ? o || (n ? t : m || s) ? [] : a : v;
+                if (i && i(v, y, r, l), s) for (h = f(y, p), s(h, [], r, l), u = h.length; u--; ) (c = h[u]) && (y[p[u]] = !(v[p[u]] = c));
                 if (n) {
                     if (o || t) {
                         if (o) {
-                            for (u = [], h = b.length; h--; ) (c = b[h]) && u.push(v[h] = c);
-                            o(null, b = [], u, l);
+                            for (h = [], u = y.length; u--; ) (c = y[u]) && h.push(v[u] = c);
+                            o(null, y = [], h, l);
                         }
-                        for (h = b.length; h--; ) (c = b[h]) && (u = o ? J.call(n, c) : d[h]) > -1 && (n[u] = !(a[u] = c));
+                        for (u = y.length; u--; ) (c = y[u]) && (h = o ? Z.call(n, c) : d[u]) > -1 && (n[h] = !(a[h] = c));
                     }
-                } else b = f(b === a ? b.splice(m, b.length) : b), o ? o(null, a, b, l) : Q.apply(a, b);
+                } else y = f(y === a ? y.splice(m, y.length) : y), o ? o(null, a, y, l) : Q.apply(a, y);
             });
         }
         function g(t) {
             for (var e, i, n, s = t.length, o = w.relative[t[0].type], a = o || w.relative[" "], r = o ? 1 : 0, l = d(function(t) {
                 return t === e;
-            }, a, !0), u = d(function(t) {
-                return J.call(e, t) > -1;
-            }, a, !0), h = [ function(t, i, n) {
-                return !o && (n || i !== T) || ((e = i).nodeType ? l(t, i, n) : u(t, i, n));
-            } ]; s > r; r++) if (i = w.relative[t[r].type]) h = [ d(p(h), i) ]; else {
+            }, a, !0), h = d(function(t) {
+                return Z.call(e, t) > -1;
+            }, a, !0), u = [ function(t, i, n) {
+                return !o && (n || i !== T) || ((e = i).nodeType ? l(t, i, n) : h(t, i, n));
+            } ]; s > r; r++) if (i = w.relative[t[r].type]) u = [ d(p(u), i) ]; else {
                 if ((i = w.filter[t[r].type].apply(null, t[r].matches))[O]) {
                     for (n = ++r; s > n && !w.relative[t[n].type]; n++) ;
-                    return m(r > 1 && p(h), r > 1 && c(t.slice(0, r - 1).concat({
+                    return m(r > 1 && p(u), r > 1 && c(t.slice(0, r - 1).concat({
                         value: " " === t[r - 2].type ? "*" : ""
                     })).replace(at, "$1"), i, n > r && g(t.slice(r, n)), s > n && g(t = t.slice(n)), s > n && c(t));
                 }
-                h.push(i);
+                u.push(i);
             }
-            return p(h);
+            return p(u);
         }
         function v(t, i) {
-            var s = i.length > 0, o = t.length > 0, a = function(n, a, r, l, u) {
-                var h, c, d, p = 0, m = "0", g = n && [], v = [], y = T, b = n || o && w.find.TAG("*", u), _ = R += null == y ? 1 : Math.random() || .1, x = b.length;
-                for (u && (T = a !== A && a); m !== x && null != (h = b[m]); m++) {
-                    if (o && h) {
-                        for (c = 0; d = t[c++]; ) if (d(h, a, r)) {
-                            l.push(h);
+            var s = i.length > 0, o = t.length > 0, a = function(n, a, r, l, h) {
+                var u, c, d, p = 0, m = "0", g = n && [], v = [], b = T, y = n || o && w.find.TAG("*", h), _ = z += null == b ? 1 : Math.random() || .1, x = y.length;
+                for (h && (T = a !== A && a); m !== x && null != (u = y[m]); m++) {
+                    if (o && u) {
+                        for (c = 0; d = t[c++]; ) if (d(u, a, r)) {
+                            l.push(u);
                             break;
                         }
-                        u && (R = _);
+                        h && (z = _);
                     }
-                    s && ((h = !d && h) && p--, n && g.push(h));
+                    s && ((u = !d && u) && p--, n && g.push(u));
                 }
                 if (p += m, s && m !== p) {
                     for (c = 0; d = i[c++]; ) d(g, v, a, r);
@@ -5321,36 +5145,36 @@ function VerificarHorario(t, e) {
                         if (p > 0) for (;m--; ) g[m] || v[m] || (v[m] = K.call(l));
                         v = f(v);
                     }
-                    Q.apply(l, v), u && !n && v.length > 0 && p + i.length > 1 && e.uniqueSort(l);
+                    Q.apply(l, v), h && !n && v.length > 0 && p + i.length > 1 && e.uniqueSort(l);
                 }
-                return u && (R = _, T = y), g;
+                return h && (z = _, T = b), g;
             };
             return s ? n(a) : a;
         }
-        function y(t, i, n) {
+        function b(t, i, n) {
             for (var s = 0, o = i.length; o > s; s++) e(t, i[s], n);
             return n;
         }
-        function b(t, e, i, n) {
-            var s, o, a, r, u, d = h(t);
+        function y(t, e, i, n) {
+            var s, o, a, r, h, d = u(t);
             if (!n && 1 === d.length) {
                 if ((o = d[0] = d[0].slice(0)).length > 2 && "ID" === (a = o[0]).type && x.getById && 9 === e.nodeType && F && w.relative[o[1].type]) {
-                    if (!(e = (w.find.ID(a.matches[0].replace(bt, _t), e) || [])[0])) return i;
+                    if (!(e = (w.find.ID(a.matches[0].replace(yt, _t), e) || [])[0])) return i;
                     t = t.slice(o.shift().value.length);
                 }
-                for (s = dt.needsContext.test(t) ? 0 : o.length; s-- && (a = o[s], !w.relative[r = a.type]); ) if ((u = w.find[r]) && (n = u(a.matches[0].replace(bt, _t), vt.test(o[0].type) && l(e.parentNode) || e))) {
+                for (s = dt.needsContext.test(t) ? 0 : o.length; s-- && (a = o[s], !w.relative[r = a.type]); ) if ((h = w.find[r]) && (n = h(a.matches[0].replace(yt, _t), vt.test(o[0].type) && l(e.parentNode) || e))) {
                     if (o.splice(s, 1), !(t = n.length && c(o))) return Q.apply(i, n), i;
                     break;
                 }
             }
             return D(t, d)(n, e, !F, i, vt.test(t) && l(e.parentNode) || e), i;
         }
-        var _, x, w, C, k, D, T, S, E, P, A, I, F, M, N, L, H, O = "sizzle" + -new Date(), z = t.document, R = 0, W = 0, j = i(), B = i(), $ = i(), q = function(t, e) {
+        var _, x, w, C, k, D, T, S, E, P, A, I, F, M, N, L, H, O = "sizzle" + -new Date(), j = t.document, z = 0, W = 0, B = i(), $ = i(), R = i(), q = function(t, e) {
             return t === e && (E = !0), 0;
-        }, Y = "undefined", V = 1 << 31, U = {}.hasOwnProperty, X = [], K = X.pop, G = X.push, Q = X.push, Z = X.slice, J = X.indexOf || function(t) {
+        }, Y = "undefined", X = 1 << 31, V = {}.hasOwnProperty, U = [], K = U.pop, G = U.push, Q = U.push, J = U.slice, Z = U.indexOf || function(t) {
             for (var e = 0, i = this.length; i > e; e++) if (this[e] === t) return e;
             return -1;
-        }, tt = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped", et = "[\\x20\\t\\r\\n\\f]", it = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+", nt = it.replace("w", "w#"), st = "\\[" + et + "*(" + it + ")" + et + "*(?:([*^$|!~]?=)" + et + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + nt + ")|)|)" + et + "*\\]", ot = ":(" + it + ")(?:\\(((['\"])((?:\\\\.|[^\\\\])*?)\\3|((?:\\\\.|[^\\\\()[\\]]|" + st.replace(3, 8) + ")*)|.*)\\)|)", at = new RegExp("^" + et + "+|((?:^|[^\\\\])(?:\\\\.)*)" + et + "+$", "g"), rt = new RegExp("^" + et + "*," + et + "*"), lt = new RegExp("^" + et + "*([>+~]|" + et + ")" + et + "*"), ut = new RegExp("=" + et + "*([^\\]'\"]*?)" + et + "*\\]", "g"), ht = new RegExp(ot), ct = new RegExp("^" + nt + "$"), dt = {
+        }, tt = "checked|selected|async|autofocus|autoplay|controls|defer|disabled|hidden|ismap|loop|multiple|open|readonly|required|scoped", et = "[\\x20\\t\\r\\n\\f]", it = "(?:\\\\.|[\\w-]|[^\\x00-\\xa0])+", nt = it.replace("w", "w#"), st = "\\[" + et + "*(" + it + ")" + et + "*(?:([*^$|!~]?=)" + et + "*(?:(['\"])((?:\\\\.|[^\\\\])*?)\\3|(" + nt + ")|)|)" + et + "*\\]", ot = ":(" + it + ")(?:\\(((['\"])((?:\\\\.|[^\\\\])*?)\\3|((?:\\\\.|[^\\\\()[\\]]|" + st.replace(3, 8) + ")*)|.*)\\)|)", at = new RegExp("^" + et + "+|((?:^|[^\\\\])(?:\\\\.)*)" + et + "+$", "g"), rt = new RegExp("^" + et + "*," + et + "*"), lt = new RegExp("^" + et + "*([>+~]|" + et + ")" + et + "*"), ht = new RegExp("=" + et + "*([^\\]'\"]*?)" + et + "*\\]", "g"), ut = new RegExp(ot), ct = new RegExp("^" + nt + "$"), dt = {
             ID: new RegExp("^#(" + it + ")"),
             CLASS: new RegExp("^\\.(" + it + ")"),
             TAG: new RegExp("^(" + it.replace("w", "w*") + ")"),
@@ -5359,16 +5183,16 @@ function VerificarHorario(t, e) {
             CHILD: new RegExp("^:(only|first|last|nth|nth-last)-(child|of-type)(?:\\(" + et + "*(even|odd|(([+-]|)(\\d*)n|)" + et + "*(?:([+-]|)" + et + "*(\\d+)|))" + et + "*\\)|)", "i"),
             bool: new RegExp("^(?:" + tt + ")$", "i"),
             needsContext: new RegExp("^" + et + "*[>+~]|:(even|odd|eq|gt|lt|nth|first|last)(?:\\(" + et + "*((?:-\\d)?\\d*)" + et + "*\\)|)(?=[^-]|$)", "i")
-        }, pt = /^(?:input|select|textarea|button)$/i, ft = /^h\d$/i, mt = /^[^{]+\{\s*\[native \w/, gt = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/, vt = /[+~]/, yt = /'|\\/g, bt = new RegExp("\\\\([\\da-f]{1,6}" + et + "?|(" + et + ")|.)", "ig"), _t = function(t, e, i) {
+        }, pt = /^(?:input|select|textarea|button)$/i, ft = /^h\d$/i, mt = /^[^{]+\{\s*\[native \w/, gt = /^(?:#([\w-]+)|(\w+)|\.([\w-]+))$/, vt = /[+~]/, bt = /'|\\/g, yt = new RegExp("\\\\([\\da-f]{1,6}" + et + "?|(" + et + ")|.)", "ig"), _t = function(t, e, i) {
             var n = "0x" + e - 65536;
             return n !== n || i ? e : 0 > n ? String.fromCharCode(n + 65536) : String.fromCharCode(n >> 10 | 55296, 1023 & n | 56320);
         };
         try {
-            Q.apply(X = Z.call(z.childNodes), z.childNodes), X[z.childNodes.length].nodeType;
+            Q.apply(U = J.call(j.childNodes), j.childNodes), U[j.childNodes.length].nodeType;
         } catch (t) {
             Q = {
-                apply: X.length ? function(t, e) {
-                    G.apply(t, Z.call(e));
+                apply: U.length ? function(t, e) {
+                    G.apply(t, J.call(e));
                 } : function(t, e) {
                     for (var i = t.length, n = 0; t[i++] = e[n++]; ) ;
                     t.length = i - 1;
@@ -5379,7 +5203,7 @@ function VerificarHorario(t, e) {
             var e = t && (t.ownerDocument || t).documentElement;
             return !!e && "HTML" !== e.nodeName;
         }, P = e.setDocument = function(t) {
-            var e, i = t ? t.ownerDocument || t : z, n = i.defaultView;
+            var e, i = t ? t.ownerDocument || t : j, n = i.defaultView;
             return i !== A && 9 === i.nodeType && i.documentElement ? (A = i, I = i.documentElement, 
             F = !k(i), n && n !== n.top && (n.addEventListener ? n.addEventListener("unload", function() {
                 P();
@@ -5400,12 +5224,12 @@ function VerificarHorario(t, e) {
                     return i && i.parentNode ? [ i ] : [];
                 }
             }, w.filter.ID = function(t) {
-                var e = t.replace(bt, _t);
+                var e = t.replace(yt, _t);
                 return function(t) {
                     return t.getAttribute("id") === e;
                 };
             }) : (delete w.find.ID, w.filter.ID = function(t) {
-                var e = t.replace(bt, _t);
+                var e = t.replace(yt, _t);
                 return function(t) {
                     var i = typeof t.getAttributeNode !== Y && t.getAttributeNode("id");
                     return i && i.value === e;
@@ -5443,21 +5267,21 @@ function VerificarHorario(t, e) {
                 if (t === e) return E = !0, 0;
                 var n = !t.compareDocumentPosition - !e.compareDocumentPosition;
                 return n || (n = (t.ownerDocument || t) === (e.ownerDocument || e) ? t.compareDocumentPosition(e) : 1, 
-                1 & n || !x.sortDetached && e.compareDocumentPosition(t) === n ? t === i || t.ownerDocument === z && H(z, t) ? -1 : e === i || e.ownerDocument === z && H(z, e) ? 1 : S ? J.call(S, t) - J.call(S, e) : 0 : 4 & n ? -1 : 1);
+                1 & n || !x.sortDetached && e.compareDocumentPosition(t) === n ? t === i || t.ownerDocument === j && H(j, t) ? -1 : e === i || e.ownerDocument === j && H(j, e) ? 1 : S ? Z.call(S, t) - Z.call(S, e) : 0 : 4 & n ? -1 : 1);
             } : function(t, e) {
                 if (t === e) return E = !0, 0;
-                var n, s = 0, o = t.parentNode, r = e.parentNode, l = [ t ], u = [ e ];
-                if (!o || !r) return t === i ? -1 : e === i ? 1 : o ? -1 : r ? 1 : S ? J.call(S, t) - J.call(S, e) : 0;
+                var n, s = 0, o = t.parentNode, r = e.parentNode, l = [ t ], h = [ e ];
+                if (!o || !r) return t === i ? -1 : e === i ? 1 : o ? -1 : r ? 1 : S ? Z.call(S, t) - Z.call(S, e) : 0;
                 if (o === r) return a(t, e);
                 for (n = t; n = n.parentNode; ) l.unshift(n);
-                for (n = e; n = n.parentNode; ) u.unshift(n);
-                for (;l[s] === u[s]; ) s++;
-                return s ? a(l[s], u[s]) : l[s] === z ? -1 : u[s] === z ? 1 : 0;
+                for (n = e; n = n.parentNode; ) h.unshift(n);
+                for (;l[s] === h[s]; ) s++;
+                return s ? a(l[s], h[s]) : l[s] === j ? -1 : h[s] === j ? 1 : 0;
             }, i) : A;
         }, e.matches = function(t, i) {
             return e(t, null, null, i);
         }, e.matchesSelector = function(t, i) {
-            if ((t.ownerDocument || t) !== A && P(t), i = i.replace(ut, "='$1']"), !(!x.matchesSelector || !F || N && N.test(i) || M && M.test(i))) try {
+            if ((t.ownerDocument || t) !== A && P(t), i = i.replace(ht, "='$1']"), !(!x.matchesSelector || !F || N && N.test(i) || M && M.test(i))) try {
                 var n = L.call(t, i);
                 if (n || x.disconnectedMatch || t.document && 11 !== t.document.nodeType) return n;
             } catch (t) {}
@@ -5466,7 +5290,7 @@ function VerificarHorario(t, e) {
             return (t.ownerDocument || t) !== A && P(t), H(t, e);
         }, e.attr = function(t, e) {
             (t.ownerDocument || t) !== A && P(t);
-            var i = w.attrHandle[e.toLowerCase()], n = i && U.call(w.attrHandle, e.toLowerCase()) ? i(t, e, !F) : void 0;
+            var i = w.attrHandle[e.toLowerCase()], n = i && V.call(w.attrHandle, e.toLowerCase()) ? i(t, e, !F) : void 0;
             return void 0 !== n ? n : x.attributes || !F ? t.getAttribute(e) : (n = t.getAttributeNode(e)) && n.specified ? n.value : null;
         }, e.error = function(t) {
             throw new Error("Syntax error, unrecognized expression: " + t);
@@ -5510,7 +5334,7 @@ function VerificarHorario(t, e) {
             },
             preFilter: {
                 ATTR: function(t) {
-                    return t[1] = t[1].replace(bt, _t), t[3] = (t[4] || t[5] || "").replace(bt, _t), 
+                    return t[1] = t[1].replace(yt, _t), t[3] = (t[4] || t[5] || "").replace(yt, _t), 
                     "~=" === t[2] && (t[3] = " " + t[3] + " "), t.slice(0, 4);
                 },
                 CHILD: function(t) {
@@ -5520,13 +5344,13 @@ function VerificarHorario(t, e) {
                 },
                 PSEUDO: function(t) {
                     var e, i = !t[5] && t[2];
-                    return dt.CHILD.test(t[0]) ? null : (t[3] && void 0 !== t[4] ? t[2] = t[4] : i && ht.test(i) && (e = h(i, !0)) && (e = i.indexOf(")", i.length - e) - i.length) && (t[0] = t[0].slice(0, e), 
+                    return dt.CHILD.test(t[0]) ? null : (t[3] && void 0 !== t[4] ? t[2] = t[4] : i && ut.test(i) && (e = u(i, !0)) && (e = i.indexOf(")", i.length - e) - i.length) && (t[0] = t[0].slice(0, e), 
                     t[2] = i.slice(0, e)), t.slice(0, 3));
                 }
             },
             filter: {
                 TAG: function(t) {
-                    var e = t.replace(bt, _t).toLowerCase();
+                    var e = t.replace(yt, _t).toLowerCase();
                     return "*" === t ? function() {
                         return !0;
                     } : function(t) {
@@ -5534,8 +5358,8 @@ function VerificarHorario(t, e) {
                     };
                 },
                 CLASS: function(t) {
-                    var e = j[t + " "];
-                    return e || (e = new RegExp("(^|" + et + ")" + t + "(" + et + "|$)")) && j(t, function(t) {
+                    var e = B[t + " "];
+                    return e || (e = new RegExp("(^|" + et + ")" + t + "(" + et + "|$)")) && B(t, function(t) {
                         return e.test("string" == typeof t.className && t.className || typeof t.getAttribute !== Y && t.getAttribute("class") || "");
                     });
                 },
@@ -5550,7 +5374,7 @@ function VerificarHorario(t, e) {
                     return 1 === n && 0 === s ? function(t) {
                         return !!t.parentNode;
                     } : function(e, i, l) {
-                        var u, h, c, d, p, f, m = o !== a ? "nextSibling" : "previousSibling", g = e.parentNode, v = r && e.nodeName.toLowerCase(), y = !l && !r;
+                        var h, u, c, d, p, f, m = o !== a ? "nextSibling" : "previousSibling", g = e.parentNode, v = r && e.nodeName.toLowerCase(), b = !l && !r;
                         if (g) {
                             if (o) {
                                 for (;m; ) {
@@ -5559,13 +5383,13 @@ function VerificarHorario(t, e) {
                                 }
                                 return !0;
                             }
-                            if (f = [ a ? g.firstChild : g.lastChild ], a && y) {
-                                for (p = (u = (h = g[O] || (g[O] = {}))[t] || [])[0] === R && u[1], d = u[0] === R && u[2], 
+                            if (f = [ a ? g.firstChild : g.lastChild ], a && b) {
+                                for (p = (h = (u = g[O] || (g[O] = {}))[t] || [])[0] === z && h[1], d = h[0] === z && h[2], 
                                 c = p && g.childNodes[p]; c = ++p && c && c[m] || (d = p = 0) || f.pop(); ) if (1 === c.nodeType && ++d && c === e) {
-                                    h[t] = [ R, p, d ];
+                                    u[t] = [ z, p, d ];
                                     break;
                                 }
-                            } else if (y && (u = (e[O] || (e[O] = {}))[t]) && u[0] === R) d = u[1]; else for (;(c = ++p && c && c[m] || (d = p = 0) || f.pop()) && ((r ? c.nodeName.toLowerCase() !== v : 1 !== c.nodeType) || !++d || (y && ((c[O] || (c[O] = {}))[t] = [ R, d ]), 
+                            } else if (b && (h = (e[O] || (e[O] = {}))[t]) && h[0] === z) d = h[1]; else for (;(c = ++p && c && c[m] || (d = p = 0) || f.pop()) && ((r ? c.nodeName.toLowerCase() !== v : 1 !== c.nodeType) || !++d || (b && ((c[O] || (c[O] = {}))[t] = [ z, d ]), 
                             c !== e)); ) ;
                             return (d -= s) === n || d % n == 0 && d / n >= 0;
                         }
@@ -5574,7 +5398,7 @@ function VerificarHorario(t, e) {
                 PSEUDO: function(t, i) {
                     var s, o = w.pseudos[t] || w.setFilters[t.toLowerCase()] || e.error("unsupported pseudo: " + t);
                     return o[O] ? o(i) : o.length > 1 ? (s = [ t, t, "", i ], w.setFilters.hasOwnProperty(t.toLowerCase()) ? n(function(t, e) {
-                        for (var n, s = o(t, i), a = s.length; a--; ) n = J.call(t, s[a]), t[n] = !(e[n] = s[a]);
+                        for (var n, s = o(t, i), a = s.length; a--; ) n = Z.call(t, s[a]), t[n] = !(e[n] = s[a]);
                     }) : function(t) {
                         return o(t, 0, s);
                     }) : o;
@@ -5600,7 +5424,7 @@ function VerificarHorario(t, e) {
                     };
                 }),
                 lang: n(function(t) {
-                    return ct.test(t || "") || e.error("unsupported lang: " + t), t = t.replace(bt, _t).toLowerCase(), 
+                    return ct.test(t || "") || e.error("unsupported lang: " + t), t = t.replace(yt, _t).toLowerCase(), 
                     function(e) {
                         var i;
                         do {
@@ -5700,11 +5524,11 @@ function VerificarHorario(t, e) {
                 return ("input" === i || "button" === i) && e.type === t;
             };
         }(_);
-        return u.prototype = w.filters = w.pseudos, w.setFilters = new u(), D = e.compile = function(t, e) {
-            var i, n = [], s = [], o = $[t + " "];
+        return h.prototype = w.filters = w.pseudos, w.setFilters = new h(), D = e.compile = function(t, e) {
+            var i, n = [], s = [], o = R[t + " "];
             if (!o) {
-                for (e || (e = h(t)), i = e.length; i--; ) o = g(e[i]), o[O] ? n.push(o) : s.push(o);
-                o = $(t, v(s, n));
+                for (e || (e = u(t)), i = e.length; i--; ) o = g(e[i]), o[O] ? n.push(o) : s.push(o);
+                o = R(t, v(s, n));
             }
             return o;
         }, x.sortStable = O.split("").sort(q).join("") === O, x.detectDuplicates = !!E, 
@@ -5725,8 +5549,8 @@ function VerificarHorario(t, e) {
             return i ? void 0 : !0 === t[e] ? e.toLowerCase() : (n = t.getAttributeNode(e)) && n.specified ? n.value : null;
         }), e;
     }(t);
-    ot.find = ht, ot.expr = ht.selectors, ot.expr[":"] = ot.expr.pseudos, ot.unique = ht.uniqueSort, 
-    ot.text = ht.getText, ot.isXMLDoc = ht.isXML, ot.contains = ht.contains;
+    ot.find = ut, ot.expr = ut.selectors, ot.expr[":"] = ot.expr.pseudos, ot.unique = ut.uniqueSort, 
+    ot.text = ut.getText, ot.isXMLDoc = ut.isXML, ot.contains = ut.contains;
     var ct = ot.expr.match.needsContext, dt = /^<(\w+)\s*\/?>(?:<\/\1>|)$/, pt = /^.[^:#\[\.,]*$/;
     ot.filter = function(t, e, i) {
         var n = e[0];
@@ -5773,7 +5597,7 @@ function VerificarHorario(t, e) {
         return t.nodeType ? (this.context = this[0] = t, this.length = 1, this) : ot.isFunction(t) ? void 0 !== ft.ready ? ft.ready(t) : t(ot) : (void 0 !== t.selector && (this.selector = t.selector, 
         this.context = t.context), ot.makeArray(t, this));
     }).prototype = ot.fn, ft = ot(mt);
-    var vt = /^(?:parents|prev(?:Until|All))/, yt = {
+    var vt = /^(?:parents|prev(?:Until|All))/, bt = {
         children: !0,
         contents: !0,
         next: !0,
@@ -5854,18 +5678,18 @@ function VerificarHorario(t, e) {
         ot.fn[t] = function(i, n) {
             var s = ot.map(this, e, i);
             return "Until" !== t.slice(-5) && (n = i), n && "string" == typeof n && (s = ot.filter(n, s)), 
-            this.length > 1 && (yt[t] || (s = ot.unique(s)), vt.test(t) && (s = s.reverse())), 
+            this.length > 1 && (bt[t] || (s = ot.unique(s)), vt.test(t) && (s = s.reverse())), 
             this.pushStack(s);
         };
     });
-    var bt = /\S+/g, _t = {};
+    var yt = /\S+/g, _t = {};
     ot.Callbacks = function(t) {
-        var e, i, n, s, a, r, l = [], u = !(t = "string" == typeof t ? _t[t] || o(t) : ot.extend({}, t)).once && [], h = function(o) {
+        var e, i, n, s, a, r, l = [], h = !(t = "string" == typeof t ? _t[t] || o(t) : ot.extend({}, t)).once && [], u = function(o) {
             for (i = t.memory && o, n = !0, a = r || 0, r = 0, s = l.length, e = !0; l && s > a; a++) if (!1 === l[a].apply(o[0], o[1]) && t.stopOnFalse) {
                 i = !1;
                 break;
             }
-            e = !1, l && (u ? u.length && h(u.shift()) : i ? l = [] : c.disable());
+            e = !1, l && (h ? h.length && u(h.shift()) : i ? l = [] : c.disable());
         }, c = {
             add: function() {
                 if (l) {
@@ -5875,7 +5699,7 @@ function VerificarHorario(t, e) {
                             var s = ot.type(n);
                             "function" === s ? t.unique && c.has(n) || l.push(n) : n && n.length && "string" !== s && e(n);
                         });
-                    }(arguments), e ? s = l.length : i && (r = n, h(i));
+                    }(arguments), e ? s = l.length : i && (r = n, u(i));
                 }
                 return this;
             },
@@ -5892,19 +5716,19 @@ function VerificarHorario(t, e) {
                 return l = [], s = 0, this;
             },
             disable: function() {
-                return l = u = i = void 0, this;
+                return l = h = i = void 0, this;
             },
             disabled: function() {
                 return !l;
             },
             lock: function() {
-                return u = void 0, i || c.disable(), this;
+                return h = void 0, i || c.disable(), this;
             },
             locked: function() {
-                return !u;
+                return !h;
             },
             fireWith: function(t, i) {
-                return !l || n && !u || (i = i || [], i = [ t, i.slice ? i.slice() : i ], e ? u.push(i) : h(i)), 
+                return !l || n && !h || (i = i || [], i = [ t, i.slice ? i.slice() : i ], e ? h.push(i) : u(i)), 
                 this;
             },
             fire: function() {
@@ -5950,12 +5774,12 @@ function VerificarHorario(t, e) {
             }), n.promise(s), t && t.call(s, s), s;
         },
         when: function(t) {
-            var e, i, n, s = 0, o = K.call(arguments), a = o.length, r = 1 !== a || t && ot.isFunction(t.promise) ? a : 0, l = 1 === r ? t : ot.Deferred(), u = function(t, i, n) {
+            var e, i, n, s = 0, o = K.call(arguments), a = o.length, r = 1 !== a || t && ot.isFunction(t.promise) ? a : 0, l = 1 === r ? t : ot.Deferred(), h = function(t, i, n) {
                 return function(s) {
                     i[t] = this, n[t] = arguments.length > 1 ? K.call(arguments) : s, n === e ? l.notifyWith(i, n) : --r || l.resolveWith(i, n);
                 };
             };
-            if (a > 1) for (e = new Array(a), i = new Array(a), n = new Array(a); a > s; s++) o[s] && ot.isFunction(o[s].promise) ? o[s].promise().done(u(s, n, o)).fail(l.reject).progress(u(s, i, e)) : --r;
+            if (a > 1) for (e = new Array(a), i = new Array(a), n = new Array(a); a > s; s++) o[s] && ot.isFunction(o[s].promise) ? o[s].promise().done(h(s, n, o)).fail(l.reject).progress(h(s, i, e)) : --r;
             return r || l.resolveWith(n, o), l.promise();
         }
     });
@@ -6028,16 +5852,16 @@ function VerificarHorario(t, e) {
             "object ": "clsid:D27CDB6E-AE6D-11cf-96B8-444553540000"
         },
         hasData: function(t) {
-            return !!(t = t.nodeType ? ot.cache[t[ot.expando]] : t[ot.expando]) && !u(t);
+            return !!(t = t.nodeType ? ot.cache[t[ot.expando]] : t[ot.expando]) && !h(t);
         },
         data: function(t, e, i) {
-            return h(t, e, i);
+            return u(t, e, i);
         },
         removeData: function(t, e) {
             return c(t, e);
         },
         _data: function(t, e, i) {
-            return h(t, e, i, !0);
+            return u(t, e, i, !0);
         },
         _removeData: function(t, e) {
             return c(t, e, !0);
@@ -6114,15 +5938,15 @@ function VerificarHorario(t, e) {
     var Tt = /[+-]?(?:\d*\.|)\d+(?:[eE][+-]?\d+|)/.source, St = [ "Top", "Right", "Bottom", "Left" ], Et = function(t, e) {
         return t = e || t, "none" === ot.css(t, "display") || !ot.contains(t.ownerDocument, t);
     }, Pt = ot.access = function(t, e, i, n, s, o, a) {
-        var r = 0, l = t.length, u = null == i;
+        var r = 0, l = t.length, h = null == i;
         if ("object" === ot.type(i)) {
             s = !0;
             for (r in i) ot.access(t, e, r, i[r], !0, o, a);
-        } else if (void 0 !== n && (s = !0, ot.isFunction(n) || (a = !0), u && (a ? (e.call(t, n), 
-        e = null) : (u = e, e = function(t, e, i) {
-            return u.call(ot(t), i);
+        } else if (void 0 !== n && (s = !0, ot.isFunction(n) || (a = !0), h && (a ? (e.call(t, n), 
+        e = null) : (h = e, e = function(t, e, i) {
+            return h.call(ot(t), i);
         })), e)) for (;l > r; r++) e(t[r], i, a ? n : n.call(t[r], r, e(t[r], i)));
-        return s ? t : u ? e.call(t) : l ? e(t[0], i) : o;
+        return s ? t : h ? e.call(t) : l ? e(t[0], i) : o;
     }, At = /^(?:checkbox|radio)$/i;
     !function() {
         var t = mt.createDocumentFragment(), e = mt.createElement("div"), i = mt.createElement("input");
@@ -6157,14 +5981,14 @@ function VerificarHorario(t, e) {
     ot.event = {
         global: {},
         add: function(t, e, i, n, s) {
-            var o, a, r, l, u, h, c, d, p, f, m, g = ot._data(t);
+            var o, a, r, l, h, u, c, d, p, f, m, g = ot._data(t);
             if (g) {
                 for (i.handler && (l = i, i = l.handler, s = l.selector), i.guid || (i.guid = ot.guid++), 
-                (a = g.events) || (a = g.events = {}), (h = g.handle) || (h = g.handle = function(t) {
-                    return typeof ot === Ct || t && ot.event.triggered === t.type ? void 0 : ot.event.dispatch.apply(h.elem, arguments);
-                }, h.elem = t), r = (e = (e || "").match(bt) || [ "" ]).length; r--; ) o = Lt.exec(e[r]) || [], 
-                p = m = o[1], f = (o[2] || "").split(".").sort(), p && (u = ot.event.special[p] || {}, 
-                p = (s ? u.delegateType : u.bindType) || p, u = ot.event.special[p] || {}, c = ot.extend({
+                (a = g.events) || (a = g.events = {}), (u = g.handle) || (u = g.handle = function(t) {
+                    return typeof ot === Ct || t && ot.event.triggered === t.type ? void 0 : ot.event.dispatch.apply(u.elem, arguments);
+                }, u.elem = t), r = (e = (e || "").match(yt) || [ "" ]).length; r--; ) o = Lt.exec(e[r]) || [], 
+                p = m = o[1], f = (o[2] || "").split(".").sort(), p && (h = ot.event.special[p] || {}, 
+                p = (s ? h.delegateType : h.bindType) || p, h = ot.event.special[p] || {}, c = ot.extend({
                     type: p,
                     origType: m,
                     data: n,
@@ -6173,61 +5997,61 @@ function VerificarHorario(t, e) {
                     selector: s,
                     needsContext: s && ot.expr.match.needsContext.test(s),
                     namespace: f.join(".")
-                }, l), (d = a[p]) || (d = a[p] = [], d.delegateCount = 0, u.setup && !1 !== u.setup.call(t, n, f, h) || (t.addEventListener ? t.addEventListener(p, h, !1) : t.attachEvent && t.attachEvent("on" + p, h))), 
-                u.add && (u.add.call(t, c), c.handler.guid || (c.handler.guid = i.guid)), s ? d.splice(d.delegateCount++, 0, c) : d.push(c), 
+                }, l), (d = a[p]) || (d = a[p] = [], d.delegateCount = 0, h.setup && !1 !== h.setup.call(t, n, f, u) || (t.addEventListener ? t.addEventListener(p, u, !1) : t.attachEvent && t.attachEvent("on" + p, u))), 
+                h.add && (h.add.call(t, c), c.handler.guid || (c.handler.guid = i.guid)), s ? d.splice(d.delegateCount++, 0, c) : d.push(c), 
                 ot.event.global[p] = !0);
                 t = null;
             }
         },
         remove: function(t, e, i, n, s) {
-            var o, a, r, l, u, h, c, d, p, f, m, g = ot.hasData(t) && ot._data(t);
-            if (g && (h = g.events)) {
-                for (u = (e = (e || "").match(bt) || [ "" ]).length; u--; ) if (r = Lt.exec(e[u]) || [], 
+            var o, a, r, l, h, u, c, d, p, f, m, g = ot.hasData(t) && ot._data(t);
+            if (g && (u = g.events)) {
+                for (h = (e = (e || "").match(yt) || [ "" ]).length; h--; ) if (r = Lt.exec(e[h]) || [], 
                 p = m = r[1], f = (r[2] || "").split(".").sort(), p) {
-                    for (c = ot.event.special[p] || {}, d = h[p = (n ? c.delegateType : c.bindType) || p] || [], 
+                    for (c = ot.event.special[p] || {}, d = u[p = (n ? c.delegateType : c.bindType) || p] || [], 
                     r = r[2] && new RegExp("(^|\\.)" + f.join("\\.(?:.*\\.|)") + "(\\.|$)"), l = o = d.length; o--; ) a = d[o], 
                     !s && m !== a.origType || i && i.guid !== a.guid || r && !r.test(a.namespace) || n && n !== a.selector && ("**" !== n || !a.selector) || (d.splice(o, 1), 
                     a.selector && d.delegateCount--, c.remove && c.remove.call(t, a));
                     l && !d.length && (c.teardown && !1 !== c.teardown.call(t, f, g.handle) || ot.removeEvent(t, p, g.handle), 
-                    delete h[p]);
-                } else for (p in h) ot.event.remove(t, p + e[u], i, n, !0);
-                ot.isEmptyObject(h) && (delete g.handle, ot._removeData(t, "events"));
+                    delete u[p]);
+                } else for (p in u) ot.event.remove(t, p + e[h], i, n, !0);
+                ot.isEmptyObject(u) && (delete g.handle, ot._removeData(t, "events"));
             }
         },
         trigger: function(e, i, n, s) {
-            var o, a, r, l, u, h, c, d = [ n || mt ], p = et.call(e, "type") ? e.type : e, f = et.call(e, "namespace") ? e.namespace.split(".") : [];
-            if (r = h = n = n || mt, 3 !== n.nodeType && 8 !== n.nodeType && !Nt.test(p + ot.event.triggered) && (p.indexOf(".") >= 0 && (f = p.split("."), 
+            var o, a, r, l, h, u, c, d = [ n || mt ], p = et.call(e, "type") ? e.type : e, f = et.call(e, "namespace") ? e.namespace.split(".") : [];
+            if (r = u = n = n || mt, 3 !== n.nodeType && 8 !== n.nodeType && !Nt.test(p + ot.event.triggered) && (p.indexOf(".") >= 0 && (f = p.split("."), 
             p = f.shift(), f.sort()), a = p.indexOf(":") < 0 && "on" + p, e = e[ot.expando] ? e : new ot.Event(p, "object" == typeof e && e), 
             e.isTrigger = s ? 2 : 3, e.namespace = f.join("."), e.namespace_re = e.namespace ? new RegExp("(^|\\.)" + f.join("\\.(?:.*\\.|)") + "(\\.|$)") : null, 
             e.result = void 0, e.target || (e.target = n), i = null == i ? [ e ] : ot.makeArray(i, [ e ]), 
-            u = ot.event.special[p] || {}, s || !u.trigger || !1 !== u.trigger.apply(n, i))) {
-                if (!s && !u.noBubble && !ot.isWindow(n)) {
-                    for (l = u.delegateType || p, Nt.test(l + p) || (r = r.parentNode); r; r = r.parentNode) d.push(r), 
-                    h = r;
-                    h === (n.ownerDocument || mt) && d.push(h.defaultView || h.parentWindow || t);
+            h = ot.event.special[p] || {}, s || !h.trigger || !1 !== h.trigger.apply(n, i))) {
+                if (!s && !h.noBubble && !ot.isWindow(n)) {
+                    for (l = h.delegateType || p, Nt.test(l + p) || (r = r.parentNode); r; r = r.parentNode) d.push(r), 
+                    u = r;
+                    u === (n.ownerDocument || mt) && d.push(u.defaultView || u.parentWindow || t);
                 }
-                for (c = 0; (r = d[c++]) && !e.isPropagationStopped(); ) e.type = c > 1 ? l : u.bindType || p, 
+                for (c = 0; (r = d[c++]) && !e.isPropagationStopped(); ) e.type = c > 1 ? l : h.bindType || p, 
                 (o = (ot._data(r, "events") || {})[e.type] && ot._data(r, "handle")) && o.apply(r, i), 
                 (o = a && r[a]) && o.apply && ot.acceptData(r) && (e.result = o.apply(r, i), !1 === e.result && e.preventDefault());
-                if (e.type = p, !s && !e.isDefaultPrevented() && (!u._default || !1 === u._default.apply(d.pop(), i)) && ot.acceptData(n) && a && n[p] && !ot.isWindow(n)) {
-                    (h = n[a]) && (n[a] = null), ot.event.triggered = p;
+                if (e.type = p, !s && !e.isDefaultPrevented() && (!h._default || !1 === h._default.apply(d.pop(), i)) && ot.acceptData(n) && a && n[p] && !ot.isWindow(n)) {
+                    (u = n[a]) && (n[a] = null), ot.event.triggered = p;
                     try {
                         n[p]();
                     } catch (t) {}
-                    ot.event.triggered = void 0, h && (n[a] = h);
+                    ot.event.triggered = void 0, u && (n[a] = u);
                 }
                 return e.result;
             }
         },
         dispatch: function(t) {
             t = ot.event.fix(t);
-            var e, i, n, s, o, a = [], r = K.call(arguments), l = (ot._data(this, "events") || {})[t.type] || [], u = ot.event.special[t.type] || {};
-            if (r[0] = t, t.delegateTarget = this, !u.preDispatch || !1 !== u.preDispatch.call(this, t)) {
+            var e, i, n, s, o, a = [], r = K.call(arguments), l = (ot._data(this, "events") || {})[t.type] || [], h = ot.event.special[t.type] || {};
+            if (r[0] = t, t.delegateTarget = this, !h.preDispatch || !1 !== h.preDispatch.call(this, t)) {
                 for (a = ot.event.handlers.call(this, t, l), e = 0; (s = a[e++]) && !t.isPropagationStopped(); ) for (t.currentTarget = s.elem, 
                 o = 0; (n = s.handlers[o++]) && !t.isImmediatePropagationStopped(); ) (!t.namespace_re || t.namespace_re.test(n.namespace)) && (t.handleObj = n, 
                 t.data = n.data, void 0 !== (i = ((ot.event.special[n.origType] || {}).handle || n.handler).apply(s.elem, r)) && !1 === (t.result = i) && (t.preventDefault(), 
                 t.stopPropagation()));
-                return u.postDispatch && u.postDispatch.call(this, t), t.result;
+                return h.postDispatch && h.postDispatch.call(this, t), t.result;
             }
         },
         handlers: function(t, e) {
@@ -6446,7 +6270,7 @@ function VerificarHorario(t, e) {
             return i ? ot.event.trigger(t, e, i, !0) : void 0;
         }
     });
-    var Ht = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video", Ot = / jQuery\d+="(?:null|\d+)"/g, zt = new RegExp("<(?:" + Ht + ")[\\s/>]", "i"), Rt = /^\s+/, Wt = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi, jt = /<([\w:]+)/, Bt = /<tbody/i, $t = /<|&#?\w+;/, qt = /<(?:script|style|link)/i, Yt = /checked\s*(?:[^=]|=\s*.checked.)/i, Vt = /^$|\/(?:java|ecma)script/i, Ut = /^true\/(.*)/, Xt = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g, Kt = {
+    var Ht = "abbr|article|aside|audio|bdi|canvas|data|datalist|details|figcaption|figure|footer|header|hgroup|mark|meter|nav|output|progress|section|summary|time|video", Ot = / jQuery\d+="(?:null|\d+)"/g, jt = new RegExp("<(?:" + Ht + ")[\\s/>]", "i"), zt = /^\s+/, Wt = /<(?!area|br|col|embed|hr|img|input|link|meta|param)(([\w:]+)[^>]*)\/>/gi, Bt = /<([\w:]+)/, $t = /<tbody/i, Rt = /<|&#?\w+;/, qt = /<(?:script|style|link)/i, Yt = /checked\s*(?:[^=]|=\s*.checked.)/i, Xt = /^$|\/(?:java|ecma)script/i, Vt = /^true\/(.*)/, Ut = /^\s*<!(?:\[CDATA\[|--)|(?:\]\]|--)>\s*$/g, Kt = {
         option: [ 1, "<select multiple='multiple'>", "</select>" ],
         legend: [ 1, "<fieldset>", "</fieldset>" ],
         area: [ 1, "<map>", "</map>" ],
@@ -6461,7 +6285,7 @@ function VerificarHorario(t, e) {
     Kt.th = Kt.td, ot.extend({
         clone: function(t, e, i) {
             var n, s, o, a, r, l = ot.contains(t.ownerDocument, t);
-            if (nt.html5Clone || ot.isXMLDoc(t) || !zt.test("<" + t.nodeName + ">") ? o = t.cloneNode(!0) : (Gt.innerHTML = t.outerHTML, 
+            if (nt.html5Clone || ot.isXMLDoc(t) || !jt.test("<" + t.nodeName + ">") ? o = t.cloneNode(!0) : (Gt.innerHTML = t.outerHTML, 
             Gt.removeChild(o = Gt.firstChild)), !(nt.noCloneEvent && nt.noCloneChecked || 1 !== t.nodeType && 11 !== t.nodeType || ot.isXMLDoc(t))) for (n = g(o), 
             r = g(t), a = 0; null != (s = r[a]); ++a) n[a] && C(s, n[a]);
             if (e) if (i) for (r = r || g(t), n = n || g(o), a = 0; null != (s = r[a]); a++) w(s, n[a]); else w(t, o);
@@ -6469,25 +6293,25 @@ function VerificarHorario(t, e) {
             o;
         },
         buildFragment: function(t, e, i, n) {
-            for (var s, o, a, r, l, u, h, c = t.length, d = m(e), p = [], f = 0; c > f; f++) if ((o = t[f]) || 0 === o) if ("object" === ot.type(o)) ot.merge(p, o.nodeType ? [ o ] : o); else if ($t.test(o)) {
-                for (r = r || d.appendChild(e.createElement("div")), l = (jt.exec(o) || [ "", "" ])[1].toLowerCase(), 
-                h = Kt[l] || Kt._default, r.innerHTML = h[1] + o.replace(Wt, "<$1></$2>") + h[2], 
-                s = h[0]; s--; ) r = r.lastChild;
-                if (!nt.leadingWhitespace && Rt.test(o) && p.push(e.createTextNode(Rt.exec(o)[0])), 
-                !nt.tbody) for (s = (o = "table" !== l || Bt.test(o) ? "<table>" !== h[1] || Bt.test(o) ? 0 : r : r.firstChild) && o.childNodes.length; s--; ) ot.nodeName(u = o.childNodes[s], "tbody") && !u.childNodes.length && o.removeChild(u);
+            for (var s, o, a, r, l, h, u, c = t.length, d = m(e), p = [], f = 0; c > f; f++) if ((o = t[f]) || 0 === o) if ("object" === ot.type(o)) ot.merge(p, o.nodeType ? [ o ] : o); else if (Rt.test(o)) {
+                for (r = r || d.appendChild(e.createElement("div")), l = (Bt.exec(o) || [ "", "" ])[1].toLowerCase(), 
+                u = Kt[l] || Kt._default, r.innerHTML = u[1] + o.replace(Wt, "<$1></$2>") + u[2], 
+                s = u[0]; s--; ) r = r.lastChild;
+                if (!nt.leadingWhitespace && zt.test(o) && p.push(e.createTextNode(zt.exec(o)[0])), 
+                !nt.tbody) for (s = (o = "table" !== l || $t.test(o) ? "<table>" !== u[1] || $t.test(o) ? 0 : r : r.firstChild) && o.childNodes.length; s--; ) ot.nodeName(h = o.childNodes[s], "tbody") && !h.childNodes.length && o.removeChild(h);
                 for (ot.merge(p, r.childNodes), r.textContent = ""; r.firstChild; ) r.removeChild(r.firstChild);
                 r = d.lastChild;
             } else p.push(e.createTextNode(o));
             for (r && d.removeChild(r), nt.appendChecked || ot.grep(g(p, "input"), v), f = 0; o = p[f++]; ) if ((!n || -1 === ot.inArray(o, n)) && (a = ot.contains(o.ownerDocument, o), 
-            r = g(d.appendChild(o), "script"), a && x(r), i)) for (s = 0; o = r[s++]; ) Vt.test(o.type || "") && i.push(o);
+            r = g(d.appendChild(o), "script"), a && x(r), i)) for (s = 0; o = r[s++]; ) Xt.test(o.type || "") && i.push(o);
             return r = null, d;
         },
         cleanData: function(t, e) {
-            for (var i, n, s, o, a = 0, r = ot.expando, l = ot.cache, u = nt.deleteExpando, h = ot.event.special; null != (i = t[a]); a++) if ((e || ot.acceptData(i)) && (s = i[r], 
+            for (var i, n, s, o, a = 0, r = ot.expando, l = ot.cache, h = nt.deleteExpando, u = ot.event.special; null != (i = t[a]); a++) if ((e || ot.acceptData(i)) && (s = i[r], 
             o = s && l[s])) {
-                if (o.events) for (n in o.events) h[n] ? ot.event.remove(i, n) : ot.removeEvent(i, n, o.handle);
-                l[s] && (delete l[s], u ? delete i[r] : typeof i.removeAttribute !== Ct ? i.removeAttribute(r) : i[r] = null, 
-                X.push(s));
+                if (o.events) for (n in o.events) u[n] ? ot.event.remove(i, n) : ot.removeEvent(i, n, o.handle);
+                l[s] && (delete l[s], h ? delete i[r] : typeof i.removeAttribute !== Ct ? i.removeAttribute(r) : i[r] = null, 
+                U.push(s));
             }
         }
     }), ot.fn.extend({
@@ -6498,13 +6322,13 @@ function VerificarHorario(t, e) {
         },
         append: function() {
             return this.domManip(arguments, function(t) {
-                1 !== this.nodeType && 11 !== this.nodeType && 9 !== this.nodeType || y(this, t).appendChild(t);
+                1 !== this.nodeType && 11 !== this.nodeType && 9 !== this.nodeType || b(this, t).appendChild(t);
             });
         },
         prepend: function() {
             return this.domManip(arguments, function(t) {
                 if (1 === this.nodeType || 11 === this.nodeType || 9 === this.nodeType) {
-                    var e = y(this, t);
+                    var e = b(this, t);
                     e.insertBefore(t, e.firstChild);
                 }
             });
@@ -6540,7 +6364,7 @@ function VerificarHorario(t, e) {
             return Pt(this, function(t) {
                 var e = this[0] || {}, i = 0, n = this.length;
                 if (void 0 === t) return 1 === e.nodeType ? e.innerHTML.replace(Ot, "") : void 0;
-                if (!("string" != typeof t || qt.test(t) || !nt.htmlSerialize && zt.test(t) || !nt.leadingWhitespace && Rt.test(t) || Kt[(jt.exec(t) || [ "", "" ])[1].toLowerCase()])) {
+                if (!("string" != typeof t || qt.test(t) || !nt.htmlSerialize && jt.test(t) || !nt.leadingWhitespace && zt.test(t) || Kt[(Bt.exec(t) || [ "", "" ])[1].toLowerCase()])) {
                     t = t.replace(Wt, "<$1></$2>");
                     try {
                         for (;n > i; i++) 1 === (e = this[i] || {}).nodeType && (ot.cleanData(g(e, !1)), 
@@ -6562,17 +6386,17 @@ function VerificarHorario(t, e) {
         },
         domManip: function(t, e) {
             t = G.apply([], t);
-            var i, n, s, o, a, r, l = 0, u = this.length, h = this, c = u - 1, d = t[0], p = ot.isFunction(d);
-            if (p || u > 1 && "string" == typeof d && !nt.checkClone && Yt.test(d)) return this.each(function(i) {
-                var n = h.eq(i);
+            var i, n, s, o, a, r, l = 0, h = this.length, u = this, c = h - 1, d = t[0], p = ot.isFunction(d);
+            if (p || h > 1 && "string" == typeof d && !nt.checkClone && Yt.test(d)) return this.each(function(i) {
+                var n = u.eq(i);
                 p && (t[0] = d.call(this, i, n.html())), n.domManip(t, e);
             });
-            if (u && (r = ot.buildFragment(t, this[0].ownerDocument, !1, this), i = r.firstChild, 
+            if (h && (r = ot.buildFragment(t, this[0].ownerDocument, !1, this), i = r.firstChild, 
             1 === r.childNodes.length && (r = i), i)) {
-                for (s = (o = ot.map(g(r, "script"), b)).length; u > l; l++) n = r, l !== c && (n = ot.clone(n, !0, !0), 
+                for (s = (o = ot.map(g(r, "script"), y)).length; h > l; l++) n = r, l !== c && (n = ot.clone(n, !0, !0), 
                 s && ot.merge(o, g(n, "script"))), e.call(this[l], n, l);
                 if (s) for (a = o[o.length - 1].ownerDocument, ot.map(o, _), l = 0; s > l; l++) n = o[l], 
-                Vt.test(n.type || "") && !ot._data(n, "globalEval") && ot.contains(a, n) && (n.src ? ot._evalUrl && ot._evalUrl(n.src) : ot.globalEval((n.text || n.textContent || n.innerHTML || "").replace(Xt, "")));
+                Xt.test(n.type || "") && !ot._data(n, "globalEval") && ot.contains(a, n) && (n.src ? ot._evalUrl && ot._evalUrl(n.src) : ot.globalEval((n.text || n.textContent || n.innerHTML || "").replace(Ut, "")));
                 r = i = null;
             }
             return this;
@@ -6590,7 +6414,7 @@ function VerificarHorario(t, e) {
             return this.pushStack(s);
         };
     });
-    var Qt, Zt = {};
+    var Qt, Jt = {};
     !function() {
         var t, e, i = mt.createElement("div");
         i.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>", 
@@ -6608,26 +6432,26 @@ function VerificarHorario(t, e) {
             return e;
         };
     }();
-    var Jt, te, ee = /^margin/, ie = new RegExp("^(" + Tt + ")(?!px)[a-z%]+$", "i"), ne = /^(top|right|bottom|left)$/;
-    t.getComputedStyle ? (Jt = function(t) {
+    var Zt, te, ee = /^margin/, ie = new RegExp("^(" + Tt + ")(?!px)[a-z%]+$", "i"), ne = /^(top|right|bottom|left)$/;
+    t.getComputedStyle ? (Zt = function(t) {
         return t.ownerDocument.defaultView.getComputedStyle(t, null);
     }, te = function(t, e, i) {
         var n, s, o, a, r = t.style;
-        return i = i || Jt(t), a = i ? i.getPropertyValue(e) || i[e] : void 0, i && ("" !== a || ot.contains(t.ownerDocument, t) || (a = ot.style(t, e)), 
+        return i = i || Zt(t), a = i ? i.getPropertyValue(e) || i[e] : void 0, i && ("" !== a || ot.contains(t.ownerDocument, t) || (a = ot.style(t, e)), 
         ie.test(a) && ee.test(e) && (n = r.width, s = r.minWidth, o = r.maxWidth, r.minWidth = r.maxWidth = r.width = a, 
         a = i.width, r.width = n, r.minWidth = s, r.maxWidth = o)), void 0 === a ? a : a + "";
-    }) : mt.documentElement.currentStyle && (Jt = function(t) {
+    }) : mt.documentElement.currentStyle && (Zt = function(t) {
         return t.currentStyle;
     }, te = function(t, e, i) {
         var n, s, o, a, r = t.style;
-        return i = i || Jt(t), null == (a = i ? i[e] : void 0) && r && r[e] && (a = r[e]), 
+        return i = i || Zt(t), null == (a = i ? i[e] : void 0) && r && r[e] && (a = r[e]), 
         ie.test(a) && !ne.test(e) && (n = r.left, s = t.runtimeStyle, (o = s && s.left) && (s.left = t.currentStyle.left), 
         r.left = "fontSize" === e ? "1em" : a, a = r.pixelLeft + "px", r.left = n, o && (s.left = o)), 
         void 0 === a ? a : a + "" || "auto";
     }), function() {
         function e() {
             var e, i, n = mt.getElementsByTagName("body")[0];
-            n && (e = mt.createElement("div"), i = mt.createElement("div"), e.style.cssText = u, 
+            n && (e = mt.createElement("div"), i = mt.createElement("div"), e.style.cssText = h, 
             n.appendChild(e).appendChild(i), i.style.cssText = "-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;position:absolute;display:block;padding:1px;border:1px;width:4px;margin-top:1%;top:1%", 
             ot.swap(n, null != n.style.zoom ? {
                 zoom: 1
@@ -6638,7 +6462,7 @@ function VerificarHorario(t, e) {
                 width: "4px"
             }).width), n.removeChild(e), i = n = null);
         }
-        var i, n, s, o, a, r, l = mt.createElement("div"), u = "border:0;width:0;height:0;position:absolute;top:0;left:-9999px";
+        var i, n, s, o, a, r, l = mt.createElement("div"), h = "border:0;width:0;height:0;position:absolute;top:0;left:-9999px";
         l.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>", 
         (i = l.getElementsByTagName("a")[0]).style.cssText = "float:left;opacity:.5", nt.opacity = /^0.5/.test(i.style.opacity), 
         nt.cssFloat = !!i.style.cssFloat, l.style.backgroundClip = "content-box", l.cloneNode(!0).style.backgroundClip = "", 
@@ -6647,7 +6471,7 @@ function VerificarHorario(t, e) {
                 if (null != n) return n;
                 var t, e, i, s = mt.createElement("div"), o = mt.getElementsByTagName("body")[0];
                 return o ? (s.setAttribute("className", "t"), s.innerHTML = "  <link/><table></table><a href='/a'>a</a><input type='checkbox'/>", 
-                t = mt.createElement("div"), t.style.cssText = u, o.appendChild(t).appendChild(s), 
+                t = mt.createElement("div"), t.style.cssText = h, o.appendChild(t).appendChild(s), 
                 s.innerHTML = "<table><tr><td></td><td>t</td></tr></table>", e = s.getElementsByTagName("td"), 
                 e[0].style.cssText = "padding:0;margin:0;border:0;display:none", i = 0 === e[0].offsetHeight, 
                 e[0].style.display = "", e[1].style.display = "none", n = i && 0 === e[0].offsetHeight, 
@@ -6666,7 +6490,7 @@ function VerificarHorario(t, e) {
                 var e, i, n, s;
                 if (null == r && t.getComputedStyle) {
                     if (!(e = mt.getElementsByTagName("body")[0])) return;
-                    i = mt.createElement("div"), n = mt.createElement("div"), i.style.cssText = u, e.appendChild(i).appendChild(n), 
+                    i = mt.createElement("div"), n = mt.createElement("div"), i.style.cssText = h, e.appendChild(i).appendChild(n), 
                     (s = n.appendChild(mt.createElement("div"))).style.cssText = n.style.cssText = "-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;display:block;padding:0;margin:0;border:0", 
                     s.style.marginRight = s.style.width = "0", n.style.width = "1px", r = !parseFloat((t.getComputedStyle(s, null) || {}).marginRight), 
                     e.removeChild(i);
@@ -6681,11 +6505,11 @@ function VerificarHorario(t, e) {
         for (o in e) t.style[o] = a[o];
         return s;
     };
-    var se = /alpha\([^)]*\)/i, oe = /opacity\s*=\s*([^)]*)/, ae = /^(none|table(?!-c[ea]).+)/, re = new RegExp("^(" + Tt + ")(.*)$", "i"), le = new RegExp("^([+-])=(" + Tt + ")", "i"), ue = {
+    var se = /alpha\([^)]*\)/i, oe = /opacity\s*=\s*([^)]*)/, ae = /^(none|table(?!-c[ea]).+)/, re = new RegExp("^(" + Tt + ")(.*)$", "i"), le = new RegExp("^([+-])=(" + Tt + ")", "i"), he = {
         position: "absolute",
         visibility: "hidden",
         display: "block"
-    }, he = {
+    }, ue = {
         letterSpacing: 0,
         fontWeight: 400
     }, ce = [ "Webkit", "O", "Moz", "ms" ];
@@ -6731,18 +6555,18 @@ function VerificarHorario(t, e) {
         css: function(t, e, i, n) {
             var s, o, a, r = ot.camelCase(e);
             return e = ot.cssProps[r] || (ot.cssProps[r] = S(t.style, r)), (a = ot.cssHooks[e] || ot.cssHooks[r]) && "get" in a && (o = a.get(t, !0, i)), 
-            void 0 === o && (o = te(t, e, n)), "normal" === o && e in he && (o = he[e]), "" === i || i ? (s = parseFloat(o), 
+            void 0 === o && (o = te(t, e, n)), "normal" === o && e in ue && (o = ue[e]), "" === i || i ? (s = parseFloat(o), 
             !0 === i || ot.isNumeric(s) ? s || 0 : o) : o;
         }
     }), ot.each([ "height", "width" ], function(t, e) {
         ot.cssHooks[e] = {
             get: function(t, i, n) {
-                return i ? 0 === t.offsetWidth && ae.test(ot.css(t, "display")) ? ot.swap(t, ue, function() {
+                return i ? 0 === t.offsetWidth && ae.test(ot.css(t, "display")) ? ot.swap(t, he, function() {
                     return I(t, e, n);
                 }) : I(t, e, n) : void 0;
             },
             set: function(t, i, n) {
-                var s = n && Jt(t);
+                var s = n && Zt(t);
                 return P(t, i, n ? A(t, e, n, nt.boxSizing() && "border-box" === ot.css(t, "boxSizing", !1, s), s) : 0);
             }
         };
@@ -6775,7 +6599,7 @@ function VerificarHorario(t, e) {
             return Pt(this, function(t, e, i) {
                 var n, s, o = {}, a = 0;
                 if (ot.isArray(e)) {
-                    for (n = Jt(t), s = e.length; s > a; a++) o[e[a]] = ot.css(t, e[a], !1, n);
+                    for (n = Zt(t), s = e.length; s > a; a++) o[e[a]] = ot.css(t, e[a], !1, n);
                     return o;
                 }
                 return void 0 !== i ? ot.style(t, e, i) : ot.css(t, e);
@@ -6831,7 +6655,7 @@ function VerificarHorario(t, e) {
             return .5 - Math.cos(t * Math.PI) / 2;
         }
     }, ot.fx = F.prototype.init, ot.fx.step = {};
-    var de, pe, fe = /^(?:toggle|show|hide)$/, me = new RegExp("^(?:([+-])=|)(" + Tt + ")([a-z%]*)$", "i"), ge = /queueHooks$/, ve = [ H ], ye = {
+    var de, pe, fe = /^(?:toggle|show|hide)$/, me = new RegExp("^(?:([+-])=|)(" + Tt + ")([a-z%]*)$", "i"), ge = /queueHooks$/, ve = [ H ], be = {
         "*": [ function(t, e) {
             var i = this.createTween(t, e), n = i.cur(), s = me.exec(e), o = s && s[3] || (ot.cssNumber[t] ? "" : "px"), a = (ot.cssNumber[t] || "px" !== o && +n) && me.exec(ot.css(i.elem, t)), r = 1, l = 20;
             if (a && a[3] !== o) {
@@ -6844,10 +6668,10 @@ function VerificarHorario(t, e) {
             i;
         } ]
     };
-    ot.Animation = ot.extend(z, {
+    ot.Animation = ot.extend(j, {
         tweener: function(t, e) {
             ot.isFunction(t) ? (e = t, t = [ "*" ]) : t = t.split(" ");
-            for (var i, n = 0, s = t.length; s > n; n++) i = t[n], ye[i] = ye[i] || [], ye[i].unshift(e);
+            for (var i, n = 0, s = t.length; s > n; n++) i = t[n], be[i] = be[i] || [], be[i].unshift(e);
         },
         prefilter: function(t, e) {
             e ? ve.unshift(t) : ve.push(t);
@@ -6870,7 +6694,7 @@ function VerificarHorario(t, e) {
         },
         animate: function(t, e, i, n) {
             var s = ot.isEmptyObject(t), o = ot.speed(e, i, n), a = function() {
-                var e = z(this, ot.extend({}, t), o);
+                var e = j(this, ot.extend({}, t), o);
                 (s || ot._data(this, "finish")) && e.stop(!0);
             };
             return a.finish = a, s || !1 === o.queue ? this.each(a) : this.queue(o.queue, a);
@@ -6953,7 +6777,7 @@ function VerificarHorario(t, e) {
         nt.input = "" === e.getAttribute("value"), e.value = "t", e.setAttribute("type", "radio"), 
         nt.radioValue = "t" === e.value, t = e = i = n = s = null;
     }();
-    var be = /\r/g;
+    var ye = /\r/g;
     ot.fn.extend({
         val: function(t) {
             var e, i, n, s = this[0];
@@ -6963,7 +6787,7 @@ function VerificarHorario(t, e) {
                     return null == t ? "" : t + "";
                 })), (e = ot.valHooks[this.type] || ot.valHooks[this.nodeName.toLowerCase()]) && "set" in e && void 0 !== e.set(this, s, "value") || (this.value = s));
             })) : s ? (e = ot.valHooks[s.type] || ot.valHooks[s.nodeName.toLowerCase()], e && "get" in e && void 0 !== (i = e.get(s, "value")) ? i : (i = s.value, 
-            "string" == typeof i ? i.replace(be, "") : null == i ? "" : i)) : void 0;
+            "string" == typeof i ? i.replace(ye, "") : null == i ? "" : i)) : void 0;
         }
     }), ot.extend({
         valHooks: {
@@ -7020,7 +6844,7 @@ function VerificarHorario(t, e) {
             i) : void ot.removeAttr(t, e));
         },
         removeAttr: function(t, e) {
-            var i, n, s = 0, o = e && e.match(bt);
+            var i, n, s = 0, o = e && e.match(yt);
             if (o && 1 === t.nodeType) for (;i = o[s++]; ) n = ot.propFix[i] || i, ot.expr.match.bool.test(i) ? De && ke || !Ce.test(i) ? t[n] = !1 : t[ot.camelCase("default-" + i)] = t[n] = !1 : ot.attr(t, i, ""), 
             t.removeAttribute(ke ? i : n);
         },
@@ -7132,22 +6956,22 @@ function VerificarHorario(t, e) {
     var Ee = /[\t\r\n\f]/g;
     ot.fn.extend({
         addClass: function(t) {
-            var e, i, n, s, o, a, r = 0, l = this.length, u = "string" == typeof t && t;
+            var e, i, n, s, o, a, r = 0, l = this.length, h = "string" == typeof t && t;
             if (ot.isFunction(t)) return this.each(function(e) {
                 ot(this).addClass(t.call(this, e, this.className));
             });
-            if (u) for (e = (t || "").match(bt) || []; l > r; r++) if (i = this[r], n = 1 === i.nodeType && (i.className ? (" " + i.className + " ").replace(Ee, " ") : " ")) {
+            if (h) for (e = (t || "").match(yt) || []; l > r; r++) if (i = this[r], n = 1 === i.nodeType && (i.className ? (" " + i.className + " ").replace(Ee, " ") : " ")) {
                 for (o = 0; s = e[o++]; ) n.indexOf(" " + s + " ") < 0 && (n += s + " ");
                 a = ot.trim(n), i.className !== a && (i.className = a);
             }
             return this;
         },
         removeClass: function(t) {
-            var e, i, n, s, o, a, r = 0, l = this.length, u = 0 === arguments.length || "string" == typeof t && t;
+            var e, i, n, s, o, a, r = 0, l = this.length, h = 0 === arguments.length || "string" == typeof t && t;
             if (ot.isFunction(t)) return this.each(function(e) {
                 ot(this).removeClass(t.call(this, e, this.className));
             });
-            if (u) for (e = (t || "").match(bt) || []; l > r; r++) if (i = this[r], n = 1 === i.nodeType && (i.className ? (" " + i.className + " ").replace(Ee, " ") : "")) {
+            if (h) for (e = (t || "").match(yt) || []; l > r; r++) if (i = this[r], n = 1 === i.nodeType && (i.className ? (" " + i.className + " ").replace(Ee, " ") : "")) {
                 for (o = 0; s = e[o++]; ) for (;n.indexOf(" " + s + " ") >= 0; ) n = n.replace(" " + s + " ", " ");
                 a = t ? ot.trim(n) : "", i.className !== a && (i.className = a);
             }
@@ -7158,7 +6982,7 @@ function VerificarHorario(t, e) {
             return "boolean" == typeof e && "string" === i ? e ? this.addClass(t) : this.removeClass(t) : this.each(ot.isFunction(t) ? function(i) {
                 ot(this).toggleClass(t.call(this, i, this.className, e), e);
             } : function() {
-                if ("string" === i) for (var e, n = 0, s = ot(this), o = t.match(bt) || []; e = o[n++]; ) s.hasClass(e) ? s.removeClass(e) : s.addClass(e); else (i === Ct || "boolean" === i) && (this.className && ot._data(this, "__className__", this.className), 
+                if ("string" === i) for (var e, n = 0, s = ot(this), o = t.match(yt) || []; e = o[n++]; ) s.hasClass(e) ? s.removeClass(e) : s.addClass(e); else (i === Ct || "boolean" === i) && (this.className && ot._data(this, "__className__", this.className), 
                 this.className = this.className || !1 === t ? "" : ot._data(this, "__className__") || "");
             });
         },
@@ -7206,7 +7030,7 @@ function VerificarHorario(t, e) {
         return i && i.documentElement && !i.getElementsByTagName("parsererror").length || ot.error("Invalid XML: " + e), 
         i;
     };
-    var Fe, Me, Ne = /#.*$/, Le = /([?&])_=[^&]*/, He = /^(.*?):[ \t]*([^\r\n]*)\r?$/gm, Oe = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/, ze = /^(?:GET|HEAD)$/, Re = /^\/\//, We = /^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/, je = {}, Be = {}, $e = "*/".concat("*");
+    var Fe, Me, Ne = /#.*$/, Le = /([?&])_=[^&]*/, He = /^(.*?):[ \t]*([^\r\n]*)\r?$/gm, Oe = /^(?:about|app|app-storage|.+-extension|file|res|widget):$/, je = /^(?:GET|HEAD)$/, ze = /^\/\//, We = /^([\w.+-]+:)(?:\/\/(?:[^\/?#]*@|)([^\/?#:]*)(?::(\d+)|)|)/, Be = {}, $e = {}, Re = "*/".concat("*");
     try {
         Me = location.href;
     } catch (t) {
@@ -7225,7 +7049,7 @@ function VerificarHorario(t, e) {
             async: !0,
             contentType: "application/x-www-form-urlencoded; charset=UTF-8",
             accepts: {
-                "*": $e,
+                "*": Re,
                 text: "text/plain",
                 html: "text/html",
                 xml: "application/xml, text/xml",
@@ -7253,80 +7077,80 @@ function VerificarHorario(t, e) {
             }
         },
         ajaxSetup: function(t, e) {
-            return e ? j(j(t, ot.ajaxSettings), e) : j(ot.ajaxSettings, t);
+            return e ? B(B(t, ot.ajaxSettings), e) : B(ot.ajaxSettings, t);
         },
-        ajaxPrefilter: R(je),
-        ajaxTransport: R(Be),
+        ajaxPrefilter: z(Be),
+        ajaxTransport: z($e),
         ajax: function(t, e) {
             function i(t, e, i, n) {
-                var s, h, v, y, _, w = e;
-                2 !== b && (b = 2, r && clearTimeout(r), u = void 0, a = n || "", x.readyState = t > 0 ? 4 : 0, 
-                s = t >= 200 && 300 > t || 304 === t, i && (y = B(c, x, i)), y = $(c, y, x, s), 
+                var s, u, v, b, _, w = e;
+                2 !== y && (y = 2, r && clearTimeout(r), h = void 0, a = n || "", x.readyState = t > 0 ? 4 : 0, 
+                s = t >= 200 && 300 > t || 304 === t, i && (b = $(c, x, i)), b = R(c, b, x, s), 
                 s ? (c.ifModified && ((_ = x.getResponseHeader("Last-Modified")) && (ot.lastModified[o] = _), 
-                (_ = x.getResponseHeader("etag")) && (ot.etag[o] = _)), 204 === t || "HEAD" === c.type ? w = "nocontent" : 304 === t ? w = "notmodified" : (w = y.state, 
-                h = y.data, v = y.error, s = !v)) : (v = w, (t || !w) && (w = "error", 0 > t && (t = 0))), 
-                x.status = t, x.statusText = (e || w) + "", s ? f.resolveWith(d, [ h, w, x ]) : f.rejectWith(d, [ x, w, v ]), 
-                x.statusCode(g), g = void 0, l && p.trigger(s ? "ajaxSuccess" : "ajaxError", [ x, c, s ? h : v ]), 
+                (_ = x.getResponseHeader("etag")) && (ot.etag[o] = _)), 204 === t || "HEAD" === c.type ? w = "nocontent" : 304 === t ? w = "notmodified" : (w = b.state, 
+                u = b.data, v = b.error, s = !v)) : (v = w, (t || !w) && (w = "error", 0 > t && (t = 0))), 
+                x.status = t, x.statusText = (e || w) + "", s ? f.resolveWith(d, [ u, w, x ]) : f.rejectWith(d, [ x, w, v ]), 
+                x.statusCode(g), g = void 0, l && p.trigger(s ? "ajaxSuccess" : "ajaxError", [ x, c, s ? u : v ]), 
                 m.fireWith(d, [ x, w ]), l && (p.trigger("ajaxComplete", [ x, c ]), --ot.active || ot.event.trigger("ajaxStop")));
             }
             "object" == typeof t && (e = t, t = void 0), e = e || {};
-            var n, s, o, a, r, l, u, h, c = ot.ajaxSetup({}, e), d = c.context || c, p = c.context && (d.nodeType || d.jquery) ? ot(d) : ot.event, f = ot.Deferred(), m = ot.Callbacks("once memory"), g = c.statusCode || {}, v = {}, y = {}, b = 0, _ = "canceled", x = {
+            var n, s, o, a, r, l, h, u, c = ot.ajaxSetup({}, e), d = c.context || c, p = c.context && (d.nodeType || d.jquery) ? ot(d) : ot.event, f = ot.Deferred(), m = ot.Callbacks("once memory"), g = c.statusCode || {}, v = {}, b = {}, y = 0, _ = "canceled", x = {
                 readyState: 0,
                 getResponseHeader: function(t) {
                     var e;
-                    if (2 === b) {
-                        if (!h) for (h = {}; e = He.exec(a); ) h[e[1].toLowerCase()] = e[2];
-                        e = h[t.toLowerCase()];
+                    if (2 === y) {
+                        if (!u) for (u = {}; e = He.exec(a); ) u[e[1].toLowerCase()] = e[2];
+                        e = u[t.toLowerCase()];
                     }
                     return null == e ? null : e;
                 },
                 getAllResponseHeaders: function() {
-                    return 2 === b ? a : null;
+                    return 2 === y ? a : null;
                 },
                 setRequestHeader: function(t, e) {
                     var i = t.toLowerCase();
-                    return b || (t = y[i] = y[i] || t, v[t] = e), this;
+                    return y || (t = b[i] = b[i] || t, v[t] = e), this;
                 },
                 overrideMimeType: function(t) {
-                    return b || (c.mimeType = t), this;
+                    return y || (c.mimeType = t), this;
                 },
                 statusCode: function(t) {
                     var e;
-                    if (t) if (2 > b) for (e in t) g[e] = [ g[e], t[e] ]; else x.always(t[x.status]);
+                    if (t) if (2 > y) for (e in t) g[e] = [ g[e], t[e] ]; else x.always(t[x.status]);
                     return this;
                 },
                 abort: function(t) {
                     var e = t || _;
-                    return u && u.abort(e), i(0, e), this;
+                    return h && h.abort(e), i(0, e), this;
                 }
             };
-            if (f.promise(x).complete = m.add, x.success = x.done, x.error = x.fail, c.url = ((t || c.url || Me) + "").replace(Ne, "").replace(Re, Fe[1] + "//"), 
-            c.type = e.method || e.type || c.method || c.type, c.dataTypes = ot.trim(c.dataType || "*").toLowerCase().match(bt) || [ "" ], 
+            if (f.promise(x).complete = m.add, x.success = x.done, x.error = x.fail, c.url = ((t || c.url || Me) + "").replace(Ne, "").replace(ze, Fe[1] + "//"), 
+            c.type = e.method || e.type || c.method || c.type, c.dataTypes = ot.trim(c.dataType || "*").toLowerCase().match(yt) || [ "" ], 
             null == c.crossDomain && (n = We.exec(c.url.toLowerCase()), c.crossDomain = !(!n || n[1] === Fe[1] && n[2] === Fe[2] && (n[3] || ("http:" === n[1] ? "80" : "443")) === (Fe[3] || ("http:" === Fe[1] ? "80" : "443")))), 
             c.data && c.processData && "string" != typeof c.data && (c.data = ot.param(c.data, c.traditional)), 
-            W(je, c, e, x), 2 === b) return x;
+            W(Be, c, e, x), 2 === y) return x;
             (l = c.global) && 0 == ot.active++ && ot.event.trigger("ajaxStart"), c.type = c.type.toUpperCase(), 
-            c.hasContent = !ze.test(c.type), o = c.url, c.hasContent || (c.data && (o = c.url += (Ae.test(o) ? "&" : "?") + c.data, 
+            c.hasContent = !je.test(c.type), o = c.url, c.hasContent || (c.data && (o = c.url += (Ae.test(o) ? "&" : "?") + c.data, 
             delete c.data), !1 === c.cache && (c.url = Le.test(o) ? o.replace(Le, "$1_=" + Pe++) : o + (Ae.test(o) ? "&" : "?") + "_=" + Pe++)), 
             c.ifModified && (ot.lastModified[o] && x.setRequestHeader("If-Modified-Since", ot.lastModified[o]), 
             ot.etag[o] && x.setRequestHeader("If-None-Match", ot.etag[o])), (c.data && c.hasContent && !1 !== c.contentType || e.contentType) && x.setRequestHeader("Content-Type", c.contentType), 
-            x.setRequestHeader("Accept", c.dataTypes[0] && c.accepts[c.dataTypes[0]] ? c.accepts[c.dataTypes[0]] + ("*" !== c.dataTypes[0] ? ", " + $e + "; q=0.01" : "") : c.accepts["*"]);
+            x.setRequestHeader("Accept", c.dataTypes[0] && c.accepts[c.dataTypes[0]] ? c.accepts[c.dataTypes[0]] + ("*" !== c.dataTypes[0] ? ", " + Re + "; q=0.01" : "") : c.accepts["*"]);
             for (s in c.headers) x.setRequestHeader(s, c.headers[s]);
-            if (c.beforeSend && (!1 === c.beforeSend.call(d, x, c) || 2 === b)) return x.abort();
+            if (c.beforeSend && (!1 === c.beforeSend.call(d, x, c) || 2 === y)) return x.abort();
             _ = "abort";
             for (s in {
                 success: 1,
                 error: 1,
                 complete: 1
             }) x[s](c[s]);
-            if (u = W(Be, c, e, x)) {
+            if (h = W($e, c, e, x)) {
                 x.readyState = 1, l && p.trigger("ajaxSend", [ x, c ]), c.async && c.timeout > 0 && (r = setTimeout(function() {
                     x.abort("timeout");
                 }, c.timeout));
                 try {
-                    b = 1, u.send(v, i);
+                    y = 1, h.send(v, i);
                 } catch (t) {
-                    if (!(2 > b)) throw t;
+                    if (!(2 > y)) throw t;
                     i(-1, t);
                 }
             } else i(-1, "No Transport");
@@ -7399,7 +7223,7 @@ function VerificarHorario(t, e) {
     }, ot.expr.filters.visible = function(t) {
         return !ot.expr.filters.hidden(t);
     };
-    var qe = /%20/g, Ye = /\[\]$/, Ve = /\r?\n/g, Ue = /^(?:submit|button|image|reset|file)$/i, Xe = /^(?:input|select|textarea|keygen)/i;
+    var qe = /%20/g, Ye = /\[\]$/, Xe = /\r?\n/g, Ve = /^(?:submit|button|image|reset|file)$/i, Ue = /^(?:input|select|textarea|keygen)/i;
     ot.param = function(t, e) {
         var i, n = [], s = function(t, e) {
             e = ot.isFunction(e) ? e() : null == e ? "" : e, n[n.length] = encodeURIComponent(t) + "=" + encodeURIComponent(e);
@@ -7418,22 +7242,22 @@ function VerificarHorario(t, e) {
                 return t ? ot.makeArray(t) : this;
             }).filter(function() {
                 var t = this.type;
-                return this.name && !ot(this).is(":disabled") && Xe.test(this.nodeName) && !Ue.test(t) && (this.checked || !At.test(t));
+                return this.name && !ot(this).is(":disabled") && Ue.test(this.nodeName) && !Ve.test(t) && (this.checked || !At.test(t));
             }).map(function(t, e) {
                 var i = ot(this).val();
                 return null == i ? null : ot.isArray(i) ? ot.map(i, function(t) {
                     return {
                         name: e.name,
-                        value: t.replace(Ve, "\r\n")
+                        value: t.replace(Xe, "\r\n")
                     };
                 }) : {
                     name: e.name,
-                    value: i.replace(Ve, "\r\n")
+                    value: i.replace(Xe, "\r\n")
                 };
             }).get();
         }
     }), ot.ajaxSettings.xhr = void 0 !== t.ActiveXObject ? function() {
-        return !this.isLocal && /^(get|post|head|put|delete|options)$/i.test(this.type) && Y() || V();
+        return !this.isLocal && /^(get|post|head|put|delete|options)$/i.test(this.type) && Y() || X();
     } : Y;
     var Ke = 0, Ge = {}, Qe = ot.ajaxSettings.xhr();
     t.ActiveXObject && ot(t).on("unload", function() {
@@ -7448,18 +7272,18 @@ function VerificarHorario(t, e) {
                     t.mimeType && o.overrideMimeType && o.overrideMimeType(t.mimeType), t.crossDomain || i["X-Requested-With"] || (i["X-Requested-With"] = "XMLHttpRequest");
                     for (s in i) void 0 !== i[s] && o.setRequestHeader(s, i[s] + "");
                     o.send(t.hasContent && t.data || null), e = function(i, s) {
-                        var r, l, u;
+                        var r, l, h;
                         if (e && (s || 4 === o.readyState)) if (delete Ge[a], e = void 0, o.onreadystatechange = ot.noop, 
                         s) 4 !== o.readyState && o.abort(); else {
-                            u = {}, r = o.status, "string" == typeof o.responseText && (u.text = o.responseText);
+                            h = {}, r = o.status, "string" == typeof o.responseText && (h.text = o.responseText);
                             try {
                                 l = o.statusText;
                             } catch (t) {
                                 l = "";
                             }
-                            r || !t.isLocal || t.crossDomain ? 1223 === r && (r = 204) : r = u.text ? 200 : 404;
+                            r || !t.isLocal || t.crossDomain ? 1223 === r && (r = 204) : r = h.text ? 200 : 404;
                         }
-                        u && n(r, l, u, o.getAllResponseHeaders());
+                        h && n(r, l, h, o.getAllResponseHeaders());
                     }, t.async ? 4 === o.readyState ? setTimeout(e) : o.onreadystatechange = Ge[a] = e : e();
                 },
                 abort: function() {
@@ -7498,23 +7322,23 @@ function VerificarHorario(t, e) {
             };
         }
     });
-    var Ze = [], Je = /(=)\?(?=&|$)|\?\?/;
+    var Je = [], Ze = /(=)\?(?=&|$)|\?\?/;
     ot.ajaxSetup({
         jsonp: "callback",
         jsonpCallback: function() {
-            var t = Ze.pop() || ot.expando + "_" + Pe++;
+            var t = Je.pop() || ot.expando + "_" + Pe++;
             return this[t] = !0, t;
         }
     }), ot.ajaxPrefilter("json jsonp", function(e, i, n) {
-        var s, o, a, r = !1 !== e.jsonp && (Je.test(e.url) ? "url" : "string" == typeof e.data && !(e.contentType || "").indexOf("application/x-www-form-urlencoded") && Je.test(e.data) && "data");
+        var s, o, a, r = !1 !== e.jsonp && (Ze.test(e.url) ? "url" : "string" == typeof e.data && !(e.contentType || "").indexOf("application/x-www-form-urlencoded") && Ze.test(e.data) && "data");
         return r || "jsonp" === e.dataTypes[0] ? (s = e.jsonpCallback = ot.isFunction(e.jsonpCallback) ? e.jsonpCallback() : e.jsonpCallback, 
-        r ? e[r] = e[r].replace(Je, "$1" + s) : !1 !== e.jsonp && (e.url += (Ae.test(e.url) ? "&" : "?") + e.jsonp + "=" + s), 
+        r ? e[r] = e[r].replace(Ze, "$1" + s) : !1 !== e.jsonp && (e.url += (Ae.test(e.url) ? "&" : "?") + e.jsonp + "=" + s), 
         e.converters["script json"] = function() {
             return a || ot.error(s + " was not called"), a[0];
         }, e.dataTypes[0] = "json", o = t[s], t[s] = function() {
             a = arguments;
         }, n.always(function() {
-            t[s] = o, e[s] && (e.jsonpCallback = i.jsonpCallback, Ze.push(s)), a && ot.isFunction(o) && o(a[0]), 
+            t[s] = o, e[s] && (e.jsonpCallback = i.jsonpCallback, Je.push(s)), a && ot.isFunction(o) && o(a[0]), 
             a = o = void 0;
         }), "script") : void 0;
     }), ot.parseHTML = function(t, e, i) {
@@ -7547,12 +7371,12 @@ function VerificarHorario(t, e) {
     var ei = t.document.documentElement;
     ot.offset = {
         setOffset: function(t, e, i) {
-            var n, s, o, a, r, l, u = ot.css(t, "position"), h = ot(t), c = {};
-            "static" === u && (t.style.position = "relative"), r = h.offset(), o = ot.css(t, "top"), 
-            l = ot.css(t, "left"), ("absolute" === u || "fixed" === u) && ot.inArray("auto", [ o, l ]) > -1 ? (n = h.position(), 
+            var n, s, o, a, r, l, h = ot.css(t, "position"), u = ot(t), c = {};
+            "static" === h && (t.style.position = "relative"), r = u.offset(), o = ot.css(t, "top"), 
+            l = ot.css(t, "left"), ("absolute" === h || "fixed" === h) && ot.inArray("auto", [ o, l ]) > -1 ? (n = u.position(), 
             a = n.top, s = n.left) : (a = parseFloat(o) || 0, s = parseFloat(l) || 0), ot.isFunction(e) && (e = e.call(t, i, r)), 
             null != e.top && (c.top = e.top - r.top + a), null != e.left && (c.left = e.left - r.left + s), 
-            "using" in e ? e.using.call(t, c) : h.css(c);
+            "using" in e ? e.using.call(t, c) : u.css(c);
         }
     }, ot.fn.extend({
         offset: function(t) {
@@ -7564,7 +7388,7 @@ function VerificarHorario(t, e) {
                 left: 0
             }, s = this[0], o = s && s.ownerDocument;
             return o ? (e = o.documentElement, ot.contains(e, s) ? (typeof s.getBoundingClientRect !== Ct && (n = s.getBoundingClientRect()), 
-            i = U(o), {
+            i = V(o), {
                 top: n.top + (i.pageYOffset || e.scrollTop) - (e.clientTop || 0),
                 left: n.left + (i.pageXOffset || e.scrollLeft) - (e.clientLeft || 0)
             }) : n) : void 0;
@@ -7596,7 +7420,7 @@ function VerificarHorario(t, e) {
         var i = /Y/.test(e);
         ot.fn[t] = function(n) {
             return Pt(this, function(t, n, s) {
-                var o = U(t);
+                var o = V(t);
                 return void 0 === s ? o ? e in o ? o[e] : o.document.documentElement[n] : t[n] : void (o ? o.scrollTo(i ? ot(o).scrollLeft() : s, i ? s : ot(o).scrollTop()) : t[n] = s);
             }, t, n, arguments.length, null);
         };
@@ -7734,7 +7558,7 @@ function VerificarHorario(t, e) {
     }
     t.ui = t.ui || {};
     t.ui.version = "1.12.1";
-    var l = 0, u = Array.prototype.slice;
+    var l = 0, h = Array.prototype.slice;
     t.cleanData = function(e) {
         return function(i) {
             var n, s, o;
@@ -7744,10 +7568,10 @@ function VerificarHorario(t, e) {
             e(i);
         };
     }(t.cleanData), t.widget = function(e, i, n) {
-        var s, o, a, r = {}, l = e.split(".")[0], u = l + "-" + (e = e.split(".")[1]);
+        var s, o, a, r = {}, l = e.split(".")[0], h = l + "-" + (e = e.split(".")[1]);
         return n || (n = i, i = t.Widget), t.isArray(n) && (n = t.extend.apply(null, [ {} ].concat(n))), 
-        t.expr[":"][u.toLowerCase()] = function(e) {
-            return !!t.data(e, u);
+        t.expr[":"][h.toLowerCase()] = function(e) {
+            return !!t.data(e, h);
         }, t[l] = t[l] || {}, s = t[l][e], o = t[l][e] = function(t, e) {
             if (!this._createWidget) return new o(t, e);
             arguments.length && this._createWidget(t, e);
@@ -7775,20 +7599,20 @@ function VerificarHorario(t, e) {
             constructor: o,
             namespace: l,
             widgetName: e,
-            widgetFullName: u
+            widgetFullName: h
         }), s ? (t.each(s._childConstructors, function(e, i) {
             var n = i.prototype;
             t.widget(n.namespace + "." + n.widgetName, o, i._proto);
         }), delete s._childConstructors) : i._childConstructors.push(o), t.widget.bridge(e, o), 
         o;
     }, t.widget.extend = function(e) {
-        for (var i, n, s = u.call(arguments, 1), o = 0, a = s.length; o < a; o++) for (i in s[o]) n = s[o][i], 
+        for (var i, n, s = h.call(arguments, 1), o = 0, a = s.length; o < a; o++) for (i in s[o]) n = s[o][i], 
         s[o].hasOwnProperty(i) && void 0 !== n && (t.isPlainObject(n) ? e[i] = t.isPlainObject(e[i]) ? t.widget.extend({}, e[i], n) : t.widget.extend({}, n) : e[i] = n);
         return e;
     }, t.widget.bridge = function(e, i) {
         var n = i.prototype.widgetFullName || e;
         t.fn[e] = function(s) {
-            var o = "string" == typeof s, a = u.call(arguments, 1), r = this;
+            var o = "string" == typeof s, a = h.call(arguments, 1), r = this;
             return o ? this.length || "instance" !== s ? this.each(function() {
                 var i, o = t.data(this, n);
                 return "instance" === s ? (r = o, !1) : o ? t.isFunction(o[s]) && "_" !== s.charAt(0) ? (i = o[s].apply(o, a), 
@@ -7930,8 +7754,8 @@ function VerificarHorario(t, e) {
                     if (e || !0 !== o.options.disabled && !t(this).hasClass("ui-state-disabled")) return ("string" == typeof a ? o[a] : a).apply(o, arguments);
                 }
                 "string" != typeof a && (r.guid = a.guid = a.guid || r.guid || t.guid++);
-                var l = n.match(/^([\w:-]*)\s*(.*)$/), u = l[1] + o.eventNamespace, h = l[2];
-                h ? s.on(u, h, r) : i.on(u, r);
+                var l = n.match(/^([\w:-]*)\s*(.*)$/), h = l[1] + o.eventNamespace, u = l[2];
+                u ? s.on(h, u, r) : i.on(h, r);
             });
         },
         _off: function(e, i) {
@@ -8025,7 +7849,7 @@ function VerificarHorario(t, e) {
                 offset: e.offset()
             };
         }
-        var s, o = Math.max, a = Math.abs, r = /left|center|right/, l = /top|center|bottom/, u = /[\+\-]\d+(\.[\d]+)?%?/, h = /^\w+/, c = /%$/, d = t.fn.position;
+        var s, o = Math.max, a = Math.abs, r = /left|center|right/, l = /top|center|bottom/, h = /[\+\-]\d+(\.[\d]+)?%?/, u = /^\w+/, c = /%$/, d = t.fn.position;
         t.position = {
             scrollbarWidth: function() {
                 if (void 0 !== s) return s;
@@ -8059,18 +7883,18 @@ function VerificarHorario(t, e) {
         }, t.fn.position = function(s) {
             if (!s || !s.of) return d.apply(this, arguments);
             s = t.extend({}, s);
-            var c, p, f, m, g, v, y = t(s.of), b = t.position.getWithinInfo(s.within), _ = t.position.getScrollInfo(b), x = (s.collision || "flip").split(" "), w = {};
-            return v = n(y), y[0].preventDefault && (s.at = "left top"), p = v.width, f = v.height, 
+            var c, p, f, m, g, v, b = t(s.of), y = t.position.getWithinInfo(s.within), _ = t.position.getScrollInfo(y), x = (s.collision || "flip").split(" "), w = {};
+            return v = n(b), b[0].preventDefault && (s.at = "left top"), p = v.width, f = v.height, 
             m = v.offset, g = t.extend({}, m), t.each([ "my", "at" ], function() {
                 var t, e, i = (s[this] || "").split(" ");
                 1 === i.length && (i = r.test(i[0]) ? i.concat([ "center" ]) : l.test(i[0]) ? [ "center" ].concat(i) : [ "center", "center" ]), 
-                i[0] = r.test(i[0]) ? i[0] : "center", i[1] = l.test(i[1]) ? i[1] : "center", t = u.exec(i[0]), 
-                e = u.exec(i[1]), w[this] = [ t ? t[0] : 0, e ? e[0] : 0 ], s[this] = [ h.exec(i[0])[0], h.exec(i[1])[0] ];
+                i[0] = r.test(i[0]) ? i[0] : "center", i[1] = l.test(i[1]) ? i[1] : "center", t = h.exec(i[0]), 
+                e = h.exec(i[1]), w[this] = [ t ? t[0] : 0, e ? e[0] : 0 ], s[this] = [ u.exec(i[0])[0], u.exec(i[1])[0] ];
             }), 1 === x.length && (x[1] = x[0]), "right" === s.at[0] ? g.left += p : "center" === s.at[0] && (g.left += p / 2), 
             "bottom" === s.at[1] ? g.top += f : "center" === s.at[1] && (g.top += f / 2), c = e(w.at, p, f), 
             g.left += c[0], g.top += c[1], this.each(function() {
-                var n, r, l = t(this), u = l.outerWidth(), h = l.outerHeight(), d = i(this, "marginLeft"), v = i(this, "marginTop"), C = u + d + i(this, "marginRight") + _.width, k = h + v + i(this, "marginBottom") + _.height, D = t.extend({}, g), T = e(w.my, l.outerWidth(), l.outerHeight());
-                "right" === s.my[0] ? D.left -= u : "center" === s.my[0] && (D.left -= u / 2), "bottom" === s.my[1] ? D.top -= h : "center" === s.my[1] && (D.top -= h / 2), 
+                var n, r, l = t(this), h = l.outerWidth(), u = l.outerHeight(), d = i(this, "marginLeft"), v = i(this, "marginTop"), C = h + d + i(this, "marginRight") + _.width, k = u + v + i(this, "marginBottom") + _.height, D = t.extend({}, g), T = e(w.my, l.outerWidth(), l.outerHeight());
+                "right" === s.my[0] ? D.left -= h : "center" === s.my[0] && (D.left -= h / 2), "bottom" === s.my[1] ? D.top -= u : "center" === s.my[1] && (D.top -= u / 2), 
                 D.left += T[0], D.top += T[1], n = {
                     marginLeft: d,
                     marginTop: v
@@ -8078,21 +7902,21 @@ function VerificarHorario(t, e) {
                     t.ui.position[x[e]] && t.ui.position[x[e]][i](D, {
                         targetWidth: p,
                         targetHeight: f,
-                        elemWidth: u,
-                        elemHeight: h,
+                        elemWidth: h,
+                        elemHeight: u,
                         collisionPosition: n,
                         collisionWidth: C,
                         collisionHeight: k,
                         offset: [ c[0] + T[0], c[1] + T[1] ],
                         my: s.my,
                         at: s.at,
-                        within: b,
+                        within: y,
                         elem: l
                     });
                 }), s.using && (r = function(t) {
-                    var e = m.left - D.left, i = e + p - u, n = m.top - D.top, r = n + f - h, c = {
+                    var e = m.left - D.left, i = e + p - h, n = m.top - D.top, r = n + f - u, c = {
                         target: {
-                            element: y,
+                            element: b,
                             left: m.left,
                             top: m.top,
                             width: p,
@@ -8102,13 +7926,13 @@ function VerificarHorario(t, e) {
                             element: l,
                             left: D.left,
                             top: D.top,
-                            width: u,
-                            height: h
+                            width: h,
+                            height: u
                         },
                         horizontal: i < 0 ? "left" : e > 0 ? "right" : "center",
                         vertical: r < 0 ? "top" : n > 0 ? "bottom" : "middle"
                     };
-                    p < u && a(e + i) < p && (c.horizontal = "center"), f < h && a(n + r) < f && (c.vertical = "middle"), 
+                    p < h && a(e + i) < p && (c.horizontal = "center"), f < u && a(n + r) < f && (c.vertical = "middle"), 
                     o(a(e), a(i)) > o(a(n), a(r)) ? c.important = "horizontal" : c.important = "vertical", 
                     s.using.call(this, t, c);
                 }), l.offset(t.extend(D, {
@@ -8118,24 +7942,24 @@ function VerificarHorario(t, e) {
         }, t.ui.position = {
             fit: {
                 left: function(t, e) {
-                    var i, n = e.within, s = n.isWindow ? n.scrollLeft : n.offset.left, a = n.width, r = t.left - e.collisionPosition.marginLeft, l = s - r, u = r + e.collisionWidth - a - s;
-                    e.collisionWidth > a ? l > 0 && u <= 0 ? (i = t.left + l + e.collisionWidth - a - s, 
-                    t.left += l - i) : t.left = u > 0 && l <= 0 ? s : l > u ? s + a - e.collisionWidth : s : l > 0 ? t.left += l : u > 0 ? t.left -= u : t.left = o(t.left - r, t.left);
+                    var i, n = e.within, s = n.isWindow ? n.scrollLeft : n.offset.left, a = n.width, r = t.left - e.collisionPosition.marginLeft, l = s - r, h = r + e.collisionWidth - a - s;
+                    e.collisionWidth > a ? l > 0 && h <= 0 ? (i = t.left + l + e.collisionWidth - a - s, 
+                    t.left += l - i) : t.left = h > 0 && l <= 0 ? s : l > h ? s + a - e.collisionWidth : s : l > 0 ? t.left += l : h > 0 ? t.left -= h : t.left = o(t.left - r, t.left);
                 },
                 top: function(t, e) {
-                    var i, n = e.within, s = n.isWindow ? n.scrollTop : n.offset.top, a = e.within.height, r = t.top - e.collisionPosition.marginTop, l = s - r, u = r + e.collisionHeight - a - s;
-                    e.collisionHeight > a ? l > 0 && u <= 0 ? (i = t.top + l + e.collisionHeight - a - s, 
-                    t.top += l - i) : t.top = u > 0 && l <= 0 ? s : l > u ? s + a - e.collisionHeight : s : l > 0 ? t.top += l : u > 0 ? t.top -= u : t.top = o(t.top - r, t.top);
+                    var i, n = e.within, s = n.isWindow ? n.scrollTop : n.offset.top, a = e.within.height, r = t.top - e.collisionPosition.marginTop, l = s - r, h = r + e.collisionHeight - a - s;
+                    e.collisionHeight > a ? l > 0 && h <= 0 ? (i = t.top + l + e.collisionHeight - a - s, 
+                    t.top += l - i) : t.top = h > 0 && l <= 0 ? s : l > h ? s + a - e.collisionHeight : s : l > 0 ? t.top += l : h > 0 ? t.top -= h : t.top = o(t.top - r, t.top);
                 }
             },
             flip: {
                 left: function(t, e) {
-                    var i, n, s = e.within, o = s.offset.left + s.scrollLeft, r = s.width, l = s.isWindow ? s.scrollLeft : s.offset.left, u = t.left - e.collisionPosition.marginLeft, h = u - l, c = u + e.collisionWidth - r - l, d = "left" === e.my[0] ? -e.elemWidth : "right" === e.my[0] ? e.elemWidth : 0, p = "left" === e.at[0] ? e.targetWidth : "right" === e.at[0] ? -e.targetWidth : 0, f = -2 * e.offset[0];
-                    h < 0 ? ((i = t.left + d + p + f + e.collisionWidth - r - o) < 0 || i < a(h)) && (t.left += d + p + f) : c > 0 && ((n = t.left - e.collisionPosition.marginLeft + d + p + f - l) > 0 || a(n) < c) && (t.left += d + p + f);
+                    var i, n, s = e.within, o = s.offset.left + s.scrollLeft, r = s.width, l = s.isWindow ? s.scrollLeft : s.offset.left, h = t.left - e.collisionPosition.marginLeft, u = h - l, c = h + e.collisionWidth - r - l, d = "left" === e.my[0] ? -e.elemWidth : "right" === e.my[0] ? e.elemWidth : 0, p = "left" === e.at[0] ? e.targetWidth : "right" === e.at[0] ? -e.targetWidth : 0, f = -2 * e.offset[0];
+                    u < 0 ? ((i = t.left + d + p + f + e.collisionWidth - r - o) < 0 || i < a(u)) && (t.left += d + p + f) : c > 0 && ((n = t.left - e.collisionPosition.marginLeft + d + p + f - l) > 0 || a(n) < c) && (t.left += d + p + f);
                 },
                 top: function(t, e) {
-                    var i, n, s = e.within, o = s.offset.top + s.scrollTop, r = s.height, l = s.isWindow ? s.scrollTop : s.offset.top, u = t.top - e.collisionPosition.marginTop, h = u - l, c = u + e.collisionHeight - r - l, d = "top" === e.my[1] ? -e.elemHeight : "bottom" === e.my[1] ? e.elemHeight : 0, p = "top" === e.at[1] ? e.targetHeight : "bottom" === e.at[1] ? -e.targetHeight : 0, f = -2 * e.offset[1];
-                    h < 0 ? ((n = t.top + d + p + f + e.collisionHeight - r - o) < 0 || n < a(h)) && (t.top += d + p + f) : c > 0 && ((i = t.top - e.collisionPosition.marginTop + d + p + f - l) > 0 || a(i) < c) && (t.top += d + p + f);
+                    var i, n, s = e.within, o = s.offset.top + s.scrollTop, r = s.height, l = s.isWindow ? s.scrollTop : s.offset.top, h = t.top - e.collisionPosition.marginTop, u = h - l, c = h + e.collisionHeight - r - l, d = "top" === e.my[1] ? -e.elemHeight : "bottom" === e.my[1] ? e.elemHeight : 0, p = "top" === e.at[1] ? e.targetHeight : "bottom" === e.at[1] ? -e.targetHeight : 0, f = -2 * e.offset[1];
+                    u < 0 ? ((n = t.top + d + p + f + e.collisionHeight - r - o) < 0 || n < a(u)) && (t.top += d + p + f) : c > 0 && ((i = t.top - e.collisionPosition.marginTop + d + p + f - l) > 0 || a(i) < c) && (t.top += d + p + f);
                 }
             },
             flipfit: {
@@ -8170,8 +7994,8 @@ function VerificarHorario(t, e) {
         }
     });
     t.ui.focusable = function(i, n) {
-        var s, o, a, r, l, u = i.nodeName.toLowerCase();
-        return "area" === u ? (s = i.parentNode, o = s.name, !(!i.href || !o || "map" !== s.nodeName.toLowerCase()) && ((a = t("img[usemap='#" + o + "']")).length > 0 && a.is(":visible"))) : (/^(input|select|textarea|button|object)$/.test(u) ? (r = !i.disabled) && (l = t(i).closest("fieldset")[0]) && (r = !l.disabled) : r = "a" === u ? i.href || n : n, 
+        var s, o, a, r, l, h = i.nodeName.toLowerCase();
+        return "area" === h ? (s = i.parentNode, o = s.name, !(!i.href || !o || "map" !== s.nodeName.toLowerCase()) && ((a = t("img[usemap='#" + o + "']")).length > 0 && a.is(":visible"))) : (/^(input|select|textarea|button|object)$/.test(h) ? (r = !i.disabled) && (l = t(i).closest("fieldset")[0]) && (r = !l.disabled) : r = "a" === h ? i.href || n : n, 
         r && t(i).is(":visible") && e(t(i)));
     }, t.extend(t.expr[":"], {
         focusable: function(e) {
@@ -8283,9 +8107,9 @@ function VerificarHorario(t, e) {
             });
         }
     }), t.ui.ie = !!/msie [\w.]+/.exec(navigator.userAgent.toLowerCase());
-    var h = !1;
+    var u = !1;
     t(document).on("mouseup", function() {
-        h = !1;
+        u = !1;
     });
     t.widget("ui.mouse", {
         version: "1.12.1",
@@ -8307,7 +8131,7 @@ function VerificarHorario(t, e) {
             this.element.off("." + this.widgetName), this._mouseMoveDelegate && this.document.off("mousemove." + this.widgetName, this._mouseMoveDelegate).off("mouseup." + this.widgetName, this._mouseUpDelegate);
         },
         _mouseDown: function(e) {
-            if (!h) {
+            if (!u) {
                 this._mouseMoved = !1, this._mouseStarted && this._mouseUp(e), this._mouseDownEvent = e;
                 var i = this, n = 1 === e.which, s = !("string" != typeof this.options.cancel || !e.target.nodeName) && t(e.target).closest(this.options.cancel).length;
                 return !(n && !s && this._mouseCapture(e)) || (this.mouseDelayMet = !this.options.delay, 
@@ -8320,7 +8144,7 @@ function VerificarHorario(t, e) {
                 }, this._mouseUpDelegate = function(t) {
                     return i._mouseUp(t);
                 }, this.document.on("mousemove." + this.widgetName, this._mouseMoveDelegate).on("mouseup." + this.widgetName, this._mouseUpDelegate), 
-                e.preventDefault(), h = !0, !0));
+                e.preventDefault(), u = !0, !0));
             }
         },
         _mouseMove: function(e) {
@@ -8336,7 +8160,7 @@ function VerificarHorario(t, e) {
             this.document.off("mousemove." + this.widgetName, this._mouseMoveDelegate).off("mouseup." + this.widgetName, this._mouseUpDelegate), 
             this._mouseStarted && (this._mouseStarted = !1, e.target === this._mouseDownEvent.target && t.data(e.target, this.widgetName + ".preventClickEvent", !0), 
             this._mouseStop(e)), this._mouseDelayTimer && (clearTimeout(this._mouseDelayTimer), 
-            delete this._mouseDelayTimer), this.ignoreMissingWhich = !1, h = !1, e.preventDefault();
+            delete this._mouseDelayTimer), this.ignoreMissingWhich = !1, u = !1, e.preventDefault();
         },
         _mouseDistanceMet: function(t) {
             return Math.max(Math.abs(this._mouseDownEvent.pageX - t.pageX), Math.abs(this._mouseDownEvent.pageY - t.pageY)) >= this.options.distance;
@@ -8566,21 +8390,21 @@ function VerificarHorario(t, e) {
             };
         },
         _generatePosition: function(t, e) {
-            var i, n, s, o, a = this.options, r = this._isRootNode(this.scrollParent[0]), l = t.pageX, u = t.pageY;
+            var i, n, s, o, a = this.options, r = this._isRootNode(this.scrollParent[0]), l = t.pageX, h = t.pageY;
             return r && this.offset.scroll || (this.offset.scroll = {
                 top: this.scrollParent.scrollTop(),
                 left: this.scrollParent.scrollLeft()
             }), e && (this.containment && (this.relativeContainer ? (n = this.relativeContainer.offset(), 
             i = [ this.containment[0] + n.left, this.containment[1] + n.top, this.containment[2] + n.left, this.containment[3] + n.top ]) : i = this.containment, 
             t.pageX - this.offset.click.left < i[0] && (l = i[0] + this.offset.click.left), 
-            t.pageY - this.offset.click.top < i[1] && (u = i[1] + this.offset.click.top), t.pageX - this.offset.click.left > i[2] && (l = i[2] + this.offset.click.left), 
-            t.pageY - this.offset.click.top > i[3] && (u = i[3] + this.offset.click.top)), a.grid && (s = a.grid[1] ? this.originalPageY + Math.round((u - this.originalPageY) / a.grid[1]) * a.grid[1] : this.originalPageY, 
-            u = i ? s - this.offset.click.top >= i[1] || s - this.offset.click.top > i[3] ? s : s - this.offset.click.top >= i[1] ? s - a.grid[1] : s + a.grid[1] : s, 
+            t.pageY - this.offset.click.top < i[1] && (h = i[1] + this.offset.click.top), t.pageX - this.offset.click.left > i[2] && (l = i[2] + this.offset.click.left), 
+            t.pageY - this.offset.click.top > i[3] && (h = i[3] + this.offset.click.top)), a.grid && (s = a.grid[1] ? this.originalPageY + Math.round((h - this.originalPageY) / a.grid[1]) * a.grid[1] : this.originalPageY, 
+            h = i ? s - this.offset.click.top >= i[1] || s - this.offset.click.top > i[3] ? s : s - this.offset.click.top >= i[1] ? s - a.grid[1] : s + a.grid[1] : s, 
             o = a.grid[0] ? this.originalPageX + Math.round((l - this.originalPageX) / a.grid[0]) * a.grid[0] : this.originalPageX, 
             l = i ? o - this.offset.click.left >= i[0] || o - this.offset.click.left > i[2] ? o : o - this.offset.click.left >= i[0] ? o - a.grid[0] : o + a.grid[0] : o), 
-            "y" === a.axis && (l = this.originalPageX), "x" === a.axis && (u = this.originalPageY)), 
+            "y" === a.axis && (l = this.originalPageX), "x" === a.axis && (h = this.originalPageY)), 
             {
-                top: u - this.offset.click.top - this.offset.relative.top - this.offset.parent.top + ("fixed" === this.cssPosition ? -this.offset.scroll.top : r ? 0 : this.offset.scroll.top),
+                top: h - this.offset.click.top - this.offset.relative.top - this.offset.parent.top + ("fixed" === this.cssPosition ? -this.offset.scroll.top : r ? 0 : this.offset.scroll.top),
                 left: l - this.offset.click.left - this.offset.relative.left - this.offset.parent.left + ("fixed" === this.cssPosition ? -this.offset.scroll.left : r ? 0 : this.offset.scroll.left)
             };
         },
@@ -8698,13 +8522,13 @@ function VerificarHorario(t, e) {
             });
         },
         drag: function(e, i, n) {
-            var s, o, a, r, l, u, h, c, d, p, f = n.options, m = f.snapTolerance, g = i.offset.left, v = g + n.helperProportions.width, y = i.offset.top, b = y + n.helperProportions.height;
-            for (d = n.snapElements.length - 1; d >= 0; d--) u = (l = n.snapElements[d].left - n.margins.left) + n.snapElements[d].width, 
-            c = (h = n.snapElements[d].top - n.margins.top) + n.snapElements[d].height, v < l - m || g > u + m || b < h - m || y > c + m || !t.contains(n.snapElements[d].item.ownerDocument, n.snapElements[d].item) ? (n.snapElements[d].snapping && n.options.snap.release && n.options.snap.release.call(n.element, e, t.extend(n._uiHash(), {
+            var s, o, a, r, l, h, u, c, d, p, f = n.options, m = f.snapTolerance, g = i.offset.left, v = g + n.helperProportions.width, b = i.offset.top, y = b + n.helperProportions.height;
+            for (d = n.snapElements.length - 1; d >= 0; d--) h = (l = n.snapElements[d].left - n.margins.left) + n.snapElements[d].width, 
+            c = (u = n.snapElements[d].top - n.margins.top) + n.snapElements[d].height, v < l - m || g > h + m || y < u - m || b > c + m || !t.contains(n.snapElements[d].item.ownerDocument, n.snapElements[d].item) ? (n.snapElements[d].snapping && n.options.snap.release && n.options.snap.release.call(n.element, e, t.extend(n._uiHash(), {
                 snapItem: n.snapElements[d].item
-            })), n.snapElements[d].snapping = !1) : ("inner" !== f.snapMode && (s = Math.abs(h - b) <= m, 
-            o = Math.abs(c - y) <= m, a = Math.abs(l - v) <= m, r = Math.abs(u - g) <= m, s && (i.position.top = n._convertPositionTo("relative", {
-                top: h - n.helperProportions.height,
+            })), n.snapElements[d].snapping = !1) : ("inner" !== f.snapMode && (s = Math.abs(u - y) <= m, 
+            o = Math.abs(c - b) <= m, a = Math.abs(l - v) <= m, r = Math.abs(h - g) <= m, s && (i.position.top = n._convertPositionTo("relative", {
+                top: u - n.helperProportions.height,
                 left: 0
             }).top), o && (i.position.top = n._convertPositionTo("relative", {
                 top: c,
@@ -8714,10 +8538,10 @@ function VerificarHorario(t, e) {
                 left: l - n.helperProportions.width
             }).left), r && (i.position.left = n._convertPositionTo("relative", {
                 top: 0,
-                left: u
-            }).left)), p = s || o || a || r, "outer" !== f.snapMode && (s = Math.abs(h - y) <= m, 
-            o = Math.abs(c - b) <= m, a = Math.abs(l - g) <= m, r = Math.abs(u - v) <= m, s && (i.position.top = n._convertPositionTo("relative", {
-                top: h,
+                left: h
+            }).left)), p = s || o || a || r, "outer" !== f.snapMode && (s = Math.abs(u - b) <= m, 
+            o = Math.abs(c - y) <= m, a = Math.abs(l - g) <= m, r = Math.abs(h - v) <= m, s && (i.position.top = n._convertPositionTo("relative", {
+                top: u,
                 left: 0
             }).top), o && (i.position.top = n._convertPositionTo("relative", {
                 top: c - n.helperProportions.height,
@@ -8727,7 +8551,7 @@ function VerificarHorario(t, e) {
                 left: l
             }).left), r && (i.position.left = n._convertPositionTo("relative", {
                 top: 0,
-                left: u - n.helperProportions.width
+                left: h - n.helperProportions.width
             }).left)), !n.snapElements[d].snapping && (s || o || a || r || p) && n.options.snap.snap && n.options.snap.snap.call(n.element, e, t.extend(n._uiHash(), {
                 snapItem: n.snapElements[d].item
             })), n.snapElements[d].snapping = s || o || a || r || p);
@@ -8853,19 +8677,19 @@ function VerificarHorario(t, e) {
         }
         return function(e, i, n, s) {
             if (!i.offset) return !1;
-            var o = (e.positionAbs || e.position.absolute).left + e.margins.left, a = (e.positionAbs || e.position.absolute).top + e.margins.top, r = o + e.helperProportions.width, l = a + e.helperProportions.height, u = i.offset.left, h = i.offset.top, c = u + i.proportions().width, d = h + i.proportions().height;
+            var o = (e.positionAbs || e.position.absolute).left + e.margins.left, a = (e.positionAbs || e.position.absolute).top + e.margins.top, r = o + e.helperProportions.width, l = a + e.helperProportions.height, h = i.offset.left, u = i.offset.top, c = h + i.proportions().width, d = u + i.proportions().height;
             switch (n) {
               case "fit":
-                return u <= o && r <= c && h <= a && l <= d;
+                return h <= o && r <= c && u <= a && l <= d;
 
               case "intersect":
-                return u < o + e.helperProportions.width / 2 && r - e.helperProportions.width / 2 < c && h < a + e.helperProportions.height / 2 && l - e.helperProportions.height / 2 < d;
+                return h < o + e.helperProportions.width / 2 && r - e.helperProportions.width / 2 < c && u < a + e.helperProportions.height / 2 && l - e.helperProportions.height / 2 < d;
 
               case "pointer":
-                return t(s.pageY, h, i.proportions().height) && t(s.pageX, u, i.proportions().width);
+                return t(s.pageY, u, i.proportions().height) && t(s.pageX, h, i.proportions().width);
 
               case "touch":
-                return (a >= h && a <= d || l >= h && l <= d || a < h && l > d) && (o >= u && o <= c || r >= u && r <= c || o < u && r > c);
+                return (a >= u && a <= d || l >= u && l <= d || a < u && l > d) && (o >= h && o <= c || r >= h && r <= c || o < h && r > c);
 
               default:
                 return !1;
@@ -9110,17 +8934,17 @@ function VerificarHorario(t, e) {
         },
         _mouseStop: function(e) {
             this.resizing = !1;
-            var i, n, s, o, a, r, l, u = this.options, h = this;
-            return this._helper && (s = (n = (i = this._proportionallyResizeElements).length && /textarea/i.test(i[0].nodeName)) && this._hasScroll(i[0], "left") ? 0 : h.sizeDiff.height, 
-            o = n ? 0 : h.sizeDiff.width, a = {
-                width: h.helper.width() - o,
-                height: h.helper.height() - s
-            }, r = parseFloat(h.element.css("left")) + (h.position.left - h.originalPosition.left) || null, 
-            l = parseFloat(h.element.css("top")) + (h.position.top - h.originalPosition.top) || null, 
-            u.animate || this.element.css(t.extend(a, {
+            var i, n, s, o, a, r, l, h = this.options, u = this;
+            return this._helper && (s = (n = (i = this._proportionallyResizeElements).length && /textarea/i.test(i[0].nodeName)) && this._hasScroll(i[0], "left") ? 0 : u.sizeDiff.height, 
+            o = n ? 0 : u.sizeDiff.width, a = {
+                width: u.helper.width() - o,
+                height: u.helper.height() - s
+            }, r = parseFloat(u.element.css("left")) + (u.position.left - u.originalPosition.left) || null, 
+            l = parseFloat(u.element.css("top")) + (u.position.top - u.originalPosition.top) || null, 
+            h.animate || this.element.css(t.extend(a, {
                 top: l,
                 left: r
-            })), h.helper.height(h.size.height), h.helper.width(h.size.width), this._helper && !u.animate && this._proportionallyResize()), 
+            })), u.helper.height(u.size.height), u.helper.width(u.size.width), this._helper && !h.animate && this._proportionallyResize()), 
             t("body").css("cursor", "auto"), this._removeClass("ui-resizable-resizing"), this._propagate("stop", e), 
             this._helper && this.helper.remove(), !1;
         },
@@ -9164,10 +8988,10 @@ function VerificarHorario(t, e) {
             t.left = e.left + (i.width - t.width)), t;
         },
         _respectSize: function(t) {
-            var e = this._vBoundaries, i = this.axis, n = this._isNumber(t.width) && e.maxWidth && e.maxWidth < t.width, s = this._isNumber(t.height) && e.maxHeight && e.maxHeight < t.height, o = this._isNumber(t.width) && e.minWidth && e.minWidth > t.width, a = this._isNumber(t.height) && e.minHeight && e.minHeight > t.height, r = this.originalPosition.left + this.originalSize.width, l = this.originalPosition.top + this.originalSize.height, u = /sw|nw|w/.test(i), h = /nw|ne|n/.test(i);
+            var e = this._vBoundaries, i = this.axis, n = this._isNumber(t.width) && e.maxWidth && e.maxWidth < t.width, s = this._isNumber(t.height) && e.maxHeight && e.maxHeight < t.height, o = this._isNumber(t.width) && e.minWidth && e.minWidth > t.width, a = this._isNumber(t.height) && e.minHeight && e.minHeight > t.height, r = this.originalPosition.left + this.originalSize.width, l = this.originalPosition.top + this.originalSize.height, h = /sw|nw|w/.test(i), u = /nw|ne|n/.test(i);
             return o && (t.width = e.minWidth), a && (t.height = e.minHeight), n && (t.width = e.maxWidth), 
-            s && (t.height = e.maxHeight), o && u && (t.left = r - e.minWidth), n && u && (t.left = r - e.maxWidth), 
-            a && h && (t.top = l - e.minHeight), s && h && (t.top = l - e.maxHeight), t.width || t.height || t.left || !t.top ? t.width || t.height || t.top || !t.left || (t.left = null) : t.top = null, 
+            s && (t.height = e.maxHeight), o && h && (t.left = r - e.minWidth), n && h && (t.left = r - e.maxWidth), 
+            a && u && (t.top = l - e.minHeight), s && u && (t.top = l - e.maxHeight), t.width || t.height || t.left || !t.top ? t.width || t.height || t.top || !t.left || (t.left = null) : t.top = null, 
             t;
         },
         _getPaddingPlusBorderDimensions: function(t) {
@@ -9256,10 +9080,10 @@ function VerificarHorario(t, e) {
             var i = t(this).resizable("instance"), n = i.options, s = i._proportionallyResizeElements, o = s.length && /textarea/i.test(s[0].nodeName), a = o && i._hasScroll(s[0], "left") ? 0 : i.sizeDiff.height, r = o ? 0 : i.sizeDiff.width, l = {
                 width: i.size.width - r,
                 height: i.size.height - a
-            }, u = parseFloat(i.element.css("left")) + (i.position.left - i.originalPosition.left) || null, h = parseFloat(i.element.css("top")) + (i.position.top - i.originalPosition.top) || null;
-            i.element.animate(t.extend(l, h && u ? {
-                top: h,
-                left: u
+            }, h = parseFloat(i.element.css("left")) + (i.position.left - i.originalPosition.left) || null, u = parseFloat(i.element.css("top")) + (i.position.top - i.originalPosition.top) || null;
+            i.element.animate(t.extend(l, u && h ? {
+                top: u,
+                left: h
             } : {}), {
                 duration: n.animateDuration,
                 easing: n.animateEasing,
@@ -9279,7 +9103,7 @@ function VerificarHorario(t, e) {
         }
     }), t.ui.plugin.add("resizable", "containment", {
         start: function() {
-            var e, i, n, s, o, a, r, l = t(this).resizable("instance"), u = l.options, h = l.element, c = u.containment, d = c instanceof t ? c.get(0) : /parent/.test(c) ? h.parent().get(0) : c;
+            var e, i, n, s, o, a, r, l = t(this).resizable("instance"), h = l.options, u = l.element, c = h.containment, d = c instanceof t ? c.get(0) : /parent/.test(c) ? u.parent().get(0) : c;
             d && (l.containerElement = t(d), /document/.test(c) || c === document ? (l.containerOffset = {
                 left: 0,
                 top: 0
@@ -9308,33 +9132,33 @@ function VerificarHorario(t, e) {
             }));
         },
         resize: function(e) {
-            var i, n, s, o, a = t(this).resizable("instance"), r = a.options, l = a.containerOffset, u = a.position, h = a._aspectRatio || e.shiftKey, c = {
+            var i, n, s, o, a = t(this).resizable("instance"), r = a.options, l = a.containerOffset, h = a.position, u = a._aspectRatio || e.shiftKey, c = {
                 top: 0,
                 left: 0
             }, d = a.containerElement, p = !0;
-            d[0] !== document && /static/.test(d.css("position")) && (c = l), u.left < (a._helper ? l.left : 0) && (a.size.width = a.size.width + (a._helper ? a.position.left - l.left : a.position.left - c.left), 
-            h && (a.size.height = a.size.width / a.aspectRatio, p = !1), a.position.left = r.helper ? l.left : 0), 
-            u.top < (a._helper ? l.top : 0) && (a.size.height = a.size.height + (a._helper ? a.position.top - l.top : a.position.top), 
-            h && (a.size.width = a.size.height * a.aspectRatio, p = !1), a.position.top = a._helper ? l.top : 0), 
+            d[0] !== document && /static/.test(d.css("position")) && (c = l), h.left < (a._helper ? l.left : 0) && (a.size.width = a.size.width + (a._helper ? a.position.left - l.left : a.position.left - c.left), 
+            u && (a.size.height = a.size.width / a.aspectRatio, p = !1), a.position.left = r.helper ? l.left : 0), 
+            h.top < (a._helper ? l.top : 0) && (a.size.height = a.size.height + (a._helper ? a.position.top - l.top : a.position.top), 
+            u && (a.size.width = a.size.height * a.aspectRatio, p = !1), a.position.top = a._helper ? l.top : 0), 
             s = a.containerElement.get(0) === a.element.parent().get(0), o = /relative|absolute/.test(a.containerElement.css("position")), 
             s && o ? (a.offset.left = a.parentData.left + a.position.left, a.offset.top = a.parentData.top + a.position.top) : (a.offset.left = a.element.offset().left, 
             a.offset.top = a.element.offset().top), i = Math.abs(a.sizeDiff.width + (a._helper ? a.offset.left - c.left : a.offset.left - l.left)), 
             n = Math.abs(a.sizeDiff.height + (a._helper ? a.offset.top - c.top : a.offset.top - l.top)), 
             i + a.size.width >= a.parentData.width && (a.size.width = a.parentData.width - i, 
-            h && (a.size.height = a.size.width / a.aspectRatio, p = !1)), n + a.size.height >= a.parentData.height && (a.size.height = a.parentData.height - n, 
-            h && (a.size.width = a.size.height * a.aspectRatio, p = !1)), p || (a.position.left = a.prevPosition.left, 
+            u && (a.size.height = a.size.width / a.aspectRatio, p = !1)), n + a.size.height >= a.parentData.height && (a.size.height = a.parentData.height - n, 
+            u && (a.size.width = a.size.height * a.aspectRatio, p = !1)), p || (a.position.left = a.prevPosition.left, 
             a.position.top = a.prevPosition.top, a.size.width = a.prevSize.width, a.size.height = a.prevSize.height);
         },
         stop: function() {
-            var e = t(this).resizable("instance"), i = e.options, n = e.containerOffset, s = e.containerPosition, o = e.containerElement, a = t(e.helper), r = a.offset(), l = a.outerWidth() - e.sizeDiff.width, u = a.outerHeight() - e.sizeDiff.height;
+            var e = t(this).resizable("instance"), i = e.options, n = e.containerOffset, s = e.containerPosition, o = e.containerElement, a = t(e.helper), r = a.offset(), l = a.outerWidth() - e.sizeDiff.width, h = a.outerHeight() - e.sizeDiff.height;
             e._helper && !i.animate && /relative/.test(o.css("position")) && t(this).css({
                 left: r.left - s.left - n.left,
                 width: l,
-                height: u
+                height: h
             }), e._helper && !i.animate && /static/.test(o.css("position")) && t(this).css({
                 left: r.left - s.left - n.left,
                 width: l,
-                height: u
+                height: h
             });
         }
     }), t.ui.plugin.add("resizable", "alsoResize", {
@@ -9397,13 +9221,13 @@ function VerificarHorario(t, e) {
         }
     }), t.ui.plugin.add("resizable", "grid", {
         resize: function() {
-            var e, i = t(this).resizable("instance"), n = i.options, s = i.size, o = i.originalSize, a = i.originalPosition, r = i.axis, l = "number" == typeof n.grid ? [ n.grid, n.grid ] : n.grid, u = l[0] || 1, h = l[1] || 1, c = Math.round((s.width - o.width) / u) * u, d = Math.round((s.height - o.height) / h) * h, p = o.width + c, f = o.height + d, m = n.maxWidth && n.maxWidth < p, g = n.maxHeight && n.maxHeight < f, v = n.minWidth && n.minWidth > p, y = n.minHeight && n.minHeight > f;
-            n.grid = l, v && (p += u), y && (f += h), m && (p -= u), g && (f -= h), /^(se|s|e)$/.test(r) ? (i.size.width = p, 
+            var e, i = t(this).resizable("instance"), n = i.options, s = i.size, o = i.originalSize, a = i.originalPosition, r = i.axis, l = "number" == typeof n.grid ? [ n.grid, n.grid ] : n.grid, h = l[0] || 1, u = l[1] || 1, c = Math.round((s.width - o.width) / h) * h, d = Math.round((s.height - o.height) / u) * u, p = o.width + c, f = o.height + d, m = n.maxWidth && n.maxWidth < p, g = n.maxHeight && n.maxHeight < f, v = n.minWidth && n.minWidth > p, b = n.minHeight && n.minHeight > f;
+            n.grid = l, v && (p += h), b && (f += u), m && (p -= h), g && (f -= u), /^(se|s|e)$/.test(r) ? (i.size.width = p, 
             i.size.height = f) : /^(ne)$/.test(r) ? (i.size.width = p, i.size.height = f, i.position.top = a.top - d) : /^(sw)$/.test(r) ? (i.size.width = p, 
-            i.size.height = f, i.position.left = a.left - c) : ((f - h <= 0 || p - u <= 0) && (e = i._getPaddingPlusBorderDimensions(this)), 
-            f - h > 0 ? (i.size.height = f, i.position.top = a.top - d) : (f = h - e.height, 
-            i.size.height = f, i.position.top = a.top + o.height - f), p - u > 0 ? (i.size.width = p, 
-            i.position.left = a.left - c) : (p = u - e.width, i.size.width = p, i.position.left = a.left + o.width - p));
+            i.size.height = f, i.position.left = a.left - c) : ((f - u <= 0 || p - h <= 0) && (e = i._getPaddingPlusBorderDimensions(this)), 
+            f - u > 0 ? (i.size.height = f, i.position.top = a.top - d) : (f = u - e.height, 
+            i.size.height = f, i.position.top = a.top + o.height - f), p - h > 0 ? (i.size.width = p, 
+            i.position.left = a.left - c) : (p = h - e.width, i.size.width = p, i.position.left = a.left + o.width - p));
         }
     });
     t.ui.resizable, t.widget("ui.selectable", t.ui.mouse, {
@@ -9484,10 +9308,10 @@ function VerificarHorario(t, e) {
                     width: r - o,
                     height: l - a
                 }), this.selectees.each(function() {
-                    var i = t.data(this, "selectable-item"), u = !1, h = {};
-                    i && i.element !== n.element[0] && (h.left = i.left + n.elementPos.left, h.right = i.right + n.elementPos.left, 
-                    h.top = i.top + n.elementPos.top, h.bottom = i.bottom + n.elementPos.top, "touch" === s.tolerance ? u = !(h.left > r || h.right < o || h.top > l || h.bottom < a) : "fit" === s.tolerance && (u = h.left > o && h.right < r && h.top > a && h.bottom < l), 
-                    u ? (i.selected && (n._removeClass(i.$element, "ui-selected"), i.selected = !1), 
+                    var i = t.data(this, "selectable-item"), h = !1, u = {};
+                    i && i.element !== n.element[0] && (u.left = i.left + n.elementPos.left, u.right = i.right + n.elementPos.left, 
+                    u.top = i.top + n.elementPos.top, u.bottom = i.bottom + n.elementPos.top, "touch" === s.tolerance ? h = !(u.left > r || u.right < o || u.top > l || u.bottom < a) : "fit" === s.tolerance && (h = u.left > o && u.right < r && u.top > a && u.bottom < l), 
+                    h ? (i.selected && (n._removeClass(i.$element, "ui-selected"), i.selected = !1), 
                     i.unselecting && (n._removeClass(i.$element, "ui-unselecting"), i.unselecting = !1), 
                     i.selecting || (n._addClass(i.$element, "ui-selecting"), i.selecting = !0, n._trigger("selecting", e, {
                         selecting: i.element
@@ -9692,7 +9516,7 @@ function VerificarHorario(t, e) {
             }), n;
         },
         _intersectsWith: function(t) {
-            var e = this.positionAbs.left, i = e + this.helperProportions.width, n = this.positionAbs.top, s = n + this.helperProportions.height, o = t.left, a = o + t.width, r = t.top, l = r + t.height, u = this.offset.click.top, h = this.offset.click.left, c = "x" === this.options.axis || n + u > r && n + u < l, d = "y" === this.options.axis || e + h > o && e + h < a, p = c && d;
+            var e = this.positionAbs.left, i = e + this.helperProportions.width, n = this.positionAbs.top, s = n + this.helperProportions.height, o = t.left, a = o + t.width, r = t.top, l = r + t.height, h = this.offset.click.top, u = this.offset.click.left, c = "x" === this.options.axis || n + h > r && n + h < l, d = "y" === this.options.axis || e + u > o && e + u < a, p = c && d;
             return "pointer" === this.options.tolerance || this.options.forcePointerForContainers || "pointer" !== this.options.tolerance && this.helperProportions[this.floating ? "width" : "height"] > t[this.floating ? "width" : "height"] ? p : o < e + this.helperProportions.width / 2 && i - this.helperProportions.width / 2 < a && r < n + this.helperProportions.height / 2 && s - this.helperProportions.height / 2 < l;
         },
         _intersectsWithPointer: function(t) {
@@ -9724,8 +9548,8 @@ function VerificarHorario(t, e) {
             function i() {
                 r.push(this);
             }
-            var n, s, o, a, r = [], l = [], u = this._connectWith();
-            if (u && e) for (n = u.length - 1; n >= 0; n--) for (s = (o = t(u[n], this.document[0])).length - 1; s >= 0; s--) (a = t.data(o[s], this.widgetFullName)) && a !== this && !a.options.disabled && l.push([ t.isFunction(a.options.items) ? a.options.items.call(a.element) : t(a.options.items, a.element).not(".ui-sortable-helper").not(".ui-sortable-placeholder"), a ]);
+            var n, s, o, a, r = [], l = [], h = this._connectWith();
+            if (h && e) for (n = h.length - 1; n >= 0; n--) for (s = (o = t(h[n], this.document[0])).length - 1; s >= 0; s--) (a = t.data(o[s], this.widgetFullName)) && a !== this && !a.options.disabled && l.push([ t.isFunction(a.options.items) ? a.options.items.call(a.element) : t(a.options.items, a.element).not(".ui-sortable-helper").not(".ui-sortable-placeholder"), a ]);
             for (l.push([ t.isFunction(this.options.items) ? this.options.items.call(this.element, null, {
                 options: this.options,
                 item: this.currentItem
@@ -9742,14 +9566,14 @@ function VerificarHorario(t, e) {
         },
         _refreshItems: function(e) {
             this.items = [], this.containers = [ this ];
-            var i, n, s, o, a, r, l, u, h = this.items, c = [ [ t.isFunction(this.options.items) ? this.options.items.call(this.element[0], e, {
+            var i, n, s, o, a, r, l, h, u = this.items, c = [ [ t.isFunction(this.options.items) ? this.options.items.call(this.element[0], e, {
                 item: this.currentItem
             }) : t(this.options.items, this.element), this ] ], d = this._connectWith();
             if (d && this.ready) for (i = d.length - 1; i >= 0; i--) for (n = (s = t(d[i], this.document[0])).length - 1; n >= 0; n--) (o = t.data(s[n], this.widgetFullName)) && o !== this && !o.options.disabled && (c.push([ t.isFunction(o.options.items) ? o.options.items.call(o.element[0], e, {
                 item: this.currentItem
             }) : t(o.options.items, o.element), o ]), this.containers.push(o));
-            for (i = c.length - 1; i >= 0; i--) for (a = c[i][1], n = 0, u = (r = c[i][0]).length; n < u; n++) (l = t(r[n])).data(this.widgetName + "-item", a), 
-            h.push({
+            for (i = c.length - 1; i >= 0; i--) for (a = c[i][1], n = 0, h = (r = c[i][0]).length; n < h; n++) (l = t(r[n])).data(this.widgetName + "-item", a), 
+            u.push({
                 item: l,
                 instance: a,
                 width: 0,
@@ -9794,7 +9618,7 @@ function VerificarHorario(t, e) {
             });
         },
         _contactContainers: function(e) {
-            var i, n, s, o, a, r, l, u, h, c, d = null, p = null;
+            var i, n, s, o, a, r, l, h, u, c, d = null, p = null;
             for (i = this.containers.length - 1; i >= 0; i--) if (!t.contains(this.currentItem[0], this.containers[i].element[0])) if (this._intersectsWith(this.containers[i].containerCache)) {
                 if (d && t.contains(this.containers[i].element[0], d.element[0])) continue;
                 d = this.containers[i], p = i;
@@ -9802,10 +9626,10 @@ function VerificarHorario(t, e) {
             this.containers[i].containerCache.over = 0);
             if (d) if (1 === this.containers.length) this.containers[p].containerCache.over || (this.containers[p]._trigger("over", e, this._uiHash(this)), 
             this.containers[p].containerCache.over = 1); else {
-                for (s = 1e4, o = null, a = (h = d.floating || this._isFloating(this.currentItem)) ? "left" : "top", 
-                r = h ? "width" : "height", c = h ? "pageX" : "pageY", n = this.items.length - 1; n >= 0; n--) t.contains(this.containers[p].element[0], this.items[n].item[0]) && this.items[n].item[0] !== this.currentItem[0] && (l = this.items[n].item.offset()[a], 
-                u = !1, e[c] - l > this.items[n][r] / 2 && (u = !0), Math.abs(e[c] - l) < s && (s = Math.abs(e[c] - l), 
-                o = this.items[n], this.direction = u ? "up" : "down"));
+                for (s = 1e4, o = null, a = (u = d.floating || this._isFloating(this.currentItem)) ? "left" : "top", 
+                r = u ? "width" : "height", c = u ? "pageX" : "pageY", n = this.items.length - 1; n >= 0; n--) t.contains(this.containers[p].element[0], this.items[n].item[0]) && this.items[n].item[0] !== this.currentItem[0] && (l = this.items[n].item.offset()[a], 
+                h = !1, e[c] - l > this.items[n][r] / 2 && (h = !0), Math.abs(e[c] - l) < s && (s = Math.abs(e[c] - l), 
+                o = this.items[n], this.direction = h ? "up" : "down"));
                 if (!o && !this.options.dropOnEmpty) return;
                 if (this.currentContainer === this.containers[p]) return void (this.currentContainer.containerCache.over || (this.containers[p]._trigger("over", e, this._uiHash()), 
                 this.currentContainer.containerCache.over = 1));
@@ -10139,14 +9963,14 @@ function VerificarHorario(t, e) {
             }), this._hoverable(this.headers), this._focusable(this.headers);
         },
         _eventHandler: function(e) {
-            var i, n, s = this.options, o = this.active, a = t(e.currentTarget), r = a[0] === o[0], l = r && s.collapsible, u = l ? t() : a.next(), h = {
+            var i, n, s = this.options, o = this.active, a = t(e.currentTarget), r = a[0] === o[0], l = r && s.collapsible, h = l ? t() : a.next(), u = {
                 oldHeader: o,
                 oldPanel: o.next(),
                 newHeader: l ? t() : a,
-                newPanel: u
+                newPanel: h
             };
-            e.preventDefault(), r && !s.collapsible || !1 === this._trigger("beforeActivate", e, h) || (s.active = !l && this.headers.index(a), 
-            this.active = r ? t() : a, this._toggle(h), this._removeClass(o, "ui-accordion-header-active", "ui-state-active"), 
+            e.preventDefault(), r && !s.collapsible || !1 === this._trigger("beforeActivate", e, u) || (s.active = !l && this.headers.index(a), 
+            this.active = r ? t() : a, this._toggle(u), this._removeClass(o, "ui-accordion-header-active", "ui-state-active"), 
             s.icons && (i = o.children(".ui-accordion-header-icon"), this._removeClass(i, null, s.icons.activeHeader)._addClass(i, null, s.icons.header)), 
             r || (this._removeClass(a, "ui-accordion-header-collapsed")._addClass(a, "ui-accordion-header-active", "ui-state-active"), 
             s.icons && (n = a.children(".ui-accordion-header-icon"), this._removeClass(n, null, s.icons.header)._addClass(n, null, s.icons.activeHeader)), 
@@ -10173,11 +9997,11 @@ function VerificarHorario(t, e) {
             });
         },
         _animate: function(t, e, i) {
-            var n, s, o, a = this, r = 0, l = t.css("box-sizing"), u = t.length && (!e.length || t.index() < e.index()), h = this.options.animate || {}, c = u && h.down || h, d = function() {
+            var n, s, o, a = this, r = 0, l = t.css("box-sizing"), h = t.length && (!e.length || t.index() < e.index()), u = this.options.animate || {}, c = h && u.down || u, d = function() {
                 a._toggleComplete(i);
             };
-            return "number" == typeof c && (o = c), "string" == typeof c && (s = c), s = s || c.easing || h.easing, 
-            o = o || c.duration || h.duration, e.length ? t.length ? (n = t.show().outerHeight(), 
+            return "number" == typeof c && (o = c), "string" == typeof c && (s = c), s = s || c.easing || u.easing, 
+            o = o || c.duration || u.duration, e.length ? t.length ? (n = t.show().outerHeight(), 
             e.animate(this.hideProps, {
                 duration: o,
                 easing: s,
@@ -11174,15 +10998,15 @@ function VerificarHorario(t, e) {
             this._updateAlternate(i), i.settings.disabled && this._disableDatepicker(e), i.dpDiv.css("display", "block"));
         },
         _dialogDatepicker: function(e, i, n, s, o) {
-            var r, l, u, h, c, d = this._dialogInst;
+            var r, l, h, u, c, d = this._dialogInst;
             return d || (this.uuid += 1, r = "dp" + this.uuid, this._dialogInput = t("<input type='text' id='" + r + "' style='position: absolute; top: -100px; width: 0px;'/>"), 
             this._dialogInput.on("keydown", this._doKeyDown), t("body").append(this._dialogInput), 
             (d = this._dialogInst = this._newInst(this._dialogInput, !1)).settings = {}, t.data(this._dialogInput[0], "datepicker", d)), 
             a(d.settings, s || {}), i = i && i.constructor === Date ? this._formatDate(d, i) : i, 
             this._dialogInput.val(i), this._pos = o ? o.length ? o : [ o.pageX, o.pageY ] : null, 
-            this._pos || (l = document.documentElement.clientWidth, u = document.documentElement.clientHeight, 
-            h = document.documentElement.scrollLeft || document.body.scrollLeft, c = document.documentElement.scrollTop || document.body.scrollTop, 
-            this._pos = [ l / 2 - 100 + h, u / 2 - 150 + c ]), this._dialogInput.css("left", this._pos[0] + 20 + "px").css("top", this._pos[1] + "px"), 
+            this._pos || (l = document.documentElement.clientWidth, h = document.documentElement.clientHeight, 
+            u = document.documentElement.scrollLeft || document.body.scrollLeft, c = document.documentElement.scrollTop || document.body.scrollTop, 
+            this._pos = [ l / 2 - 100 + u, h / 2 - 150 + c ]), this._dialogInput.css("left", this._pos[0] + 20 + "px").css("top", this._pos[1] + "px"), 
             d.settings.onSelect = n, this._inDialog = !0, this.dpDiv.addClass(this._dialogClass), 
             this._showDatepicker(this._dialogInput[0]), t.blockUI && t.blockUI(this.dpDiv), 
             t.data(this._dialogInput[0], "datepicker", d), this;
@@ -11234,15 +11058,15 @@ function VerificarHorario(t, e) {
             }
         },
         _optionDatepicker: function(e, i, n) {
-            var s, o, r, l, u = this._getInst(e);
-            if (2 === arguments.length && "string" == typeof i) return "defaults" === i ? t.extend({}, t.datepicker._defaults) : u ? "all" === i ? t.extend({}, u.settings) : this._get(u, i) : null;
-            s = i || {}, "string" == typeof i && ((s = {})[i] = n), u && (this._curInst === u && this._hideDatepicker(), 
-            o = this._getDateDatepicker(e, !0), r = this._getMinMaxDate(u, "min"), l = this._getMinMaxDate(u, "max"), 
-            a(u.settings, s), null !== r && void 0 !== s.dateFormat && void 0 === s.minDate && (u.settings.minDate = this._formatDate(u, r)), 
-            null !== l && void 0 !== s.dateFormat && void 0 === s.maxDate && (u.settings.maxDate = this._formatDate(u, l)), 
+            var s, o, r, l, h = this._getInst(e);
+            if (2 === arguments.length && "string" == typeof i) return "defaults" === i ? t.extend({}, t.datepicker._defaults) : h ? "all" === i ? t.extend({}, h.settings) : this._get(h, i) : null;
+            s = i || {}, "string" == typeof i && ((s = {})[i] = n), h && (this._curInst === h && this._hideDatepicker(), 
+            o = this._getDateDatepicker(e, !0), r = this._getMinMaxDate(h, "min"), l = this._getMinMaxDate(h, "max"), 
+            a(h.settings, s), null !== r && void 0 !== s.dateFormat && void 0 === s.minDate && (h.settings.minDate = this._formatDate(h, r)), 
+            null !== l && void 0 !== s.dateFormat && void 0 === s.maxDate && (h.settings.maxDate = this._formatDate(h, l)), 
             "disabled" in s && (s.disabled ? this._disableDatepicker(e) : this._enableDatepicker(e)), 
-            this._attachments(t(e), u), this._autoSize(u), this._setDate(u, o), this._updateAlternate(u), 
-            this._updateDatepicker(u));
+            this._attachments(t(e), h), this._autoSize(h), this._setDate(h, o), this._updateAlternate(h), 
+            this._updateDatepicker(h));
         },
         _changeDatepicker: function(t, e, i) {
             this._optionDatepicker(t, e, i);
@@ -11330,7 +11154,7 @@ function VerificarHorario(t, e) {
         _showDatepicker: function(e) {
             if ("input" !== (e = e.target || e).nodeName.toLowerCase() && (e = t("input", e.parentNode)[0]), 
             !t.datepicker._isDisabledDatepicker(e) && t.datepicker._lastInput !== e) {
-                var n, s, o, r, l, u, h;
+                var n, s, o, r, l, h, u;
                 n = t.datepicker._getInst(e), t.datepicker._curInst && t.datepicker._curInst !== n && (t.datepicker._curInst.dpDiv.stop(!0, !0), 
                 n && t.datepicker._datepickerShowing && t.datepicker._hideDatepicker(t.datepicker._curInst.input[0])), 
                 !1 !== (o = (s = t.datepicker._get(n, "beforeShow")) ? s.apply(e, [ e, n ]) : {}) && (a(n.settings, o), 
@@ -11350,8 +11174,8 @@ function VerificarHorario(t, e) {
                     display: "none",
                     left: l.left + "px",
                     top: l.top + "px"
-                }), n.inline || (u = t.datepicker._get(n, "showAnim"), h = t.datepicker._get(n, "duration"), 
-                n.dpDiv.css("z-index", i(t(e)) + 1), t.datepicker._datepickerShowing = !0, t.effects && t.effects.effect[u] ? n.dpDiv.show(u, t.datepicker._get(n, "showOptions"), h) : n.dpDiv[u || "show"](u ? h : null), 
+                }), n.inline || (h = t.datepicker._get(n, "showAnim"), u = t.datepicker._get(n, "duration"), 
+                n.dpDiv.css("z-index", i(t(e)) + 1), t.datepicker._datepickerShowing = !0, t.effects && t.effects.effect[h] ? n.dpDiv.show(h, t.datepicker._get(n, "showOptions"), u) : n.dpDiv[h || "show"](h ? u : null), 
                 t.datepicker._shouldFocusInput(n) && n.input.trigger("focus"), t.datepicker._curInst = n));
             }
         },
@@ -11372,11 +11196,11 @@ function VerificarHorario(t, e) {
             return t.input && t.input.is(":visible") && !t.input.is(":disabled") && !t.input.is(":focus");
         },
         _checkOffset: function(e, i, n) {
-            var s = e.dpDiv.outerWidth(), o = e.dpDiv.outerHeight(), a = e.input ? e.input.outerWidth() : 0, r = e.input ? e.input.outerHeight() : 0, l = document.documentElement.clientWidth + (n ? 0 : t(document).scrollLeft()), u = document.documentElement.clientHeight + (n ? 0 : t(document).scrollTop());
+            var s = e.dpDiv.outerWidth(), o = e.dpDiv.outerHeight(), a = e.input ? e.input.outerWidth() : 0, r = e.input ? e.input.outerHeight() : 0, l = document.documentElement.clientWidth + (n ? 0 : t(document).scrollLeft()), h = document.documentElement.clientHeight + (n ? 0 : t(document).scrollTop());
             return i.left -= this._get(e, "isRTL") ? s - a : 0, i.left -= n && i.left === e.input.offset().left ? t(document).scrollLeft() : 0, 
             i.top -= n && i.top === e.input.offset().top + r ? t(document).scrollTop() : 0, 
             i.left -= Math.min(i.left, i.left + s > l && l > s ? Math.abs(i.left + s - l) : 0), 
-            i.top -= Math.min(i.top, i.top + o > u && u > o ? Math.abs(o + r) : 0), i;
+            i.top -= Math.min(i.top, i.top + o > h && h > o ? Math.abs(o + r) : 0), i;
         },
         _findPos: function(e) {
             for (var i, n = this._getInst(e), s = this._get(n, "isRTL"); e && ("hidden" === e.type || 1 !== e.nodeType || t.expr.filters.hidden(e)); ) e = e[s ? "previousSibling" : "nextSibling"];
@@ -11454,7 +11278,7 @@ function VerificarHorario(t, e) {
         parseDate: function(e, i, n) {
             if (null == e || null == i) throw "Invalid arguments";
             if ("" === (i = "object" == typeof i ? i.toString() : i + "")) return null;
-            var s, o, a, r, l = 0, u = (n ? n.shortYearCutoff : null) || this._defaults.shortYearCutoff, h = "string" != typeof u ? u : new Date().getFullYear() % 100 + parseInt(u, 10), c = (n ? n.dayNamesShort : null) || this._defaults.dayNamesShort, d = (n ? n.dayNames : null) || this._defaults.dayNames, p = (n ? n.monthNamesShort : null) || this._defaults.monthNamesShort, f = (n ? n.monthNames : null) || this._defaults.monthNames, m = -1, g = -1, v = -1, y = -1, b = !1, _ = function(t) {
+            var s, o, a, r, l = 0, h = (n ? n.shortYearCutoff : null) || this._defaults.shortYearCutoff, u = "string" != typeof h ? h : new Date().getFullYear() % 100 + parseInt(h, 10), c = (n ? n.dayNamesShort : null) || this._defaults.dayNamesShort, d = (n ? n.dayNames : null) || this._defaults.dayNames, p = (n ? n.monthNamesShort : null) || this._defaults.monthNamesShort, f = (n ? n.monthNames : null) || this._defaults.monthNames, m = -1, g = -1, v = -1, b = -1, y = !1, _ = function(t) {
                 var i = s + 1 < e.length && e.charAt(s + 1) === t;
                 return i && s++, i;
             }, x = function(t) {
@@ -11477,7 +11301,7 @@ function VerificarHorario(t, e) {
                 if (i.charAt(l) !== e.charAt(s)) throw "Unexpected literal at position " + l;
                 l++;
             };
-            for (s = 0; s < e.length; s++) if (b) "'" !== e.charAt(s) || _("'") ? C() : b = !1; else switch (e.charAt(s)) {
+            for (s = 0; s < e.length; s++) if (y) "'" !== e.charAt(s) || _("'") ? C() : y = !1; else switch (e.charAt(s)) {
               case "d":
                 v = x("d");
                 break;
@@ -11487,7 +11311,7 @@ function VerificarHorario(t, e) {
                 break;
 
               case "o":
-                y = x("o");
+                b = x("o");
                 break;
 
               case "m":
@@ -11512,15 +11336,15 @@ function VerificarHorario(t, e) {
                 break;
 
               case "'":
-                _("'") ? C() : b = !0;
+                _("'") ? C() : y = !0;
                 break;
 
               default:
                 C();
             }
             if (l < i.length && (a = i.substr(l), !/^\s+/.test(a))) throw "Extra/unparsed characters found in date: " + a;
-            if (-1 === m ? m = new Date().getFullYear() : m < 100 && (m += new Date().getFullYear() - new Date().getFullYear() % 100 + (m <= h ? 0 : -100)), 
-            y > -1) for (g = 1, v = y; ;) {
+            if (-1 === m ? m = new Date().getFullYear() : m < 100 && (m += new Date().getFullYear() - new Date().getFullYear() % 100 + (m <= u ? 0 : -100)), 
+            b > -1) for (g = 1, v = b; ;) {
                 if (o = this._getDaysInMonth(m, g - 1), v <= o) break;
                 g++, v -= o;
             }
@@ -11545,32 +11369,32 @@ function VerificarHorario(t, e) {
             var n, s = (i ? i.dayNamesShort : null) || this._defaults.dayNamesShort, o = (i ? i.dayNames : null) || this._defaults.dayNames, a = (i ? i.monthNamesShort : null) || this._defaults.monthNamesShort, r = (i ? i.monthNames : null) || this._defaults.monthNames, l = function(e) {
                 var i = n + 1 < t.length && t.charAt(n + 1) === e;
                 return i && n++, i;
-            }, u = function(t, e, i) {
+            }, h = function(t, e, i) {
                 var n = "" + e;
                 if (l(t)) for (;n.length < i; ) n = "0" + n;
                 return n;
-            }, h = function(t, e, i, n) {
+            }, u = function(t, e, i, n) {
                 return l(t) ? n[e] : i[e];
             }, c = "", d = !1;
             if (e) for (n = 0; n < t.length; n++) if (d) "'" !== t.charAt(n) || l("'") ? c += t.charAt(n) : d = !1; else switch (t.charAt(n)) {
               case "d":
-                c += u("d", e.getDate(), 2);
+                c += h("d", e.getDate(), 2);
                 break;
 
               case "D":
-                c += h("D", e.getDay(), s, o);
+                c += u("D", e.getDay(), s, o);
                 break;
 
               case "o":
-                c += u("o", Math.round((new Date(e.getFullYear(), e.getMonth(), e.getDate()).getTime() - new Date(e.getFullYear(), 0, 0).getTime()) / 864e5), 3);
+                c += h("o", Math.round((new Date(e.getFullYear(), e.getMonth(), e.getDate()).getTime() - new Date(e.getFullYear(), 0, 0).getTime()) / 864e5), 3);
                 break;
 
               case "m":
-                c += u("m", e.getMonth() + 1, 2);
+                c += h("m", e.getMonth() + 1, 2);
                 break;
 
               case "M":
-                c += h("M", e.getMonth(), a, r);
+                c += u("M", e.getMonth(), a, r);
                 break;
 
               case "y":
@@ -11718,31 +11542,31 @@ function VerificarHorario(t, e) {
             });
         },
         _generateHTML: function(t) {
-            var e, i, n, s, o, a, r, l, u, h, c, d, p, f, m, g, v, y, b, _, x, w, C, k, D, T, S, E, P, A, I, F, M, N, L, H, O, z, R, W = new Date(), j = this._daylightSavingAdjust(new Date(W.getFullYear(), W.getMonth(), W.getDate())), B = this._get(t, "isRTL"), $ = this._get(t, "showButtonPanel"), q = this._get(t, "hideIfNoPrevNext"), Y = this._get(t, "navigationAsDateFormat"), V = this._getNumberOfMonths(t), U = this._get(t, "showCurrentAtPos"), X = this._get(t, "stepMonths"), K = 1 !== V[0] || 1 !== V[1], G = this._daylightSavingAdjust(t.currentDay ? new Date(t.currentYear, t.currentMonth, t.currentDay) : new Date(9999, 9, 9)), Q = this._getMinMaxDate(t, "min"), Z = this._getMinMaxDate(t, "max"), J = t.drawMonth - U, tt = t.drawYear;
-            if (J < 0 && (J += 12, tt--), Z) for (e = this._daylightSavingAdjust(new Date(Z.getFullYear(), Z.getMonth() - V[0] * V[1] + 1, Z.getDate())), 
-            e = Q && e < Q ? Q : e; this._daylightSavingAdjust(new Date(tt, J, 1)) > e; ) --J < 0 && (J = 11, 
+            var e, i, n, s, o, a, r, l, h, u, c, d, p, f, m, g, v, b, y, _, x, w, C, k, D, T, S, E, P, A, I, F, M, N, L, H, O, j, z, W = new Date(), B = this._daylightSavingAdjust(new Date(W.getFullYear(), W.getMonth(), W.getDate())), $ = this._get(t, "isRTL"), R = this._get(t, "showButtonPanel"), q = this._get(t, "hideIfNoPrevNext"), Y = this._get(t, "navigationAsDateFormat"), X = this._getNumberOfMonths(t), V = this._get(t, "showCurrentAtPos"), U = this._get(t, "stepMonths"), K = 1 !== X[0] || 1 !== X[1], G = this._daylightSavingAdjust(t.currentDay ? new Date(t.currentYear, t.currentMonth, t.currentDay) : new Date(9999, 9, 9)), Q = this._getMinMaxDate(t, "min"), J = this._getMinMaxDate(t, "max"), Z = t.drawMonth - V, tt = t.drawYear;
+            if (Z < 0 && (Z += 12, tt--), J) for (e = this._daylightSavingAdjust(new Date(J.getFullYear(), J.getMonth() - X[0] * X[1] + 1, J.getDate())), 
+            e = Q && e < Q ? Q : e; this._daylightSavingAdjust(new Date(tt, Z, 1)) > e; ) --Z < 0 && (Z = 11, 
             tt--);
-            for (t.drawMonth = J, t.drawYear = tt, i = this._get(t, "prevText"), i = Y ? this.formatDate(i, this._daylightSavingAdjust(new Date(tt, J - X, 1)), this._getFormatConfig(t)) : i, 
-            n = this._canAdjustMonth(t, -1, tt, J) ? "<a class='ui-datepicker-prev ui-corner-all' data-handler='prev' data-event='click' title='" + i + "'><span class='ui-icon ui-icon-circle-triangle-" + (B ? "e" : "w") + "'>" + i + "</span></a>" : q ? "" : "<a class='ui-datepicker-prev ui-corner-all ui-state-disabled' title='" + i + "'><span class='ui-icon ui-icon-circle-triangle-" + (B ? "e" : "w") + "'>" + i + "</span></a>", 
-            s = this._get(t, "nextText"), s = Y ? this.formatDate(s, this._daylightSavingAdjust(new Date(tt, J + X, 1)), this._getFormatConfig(t)) : s, 
-            o = this._canAdjustMonth(t, 1, tt, J) ? "<a class='ui-datepicker-next ui-corner-all' data-handler='next' data-event='click' title='" + s + "'><span class='ui-icon ui-icon-circle-triangle-" + (B ? "w" : "e") + "'>" + s + "</span></a>" : q ? "" : "<a class='ui-datepicker-next ui-corner-all ui-state-disabled' title='" + s + "'><span class='ui-icon ui-icon-circle-triangle-" + (B ? "w" : "e") + "'>" + s + "</span></a>", 
-            a = this._get(t, "currentText"), r = this._get(t, "gotoCurrent") && t.currentDay ? G : j, 
+            for (t.drawMonth = Z, t.drawYear = tt, i = this._get(t, "prevText"), i = Y ? this.formatDate(i, this._daylightSavingAdjust(new Date(tt, Z - U, 1)), this._getFormatConfig(t)) : i, 
+            n = this._canAdjustMonth(t, -1, tt, Z) ? "<a class='ui-datepicker-prev ui-corner-all' data-handler='prev' data-event='click' title='" + i + "'><span class='ui-icon ui-icon-circle-triangle-" + ($ ? "e" : "w") + "'>" + i + "</span></a>" : q ? "" : "<a class='ui-datepicker-prev ui-corner-all ui-state-disabled' title='" + i + "'><span class='ui-icon ui-icon-circle-triangle-" + ($ ? "e" : "w") + "'>" + i + "</span></a>", 
+            s = this._get(t, "nextText"), s = Y ? this.formatDate(s, this._daylightSavingAdjust(new Date(tt, Z + U, 1)), this._getFormatConfig(t)) : s, 
+            o = this._canAdjustMonth(t, 1, tt, Z) ? "<a class='ui-datepicker-next ui-corner-all' data-handler='next' data-event='click' title='" + s + "'><span class='ui-icon ui-icon-circle-triangle-" + ($ ? "w" : "e") + "'>" + s + "</span></a>" : q ? "" : "<a class='ui-datepicker-next ui-corner-all ui-state-disabled' title='" + s + "'><span class='ui-icon ui-icon-circle-triangle-" + ($ ? "w" : "e") + "'>" + s + "</span></a>", 
+            a = this._get(t, "currentText"), r = this._get(t, "gotoCurrent") && t.currentDay ? G : B, 
             a = Y ? this.formatDate(a, r, this._getFormatConfig(t)) : a, l = t.inline ? "" : "<button type='button' class='ui-datepicker-close ui-state-default ui-priority-primary ui-corner-all' data-handler='hide' data-event='click'>" + this._get(t, "closeText") + "</button>", 
-            u = $ ? "<div class='ui-datepicker-buttonpane ui-widget-content'>" + (B ? l : "") + (this._isInRange(t, r) ? "<button type='button' class='ui-datepicker-current ui-state-default ui-priority-secondary ui-corner-all' data-handler='today' data-event='click'>" + a + "</button>" : "") + (B ? "" : l) + "</div>" : "", 
-            h = parseInt(this._get(t, "firstDay"), 10), h = isNaN(h) ? 0 : h, c = this._get(t, "showWeek"), 
+            h = R ? "<div class='ui-datepicker-buttonpane ui-widget-content'>" + ($ ? l : "") + (this._isInRange(t, r) ? "<button type='button' class='ui-datepicker-current ui-state-default ui-priority-secondary ui-corner-all' data-handler='today' data-event='click'>" + a + "</button>" : "") + ($ ? "" : l) + "</div>" : "", 
+            u = parseInt(this._get(t, "firstDay"), 10), u = isNaN(u) ? 0 : u, c = this._get(t, "showWeek"), 
             d = this._get(t, "dayNames"), p = this._get(t, "dayNamesMin"), f = this._get(t, "monthNames"), 
             m = this._get(t, "monthNamesShort"), g = this._get(t, "beforeShowDay"), v = this._get(t, "showOtherMonths"), 
-            y = this._get(t, "selectOtherMonths"), b = this._getDefaultDate(t), _ = "", w = 0; w < V[0]; w++) {
-                for (C = "", this.maxRows = 4, k = 0; k < V[1]; k++) {
-                    if (D = this._daylightSavingAdjust(new Date(tt, J, t.selectedDay)), T = " ui-corner-all", 
+            b = this._get(t, "selectOtherMonths"), y = this._getDefaultDate(t), _ = "", w = 0; w < X[0]; w++) {
+                for (C = "", this.maxRows = 4, k = 0; k < X[1]; k++) {
+                    if (D = this._daylightSavingAdjust(new Date(tt, Z, t.selectedDay)), T = " ui-corner-all", 
                     S = "", K) {
-                        if (S += "<div class='ui-datepicker-group", V[1] > 1) switch (k) {
+                        if (S += "<div class='ui-datepicker-group", X[1] > 1) switch (k) {
                           case 0:
-                            S += " ui-datepicker-group-first", T = " ui-corner-" + (B ? "right" : "left");
+                            S += " ui-datepicker-group-first", T = " ui-corner-" + ($ ? "right" : "left");
                             break;
 
-                          case V[1] - 1:
-                            S += " ui-datepicker-group-last", T = " ui-corner-" + (B ? "left" : "right");
+                          case X[1] - 1:
+                            S += " ui-datepicker-group-last", T = " ui-corner-" + ($ ? "left" : "right");
                             break;
 
                           default:
@@ -11750,42 +11574,42 @@ function VerificarHorario(t, e) {
                         }
                         S += "'>";
                     }
-                    for (S += "<div class='ui-datepicker-header ui-widget-header ui-helper-clearfix" + T + "'>" + (/all|left/.test(T) && 0 === w ? B ? o : n : "") + (/all|right/.test(T) && 0 === w ? B ? n : o : "") + this._generateMonthYearHeader(t, J, tt, Q, Z, w > 0 || k > 0, f, m) + "</div><table class='ui-datepicker-calendar'><thead><tr>", 
+                    for (S += "<div class='ui-datepicker-header ui-widget-header ui-helper-clearfix" + T + "'>" + (/all|left/.test(T) && 0 === w ? $ ? o : n : "") + (/all|right/.test(T) && 0 === w ? $ ? n : o : "") + this._generateMonthYearHeader(t, Z, tt, Q, J, w > 0 || k > 0, f, m) + "</div><table class='ui-datepicker-calendar'><thead><tr>", 
                     E = c ? "<th class='ui-datepicker-week-col'>" + this._get(t, "weekHeader") + "</th>" : "", 
-                    x = 0; x < 7; x++) P = (x + h) % 7, E += "<th scope='col'" + ((x + h + 6) % 7 >= 5 ? " class='ui-datepicker-week-end'" : "") + "><span title='" + d[P] + "'>" + p[P] + "</span></th>";
-                    for (S += E + "</tr></thead><tbody>", A = this._getDaysInMonth(tt, J), tt === t.selectedYear && J === t.selectedMonth && (t.selectedDay = Math.min(t.selectedDay, A)), 
-                    I = (this._getFirstDayOfMonth(tt, J) - h + 7) % 7, F = Math.ceil((I + A) / 7), M = K && this.maxRows > F ? this.maxRows : F, 
-                    this.maxRows = M, N = this._daylightSavingAdjust(new Date(tt, J, 1 - I)), L = 0; L < M; L++) {
+                    x = 0; x < 7; x++) P = (x + u) % 7, E += "<th scope='col'" + ((x + u + 6) % 7 >= 5 ? " class='ui-datepicker-week-end'" : "") + "><span title='" + d[P] + "'>" + p[P] + "</span></th>";
+                    for (S += E + "</tr></thead><tbody>", A = this._getDaysInMonth(tt, Z), tt === t.selectedYear && Z === t.selectedMonth && (t.selectedDay = Math.min(t.selectedDay, A)), 
+                    I = (this._getFirstDayOfMonth(tt, Z) - u + 7) % 7, F = Math.ceil((I + A) / 7), M = K && this.maxRows > F ? this.maxRows : F, 
+                    this.maxRows = M, N = this._daylightSavingAdjust(new Date(tt, Z, 1 - I)), L = 0; L < M; L++) {
                         for (S += "<tr>", H = c ? "<td class='ui-datepicker-week-col'>" + this._get(t, "calculateWeek")(N) + "</td>" : "", 
                         x = 0; x < 7; x++) O = g ? g.apply(t.input ? t.input[0] : null, [ N ]) : [ !0, "" ], 
-                        R = (z = N.getMonth() !== J) && !y || !O[0] || Q && N < Q || Z && N > Z, H += "<td class='" + ((x + h + 6) % 7 >= 5 ? " ui-datepicker-week-end" : "") + (z ? " ui-datepicker-other-month" : "") + (N.getTime() === D.getTime() && J === t.selectedMonth && t._keyEvent || b.getTime() === N.getTime() && b.getTime() === D.getTime() ? " " + this._dayOverClass : "") + (R ? " " + this._unselectableClass + " ui-state-disabled" : "") + (z && !v ? "" : " " + O[1] + (N.getTime() === G.getTime() ? " " + this._currentClass : "") + (N.getTime() === j.getTime() ? " ui-datepicker-today" : "")) + "'" + (z && !v || !O[2] ? "" : " title='" + O[2].replace(/'/g, "&#39;") + "'") + (R ? "" : " data-handler='selectDay' data-event='click' data-month='" + N.getMonth() + "' data-year='" + N.getFullYear() + "'") + ">" + (z && !v ? "&#xa0;" : R ? "<span class='ui-state-default'>" + N.getDate() + "</span>" : "<a class='ui-state-default" + (N.getTime() === j.getTime() ? " ui-state-highlight" : "") + (N.getTime() === G.getTime() ? " ui-state-active" : "") + (z ? " ui-priority-secondary" : "") + "' href='#'>" + N.getDate() + "</a>") + "</td>", 
+                        z = (j = N.getMonth() !== Z) && !b || !O[0] || Q && N < Q || J && N > J, H += "<td class='" + ((x + u + 6) % 7 >= 5 ? " ui-datepicker-week-end" : "") + (j ? " ui-datepicker-other-month" : "") + (N.getTime() === D.getTime() && Z === t.selectedMonth && t._keyEvent || y.getTime() === N.getTime() && y.getTime() === D.getTime() ? " " + this._dayOverClass : "") + (z ? " " + this._unselectableClass + " ui-state-disabled" : "") + (j && !v ? "" : " " + O[1] + (N.getTime() === G.getTime() ? " " + this._currentClass : "") + (N.getTime() === B.getTime() ? " ui-datepicker-today" : "")) + "'" + (j && !v || !O[2] ? "" : " title='" + O[2].replace(/'/g, "&#39;") + "'") + (z ? "" : " data-handler='selectDay' data-event='click' data-month='" + N.getMonth() + "' data-year='" + N.getFullYear() + "'") + ">" + (j && !v ? "&#xa0;" : z ? "<span class='ui-state-default'>" + N.getDate() + "</span>" : "<a class='ui-state-default" + (N.getTime() === B.getTime() ? " ui-state-highlight" : "") + (N.getTime() === G.getTime() ? " ui-state-active" : "") + (j ? " ui-priority-secondary" : "") + "' href='#'>" + N.getDate() + "</a>") + "</td>", 
                         N.setDate(N.getDate() + 1), N = this._daylightSavingAdjust(N);
                         S += H + "</tr>";
                     }
-                    ++J > 11 && (J = 0, tt++), C += S += "</tbody></table>" + (K ? "</div>" + (V[0] > 0 && k === V[1] - 1 ? "<div class='ui-datepicker-row-break'></div>" : "") : "");
+                    ++Z > 11 && (Z = 0, tt++), C += S += "</tbody></table>" + (K ? "</div>" + (X[0] > 0 && k === X[1] - 1 ? "<div class='ui-datepicker-row-break'></div>" : "") : "");
                 }
                 _ += C;
             }
-            return _ += u, t._keyEvent = !1, _;
+            return _ += h, t._keyEvent = !1, _;
         },
         _generateMonthYearHeader: function(t, e, i, n, s, o, a, r) {
-            var l, u, h, c, d, p, f, m, g = this._get(t, "changeMonth"), v = this._get(t, "changeYear"), y = this._get(t, "showMonthAfterYear"), b = "<div class='ui-datepicker-title'>", _ = "";
+            var l, h, u, c, d, p, f, m, g = this._get(t, "changeMonth"), v = this._get(t, "changeYear"), b = this._get(t, "showMonthAfterYear"), y = "<div class='ui-datepicker-title'>", _ = "";
             if (o || !g) _ += "<span class='ui-datepicker-month'>" + a[e] + "</span>"; else {
-                for (l = n && n.getFullYear() === i, u = s && s.getFullYear() === i, _ += "<select class='ui-datepicker-month' data-handler='selectMonth' data-event='change'>", 
-                h = 0; h < 12; h++) (!l || h >= n.getMonth()) && (!u || h <= s.getMonth()) && (_ += "<option value='" + h + "'" + (h === e ? " selected='selected'" : "") + ">" + r[h] + "</option>");
+                for (l = n && n.getFullYear() === i, h = s && s.getFullYear() === i, _ += "<select class='ui-datepicker-month' data-handler='selectMonth' data-event='change'>", 
+                u = 0; u < 12; u++) (!l || u >= n.getMonth()) && (!h || u <= s.getMonth()) && (_ += "<option value='" + u + "'" + (u === e ? " selected='selected'" : "") + ">" + r[u] + "</option>");
                 _ += "</select>";
             }
-            if (y || (b += _ + (!o && g && v ? "" : "&#xa0;")), !t.yearshtml) if (t.yearshtml = "", 
-            o || !v) b += "<span class='ui-datepicker-year'>" + i + "</span>"; else {
+            if (b || (y += _ + (!o && g && v ? "" : "&#xa0;")), !t.yearshtml) if (t.yearshtml = "", 
+            o || !v) y += "<span class='ui-datepicker-year'>" + i + "</span>"; else {
                 for (c = this._get(t, "yearRange").split(":"), d = new Date().getFullYear(), f = (p = function(t) {
                     var e = t.match(/c[+\-].*/) ? i + parseInt(t.substring(1), 10) : t.match(/[+\-].*/) ? d + parseInt(t, 10) : parseInt(t, 10);
                     return isNaN(e) ? d : e;
                 })(c[0]), m = Math.max(f, p(c[1] || "")), f = n ? Math.max(f, n.getFullYear()) : f, 
                 m = s ? Math.min(m, s.getFullYear()) : m, t.yearshtml += "<select class='ui-datepicker-year' data-handler='selectYear' data-event='change'>"; f <= m; f++) t.yearshtml += "<option value='" + f + "'" + (f === i ? " selected='selected'" : "") + ">" + f + "</option>";
-                t.yearshtml += "</select>", b += t.yearshtml, t.yearshtml = null;
+                t.yearshtml += "</select>", y += t.yearshtml, t.yearshtml = null;
             }
-            return b += this._get(t, "yearSuffix"), y && (b += (!o && g && v ? "" : "&#xa0;") + _), 
-            b += "</div>";
+            return y += this._get(t, "yearSuffix"), b && (y += (!o && g && v ? "" : "&#xa0;") + _), 
+            y += "</div>";
         },
         _adjustInstDate: function(t, e, i) {
             var n = t.selectedYear + ("Y" === i ? e : 0), s = t.selectedMonth + ("M" === i ? e : 0), o = Math.min(t.selectedDay, this._getDaysInMonth(n, s)) + ("D" === i ? e : 0), a = this._restrictMinMax(t, this._daylightSavingAdjust(new Date(n, s, o)));
@@ -12647,8 +12471,8 @@ function VerificarHorario(t, e) {
             this.handles.remove(), this.range && this.range.remove(), this._mouseDestroy();
         },
         _mouseCapture: function(e) {
-            var i, n, s, o, a, r, l, u = this, h = this.options;
-            return !h.disabled && (this.elementSize = {
+            var i, n, s, o, a, r, l, h = this, u = this.options;
+            return !u.disabled && (this.elementSize = {
                 width: this.element.outerWidth(),
                 height: this.element.outerHeight()
             }, this.elementOffset = this.element.offset(), i = {
@@ -12656,8 +12480,8 @@ function VerificarHorario(t, e) {
                 y: e.pageY
             }, n = this._normValueFromMouse(i), s = this._valueMax() - this._valueMin() + 1, 
             this.handles.each(function(e) {
-                var i = Math.abs(n - u.values(e));
-                (s > i || s === i && (e === u._lastChangedValue || u.values(e) === h.min)) && (s = i, 
+                var i = Math.abs(n - h.values(e));
+                (s > i || s === i && (e === h._lastChangedValue || h.values(e) === u.min)) && (s = i, 
                 o = t(this), a = e);
             }), !1 !== this._start(e, a) && (this._mouseSliding = !0, this._handleIndex = a, 
             this._addClass(o, null, "ui-state-active"), o.trigger("focus"), r = o.offset(), 
@@ -12816,33 +12640,33 @@ function VerificarHorario(t, e) {
             });
         },
         _refreshValue: function() {
-            var e, i, n, s, o, a = this.options.range, r = this.options, l = this, u = !this._animateOff && r.animate, h = {};
+            var e, i, n, s, o, a = this.options.range, r = this.options, l = this, h = !this._animateOff && r.animate, u = {};
             this._hasMultipleValues() ? this.handles.each(function(n) {
-                i = (l.values(n) - l._valueMin()) / (l._valueMax() - l._valueMin()) * 100, h["horizontal" === l.orientation ? "left" : "bottom"] = i + "%", 
-                t(this).stop(1, 1)[u ? "animate" : "css"](h, r.animate), !0 === l.options.range && ("horizontal" === l.orientation ? (0 === n && l.range.stop(1, 1)[u ? "animate" : "css"]({
+                i = (l.values(n) - l._valueMin()) / (l._valueMax() - l._valueMin()) * 100, u["horizontal" === l.orientation ? "left" : "bottom"] = i + "%", 
+                t(this).stop(1, 1)[h ? "animate" : "css"](u, r.animate), !0 === l.options.range && ("horizontal" === l.orientation ? (0 === n && l.range.stop(1, 1)[h ? "animate" : "css"]({
                     left: i + "%"
-                }, r.animate), 1 === n && l.range[u ? "animate" : "css"]({
+                }, r.animate), 1 === n && l.range[h ? "animate" : "css"]({
                     width: i - e + "%"
                 }, {
                     queue: !1,
                     duration: r.animate
-                })) : (0 === n && l.range.stop(1, 1)[u ? "animate" : "css"]({
+                })) : (0 === n && l.range.stop(1, 1)[h ? "animate" : "css"]({
                     bottom: i + "%"
-                }, r.animate), 1 === n && l.range[u ? "animate" : "css"]({
+                }, r.animate), 1 === n && l.range[h ? "animate" : "css"]({
                     height: i - e + "%"
                 }, {
                     queue: !1,
                     duration: r.animate
                 }))), e = i;
             }) : (n = this.value(), s = this._valueMin(), o = this._valueMax(), i = o !== s ? (n - s) / (o - s) * 100 : 0, 
-            h["horizontal" === this.orientation ? "left" : "bottom"] = i + "%", this.handle.stop(1, 1)[u ? "animate" : "css"](h, r.animate), 
-            "min" === a && "horizontal" === this.orientation && this.range.stop(1, 1)[u ? "animate" : "css"]({
+            u["horizontal" === this.orientation ? "left" : "bottom"] = i + "%", this.handle.stop(1, 1)[h ? "animate" : "css"](u, r.animate), 
+            "min" === a && "horizontal" === this.orientation && this.range.stop(1, 1)[h ? "animate" : "css"]({
                 width: i + "%"
-            }, r.animate), "max" === a && "horizontal" === this.orientation && this.range.stop(1, 1)[u ? "animate" : "css"]({
+            }, r.animate), "max" === a && "horizontal" === this.orientation && this.range.stop(1, 1)[h ? "animate" : "css"]({
                 width: 100 - i + "%"
-            }, r.animate), "min" === a && "vertical" === this.orientation && this.range.stop(1, 1)[u ? "animate" : "css"]({
+            }, r.animate), "min" === a && "vertical" === this.orientation && this.range.stop(1, 1)[h ? "animate" : "css"]({
                 height: i + "%"
-            }, r.animate), "max" === a && "vertical" === this.orientation && this.range.stop(1, 1)[u ? "animate" : "css"]({
+            }, r.animate), "max" === a && "vertical" === this.orientation && this.range.stop(1, 1)[h ? "animate" : "css"]({
                 height: 100 - i + "%"
             }, r.animate));
         },
@@ -13294,10 +13118,10 @@ function VerificarHorario(t, e) {
                 role: "presentation",
                 tabIndex: -1
             }), this._addClass(this.anchors, "ui-tabs-anchor"), this.panels = t(), this.anchors.each(function(i, n) {
-                var s, o, a, r = t(n).uniqueId().attr("id"), l = t(n).closest("li"), u = l.attr("aria-controls");
+                var s, o, a, r = t(n).uniqueId().attr("id"), l = t(n).closest("li"), h = l.attr("aria-controls");
                 e._isLocal(n) ? (a = (s = n.hash).substring(1), o = e.element.find(e._sanitizeSelector(s))) : (s = "#" + (a = l.attr("aria-controls") || t({}).uniqueId()[0].id), 
                 (o = e.element.find(s)).length || (o = e._createPanel(a)).insertAfter(e.panels[i - 1] || e.tablist), 
-                o.attr("aria-live", "polite")), o.length && (e.panels = e.panels.add(o)), u && l.data("ui-tabs-aria-controls", u), 
+                o.attr("aria-live", "polite")), o.length && (e.panels = e.panels.add(o)), h && l.data("ui-tabs-aria-controls", h), 
                 l.attr({
                     "aria-controls": a,
                     "aria-labelledby": r
@@ -13348,15 +13172,15 @@ function VerificarHorario(t, e) {
             }).height(i));
         },
         _eventHandler: function(e) {
-            var i = this.options, n = this.active, s = t(e.currentTarget).closest("li"), o = s[0] === n[0], a = o && i.collapsible, r = a ? t() : this._getPanelForTab(s), l = n.length ? this._getPanelForTab(n) : t(), u = {
+            var i = this.options, n = this.active, s = t(e.currentTarget).closest("li"), o = s[0] === n[0], a = o && i.collapsible, r = a ? t() : this._getPanelForTab(s), l = n.length ? this._getPanelForTab(n) : t(), h = {
                 oldTab: n,
                 oldPanel: l,
                 newTab: a ? t() : s,
                 newPanel: r
             };
-            e.preventDefault(), s.hasClass("ui-state-disabled") || s.hasClass("ui-tabs-loading") || this.running || o && !i.collapsible || !1 === this._trigger("beforeActivate", e, u) || (i.active = !a && this.tabs.index(s), 
+            e.preventDefault(), s.hasClass("ui-state-disabled") || s.hasClass("ui-tabs-loading") || this.running || o && !i.collapsible || !1 === this._trigger("beforeActivate", e, h) || (i.active = !a && this.tabs.index(s), 
             this.active = o ? t() : s, this.xhr && this.xhr.abort(), l.length || r.length || t.error("jQuery UI Tabs: Mismatching fragment identifier."), 
-            r.length && this.load(this.tabs.index(s), e), this._toggle(e, u));
+            r.length && this.load(this.tabs.index(s), e), this._toggle(e, h));
         },
         _toggle: function(e, i) {
             function n() {
@@ -13555,9 +13379,9 @@ function VerificarHorario(t, e) {
         },
         _open: function(e, i, n) {
             function s(t) {
-                u.of = t, a.is(":hidden") || a.position(u);
+                h.of = t, a.is(":hidden") || a.position(h);
             }
-            var o, a, r, l, u = t.extend({}, this.options.position);
+            var o, a, r, l, h = t.extend({}, this.options.position);
             n && ((o = this._find(i)) ? o.tooltip.find(".ui-tooltip-content").html(n) : (i.is("[title]") && (e && "mouseover" === e.type ? i.attr("title", "") : i.removeAttr("title")), 
             o = this._tooltip(i), a = o.tooltip, this._addDescribedBy(i, a.attr("id")), a.find(".ui-tooltip-content").html(n), 
             this.liveRegion.children().hide(), (l = t("<div>").html(a.find(".ui-tooltip-content").html())).removeAttr("name").find("[name]").removeAttr("name"), 
@@ -13566,7 +13390,7 @@ function VerificarHorario(t, e) {
             }), s(e)) : a.position(t.extend({
                 of: i
             }, this.options.position)), a.hide(), this._show(a, this.options.show), this.options.track && this.options.show && this.options.show.delay && (r = this.delayedShow = setInterval(function() {
-                a.is(":visible") && (s(u.of), clearInterval(r));
+                a.is(":visible") && (s(h.of), clearInterval(r));
             }, t.fx.interval)), this._trigger("open", e, {
                 tooltip: a
             })));
@@ -13641,7 +13465,7 @@ function VerificarHorario(t, e) {
         effect: {}
     }, function(t, e) {
         function i(t, e, i) {
-            var n = h[e.type] || {};
+            var n = u[e.type] || {};
             return null == t ? i || !e.def ? null : e.def : (t = n.floor ? ~~t : parseFloat(t), 
             isNaN(t) ? e.def : n.mod ? (t + n.mod) % n.mod : 0 > t ? 0 : n.max < t ? n.max : t);
         }
@@ -13649,7 +13473,7 @@ function VerificarHorario(t, e) {
             var i = l(), n = i._rgba = [];
             return e = e.toLowerCase(), p(r, function(t, s) {
                 var o, a = s.re.exec(e), r = a && s.parse(a), l = s.space || "rgba";
-                if (r) return o = i[l](r), i[u[l].cache] = o[u[l].cache], n = i._rgba = o._rgba, 
+                if (r) return o = i[l](r), i[h[l].cache] = o[h[l].cache], n = i._rgba = o._rgba, 
                 !1;
             }), n.length ? ("0,0,0,0" === n.join() && t.extend(n, o.transparent), i) : o[e];
         }
@@ -13684,7 +13508,7 @@ function VerificarHorario(t, e) {
             }
         } ], l = t.Color = function(e, i, n, s) {
             return new t.Color.fn.parse(e, i, n, s);
-        }, u = {
+        }, h = {
             rgba: {
                 props: {
                     red: {
@@ -13717,7 +13541,7 @@ function VerificarHorario(t, e) {
                     }
                 }
             }
-        }, h = {
+        }, u = {
             byte: {
                 floor: !0,
                 max: 255
@@ -13731,7 +13555,7 @@ function VerificarHorario(t, e) {
             }
         }, c = l.support = {}, d = t("<p>")[0], p = t.each;
         d.style.cssText = "background-color:rgba(1,1,1,.5)", c.rgba = d.style.backgroundColor.indexOf("rgba") > -1, 
-        p(u, function(t, e) {
+        p(h, function(t, e) {
             e.cache = "_" + t, e.props.alpha = {
                 idx: 3,
                 type: "percent",
@@ -13741,25 +13565,25 @@ function VerificarHorario(t, e) {
             parse: function(e, s, a, r) {
                 if (void 0 === e) return this._rgba = [ null, null, null, null ], this;
                 (e.jquery || e.nodeType) && (e = t(e).css(s), s = void 0);
-                var h = this, c = t.type(e), d = this._rgba = [];
-                return void 0 !== s && (e = [ e, s, a, r ], c = "array"), "string" === c ? this.parse(n(e) || o._default) : "array" === c ? (p(u.rgba.props, function(t, n) {
+                var u = this, c = t.type(e), d = this._rgba = [];
+                return void 0 !== s && (e = [ e, s, a, r ], c = "array"), "string" === c ? this.parse(n(e) || o._default) : "array" === c ? (p(h.rgba.props, function(t, n) {
                     d[n.idx] = i(e[n.idx], n);
-                }), this) : "object" === c ? (e instanceof l ? p(u, function(t, i) {
-                    e[i.cache] && (h[i.cache] = e[i.cache].slice());
-                }) : p(u, function(n, s) {
+                }), this) : "object" === c ? (e instanceof l ? p(h, function(t, i) {
+                    e[i.cache] && (u[i.cache] = e[i.cache].slice());
+                }) : p(h, function(n, s) {
                     var o = s.cache;
                     p(s.props, function(t, n) {
-                        if (!h[o] && s.to) {
+                        if (!u[o] && s.to) {
                             if ("alpha" === t || null == e[t]) return;
-                            h[o] = s.to(h._rgba);
+                            u[o] = s.to(u._rgba);
                         }
-                        h[o][n.idx] = i(e[t], n, !0);
-                    }), h[o] && t.inArray(null, h[o].slice(0, 3)) < 0 && (h[o][3] = 1, s.from && (h._rgba = s.from(h[o])));
+                        u[o][n.idx] = i(e[t], n, !0);
+                    }), u[o] && t.inArray(null, u[o].slice(0, 3)) < 0 && (u[o][3] = 1, s.from && (u._rgba = s.from(u[o])));
                 }), this) : void 0;
             },
             is: function(t) {
                 var e = l(t), i = !0, n = this;
-                return p(u, function(t, s) {
+                return p(h, function(t, s) {
                     var o, a = e[s.cache];
                     return a && (o = n[s.cache] || s.to && s.to(n._rgba) || [], p(s.props, function(t, e) {
                         if (null != a[e.idx]) return i = a[e.idx] === o[e.idx];
@@ -13768,15 +13592,15 @@ function VerificarHorario(t, e) {
             },
             _space: function() {
                 var t = [], e = this;
-                return p(u, function(i, n) {
+                return p(h, function(i, n) {
                     e[n.cache] && t.push(i);
                 }), t.pop();
             },
             transition: function(t, e) {
-                var n = l(t), s = n._space(), o = u[s], a = 0 === this.alpha() ? l("transparent") : this, r = a[o.cache] || o.to(a._rgba), c = r.slice();
+                var n = l(t), s = n._space(), o = h[s], a = 0 === this.alpha() ? l("transparent") : this, r = a[o.cache] || o.to(a._rgba), c = r.slice();
                 return n = n[o.cache], p(o.props, function(t, s) {
-                    var o = s.idx, a = r[o], l = n[o], u = h[s.type] || {};
-                    null !== l && (null === a ? c[o] = l : (u.mod && (l - a > u.mod / 2 ? a += u.mod : a - l > u.mod / 2 && (a -= u.mod)), 
+                    var o = s.idx, a = r[o], l = n[o], h = u[s.type] || {};
+                    null !== l && (null === a ? c[o] = l : (h.mod && (l - a > h.mod / 2 ? a += h.mod : a - l > h.mod / 2 && (a -= h.mod)), 
                     c[o] = i((l - a) * e + a, s)));
                 }), this[s](c);
             },
@@ -13809,30 +13633,30 @@ function VerificarHorario(t, e) {
             toString: function() {
                 return 0 === this._rgba[3] ? "transparent" : this.toRgbaString();
             }
-        }), l.fn.parse.prototype = l.fn, u.hsla.to = function(t) {
+        }), l.fn.parse.prototype = l.fn, h.hsla.to = function(t) {
             if (null == t[0] || null == t[1] || null == t[2]) return [ null, null, null, t[3] ];
-            var e, i, n = t[0] / 255, s = t[1] / 255, o = t[2] / 255, a = t[3], r = Math.max(n, s, o), l = Math.min(n, s, o), u = r - l, h = r + l, c = .5 * h;
-            return e = l === r ? 0 : n === r ? 60 * (s - o) / u + 360 : s === r ? 60 * (o - n) / u + 120 : 60 * (n - s) / u + 240, 
-            i = 0 === u ? 0 : c <= .5 ? u / h : u / (2 - h), [ Math.round(e) % 360, i, c, null == a ? 1 : a ];
-        }, u.hsla.from = function(t) {
+            var e, i, n = t[0] / 255, s = t[1] / 255, o = t[2] / 255, a = t[3], r = Math.max(n, s, o), l = Math.min(n, s, o), h = r - l, u = r + l, c = .5 * u;
+            return e = l === r ? 0 : n === r ? 60 * (s - o) / h + 360 : s === r ? 60 * (o - n) / h + 120 : 60 * (n - s) / h + 240, 
+            i = 0 === h ? 0 : c <= .5 ? h / u : h / (2 - u), [ Math.round(e) % 360, i, c, null == a ? 1 : a ];
+        }, h.hsla.from = function(t) {
             if (null == t[0] || null == t[1] || null == t[2]) return [ null, null, null, t[3] ];
             var e = t[0] / 360, i = t[1], n = t[2], o = t[3], a = n <= .5 ? n * (1 + i) : n + i - n * i, r = 2 * n - a;
             return [ Math.round(255 * s(r, a, e + 1 / 3)), Math.round(255 * s(r, a, e)), Math.round(255 * s(r, a, e - 1 / 3)), o ];
-        }, p(u, function(e, n) {
-            var s = n.props, o = n.cache, r = n.to, u = n.from;
+        }, p(h, function(e, n) {
+            var s = n.props, o = n.cache, r = n.to, h = n.from;
             l.fn[e] = function(e) {
                 if (r && !this[o] && (this[o] = r(this._rgba)), void 0 === e) return this[o].slice();
-                var n, a = t.type(e), h = "array" === a || "object" === a ? e : arguments, c = this[o].slice();
+                var n, a = t.type(e), u = "array" === a || "object" === a ? e : arguments, c = this[o].slice();
                 return p(s, function(t, e) {
-                    var n = h["object" === a ? t : e.idx];
+                    var n = u["object" === a ? t : e.idx];
                     null == n && (n = c[e.idx]), c[e.idx] = i(n, e);
-                }), u ? (n = l(u(c)), n[o] = c, n) : l(c);
+                }), h ? (n = l(h(c)), n[o] = c, n) : l(c);
             }, p(s, function(i, n) {
                 l.fn[i] || (l.fn[i] = function(s) {
-                    var o, r = t.type(s), l = "alpha" === i ? this._hsla ? "hsla" : "rgba" : e, u = this[l](), h = u[n.idx];
-                    return "undefined" === r ? h : ("function" === r && (s = s.call(this, h), r = t.type(s)), 
-                    null == s && n.empty ? this : ("string" === r && (o = a.exec(s)) && (s = h + parseFloat(o[2]) * ("+" === o[1] ? 1 : -1)), 
-                    u[n.idx] = s, this[l](u)));
+                    var o, r = t.type(s), l = "alpha" === i ? this._hsla ? "hsla" : "rgba" : e, h = this[l](), u = h[n.idx];
+                    return "undefined" === r ? u : ("function" === r && (s = s.call(this, u), r = t.type(s)), 
+                    null == s && n.empty ? this : ("string" === r && (o = a.exec(s)) && (s = u + parseFloat(o[2]) * ("+" === o[1] ? 1 : -1)), 
+                    h[n.idx] = s, this[l](h)));
                 });
             });
         }), l.hook = function(e) {
@@ -13918,8 +13742,8 @@ function VerificarHorario(t, e) {
         }), t.effects.animateClass = function(s, o, a, r) {
             var l = t.speed(o, a, r);
             return this.queue(function() {
-                var o, a = t(this), r = a.attr("class") || "", u = l.children ? a.find("*").addBack() : a;
-                u = u.map(function() {
+                var o, a = t(this), r = a.attr("class") || "", h = l.children ? a.find("*").addBack() : a;
+                h = h.map(function() {
                     return {
                         el: t(this),
                         start: e(this)
@@ -13928,9 +13752,9 @@ function VerificarHorario(t, e) {
                     t.each(n, function(t, e) {
                         s[e] && a[e + "Class"](s[e]);
                     });
-                })(), u = u.map(function() {
+                })(), h = h.map(function() {
                     return this.end = e(this.el[0]), this.diff = i(this.start, this.end), this;
-                }), a.attr("class", r), u = u.map(function() {
+                }), a.attr("class", r), h = h.map(function() {
                     var e = this, i = t.Deferred(), n = t.extend({}, l, {
                         queue: !1,
                         complete: function() {
@@ -13938,7 +13762,7 @@ function VerificarHorario(t, e) {
                         }
                     });
                     return this.el.animate(this.diff, n), i.promise();
-                }), t.when.apply(t, u.get()).done(function() {
+                }), t.when.apply(t, h.get()).done(function() {
                     o(), t.each(arguments, function() {
                         var e = this.el;
                         t.each(this.diff, function(t) {
@@ -14189,15 +14013,15 @@ function VerificarHorario(t, e) {
                         t.isFunction(l) && l.call(r[0]), t.isFunction(e) && e();
                     }
                     var r = t(this);
-                    n.mode = h.shift(), !1 === t.uiBackCompat || o ? "none" === n.mode ? (r[u](), a()) : s.call(r[0], n, i) : (r.is(":hidden") ? "hide" === u : "show" === u) ? (r[u](), 
+                    n.mode = u.shift(), !1 === t.uiBackCompat || o ? "none" === n.mode ? (r[h](), a()) : s.call(r[0], n, i) : (r.is(":hidden") ? "hide" === h : "show" === h) ? (r[h](), 
                     a()) : s.call(r[0], n, a);
                 }
-                var n = e.apply(this, arguments), s = t.effects.effect[n.effect], o = s.mode, a = n.queue, r = a || "fx", l = n.complete, u = n.mode, h = [], c = function(e) {
-                    var i = t(this), n = t.effects.mode(i, u) || o;
-                    i.data(f, !0), h.push(n), o && ("show" === n || n === o && "hide" === n) && i.show(), 
+                var n = e.apply(this, arguments), s = t.effects.effect[n.effect], o = s.mode, a = n.queue, r = a || "fx", l = n.complete, h = n.mode, u = [], c = function(e) {
+                    var i = t(this), n = t.effects.mode(i, h) || o;
+                    i.data(f, !0), u.push(n), o && ("show" === n || n === o && "hide" === n) && i.show(), 
                     o && "none" === n || t.effects.saveStyle(i), t.isFunction(e) && e();
                 };
-                return t.fx.off || !s ? u ? this[u](n.duration, l) : this.each(function() {
+                return t.fx.off || !s ? h ? this[h](n.duration, l) : this.each(function() {
                     l && l.call(this);
                 }) : !1 === a ? this.each(c).each(i) : this.queue(r, c).queue(r, i);
             },
@@ -14232,9 +14056,9 @@ function VerificarHorario(t, e) {
                 return t ? this.css("clip", "rect(" + t.top + "px " + t.right + "px " + t.bottom + "px " + t.left + "px)") : n(this.css("clip"), this);
             },
             transfer: function(e, i) {
-                var n = t(this), s = t(e.to), o = "fixed" === s.css("position"), a = t("body"), r = o ? a.scrollTop() : 0, l = o ? a.scrollLeft() : 0, u = s.offset(), h = {
-                    top: u.top - r,
-                    left: u.left - l,
+                var n = t(this), s = t(e.to), o = "fixed" === s.css("position"), a = t("body"), r = o ? a.scrollTop() : 0, l = o ? a.scrollLeft() : 0, h = s.offset(), u = {
+                    top: h.top - r,
+                    left: h.left - l,
                     height: s.innerHeight(),
                     width: s.innerWidth()
                 }, c = n.offset(), d = t("<div class='ui-effects-transfer'></div>").appendTo("body").addClass(e.className).css({
@@ -14243,7 +14067,7 @@ function VerificarHorario(t, e) {
                     height: n.innerHeight(),
                     width: n.innerWidth(),
                     position: o ? "fixed" : "absolute"
-                }).animate(h, e.duration, e.easing, function() {
+                }).animate(u, e.duration, e.easing, function() {
                     d.remove(), t.isFunction(i) && i();
                 });
             }
@@ -14306,22 +14130,22 @@ function VerificarHorario(t, e) {
             complete: i
         });
     }), t.effects.define("bounce", function(e, i) {
-        var n, s, o, a = t(this), r = e.mode, l = "hide" === r, u = "show" === r, h = e.direction || "up", c = e.distance, d = e.times || 5, p = 2 * d + (u || l ? 1 : 0), f = e.duration / p, m = e.easing, g = "up" === h || "down" === h ? "top" : "left", v = "up" === h || "left" === h, y = 0, b = a.queue().length;
+        var n, s, o, a = t(this), r = e.mode, l = "hide" === r, h = "show" === r, u = e.direction || "up", c = e.distance, d = e.times || 5, p = 2 * d + (h || l ? 1 : 0), f = e.duration / p, m = e.easing, g = "up" === u || "down" === u ? "top" : "left", v = "up" === u || "left" === u, b = 0, y = a.queue().length;
         for (t.effects.createPlaceholder(a), o = a.css(g), c || (c = a["top" === g ? "outerHeight" : "outerWidth"]() / 3), 
-        u && ((s = {
+        h && ((s = {
             opacity: 1
         })[g] = o, a.css("opacity", 0).css(g, v ? 2 * -c : 2 * c).animate(s, f, m)), l && (c /= Math.pow(2, d - 1)), 
-        (s = {})[g] = o; y < d; y++) (n = {})[g] = (v ? "-=" : "+=") + c, a.animate(n, f, m).animate(s, f, m), 
+        (s = {})[g] = o; b < d; b++) (n = {})[g] = (v ? "-=" : "+=") + c, a.animate(n, f, m).animate(s, f, m), 
         c = l ? 2 * c : c / 2;
         l && ((n = {
             opacity: 0
-        })[g] = (v ? "-=" : "+=") + c, a.animate(n, f, m)), a.queue(i), t.effects.unshift(a, b, p + 1);
+        })[g] = (v ? "-=" : "+=") + c, a.animate(n, f, m)), a.queue(i), t.effects.unshift(a, y, p + 1);
     }), t.effects.define("clip", "hide", function(e, i) {
-        var n, s = {}, o = t(this), a = e.direction || "vertical", r = "both" === a, l = r || "horizontal" === a, u = r || "vertical" === a;
+        var n, s = {}, o = t(this), a = e.direction || "vertical", r = "both" === a, l = r || "horizontal" === a, h = r || "vertical" === a;
         n = o.cssClip(), s.clip = {
-            top: u ? (n.bottom - n.top) / 2 : n.top,
+            top: h ? (n.bottom - n.top) / 2 : n.top,
             right: l ? (n.right - n.left) / 2 : n.right,
-            bottom: u ? (n.bottom - n.top) / 2 : n.bottom,
+            bottom: h ? (n.bottom - n.top) / 2 : n.bottom,
             left: l ? (n.right - n.left) / 2 : n.left
         }, t.effects.createPlaceholder(o), "show" === e.mode && (o.cssClip(s.clip), s.clip = n), 
         o.animate(s, {
@@ -14331,11 +14155,11 @@ function VerificarHorario(t, e) {
             complete: i
         });
     }), t.effects.define("drop", "hide", function(e, i) {
-        var n, s = t(this), o = "show" === e.mode, a = e.direction || "left", r = "up" === a || "down" === a ? "top" : "left", l = "up" === a || "left" === a ? "-=" : "+=", u = "+=" === l ? "-=" : "+=", h = {
+        var n, s = t(this), o = "show" === e.mode, a = e.direction || "left", r = "up" === a || "down" === a ? "top" : "left", l = "up" === a || "left" === a ? "-=" : "+=", h = "+=" === l ? "-=" : "+=", u = {
             opacity: 0
         };
         t.effects.createPlaceholder(s), n = e.distance || s["top" === r ? "outerHeight" : "outerWidth"](!0) / 2, 
-        h[r] = l + n, o && (s.css(h), h[r] = u + n, h.opacity = 1), s.animate(h, {
+        u[r] = l + n, o && (s.css(u), u[r] = h + n, u.opacity = 1), s.animate(u, {
             queue: !1,
             duration: e.duration,
             easing: e.easing,
@@ -14343,16 +14167,16 @@ function VerificarHorario(t, e) {
         });
     }), t.effects.define("explode", "hide", function(e, i) {
         function n() {
-            y.push(this), y.length === c * d && s();
+            b.push(this), b.length === c * d && s();
         }
         function s() {
             p.css({
                 visibility: "visible"
-            }), t(y).remove(), i();
+            }), t(b).remove(), i();
         }
-        var o, a, r, l, u, h, c = e.pieces ? Math.round(Math.sqrt(e.pieces)) : 3, d = c, p = t(this), f = "show" === e.mode, m = p.show().css("visibility", "hidden").offset(), g = Math.ceil(p.outerWidth() / d), v = Math.ceil(p.outerHeight() / c), y = [];
-        for (o = 0; o < c; o++) for (l = m.top + o * v, h = o - (c - 1) / 2, a = 0; a < d; a++) r = m.left + a * g, 
-        u = a - (d - 1) / 2, p.clone().appendTo("body").wrap("<div></div>").css({
+        var o, a, r, l, h, u, c = e.pieces ? Math.round(Math.sqrt(e.pieces)) : 3, d = c, p = t(this), f = "show" === e.mode, m = p.show().css("visibility", "hidden").offset(), g = Math.ceil(p.outerWidth() / d), v = Math.ceil(p.outerHeight() / c), b = [];
+        for (o = 0; o < c; o++) for (l = m.top + o * v, u = o - (c - 1) / 2, a = 0; a < d; a++) r = m.left + a * g, 
+        h = a - (d - 1) / 2, p.clone().appendTo("body").wrap("<div></div>").css({
             position: "absolute",
             visibility: "visible",
             left: -a * g,
@@ -14362,12 +14186,12 @@ function VerificarHorario(t, e) {
             overflow: "hidden",
             width: g,
             height: v,
-            left: r + (f ? u * g : 0),
-            top: l + (f ? h * v : 0),
+            left: r + (f ? h * g : 0),
+            top: l + (f ? u * v : 0),
             opacity: f ? 0 : 1
         }).animate({
-            left: r + (f ? 0 : u * g),
-            top: l + (f ? 0 : h * v),
+            left: r + (f ? 0 : h * g),
+            top: l + (f ? 0 : u * v),
             opacity: f ? 1 : 0
         }, e.duration || 500, e.easing, n);
     }), t.effects.define("fade", "toggle", function(e, i) {
@@ -14381,17 +14205,17 @@ function VerificarHorario(t, e) {
             complete: i
         });
     }), t.effects.define("fold", "hide", function(e, i) {
-        var n = t(this), s = e.mode, o = "show" === s, a = "hide" === s, r = e.size || 15, l = /([0-9]+)%/.exec(r), u = !!e.horizFirst ? [ "right", "bottom" ] : [ "bottom", "right" ], h = e.duration / 2, c = t.effects.createPlaceholder(n), d = n.cssClip(), p = {
+        var n = t(this), s = e.mode, o = "show" === s, a = "hide" === s, r = e.size || 15, l = /([0-9]+)%/.exec(r), h = !!e.horizFirst ? [ "right", "bottom" ] : [ "bottom", "right" ], u = e.duration / 2, c = t.effects.createPlaceholder(n), d = n.cssClip(), p = {
             clip: t.extend({}, d)
         }, f = {
             clip: t.extend({}, d)
-        }, m = [ d[u[0]], d[u[1]] ], g = n.queue().length;
-        l && (r = parseInt(l[1], 10) / 100 * m[a ? 0 : 1]), p.clip[u[0]] = r, f.clip[u[0]] = r, 
-        f.clip[u[1]] = 0, o && (n.cssClip(f.clip), c && c.css(t.effects.clipToBox(f)), f.clip = d), 
+        }, m = [ d[h[0]], d[h[1]] ], g = n.queue().length;
+        l && (r = parseInt(l[1], 10) / 100 * m[a ? 0 : 1]), p.clip[h[0]] = r, f.clip[h[0]] = r, 
+        f.clip[h[1]] = 0, o && (n.cssClip(f.clip), c && c.css(t.effects.clipToBox(f)), f.clip = d), 
         n.queue(function(i) {
-            c && c.animate(t.effects.clipToBox(p), h, e.easing).animate(t.effects.clipToBox(f), h, e.easing), 
+            c && c.animate(t.effects.clipToBox(p), u, e.easing).animate(t.effects.clipToBox(f), u, e.easing), 
             i();
-        }).animate(p, h, e.easing).animate(f, h, e.easing).queue(i), t.effects.unshift(n, g, 4);
+        }).animate(p, u, e.easing).animate(f, u, e.easing).queue(i), t.effects.unshift(n, g, 4);
     }), t.effects.define("highlight", "show", function(e, i) {
         var n = t(this), s = {
             backgroundColor: n.css("backgroundColor")
@@ -14406,24 +14230,24 @@ function VerificarHorario(t, e) {
             complete: i
         });
     }), t.effects.define("size", function(e, i) {
-        var n, s, o, a = t(this), r = [ "fontSize" ], l = [ "borderTopWidth", "borderBottomWidth", "paddingTop", "paddingBottom" ], u = [ "borderLeftWidth", "borderRightWidth", "paddingLeft", "paddingRight" ], h = e.mode, c = "effect" !== h, d = e.scale || "both", p = e.origin || [ "middle", "center" ], f = a.css("position"), m = a.position(), g = t.effects.scaledDimensions(a), v = e.from || g, y = e.to || t.effects.scaledDimensions(a, 0);
-        t.effects.createPlaceholder(a), "show" === h && (o = v, v = y, y = o), s = {
+        var n, s, o, a = t(this), r = [ "fontSize" ], l = [ "borderTopWidth", "borderBottomWidth", "paddingTop", "paddingBottom" ], h = [ "borderLeftWidth", "borderRightWidth", "paddingLeft", "paddingRight" ], u = e.mode, c = "effect" !== u, d = e.scale || "both", p = e.origin || [ "middle", "center" ], f = a.css("position"), m = a.position(), g = t.effects.scaledDimensions(a), v = e.from || g, b = e.to || t.effects.scaledDimensions(a, 0);
+        t.effects.createPlaceholder(a), "show" === u && (o = v, v = b, b = o), s = {
             from: {
                 y: v.height / g.height,
                 x: v.width / g.width
             },
             to: {
-                y: y.height / g.height,
-                x: y.width / g.width
+                y: b.height / g.height,
+                x: b.width / g.width
             }
         }, "box" !== d && "both" !== d || (s.from.y !== s.to.y && (v = t.effects.setTransition(a, l, s.from.y, v), 
-        y = t.effects.setTransition(a, l, s.to.y, y)), s.from.x !== s.to.x && (v = t.effects.setTransition(a, u, s.from.x, v), 
-        y = t.effects.setTransition(a, u, s.to.x, y))), "content" !== d && "both" !== d || s.from.y !== s.to.y && (v = t.effects.setTransition(a, r, s.from.y, v), 
-        y = t.effects.setTransition(a, r, s.to.y, y)), p && (n = t.effects.getBaseline(p, g), 
+        b = t.effects.setTransition(a, l, s.to.y, b)), s.from.x !== s.to.x && (v = t.effects.setTransition(a, h, s.from.x, v), 
+        b = t.effects.setTransition(a, h, s.to.x, b))), "content" !== d && "both" !== d || s.from.y !== s.to.y && (v = t.effects.setTransition(a, r, s.from.y, v), 
+        b = t.effects.setTransition(a, r, s.to.y, b)), p && (n = t.effects.getBaseline(p, g), 
         v.top = (g.outerHeight - v.outerHeight) * n.y + m.top, v.left = (g.outerWidth - v.outerWidth) * n.x + m.left, 
-        y.top = (g.outerHeight - y.outerHeight) * n.y + m.top, y.left = (g.outerWidth - y.outerWidth) * n.x + m.left), 
+        b.top = (g.outerHeight - b.outerHeight) * n.y + m.top, b.left = (g.outerWidth - b.outerWidth) * n.x + m.left), 
         a.css(v), "content" !== d && "both" !== d || (l = l.concat([ "marginTop", "marginBottom" ]).concat(r), 
-        u = u.concat([ "marginLeft", "marginRight" ]), a.find("*[width]").each(function() {
+        h = h.concat([ "marginLeft", "marginRight" ]), a.find("*[width]").each(function() {
             var i = t(this), n = t.effects.scaledDimensions(i), o = {
                 height: n.height * s.from.y,
                 width: n.width * s.from.x,
@@ -14436,17 +14260,17 @@ function VerificarHorario(t, e) {
                 outerWidth: n.width * s.to.x
             };
             s.from.y !== s.to.y && (o = t.effects.setTransition(i, l, s.from.y, o), a = t.effects.setTransition(i, l, s.to.y, a)), 
-            s.from.x !== s.to.x && (o = t.effects.setTransition(i, u, s.from.x, o), a = t.effects.setTransition(i, u, s.to.x, a)), 
+            s.from.x !== s.to.x && (o = t.effects.setTransition(i, h, s.from.x, o), a = t.effects.setTransition(i, h, s.to.x, a)), 
             c && t.effects.saveStyle(i), i.css(o), i.animate(a, e.duration, e.easing, function() {
                 c && t.effects.restoreStyle(i);
             });
-        })), a.animate(y, {
+        })), a.animate(b, {
             queue: !1,
             duration: e.duration,
             easing: e.easing,
             complete: function() {
                 var e = a.offset();
-                0 === y.opacity && a.css("opacity", v.opacity), c || (a.css("position", "static" === f ? "relative" : f).offset(e), 
+                0 === b.opacity && a.css("opacity", v.opacity), c || (a.css("position", "static" === f ? "relative" : f).offset(e), 
                 t.effects.saveStyle(a)), i();
             }
         });
@@ -14464,28 +14288,28 @@ function VerificarHorario(t, e) {
         });
         t.effects.effect.scale.call(this, n, i);
     }), t.effects.define("pulsate", "show", function(e, i) {
-        var n = t(this), s = e.mode, o = "show" === s, a = "hide" === s, r = o || a, l = 2 * (e.times || 5) + (r ? 1 : 0), u = e.duration / l, h = 0, c = 1, d = n.queue().length;
-        for (!o && n.is(":visible") || (n.css("opacity", 0).show(), h = 1); c < l; c++) n.animate({
-            opacity: h
-        }, u, e.easing), h = 1 - h;
+        var n = t(this), s = e.mode, o = "show" === s, a = "hide" === s, r = o || a, l = 2 * (e.times || 5) + (r ? 1 : 0), h = e.duration / l, u = 0, c = 1, d = n.queue().length;
+        for (!o && n.is(":visible") || (n.css("opacity", 0).show(), u = 1); c < l; c++) n.animate({
+            opacity: u
+        }, h, e.easing), u = 1 - u;
         n.animate({
-            opacity: h
-        }, u, e.easing), n.queue(i), t.effects.unshift(n, d, l + 1);
+            opacity: u
+        }, h, e.easing), n.queue(i), t.effects.unshift(n, d, l + 1);
     }), t.effects.define("shake", function(e, i) {
-        var n = 1, s = t(this), o = e.direction || "left", a = e.distance || 20, r = e.times || 3, l = 2 * r + 1, u = Math.round(e.duration / l), h = "up" === o || "down" === o ? "top" : "left", c = "up" === o || "left" === o, d = {}, p = {}, f = {}, m = s.queue().length;
-        for (t.effects.createPlaceholder(s), d[h] = (c ? "-=" : "+=") + a, p[h] = (c ? "+=" : "-=") + 2 * a, 
-        f[h] = (c ? "-=" : "+=") + 2 * a, s.animate(d, u, e.easing); n < r; n++) s.animate(p, u, e.easing).animate(f, u, e.easing);
-        s.animate(p, u, e.easing).animate(d, u / 2, e.easing).queue(i), t.effects.unshift(s, m, l + 1);
+        var n = 1, s = t(this), o = e.direction || "left", a = e.distance || 20, r = e.times || 3, l = 2 * r + 1, h = Math.round(e.duration / l), u = "up" === o || "down" === o ? "top" : "left", c = "up" === o || "left" === o, d = {}, p = {}, f = {}, m = s.queue().length;
+        for (t.effects.createPlaceholder(s), d[u] = (c ? "-=" : "+=") + a, p[u] = (c ? "+=" : "-=") + 2 * a, 
+        f[u] = (c ? "-=" : "+=") + 2 * a, s.animate(d, h, e.easing); n < r; n++) s.animate(p, h, e.easing).animate(f, h, e.easing);
+        s.animate(p, h, e.easing).animate(d, h / 2, e.easing).queue(i), t.effects.unshift(s, m, l + 1);
     }), t.effects.define("slide", "show", function(e, i) {
         var n, s, o = t(this), a = {
             up: [ "bottom", "top" ],
             down: [ "top", "bottom" ],
             left: [ "right", "left" ],
             right: [ "left", "right" ]
-        }, r = e.mode, l = e.direction || "left", u = "up" === l || "down" === l ? "top" : "left", h = "up" === l || "left" === l, c = e.distance || o["top" === u ? "outerHeight" : "outerWidth"](!0), d = {};
-        t.effects.createPlaceholder(o), n = o.cssClip(), s = o.position()[u], d[u] = (h ? -1 : 1) * c + s, 
+        }, r = e.mode, l = e.direction || "left", h = "up" === l || "down" === l ? "top" : "left", u = "up" === l || "left" === l, c = e.distance || o["top" === h ? "outerHeight" : "outerWidth"](!0), d = {};
+        t.effects.createPlaceholder(o), n = o.cssClip(), s = o.position()[h], d[h] = (u ? -1 : 1) * c + s, 
         d.clip = o.cssClip(), d.clip[a[l][1]] = d.clip[a[l][0]], "show" === r && (o.cssClip(d.clip), 
-        o.css(u, d[u]), d.clip = n, d[u] = s), o.animate(d, {
+        o.css(h, d[h]), d.clip = n, d[h] = s), o.animate(d, {
             queue: !1,
             duration: e.duration,
             easing: e.easing,
@@ -14505,23 +14329,23 @@ function VerificarHorario(t, e) {
     }), t.fn.multiDatesPicker = function(e) {
         function i(t, e) {
             e || (e = "picked"), t = a.call(this, t);
-            for (var i = 0; i < this.multiDatesPicker.dates[e].length; i++) if (!h.compareDates(this.multiDatesPicker.dates[e][i], t)) return this.multiDatesPicker.dates[e].splice(i, 1).pop();
+            for (var i = 0; i < this.multiDatesPicker.dates[e].length; i++) if (!u.compareDates(this.multiDatesPicker.dates[e][i], t)) return this.multiDatesPicker.dates[e].splice(i, 1).pop();
         }
         function n(t, e) {
             return e || (e = "picked"), this.multiDatesPicker.dates[e].splice(t, 1).pop();
         }
         function s(t, e, i) {
             e || (e = "picked"), (t = a.call(this, t)).setHours(0), t.setMinutes(0), t.setSeconds(0), 
-            t.setMilliseconds(0), !1 === h.gotDate.call(this, t, e) && (this.multiDatesPicker.dates[e].push(t), 
-            i || this.multiDatesPicker.dates[e].sort(h.compareDates));
+            t.setMilliseconds(0), !1 === u.gotDate.call(this, t, e) && (this.multiDatesPicker.dates[e].push(t), 
+            i || this.multiDatesPicker.dates[e].sort(u.compareDates));
         }
         function o(t) {
-            t || (t = "picked"), this.multiDatesPicker.dates[t].sort(h.compareDates);
+            t || (t = "picked"), this.multiDatesPicker.dates[t].sort(u.compareDates);
         }
         function a(t, e, i) {
-            return e || (e = "object"), h.dateConvert.call(this, t, e, i);
+            return e || (e = "object"), u.dateConvert.call(this, t, e, i);
         }
-        var r = arguments, l = this, u = (new Date(), new Date(0), {}), h = {
+        var r = arguments, l = this, h = (new Date(), new Date(0), {}), u = {
             init: function(e) {
                 var i = t(this);
                 this.multiDatesPicker.changed = !1;
@@ -14534,7 +14358,7 @@ function VerificarHorario(t, e) {
                         if (this.multiDatesPicker.changed = !0, e && (n.multiDatesPicker("toggleDate", e), 
                         this.multiDatesPicker.changed = !0), "normal" == this.multiDatesPicker.mode && this.multiDatesPicker.pickableRange) if (this.multiDatesPicker.dates.picked.length > 0) {
                             var s = this.multiDatesPicker.dates.picked[0], o = new Date(s.getTime());
-                            if (h.sumDays(o, this.multiDatesPicker.pickableRange - 1), this.multiDatesPicker.adjustRangeToDisabled) {
+                            if (u.sumDays(o, this.multiDatesPicker.pickableRange - 1), this.multiDatesPicker.adjustRangeToDisabled) {
                                 var a, r = this.multiDatesPicker.dates.disabled.slice(0);
                                 do {
                                     a = 0;
@@ -14561,8 +14385,8 @@ function VerificarHorario(t, e) {
                 this.multiDatesPicker.originalBeforeShowDay = e.beforeShowDay, this.multiDatesPicker.originalOnClose = e.onClose, 
                 i.datepicker(e), this.multiDatesPicker.minDate = t.datepicker._determineDate(this, e.minDate, null), 
                 this.multiDatesPicker.maxDate = t.datepicker._determineDate(this, e.maxDate, null), 
-                e.addDates && h.addDates.call(this, e.addDates), e.addDisabledDates && h.addDates.call(this, e.addDisabledDates, "disabled"), 
-                h.setMode.call(this, e)) : i.datepicker(), i.datepicker("option", n), s && i.multiDatesPicker("value", s);
+                e.addDates && u.addDates.call(this, e.addDates), e.addDisabledDates && u.addDates.call(this, e.addDisabledDates, "disabled"), 
+                u.setMode.call(this, e)) : i.datepicker(), i.datepicker("option", n), s && i.multiDatesPicker("value", s);
                 var o = i.multiDatesPicker("value");
                 i.val(o);
                 var a = i.datepicker("option", "altField");
@@ -14625,15 +14449,15 @@ function VerificarHorario(t, e) {
             },
             gotDate: function(t, e) {
                 e || (e = "picked");
-                for (var i = 0; i < this.multiDatesPicker.dates[e].length; i++) if (0 === h.compareDates.call(this, this.multiDatesPicker.dates[e][i], t)) return i;
+                for (var i = 0; i < this.multiDatesPicker.dates[e].length; i++) if (0 === u.compareDates.call(this, this.multiDatesPicker.dates[e][i], t)) return i;
                 return !1;
             },
             value: function(t) {
                 if (!t || "string" != typeof t) {
-                    var e = h.getDates.call(this, "string");
+                    var e = u.getDates.call(this, "string");
                     return e.length ? e.join(this.multiDatesPicker.separator) : "";
                 }
-                h.addDates.call(this, t.split(this.multiDatesPicker.separator));
+                u.addDates.call(this, t.split(this.multiDatesPicker.separator));
             },
             getDates: function(e, i) {
                 switch (e || (e = "string"), i || (i = "picked"), e) {
@@ -14699,11 +14523,11 @@ function VerificarHorario(t, e) {
                     this.multiDatesPicker.dates[e] = [];
                     var i = this.multiDatesPicker.autoselectRange[1], n = this.multiDatesPicker.autoselectRange[0];
                     i < n && (i = this.multiDatesPicker.autoselectRange[0], n = this.multiDatesPicker.autoselectRange[1]);
-                    for (var s = n; s < i; s++) h.addDates.call(this, h.sumDays.call(this, t, s), e);
+                    for (var s = n; s < i; s++) u.addDates.call(this, u.sumDays.call(this, t, s), e);
                     break;
 
                   default:
-                    !1 === h.gotDate.call(this, t) ? h.addDates.call(this, t, e) : h.removeDates.call(this, t, e);
+                    !1 === u.gotDate.call(this, t) ? u.addDates.call(this, t, e) : u.removeDates.call(this, t, e);
                 }
             },
             setMode: function(e) {
@@ -14732,7 +14556,7 @@ function VerificarHorario(t, e) {
                     }
                     n > 0 && t.error("Some mandatory options not specified!");
                 }
-                u.onSelect && u.onSelect();
+                h.onSelect && h.onSelect();
             },
             destroy: function() {
                 this.multiDatesPicker = null, t(this).datepicker("destroy");
@@ -14747,15 +14571,15 @@ function VerificarHorario(t, e) {
                 },
                 mode: "normal",
                 adjustRangeToDisabled: !0
-            }), h[e]) {
-                var n = h[e].apply(this, Array.prototype.slice.call(r, 1));
+            }), u[e]) {
+                var n = u[e].apply(this, Array.prototype.slice.call(r, 1));
                 switch (e) {
                   case "removeDates":
                   case "removeIndexes":
                   case "resetDates":
                   case "toggleDate":
                   case "addDates":
-                    var s = i.datepicker("option", "altField"), o = h.value.call(this);
+                    var s = i.datepicker("option", "altField"), o = u.value.call(this);
                     void 0 !== s && "" != s && t(s).val(o), i.val(o), t.datepicker._refreshDatepicker(this);
                 }
                 switch (e) {
@@ -14771,7 +14595,7 @@ function VerificarHorario(t, e) {
                 return n;
             }
             return "object" != typeof e && e ? (t.error("Method " + e + " does not exist on jQuery.multiDatesPicker"), 
-            !1) : h.init.apply(this, r);
+            !1) : u.init.apply(this, r);
         }), l;
     };
     var e = new Date().getTime();
@@ -14787,7 +14611,7 @@ function VerificarHorario(t, e) {
 }), function(t) {
     "function" == typeof define && define.amd ? define([ "jquery" ], t) : t("object" == typeof exports ? require("jquery") : window.jQuery || window.Zepto);
 }(function(t) {
-    var e, i, n, s, o, a, r = function() {}, l = !!window.jQuery, u = t(window), h = function(t, i) {
+    var e, i, n, s, o, a, r = function() {}, l = !!window.jQuery, h = t(window), u = function(t, i) {
         e.ev.on("mfp" + t + ".mfp", i);
     }, c = function(e, i, n, s) {
         var o = document.createElement("div");
@@ -14841,7 +14665,7 @@ function VerificarHorario(t, e) {
                         var f = l[s];
                         f = f.charAt(0).toUpperCase() + f.slice(1), e["init" + f].call(e);
                     }
-                    d("BeforeOpen"), e.st.showCloseBtn && (e.st.closeBtnInside ? (h("MarkupParse", function(t, e, i, n) {
+                    d("BeforeOpen"), e.st.showCloseBtn && (e.st.closeBtnInside ? (u("MarkupParse", function(t, e, i, n) {
                         i.close_replaceWith = p(n.type);
                     }), o += " mfp-close-btn-in") : e.wrap.append(p())), e.st.alignTop && (o += " mfp-align-top"), 
                     e.fixedContentPos ? e.wrap.css({
@@ -14849,24 +14673,24 @@ function VerificarHorario(t, e) {
                         overflowX: "hidden",
                         overflowY: e.st.overflowY
                     }) : e.wrap.css({
-                        top: u.scrollTop(),
+                        top: h.scrollTop(),
                         position: "absolute"
                     }), (!1 === e.st.fixedBgPos || "auto" === e.st.fixedBgPos && !e.fixedContentPos) && e.bgOverlay.css({
                         height: n.height(),
                         position: "absolute"
                     }), e.st.enableEscapeKey && n.on("keyup.mfp", function(t) {
                         27 === t.keyCode && e.close();
-                    }), u.on("resize.mfp", function() {
+                    }), h.on("resize.mfp", function() {
                         e.updateSize();
                     }), e.st.closeOnContentClick || (o += " mfp-auto-cursor"), o && e.wrap.addClass(o);
-                    var m = e.wH = u.height(), g = {};
+                    var m = e.wH = h.height(), g = {};
                     if (e.fixedContentPos && e._hasScrollBar(m)) {
                         var v = e._getScrollbarSize();
                         v && (g.marginRight = v);
                     }
                     e.fixedContentPos && (e.isIE7 ? t("body, html").css("overflow", "hidden") : g.overflow = "hidden");
-                    var y = e.st.mainClass;
-                    return e.isIE7 && (y += " mfp-ie7"), y && e._addClassToMFP(y), e.updateItemHTML(), 
+                    var b = e.st.mainClass;
+                    return e.isIE7 && (b += " mfp-ie7"), b && e._addClassToMFP(b), e.updateItemHTML(), 
                     d("BuildControls"), t("html").css(g), e.bgOverlay.add(e.wrap).prependTo(e.st.prependTo || t(document.body)), 
                     e._lastFocusedEl = document.activeElement, setTimeout(function() {
                         e.content ? (e._addClassToMFP("mfp-ready"), e._setFocus()) : e.bgOverlay.addClass("mfp-ready"), 
@@ -14902,7 +14726,7 @@ function VerificarHorario(t, e) {
             if (e.isIOS) {
                 var i = document.documentElement.clientWidth / window.innerWidth, n = window.innerHeight * i;
                 e.wrap.css("height", n), e.wH = n;
-            } else e.wH = t || u.height();
+            } else e.wH = t || h.height();
             e.fixedContentPos || e.wrap.css("height", e.wH), d("Resize");
         },
         updateItemHTML: function() {
@@ -14954,7 +14778,7 @@ function VerificarHorario(t, e) {
                 var o = void 0 !== s.disableOn ? s.disableOn : t.magnificPopup.defaults.disableOn;
                 if (o) if (t.isFunction(o)) {
                     if (!o.call(e)) return !0;
-                } else if (u.width() < o) return !0;
+                } else if (h.width() < o) return !0;
                 i.type && (i.preventDefault(), e.isOpen && i.stopPropagation()), s.el = t(i.mfpEl), 
                 s.delegate && (s.items = n.find(s.delegate)), e.open(s);
             }
@@ -14989,7 +14813,7 @@ function VerificarHorario(t, e) {
             this.bgOverlay.removeClass(t), e.wrap.removeClass(t);
         },
         _hasScrollBar: function(t) {
-            return (e.isIE7 ? n.height() : document.body.scrollHeight) > (t || u.height());
+            return (e.isIE7 ? n.height() : document.body.scrollHeight) > (t || h.height());
         },
         _setFocus: function() {
             (e.st.focus ? e.content.find(e.st.focus).eq(0) : e.wrap).focus();
@@ -15070,8 +14894,8 @@ function VerificarHorario(t, e) {
         l ? n.data("magnificPopup", i) : n[0].magnificPopup = i, e.addGroup(n, i);
         return n;
     };
-    var g, v, y, b = function() {
-        y && (v.after(y.addClass(g)).detach(), y = null);
+    var g, v, b, y = function() {
+        b && (v.after(b.addClass(g)).detach(), b = null);
     };
     t.magnificPopup.registerModule("inline", {
         options: {
@@ -15081,16 +14905,16 @@ function VerificarHorario(t, e) {
         },
         proto: {
             initInline: function() {
-                e.types.push("inline"), h("Close.inline", function() {
-                    b();
+                e.types.push("inline"), u("Close.inline", function() {
+                    y();
                 });
             },
             getInline: function(i, n) {
-                if (b(), i.src) {
+                if (y(), i.src) {
                     var s = e.st.inline, o = t(i.src);
                     if (o.length) {
                         var a = o[0].parentNode;
-                        a && a.tagName && (v || (g = s.hiddenClass, v = c(g), g = "mfp-" + g), y = o.after(v).detach().removeClass(g)), 
+                        a && a.tagName && (v || (g = s.hiddenClass, v = c(g), g = "mfp-" + g), b = o.after(v).detach().removeClass(g)), 
                         e.updateStatus("ready");
                     } else e.updateStatus("error", s.tNotFound), o = t("<div>");
                     return i.inlineElement = o, o;
@@ -15112,7 +14936,7 @@ function VerificarHorario(t, e) {
         },
         proto: {
             initAjax: function() {
-                e.types.push("ajax"), _ = e.st.ajax.cursor, h("Close.ajax", w), h("BeforeChange.ajax", w);
+                e.types.push("ajax"), _ = e.st.ajax.cursor, u("Close.ajax", w), u("BeforeChange.ajax", w);
             },
             getAjax: function(i) {
                 _ && t(document.body).addClass(_), e.updateStatus("loading");
@@ -15156,11 +14980,11 @@ function VerificarHorario(t, e) {
         proto: {
             initImage: function() {
                 var i = e.st.image, n = ".image";
-                e.types.push("image"), h("Open" + n, function() {
+                e.types.push("image"), u("Open" + n, function() {
                     "image" === e.currItem.type && i.cursor && t(document.body).addClass(i.cursor);
-                }), h("Close" + n, function() {
-                    i.cursor && t(document.body).removeClass(i.cursor), u.off("resize.mfp");
-                }), h("Resize" + n, e.resizeImage), e.isLowIE && h("AfterChange", e.resizeImage);
+                }), u("Close" + n, function() {
+                    i.cursor && t(document.body).removeClass(i.cursor), h.off("resize.mfp");
+                }), u("Resize" + n, e.resizeImage), e.isLowIE && u("AfterChange", e.resizeImage);
             },
             resizeImage: function() {
                 var t = e.currItem;
@@ -15191,10 +15015,10 @@ function VerificarHorario(t, e) {
                     i.hasSize = !0, i.loaded = !0, i.loadError = !0);
                 }, r = e.st.image, l = n.find(".mfp-img");
                 if (l.length) {
-                    var u = document.createElement("img");
-                    u.className = "mfp-img", i.el && i.el.find("img").length && (u.alt = i.el.find("img").attr("alt")), 
-                    i.img = t(u).on("load.mfploader", o).on("error.mfploader", a), u.src = i.src, l.is("img") && (i.img = i.img.clone()), 
-                    (u = i.img[0]).naturalWidth > 0 ? i.hasSize = !0 : u.width || (i.hasSize = !1);
+                    var h = document.createElement("img");
+                    h.className = "mfp-img", i.el && i.el.find("img").length && (h.alt = i.el.find("img").attr("alt")), 
+                    i.img = t(h).on("load.mfploader", o).on("error.mfploader", a), h.src = i.src, l.is("img") && (i.img = i.img.clone()), 
+                    (h = i.img[0]).naturalWidth > 0 ? i.hasSize = !0 : h.width || (i.hasSize = !1);
                 }
                 return e._parseMarkup(n, {
                     title: k(i),
@@ -15235,7 +15059,7 @@ function VerificarHorario(t, e) {
                     }, l = function() {
                         e.content.css("visibility", "visible");
                     };
-                    h("BuildControls" + n, function() {
+                    u("BuildControls" + n, function() {
                         if (e._allowZoom()) {
                             if (clearTimeout(s), e.content.css("visibility", "hidden"), !(t = e._getItemToZoom())) return void l();
                             (o = r(t)).css(e._getOffset()), e.wrap.append(o), s = setTimeout(function() {
@@ -15246,7 +15070,7 @@ function VerificarHorario(t, e) {
                                 }, a);
                             }, 16);
                         }
-                    }), h("BeforeClose" + n, function() {
+                    }), u("BeforeClose" + n, function() {
                         if (e._allowZoom()) {
                             if (clearTimeout(s), e.st.removalDelay = a, !t) {
                                 if (!(t = e._getItemToZoom())) return;
@@ -15257,7 +15081,7 @@ function VerificarHorario(t, e) {
                                 o.css(e._getOffset());
                             }, 16);
                         }
-                    }), h("Close" + n, function() {
+                    }), u("Close" + n, function() {
                         e._allowZoom() && (l(), o && o.remove(), t = null);
                     });
                 }
@@ -15309,9 +15133,9 @@ function VerificarHorario(t, e) {
         },
         proto: {
             initIframe: function() {
-                e.types.push("iframe"), h("BeforeChange", function(t, e, i) {
+                e.types.push("iframe"), u("BeforeChange", function(t, e, i) {
                     e !== i && ("iframe" === e ? S() : "iframe" === i && S(!0));
-                }), h("Close.iframe", function() {
+                }), u("Close.iframe", function() {
                     S();
                 });
             },
@@ -15348,18 +15172,18 @@ function VerificarHorario(t, e) {
             initGallery: function() {
                 var i = e.st.gallery, s = ".mfp-gallery";
                 if (e.direction = !0, !i || !i.enabled) return !1;
-                o += " mfp-gallery", h("Open" + s, function() {
+                o += " mfp-gallery", u("Open" + s, function() {
                     i.navigateByImgClick && e.wrap.on("click" + s, ".mfp-img", function() {
                         if (e.items.length > 1) return e.next(), !1;
                     }), n.on("keydown" + s, function(t) {
                         37 === t.keyCode ? e.prev() : 39 === t.keyCode && e.next();
                     });
-                }), h("UpdateStatus" + s, function(t, i) {
+                }), u("UpdateStatus" + s, function(t, i) {
                     i.text && (i.text = P(i.text, e.currItem.index, e.items.length));
-                }), h("MarkupParse" + s, function(t, n, s, o) {
+                }), u("MarkupParse" + s, function(t, n, s, o) {
                     var a = e.items.length;
                     s.counter = a > 1 ? P(i.tCounter, o.index, a) : "";
-                }), h("BuildControls" + s, function() {
+                }), u("BuildControls" + s, function() {
                     if (e.items.length > 1 && i.arrows && !e.arrowLeft) {
                         var n = i.arrowMarkup, s = e.arrowLeft = t(n.replace(/%title%/gi, i.tPrev).replace(/%dir%/gi, "left")).addClass("mfp-prevent-close"), o = e.arrowRight = t(n.replace(/%title%/gi, i.tNext).replace(/%dir%/gi, "right")).addClass("mfp-prevent-close");
                         s.click(function() {
@@ -15368,11 +15192,11 @@ function VerificarHorario(t, e) {
                             e.next();
                         }), e.container.append(s.add(o));
                     }
-                }), h("Change" + s, function() {
+                }), u("Change" + s, function() {
                     e._preloadTimeout && clearTimeout(e._preloadTimeout), e._preloadTimeout = setTimeout(function() {
                         e.preloadNearbyImages(), e._preloadTimeout = null;
                     }, 16);
-                }), h("Close" + s, function() {
+                }), u("Close" + s, function() {
                     n.off(s), e.wrap.off("click" + s), e.arrowRight = e.arrowLeft = null;
                 });
             },
@@ -15415,19 +15239,664 @@ function VerificarHorario(t, e) {
             initRetina: function() {
                 if (window.devicePixelRatio > 1) {
                     var t = e.st.retina, i = t.ratio;
-                    (i = isNaN(i) ? i() : i) > 1 && (h("ImageHasSize.retina", function(t, e) {
+                    (i = isNaN(i) ? i() : i) > 1 && (u("ImageHasSize.retina", function(t, e) {
                         e.img.css({
                             "max-width": e.img[0].naturalWidth / i,
                             width: "100%"
                         });
-                    }), h("ElementParse.retina", function(e, n) {
+                    }), u("ElementParse.retina", function(e, n) {
                         n.src = t.replaceSrc(n, i);
                     }));
                 }
             }
         }
     }), f();
-}), function(t) {
+}), "undefined" == typeof jQuery) throw new Error("jquery-confirm requires jQuery");
+
+var jconfirm, Jconfirm;
+
+!function(t, e) {
+    t.fn.confirm = function(e, i) {
+        return void 0 === e && (e = {}), "string" == typeof e && (e = {
+            content: e,
+            title: i || !1
+        }), t(this).each(function() {
+            var i = t(this);
+            i.attr("jc-attached") ? console.warn("jConfirm has already been attached to this element ", i[0]) : (i.on("click", function(n) {
+                n.preventDefault();
+                var s = t.extend({}, e);
+                if (i.attr("data-title") && (s.title = i.attr("data-title")), i.attr("data-content") && (s.content = i.attr("data-content")), 
+                void 0 === s.buttons && (s.buttons = {}), s.$target = i, i.attr("href") && 0 == Object.keys(s.buttons).length) {
+                    var o = t.extend(!0, {}, jconfirm.pluginDefaults.defaultButtons, (jconfirm.defaults || {}).defaultButtons || {}), a = Object.keys(o)[0];
+                    s.buttons = o, s.buttons[a].action = function() {
+                        location.href = i.attr("href");
+                    };
+                }
+                s.closeIcon = !1;
+                t.confirm(s);
+            }), i.attr("jc-attached", !0));
+        }), t(this);
+    }, t.confirm = function(e, i) {
+        if (void 0 === e && (e = {}), "string" == typeof e && (e = {
+            content: e,
+            title: i || !1
+        }), "object" != typeof e.buttons && (e.buttons = {}), 0 == Object.keys(e.buttons).length) {
+            var n = t.extend(!0, {}, jconfirm.pluginDefaults.defaultButtons, (jconfirm.defaults || {}).defaultButtons || {});
+            e.buttons = n;
+        }
+        return jconfirm(e);
+    }, t.alert = function(e, i) {
+        if (void 0 === e && (e = {}), "string" == typeof e && (e = {
+            content: e,
+            title: i || !1
+        }), "object" != typeof e.buttons && (e.buttons = {}), 0 == Object.keys(e.buttons).length) {
+            var n = t.extend(!0, {}, jconfirm.pluginDefaults.defaultButtons, (jconfirm.defaults || {}).defaultButtons || {}), s = Object.keys(n)[0];
+            e.buttons[s] = n[s];
+        }
+        return jconfirm(e);
+    }, t.dialog = function(t, e) {
+        return void 0 === t && (t = {}), "string" == typeof t && (t = {
+            content: t,
+            title: e || !1,
+            closeIcon: function() {}
+        }), t.buttons = {}, void 0 === t.closeIcon && (t.closeIcon = function() {}), t.confirmKeys = [ 13 ], 
+        jconfirm(t);
+    }, jconfirm = function(e) {
+        void 0 === e && (e = {});
+        var i = t.extend(!0, {}, jconfirm.pluginDefaults);
+        jconfirm.defaults && (i = t.extend(!0, i, jconfirm.defaults)), i = t.extend(!0, {}, i, e);
+        var n = new Jconfirm(i);
+        return jconfirm.instances.push(n), n;
+    }, (Jconfirm = function(e) {
+        t.extend(this, e), this._init();
+    }).prototype = {
+        _init: function() {
+            var e = this;
+            jconfirm.instances.length || (jconfirm.lastFocused = t("body").find(":focus")), 
+            this._id = Math.round(99999 * Math.random()), this.contentParsed = t(document.createElement("div")), 
+            this.lazyOpen || setTimeout(function() {
+                e.open();
+            }, 0);
+        },
+        _buildHTML: function() {
+            var e = this;
+            this._parseAnimation(this.animation, "o"), this._parseAnimation(this.closeAnimation, "c"), 
+            this._parseBgDismissAnimation(this.backgroundDismissAnimation), this._parseColumnClass(this.columnClass), 
+            this._parseTheme(this.theme), this._parseType(this.type);
+            var i = t(this.template);
+            i.find(".jconfirm-box").addClass(this.animationParsed).addClass(this.backgroundDismissAnimationParsed).addClass(this.typeParsed), 
+            this.typeAnimated && i.find(".jconfirm-box").addClass("jconfirm-type-animated"), 
+            this.useBootstrap ? (i.find(".jc-bs3-row").addClass(this.bootstrapClasses.row), 
+            i.find(".jc-bs3-row").addClass("justify-content-md-center justify-content-sm-center justify-content-xs-center justify-content-lg-center"), 
+            i.find(".jconfirm-box-container").addClass(this.columnClassParsed), this.containerFluid ? i.find(".jc-bs3-container").addClass(this.bootstrapClasses.containerFluid) : i.find(".jc-bs3-container").addClass(this.bootstrapClasses.container)) : i.find(".jconfirm-box").css("width", this.boxWidth), 
+            this.titleClass && i.find(".jconfirm-title-c").addClass(this.titleClass), i.addClass(this.themeParsed);
+            var n = "jconfirm-box" + this._id;
+            i.find(".jconfirm-box").attr("aria-labelledby", n).attr("tabindex", -1), i.find(".jconfirm-content").attr("id", n), 
+            null !== this.bgOpacity && i.find(".jconfirm-bg").css("opacity", this.bgOpacity), 
+            this.rtl && i.addClass("jconfirm-rtl"), this.$el = i.appendTo(this.container), this.$jconfirmBoxContainer = this.$el.find(".jconfirm-box-container"), 
+            this.$jconfirmBox = this.$body = this.$el.find(".jconfirm-box"), this.$jconfirmBg = this.$el.find(".jconfirm-bg"), 
+            this.$title = this.$el.find(".jconfirm-title"), this.$titleContainer = this.$el.find(".jconfirm-title-c"), 
+            this.$content = this.$el.find("div.jconfirm-content"), this.$contentPane = this.$el.find(".jconfirm-content-pane"), 
+            this.$icon = this.$el.find(".jconfirm-icon-c"), this.$closeIcon = this.$el.find(".jconfirm-closeIcon"), 
+            this.$holder = this.$el.find(".jconfirm-holder"), this.$btnc = this.$el.find(".jconfirm-buttons"), 
+            this.$scrollPane = this.$el.find(".jconfirm-scrollpane"), e.setStartingPoint(), 
+            this._contentReady = t.Deferred(), this._modalReady = t.Deferred(), this.$holder.css({
+                "padding-top": this.offsetTop,
+                "padding-bottom": this.offsetBottom
+            }), this.setTitle(), this.setIcon(), this._setButtons(), this._parseContent(), this.initDraggable(), 
+            this.isAjax && this.showLoading(!1), t.when(this._contentReady, this._modalReady).then(function() {
+                e.isAjaxLoading ? setTimeout(function() {
+                    e.isAjaxLoading = !1, e.setContent(), e.setTitle(), e.setIcon(), setTimeout(function() {
+                        e.hideLoading(!1), e._updateContentMaxHeight();
+                    }, 100), "function" == typeof e.onContentReady && e.onContentReady();
+                }, 50) : (e._updateContentMaxHeight(), e.setTitle(), e.setIcon(), "function" == typeof e.onContentReady && e.onContentReady()), 
+                e.autoClose && e._startCountDown();
+            }), this._watchContent(), "none" === this.animation && (this.animationSpeed = 1, 
+            this.animationBounce = 1), this.$body.css(this._getCSS(this.animationSpeed, this.animationBounce)), 
+            this.$contentPane.css(this._getCSS(this.animationSpeed, 1)), this.$jconfirmBg.css(this._getCSS(this.animationSpeed, 1)), 
+            this.$jconfirmBoxContainer.css(this._getCSS(this.animationSpeed, 1));
+        },
+        _typePrefix: "jconfirm-type-",
+        typeParsed: "",
+        _parseType: function(t) {
+            this.typeParsed = this._typePrefix + t;
+        },
+        setType: function(t) {
+            var e = this.typeParsed;
+            this._parseType(t), this.$jconfirmBox.removeClass(e).addClass(this.typeParsed);
+        },
+        themeParsed: "",
+        _themePrefix: "jconfirm-",
+        setTheme: function(t) {
+            var e = this.theme;
+            this.theme = t || this.theme, this._parseTheme(this.theme), e && this.$el.removeClass(e), 
+            this.$el.addClass(this.themeParsed), this.theme = t;
+        },
+        _parseTheme: function(e) {
+            var i = this;
+            e = e.split(","), t.each(e, function(n, s) {
+                -1 === s.indexOf(i._themePrefix) && (e[n] = i._themePrefix + t.trim(s));
+            }), this.themeParsed = e.join(" ").toLowerCase();
+        },
+        backgroundDismissAnimationParsed: "",
+        _bgDismissPrefix: "jconfirm-hilight-",
+        _parseBgDismissAnimation: function(e) {
+            var i = e.split(","), n = this;
+            t.each(i, function(e, s) {
+                -1 === s.indexOf(n._bgDismissPrefix) && (i[e] = n._bgDismissPrefix + t.trim(s));
+            }), this.backgroundDismissAnimationParsed = i.join(" ").toLowerCase();
+        },
+        animationParsed: "",
+        closeAnimationParsed: "",
+        _animationPrefix: "jconfirm-animation-",
+        setAnimation: function(t) {
+            this.animation = t || this.animation, this._parseAnimation(this.animation, "o");
+        },
+        _parseAnimation: function(e, i) {
+            i = i || "o";
+            var n = e.split(","), s = this;
+            t.each(n, function(e, i) {
+                -1 === i.indexOf(s._animationPrefix) && (n[e] = s._animationPrefix + t.trim(i));
+            });
+            var o = n.join(" ").toLowerCase();
+            return "o" === i ? this.animationParsed = o : this.closeAnimationParsed = o, o;
+        },
+        setCloseAnimation: function(t) {
+            this.closeAnimation = t || this.closeAnimation, this._parseAnimation(this.closeAnimation, "c");
+        },
+        setAnimationSpeed: function(t) {
+            this.animationSpeed = t || this.animationSpeed;
+        },
+        columnClassParsed: "",
+        setColumnClass: function(t) {
+            this.useBootstrap ? (this.columnClass = t || this.columnClass, this._parseColumnClass(this.columnClass), 
+            this.$jconfirmBoxContainer.addClass(this.columnClassParsed)) : console.warn("cannot set columnClass, useBootstrap is set to false");
+        },
+        _updateContentMaxHeight: function() {
+            var i = t(e).height() - (this.$jconfirmBox.outerHeight() - this.$contentPane.outerHeight()) - (this.offsetTop + this.offsetBottom);
+            this.$contentPane.css({
+                "max-height": i + "px"
+            });
+        },
+        setBoxWidth: function(t) {
+            this.useBootstrap ? console.warn("cannot set boxWidth, useBootstrap is set to true") : (this.boxWidth = t, 
+            this.$jconfirmBox.css("width", t));
+        },
+        _parseColumnClass: function(t) {
+            var e;
+            switch (t = t.toLowerCase()) {
+              case "xl":
+              case "xlarge":
+                e = "col-md-12";
+                break;
+
+              case "l":
+              case "large":
+                e = "col-md-8 col-md-offset-2";
+                break;
+
+              case "m":
+              case "medium":
+                e = "col-md-6 col-md-offset-3";
+                break;
+
+              case "s":
+              case "small":
+                e = "col-md-4 col-md-offset-4";
+                break;
+
+              case "xs":
+              case "xsmall":
+                e = "col-md-2 col-md-offset-5";
+                break;
+
+              default:
+                e = t;
+            }
+            this.columnClassParsed = e;
+        },
+        initDraggable: function() {
+            var i = this, n = this.$titleContainer;
+            this.resetDrag(), this.draggable && (n.on("mousedown", function(t) {
+                n.addClass("jconfirm-hand"), i.mouseX = t.clientX, i.mouseY = t.clientY, i.isDrag = !0;
+            }), t(e).on("mousemove." + this._id, function(t) {
+                i.isDrag && (i.movingX = t.clientX - i.mouseX + i.initialX, i.movingY = t.clientY - i.mouseY + i.initialY, 
+                i.setDrag());
+            }), t(e).on("mouseup." + this._id, function() {
+                n.removeClass("jconfirm-hand"), i.isDrag && (i.isDrag = !1, i.initialX = i.movingX, 
+                i.initialY = i.movingY);
+            }));
+        },
+        resetDrag: function() {
+            this.isDrag = !1, this.initialX = 0, this.initialY = 0, this.movingX = 0, this.movingY = 0, 
+            this.mouseX = 0, this.mouseY = 0, this.$jconfirmBoxContainer.css("transform", "translate(0px, 0px)");
+        },
+        setDrag: function() {
+            if (this.draggable) {
+                this.alignMiddle = !1;
+                var i = this.$jconfirmBox.outerWidth(), n = this.$jconfirmBox.outerHeight(), s = t(e).width(), o = t(e).height(), a = this;
+                if (a.movingX % 1 == 0 || a.movingY % 1 == 0) {
+                    if (a.dragWindowBorder) {
+                        var r = s / 2 - i / 2, l = o / 2 - n / 2;
+                        l -= a.dragWindowGap, (r -= a.dragWindowGap) + a.movingX < 0 ? a.movingX = -r : r - a.movingX < 0 && (a.movingX = r), 
+                        l + a.movingY < 0 ? a.movingY = -l : l - a.movingY < 0 && (a.movingY = l);
+                    }
+                    a.$jconfirmBoxContainer.css("transform", "translate(" + a.movingX + "px, " + a.movingY + "px)");
+                }
+            }
+        },
+        _scrollTop: function() {
+            if ("undefined" != typeof pageYOffset) return pageYOffset;
+            var t = document.body, e = document.documentElement;
+            return (e = e.clientHeight ? e : t).scrollTop;
+        },
+        _watchContent: function() {
+            var i = this;
+            this._timer && clearInterval(this._timer);
+            var n = 0;
+            this._timer = setInterval(function() {
+                if (i.smoothContent) {
+                    var s = i.$content.outerHeight() || 0;
+                    s !== n && (i.$contentPane.css({
+                        height: s
+                    }).scrollTop(0), n = s);
+                    var o = t(e).height();
+                    i.offsetTop + i.offsetBottom + i.$jconfirmBox.height() - i.$contentPane.height() + i.$content.height() < o ? i.$contentPane.addClass("no-scroll") : i.$contentPane.removeClass("no-scroll");
+                }
+            }, this.watchInterval);
+        },
+        _overflowClass: "jconfirm-overflow",
+        _hilightAnimating: !1,
+        highlight: function() {
+            this.hiLightModal();
+        },
+        hiLightModal: function() {
+            var t = this;
+            if (!this._hilightAnimating) {
+                t.$body.addClass("hilight");
+                var e = parseFloat(t.$body.css("animation-duration")) || 2;
+                this._hilightAnimating = !0, setTimeout(function() {
+                    t._hilightAnimating = !1, t.$body.removeClass("hilight");
+                }, 1e3 * e);
+            }
+        },
+        _bindEvents: function() {
+            var i = this;
+            this.boxClicked = !1, this.$scrollPane.click(function(t) {
+                if (!i.boxClicked) {
+                    var e, n = !1, s = !1;
+                    if (e = "function" == typeof i.backgroundDismiss ? i.backgroundDismiss() : i.backgroundDismiss, 
+                    "string" == typeof e && void 0 !== i.buttons[e] ? (n = e, s = !1) : s = void 0 === e || 1 == !!e, 
+                    n) {
+                        var o = i.buttons[n].action.apply(i);
+                        s = void 0 === o || !!o;
+                    }
+                    s ? i.close() : i.hiLightModal();
+                }
+                i.boxClicked = !1;
+            }), this.$jconfirmBox.click(function(t) {
+                i.boxClicked = !0;
+            });
+            var n = !1;
+            t(e).on("jcKeyDown." + i._id, function(t) {
+                n || (n = !0);
+            }), t(e).on("keyup." + i._id, function(t) {
+                n && (i.reactOnKey(t), n = !1);
+            }), t(e).on("resize." + this._id, function() {
+                i._updateContentMaxHeight(), setTimeout(function() {
+                    i.resetDrag();
+                }, 100);
+            });
+        },
+        _cubic_bezier: "0.36, 0.55, 0.19",
+        _getCSS: function(t, e) {
+            return {
+                "-webkit-transition-duration": t / 1e3 + "s",
+                "transition-duration": t / 1e3 + "s",
+                "-webkit-transition-timing-function": "cubic-bezier(" + this._cubic_bezier + ", " + e + ")",
+                "transition-timing-function": "cubic-bezier(" + this._cubic_bezier + ", " + e + ")"
+            };
+        },
+        _setButtons: function() {
+            var e = this, i = 0;
+            if ("object" != typeof this.buttons && (this.buttons = {}), t.each(this.buttons, function(n, s) {
+                i += 1, "function" == typeof s && (e.buttons[n] = s = {
+                    action: s
+                }), e.buttons[n].text = s.text || n, e.buttons[n].btnClass = s.btnClass || "btn-default", 
+                e.buttons[n].action = s.action || function() {}, e.buttons[n].keys = s.keys || [], 
+                e.buttons[n].isHidden = s.isHidden || !1, e.buttons[n].isDisabled = s.isDisabled || !1, 
+                t.each(e.buttons[n].keys, function(t, i) {
+                    e.buttons[n].keys[t] = i.toLowerCase();
+                });
+                var o = t('<button type="button" class="btn"></button>').html(e.buttons[n].text).addClass(e.buttons[n].btnClass).prop("disabled", e.buttons[n].isDisabled).css("display", e.buttons[n].isHidden ? "none" : "").click(function(t) {
+                    t.preventDefault();
+                    var i = e.buttons[n].action.apply(e, [ e.buttons[n] ]);
+                    e.onAction.apply(e, [ n, e.buttons[n] ]), e._stopCountDown(), (void 0 === i || i) && e.close();
+                });
+                e.buttons[n].el = o, e.buttons[n].setText = function(t) {
+                    o.html(t);
+                }, e.buttons[n].addClass = function(t) {
+                    o.addClass(t);
+                }, e.buttons[n].removeClass = function(t) {
+                    o.removeClass(t);
+                }, e.buttons[n].disable = function() {
+                    e.buttons[n].isDisabled = !0, o.prop("disabled", !0);
+                }, e.buttons[n].enable = function() {
+                    e.buttons[n].isDisabled = !1, o.prop("disabled", !1);
+                }, e.buttons[n].show = function() {
+                    e.buttons[n].isHidden = !1, o.css("display", "");
+                }, e.buttons[n].hide = function() {
+                    e.buttons[n].isHidden = !0, o.css("display", "none");
+                }, e["$_" + n] = e["$$" + n] = o, e.$btnc.append(o);
+            }), 0 === i && this.$btnc.hide(), null === this.closeIcon && 0 === i && (this.closeIcon = !0), 
+            this.closeIcon) {
+                if (this.closeIconClass) {
+                    var n = '<i class="' + this.closeIconClass + '"></i>';
+                    this.$closeIcon.html(n);
+                }
+                this.$closeIcon.click(function(t) {
+                    t.preventDefault();
+                    var i, n = !1, s = !1;
+                    if (i = "function" == typeof e.closeIcon ? e.closeIcon() : e.closeIcon, "string" == typeof i && void 0 !== e.buttons[i] ? (n = i, 
+                    s = !1) : s = void 0 === i || 1 == !!i, n) {
+                        var o = e.buttons[n].action.apply(e);
+                        s = void 0 === o || !!o;
+                    }
+                    s && e.close();
+                }), this.$closeIcon.show();
+            } else this.$closeIcon.hide();
+        },
+        setTitle: function(t, e) {
+            if (e = e || !1, void 0 !== t) if ("string" == typeof t) this.title = t; else if ("function" == typeof t) {
+                "function" == typeof t.promise && console.error("Promise was returned from title function, this is not supported.");
+                var i = t();
+                this.title = "string" == typeof i && i;
+            } else this.title = !1;
+            this.isAjaxLoading && !e || (this.$title.html(this.title || ""), this.updateTitleContainer());
+        },
+        setIcon: function(t, e) {
+            if (e = e || !1, void 0 !== t) if ("string" == typeof t) this.icon = t; else if ("function" == typeof t) {
+                var i = t();
+                this.icon = "string" == typeof i && i;
+            } else this.icon = !1;
+            this.isAjaxLoading && !e || (this.$icon.html(this.icon ? '<i class="' + this.icon + '"></i>' : ""), 
+            this.updateTitleContainer());
+        },
+        updateTitleContainer: function() {
+            this.title || this.icon ? this.$titleContainer.show() : this.$titleContainer.hide();
+        },
+        setContentPrepend: function(t, e) {
+            t && this.contentParsed.prepend(t);
+        },
+        setContentAppend: function(t) {
+            t && this.contentParsed.append(t);
+        },
+        setContent: function(t, e) {
+            e = !!e;
+            var i = this;
+            t && this.contentParsed.html("").append(t), this.isAjaxLoading && !e || (this.$content.html(""), 
+            this.$content.append(this.contentParsed), setTimeout(function() {
+                i.$body.find("input[autofocus]:visible:first").focus();
+            }, 100));
+        },
+        loadingSpinner: !1,
+        showLoading: function(t) {
+            this.loadingSpinner = !0, this.$jconfirmBox.addClass("loading"), t && this.$btnc.find("button").prop("disabled", !0);
+        },
+        hideLoading: function(t) {
+            this.loadingSpinner = !1, this.$jconfirmBox.removeClass("loading"), t && this.$btnc.find("button").prop("disabled", !1);
+        },
+        ajaxResponse: !1,
+        contentParsed: "",
+        isAjax: !1,
+        isAjaxLoading: !1,
+        _parseContent: function() {
+            var e = this, i = "&nbsp;";
+            if ("function" == typeof this.content) {
+                var n = this.content.apply(this);
+                "string" == typeof n ? this.content = n : "object" == typeof n && "function" == typeof n.always ? (this.isAjax = !0, 
+                this.isAjaxLoading = !0, n.always(function(t, i, n) {
+                    e.ajaxResponse = {
+                        data: t,
+                        status: i,
+                        xhr: n
+                    }, e._contentReady.resolve(t, i, n), "function" == typeof e.contentLoaded && e.contentLoaded(t, i, n);
+                }), this.content = i) : this.content = i;
+            }
+            if ("string" == typeof this.content && "url:" === this.content.substr(0, 4).toLowerCase()) {
+                this.isAjax = !0, this.isAjaxLoading = !0;
+                var s = this.content.substring(4, this.content.length);
+                t.get(s).done(function(t) {
+                    e.contentParsed.html(t);
+                }).always(function(t, i, n) {
+                    e.ajaxResponse = {
+                        data: t,
+                        status: i,
+                        xhr: n
+                    }, e._contentReady.resolve(t, i, n), "function" == typeof e.contentLoaded && e.contentLoaded(t, i, n);
+                });
+            }
+            this.content || (this.content = i), this.isAjax || (this.contentParsed.html(this.content), 
+            this.setContent(), e._contentReady.resolve());
+        },
+        _stopCountDown: function() {
+            clearInterval(this.autoCloseInterval), this.$cd && this.$cd.remove();
+        },
+        _startCountDown: function() {
+            var e = this, i = this.autoClose.split("|");
+            if (2 !== i.length) return console.error("Invalid option for autoClose. example 'close|10000'"), 
+            !1;
+            var n = i[0], s = parseInt(i[1]);
+            if (void 0 === this.buttons[n]) return console.error("Invalid button key '" + n + "' for autoClose"), 
+            !1;
+            var o = Math.ceil(s / 1e3);
+            this.$cd = t('<span class="countdown"> (' + o + ")</span>").appendTo(this["$_" + n]), 
+            this.autoCloseInterval = setInterval(function() {
+                e.$cd.html(" (" + (o -= 1) + ") "), o <= 0 && (e["$$" + n].trigger("click"), e._stopCountDown());
+            }, 1e3);
+        },
+        _getKey: function(t) {
+            switch (t) {
+              case 192:
+                return "tilde";
+
+              case 13:
+                return "enter";
+
+              case 16:
+                return "shift";
+
+              case 9:
+                return "tab";
+
+              case 20:
+                return "capslock";
+
+              case 17:
+                return "ctrl";
+
+              case 91:
+                return "win";
+
+              case 18:
+                return "alt";
+
+              case 27:
+                return "esc";
+
+              case 32:
+                return "space";
+            }
+            var e = String.fromCharCode(t);
+            return !!/^[A-z0-9]+$/.test(e) && e.toLowerCase();
+        },
+        reactOnKey: function(e) {
+            var i = this, n = t(".jconfirm");
+            if (n.eq(n.length - 1)[0] !== this.$el[0]) return !1;
+            var s = e.which;
+            if (this.$content.find(":input").is(":focus") && /13|32/.test(s)) return !1;
+            var o = this._getKey(s);
+            if ("esc" === o && this.escapeKey) if (!0 === this.escapeKey) this.$scrollPane.trigger("click"); else if ("string" == typeof this.escapeKey || "function" == typeof this.escapeKey) {
+                var a;
+                (a = "function" == typeof this.escapeKey ? this.escapeKey() : this.escapeKey) && (void 0 === this.buttons[a] ? console.warn("Invalid escapeKey, no buttons found with key " + a) : this["$_" + a].trigger("click"));
+            }
+            t.each(this.buttons, function(t, e) {
+                -1 != e.keys.indexOf(o) && i["$_" + t].trigger("click");
+            });
+        },
+        setDialogCenter: function() {
+            console.info("setDialogCenter is deprecated, dialogs are centered with CSS3 tables");
+        },
+        _unwatchContent: function() {
+            clearInterval(this._timer);
+        },
+        close: function() {
+            var i = this;
+            return "function" == typeof this.onClose && this.onClose(), this._unwatchContent(), 
+            t(e).unbind("resize." + this._id), t(e).unbind("keyup." + this._id), t(e).unbind("jcKeyDown." + this._id), 
+            this.draggable && (t(e).unbind("mousemove." + this._id), t(e).unbind("mouseup." + this._id), 
+            this.$titleContainer.unbind("mousedown")), i.$el.removeClass(i.loadedClass), t("body").removeClass("jconfirm-no-scroll-" + i._id), 
+            i.$jconfirmBoxContainer.removeClass("jconfirm-no-transition"), setTimeout(function() {
+                i.$body.addClass(i.closeAnimationParsed), i.$jconfirmBg.addClass("jconfirm-bg-h");
+                var n = "none" === i.closeAnimation ? 1 : i.animationSpeed;
+                setTimeout(function() {
+                    i.$el.remove();
+                    jconfirm.instances;
+                    var n = jconfirm.instances.length - 1;
+                    for (n; n >= 0; n--) jconfirm.instances[n]._id === i._id && jconfirm.instances.splice(n, 1);
+                    if (!jconfirm.instances.length && i.scrollToPreviousElement && jconfirm.lastFocused && jconfirm.lastFocused.length && t.contains(document, jconfirm.lastFocused[0])) {
+                        var s = jconfirm.lastFocused;
+                        if (i.scrollToPreviousElementAnimate) {
+                            var o = t(e).scrollTop(), a = jconfirm.lastFocused.offset().top, r = t(e).height();
+                            if (a > o && a < o + r) s.focus(); else {
+                                var l = a - Math.round(r / 3);
+                                t("html, body").animate({
+                                    scrollTop: l
+                                }, i.animationSpeed, "swing", function() {
+                                    s.focus();
+                                });
+                            }
+                        } else s.focus();
+                        jconfirm.lastFocused = !1;
+                    }
+                    "function" == typeof i.onDestroy && i.onDestroy();
+                }, .4 * n);
+            }, 50), !0;
+        },
+        open: function() {
+            return !this.isOpen() && (this._buildHTML(), this._bindEvents(), this._open(), !0);
+        },
+        setStartingPoint: function() {
+            var i = !1;
+            if (!0 !== this.animateFromElement && this.animateFromElement) i = this.animateFromElement, 
+            jconfirm.lastClicked = !1; else {
+                if (!jconfirm.lastClicked || !0 !== this.animateFromElement) return !1;
+                i = jconfirm.lastClicked, jconfirm.lastClicked = !1;
+            }
+            if (!i) return !1;
+            var n = i.offset(), s = i.outerHeight() / 2, o = i.outerWidth() / 2;
+            s -= this.$jconfirmBox.outerHeight() / 2, o -= this.$jconfirmBox.outerWidth() / 2;
+            var a = n.top + s;
+            a -= this._scrollTop();
+            var r = n.left + o, l = t(e).height() / 2, h = t(e).width() / 2;
+            if (a -= l - this.$jconfirmBox.outerHeight() / 2, r -= h - this.$jconfirmBox.outerWidth() / 2, 
+            Math.abs(a) > l || Math.abs(r) > h) return !1;
+            this.$jconfirmBoxContainer.css("transform", "translate(" + r + "px, " + a + "px)");
+        },
+        _open: function() {
+            var t = this;
+            "function" == typeof t.onOpenBefore && t.onOpenBefore(), this.$body.removeClass(this.animationParsed), 
+            this.$jconfirmBg.removeClass("jconfirm-bg-h"), this.$body.focus(), t.$jconfirmBoxContainer.css("transform", "translate(0px, 0px)"), 
+            setTimeout(function() {
+                t.$body.css(t._getCSS(t.animationSpeed, 1)), t.$body.css({
+                    "transition-property": t.$body.css("transition-property") + ", margin"
+                }), t.$jconfirmBoxContainer.addClass("jconfirm-no-transition"), t._modalReady.resolve(), 
+                "function" == typeof t.onOpen && t.onOpen(), t.$el.addClass(t.loadedClass);
+            }, this.animationSpeed);
+        },
+        loadedClass: "jconfirm-open",
+        isClosed: function() {
+            return !this.$el || "" === this.$el.css("display");
+        },
+        isOpen: function() {
+            return !this.isClosed();
+        },
+        toggle: function() {
+            this.isOpen() ? this.close() : this.open();
+        }
+    }, jconfirm.instances = [], jconfirm.lastFocused = !1, jconfirm.pluginDefaults = {
+        template: '<div class="jconfirm"><div class="jconfirm-bg jconfirm-bg-h"></div><div class="jconfirm-scrollpane"><div class="jconfirm-row"><div class="jconfirm-cell"><div class="jconfirm-holder"><div class="jc-bs3-container"><div class="jc-bs3-row"><div class="jconfirm-box-container jconfirm-animated"><div class="jconfirm-box" role="dialog" aria-labelledby="labelled" tabindex="-1"><div class="jconfirm-closeIcon">&times;</div><div class="jconfirm-title-c"><span class="jconfirm-icon-c"></span><span class="jconfirm-title"></span></div><div class="jconfirm-content-pane"><div class="jconfirm-content"></div></div><div class="jconfirm-buttons"></div><div class="jconfirm-clear"></div></div></div></div></div></div></div></div></div></div>',
+        title: "Hello",
+        titleClass: "",
+        type: "default",
+        typeAnimated: !0,
+        draggable: !0,
+        dragWindowGap: 15,
+        dragWindowBorder: !0,
+        animateFromElement: !0,
+        alignMiddle: !0,
+        smoothContent: !0,
+        content: "Are you sure to continue?",
+        buttons: {},
+        defaultButtons: {
+            ok: {
+                action: function() {}
+            },
+            close: {
+                action: function() {}
+            }
+        },
+        contentLoaded: function() {},
+        icon: "",
+        lazyOpen: !1,
+        bgOpacity: null,
+        theme: "light",
+        animation: "scale",
+        closeAnimation: "scale",
+        animationSpeed: 400,
+        animationBounce: 1,
+        escapeKey: !0,
+        rtl: !1,
+        container: "body",
+        containerFluid: !1,
+        backgroundDismiss: !1,
+        backgroundDismissAnimation: "shake",
+        autoClose: !1,
+        closeIcon: null,
+        closeIconClass: !1,
+        watchInterval: 100,
+        columnClass: "col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1",
+        boxWidth: "50%",
+        scrollToPreviousElement: !0,
+        scrollToPreviousElementAnimate: !0,
+        useBootstrap: !0,
+        offsetTop: 40,
+        offsetBottom: 40,
+        bootstrapClasses: {
+            container: "container",
+            containerFluid: "container-fluid",
+            row: "row"
+        },
+        onContentReady: function() {},
+        onOpenBefore: function() {},
+        onOpen: function() {},
+        onClose: function() {},
+        onDestroy: function() {},
+        onAction: function() {}
+    };
+    var i = !1;
+    t(e).on("keydown", function(n) {
+        if (!i) {
+            var s = !1;
+            t(n.target).closest(".jconfirm-box").length && (s = !0), s && t(e).trigger("jcKeyDown"), 
+            i = !0;
+        }
+    }), t(e).on("keyup", function() {
+        i = !1;
+    }), jconfirm.lastClicked = !1, t(document).on("mousedown", "button, a", function() {
+        jconfirm.lastClicked = t(this);
+    });
+}(jQuery, window), function(t) {
     "use strict";
     function e(e, n) {
         var s = this, o = e.attr("name") || n.name || "";
@@ -15723,18 +16192,18 @@ function VerificarHorario(t, e) {
             this.update(!0), this.options.isOpen && this.open();
         },
         optionToHtml: function(e, n, s, o) {
-            var a, r = this, l = t(n), u = l.attr("class") || "", h = i('title="%s"', l.attr("title")), c = this.options.multiple ? "multiple" : "", d = this.options.single ? "radio" : "checkbox";
+            var a, r = this, l = t(n), h = l.attr("class") || "", u = i('title="%s"', l.attr("title")), c = this.options.multiple ? "multiple" : "", d = this.options.single ? "radio" : "checkbox";
             if (l.is("option")) {
                 var p, f = l.val(), m = r.options.textTemplate(l), g = l.prop("selected"), v = i('style="%s"', this.options.styler(f));
-                return a = o || l.prop("disabled"), (p = t([ i('<li class="%s %s" %s %s>', c, u, h, v), i('<label class="%s">', a ? "disabled" : ""), i('<input type="%s" %s%s%s%s>', d, this.selectItemName, g ? ' checked="checked"' : "", a ? ' disabled="disabled"' : "", i(' data-group="%s"', s)), i("<span>%s</span>", m), "</label>", "</li>" ].join(""))).find("input").val(f), 
+                return a = o || l.prop("disabled"), (p = t([ i('<li class="%s %s" %s %s>', c, h, u, v), i('<label class="%s">', a ? "disabled" : ""), i('<input type="%s" %s%s%s%s>', d, this.selectItemName, g ? ' checked="checked"' : "", a ? ' disabled="disabled"' : "", i(' data-group="%s"', s)), i("<span>%s</span>", m), "</label>", "</li>" ].join(""))).find("input").val(f), 
                 p;
             }
             if (l.is("optgroup")) {
-                var y = r.options.labelTemplate(l), b = t("<div/>");
-                return s = "group_" + e, a = l.prop("disabled"), b.append([ '<li class="group">', i('<label class="optgroup %s" data-group="%s">', a ? "disabled" : "", s), this.options.hideOptgroupCheckboxes || this.options.single ? "" : i('<input type="checkbox" %s %s>', this.selectGroupName, a ? 'disabled="disabled"' : ""), y, "</label>", "</li>" ].join("")), 
+                var b = r.options.labelTemplate(l), y = t("<div/>");
+                return s = "group_" + e, a = l.prop("disabled"), y.append([ '<li class="group">', i('<label class="optgroup %s" data-group="%s">', a ? "disabled" : "", s), this.options.hideOptgroupCheckboxes || this.options.single ? "" : i('<input type="checkbox" %s %s>', this.selectGroupName, a ? 'disabled="disabled"' : ""), b, "</label>", "</li>" ].join("")), 
                 t.each(l.children(), function(t, e) {
-                    b.append(r.optionToHtml(t, e, s, a));
-                }), b.html();
+                    y.append(r.optionToHtml(t, e, s, a));
+                }), y.html();
             }
         },
         events: function() {
@@ -15846,10 +16315,10 @@ function VerificarHorario(t, e) {
                 var e = [], o = t.trim(t(this).parent().text()), a = t(this).parent().data("group"), r = n.$drop.find(i('[%s][data-group="%s"]', n.selectItemName, a)), l = r.filter(":checked");
                 if (l.length) {
                     if (e.push("["), e.push(o), r.length > l.length) {
-                        var u = [];
+                        var h = [];
                         l.each(function() {
-                            u.push(t(this).parent().text());
-                        }), e.push(": " + u.join(", "));
+                            h.push(t(this).parent().text());
+                        }), e.push(": " + h.join(", "));
                     }
                     e.push("]"), s.push(e.join(""));
                 }
@@ -16079,7 +16548,7 @@ function VerificarHorario(t, e) {
         dayNamesShort: [ "Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb" ],
         dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sá" ],
         weekHeader: "Sm",
-        dateFormat: "dd/mm/yy"
+        dateFormat: "yy-mm-dd"
     }), function(t, e, i, n) {
         t(".inputfile").each(function() {
             var e = t(this), i = e.next("label");
@@ -16089,17 +16558,17 @@ function VerificarHorario(t, e) {
             });
         });
     }(jQuery, window, document);
-    var u = $(".colum").width() / 12 * 5;
+    var h = $(".colum").width() / 12 * 5;
     $(".colimg").css({
-        height: u + "px"
-    }), $(".colimg").css({
-        width: u + "px"
-    });
-    var h = $(".bloqueEvento").width() / 15 * 3;
-    $(".ilustracion").css({
         height: h + "px"
-    }), $(".ilustracion").css({
+    }), $(".colimg").css({
         width: h + "px"
+    });
+    var u = $(".bloqueEvento").width() / 15 * 3;
+    $(".ilustracion").css({
+        height: u + "px"
+    }), $(".ilustracion").css({
+        width: u + "px"
     }), $("#file-input").change(function(e) {
         t(e);
     }), $("#fileInput").change(function(t) {
@@ -16114,13 +16583,19 @@ function VerificarHorario(t, e) {
             var s = $("#idDiasEv").val(), o = e.split(","), r = '<div class="selHour"> <select id=time' + s + ">";
             s++, $("#idDiasEv").val(s);
             for (var l = 0; l < o.length; l++) r += '<option value="' + o[l] + '">' + o[l] + "</option>";
-            var u = a({
+            var h = a({
                 dateS: r += "</select> </div>",
                 inicio: $("#HoraInicio").val(),
                 termino: $("#HoraTermino").val()
             });
-            $(".muestraHorario table tbody").append(u), $("#calendario").multiDatesPicker("resetDates", "picked");
-        } else alert("Ingrese datos antes");
+            $(".muestraHorario table tbody").append(h), $("#calendario").multiDatesPicker("resetDates", "picked");
+        } else $.alert({
+            icon: "fa fa-warning",
+            title: "¡Datos sin seleccionar!",
+            content: "Asegurese de haber seleccionado los días y, establecido una hora de inicio y fin.",
+            boxWidth: "30%",
+            useBootstrap: !1
+        });
     }), $(".muestraHorario").on("click", "tbody tr .elimiFile", function(t) {
         t.preventDefault(), $(this).closest("tr").remove();
         var e, i, n = [], s = -1;
@@ -16146,13 +16621,19 @@ function VerificarHorario(t, e) {
             var s = $("#idDiasP").val(), o = e.split(","), a = '<div class="selHourP"> <select id=timep' + s + ">";
             s++, $("#idDiasP").val(s);
             for (var l = 0; l < o.length; l++) a += '<option value="' + o[l] + '">' + o[l] + "</option>";
-            var u = r({
+            var h = r({
                 dateS: a += "</select> </div>",
                 inicio: $("#HoraInicioP").val(),
                 termino: $("#HoraTerminoP").val()
             });
-            $(".muestraHorarioP table tbody").append(u), $("#calendario").multiDatesPicker("resetDates", "picked");
-        } else alert("Ingrese datos antes");
+            $(".muestraHorarioP table tbody").append(h), $("#calendario").multiDatesPicker("resetDates", "picked");
+        } else $.alert({
+            icon: "fa fa-warning",
+            title: "¡Datos sin seleccionar!",
+            content: "Asegurese de haber seleccionado los días y, establecido una hora de inicio y fin.",
+            boxWidth: "30%",
+            useBootstrap: !1
+        });
     }), $(".muestraHorarioP").on("click", "tbody tr .elimiFile", function(t) {
         t.preventDefault(), $(this).closest("tr").remove();
         var e, i, n = [], s = -1;
@@ -16185,7 +16666,13 @@ function VerificarHorario(t, e) {
             $(".muestraTime table tbody").append(a), $(".contenedorDias input:checkbox").each(function() {
                 $(this).prop("checked", !1);
             });
-        } else alert("Ingrese datos antes");
+        } else $.alert({
+            icon: "fa fa-warning",
+            title: "¡Datos sin seleccionar!",
+            content: "Asegurese de haber seleccionado los días y, establecido una hora de inicio y fin.",
+            boxWidth: "30%",
+            useBootstrap: !1
+        });
     }), $(".muestraTime").on("click", "tbody tr .elimiFiles", function(t) {
         t.preventDefault(), $(this).closest("tr").remove();
         var e, i, n = [], s = -1;
@@ -16217,10 +16704,4 @@ function VerificarHorario(t, e) {
         "none" == e.css("display") ? (e.slideDown(400), $(this).addClass("open")) : (e.slideUp(400), 
         $(this).removeClass("open"));
     });
-}), $("#r").on("click", function(t) {
-    resultadoAnio(2018);
-}), $("#diasEvento select[name=dias]").change(function(t) {
-    alert("jin");
-    var e = $(".contenidoSelect select[name=dias] option:selected").val();
-    $("select[name=hora] > option[value=" + e + "]").attr("selected", !0);
 });

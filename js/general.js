@@ -4,6 +4,7 @@
 //@prepros-prepend jquery-ui.js
 //@prepros-prepend jquery-ui.multidatespicker-v1.6.6.js
 //@prepros-prepend jquery.magnific-popup.js
+//@prepros-prepend jquery-confirm.min.js
 //@prepros-prepend multiple-select.js
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +81,7 @@ $(document).ready(function(){
 		dayNamesShort: ['Dom','Lun','Mar','Mié','Jue','Vie','Sáb'],
 		dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
 		weekHeader: 'Sm',
-		dateFormat: 'dd/mm/yy',
+		dateFormat: 'yy-mm-dd',
 	});
 
 	////////////////////////////////////////////////////////////////
@@ -265,7 +266,13 @@ $(document).ready(function(){
 		 	$('.muestraHorario table tbody').append(row); 
 		 	$('#calendario').multiDatesPicker('resetDates', 'picked');
 		}else{
-			alert("Ingrese datos antes");
+			$.alert({
+				icon: 'fa fa-warning',
+			    title: '¡Datos sin seleccionar!',
+			    content: 'Asegurese de haber seleccionado los días y, establecido una hora de inicio y fin.',
+			    boxWidth: '30%',
+    			useBootstrap: false,
+			});
 		}
     	
 	});
@@ -366,7 +373,13 @@ $(document).ready(function(){
 		 	$('.muestraHorarioP table tbody').append(row); 
 		 	$('#calendario').multiDatesPicker('resetDates', 'picked');
 		}else{
-			alert("Ingrese datos antes");
+			$.alert({
+				icon: 'fa fa-warning',
+			    title: '¡Datos sin seleccionar!',
+			    content: 'Asegurese de haber seleccionado los días y, establecido una hora de inicio y fin.',
+			    boxWidth: '30%',
+    			useBootstrap: false,
+			});
 		}
     	
 	});
@@ -468,7 +481,13 @@ $(document).ready(function(){
 	            $(this).prop('checked', false);
 	        });
 		}else{
-			alert("Ingrese datos antes");
+			$.alert({
+				icon: 'fa fa-warning',
+			    title: '¡Datos sin seleccionar!',
+			    content: 'Asegurese de haber seleccionado los días y, establecido una hora de inicio y fin.',
+			    boxWidth: '30%',
+    			useBootstrap: false,
+			});
 		}
     });
 
@@ -569,198 +588,8 @@ $(document).ready(function(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function enviarDatosEvento()
-{
-	var res=ValidarEvento();
-	if(res!=false)
-	{
-	valores= new Array();
-	var cont=0;
-	var dias="";
-	$('#tabla tbody tr').each(function () {
-	var id=$(this).find('td').eq(0).html();
-	var hrI=$(this).find('td').eq(2).html();
-	var hrF=$(this).find('td').eq(3).html();
-	var id="#time"
- 	
- 	id=id+cont+" option";
-		$(id).each(function(){
-	   	dias+=$(this).attr('value')+',';
-		});
-	cont++;
-	 valor=new Array(id, hrI, hrF, dias);
-	// alert(dias);
-	 dias="";
-	 if(cont!=0){
-	 valores.push(valor);}
-	});
-	var formData = new FormData(document.getElementById("Evento"));
-	formData.append("valores",JSON.stringify(valores));
-	//alert(formData);
-	$.ajax({
-                async: false,
-                    type: "POST",
-                    url: "lib/insertarEvento.php",
-                    data: formData,
-                    cache: false,
-				    contentType: false,
-				    processData: false,
-                    success: function(data) {
-                    	alert("Enviando datos...");
-	                    alert(data);
-                    },
-                    error: function(data) {
-                    alert("Error en la subida");
-                	}
-                });
-	return true;
-	}else{return false;}
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-function enviarDatosPromocion()
-{
-	valores= new Array();
-	var cont=0;
-	var dias="";
-	$('#tabla tbody tr').each(function () {
-	var id=$(this).find('td').eq(0).html();
-	var hrI=$(this).find('td').eq(2).html();
-	var hrF=$(this).find('td').eq(3).html();
-	var id="#timep"
- 	
- 	id=id+cont+" option";
-		$(id).each(function(){
-	   	dias+=$(this).attr('value')+',';
-		});
-	cont++;
-	 valor=new Array(id, hrI, hrF, dias);
-	 //alert(dias);
-	 dias="";
-	 if(cont!=0){
-	 valores.push(valor);}
-	});
-	var formData = new FormData(document.getElementById("Promocion"));
-	formData.append("valores",JSON.stringify(valores));
-	//alert(formData);
-	$.ajax({
-                async: false,
-                    type: "POST",
-                    url: "lib/insertarPromocion.php",
-                    data: formData,
-                    cache: false,
-				    contentType: false,
-				    processData: false,
-                    success: function(data) {
-                    	alert("Enviando datos...");
-	                    alert(data);
-                    },
-                    error: function(data) {
-                    alert("Error en la subida");
-                	}
-                });
-	return true;
-}
-////////////////////////////////////////////////////////////////////
-
-$('#r').on("click", function(event){
-    	resultadoAnio(2018);
-    });
-////////////////////////////////////////////////////////
-$("#diasEvento select[name=dias]").change(function(event){
-	alert("jin");
-    	var id=$(".contenidoSelect select[name=dias] option:selected").val();
-    	//alert("fer");
-    	$("select[name=hora] > option[value="+ id +"]").attr("selected",true)
-    	/*$Siguiente=$(this).next(".contenidoHora select[name=hora] option[value="+ id +"]");
-    	$Siguiente.attr("selected",true);*/
-    });
-/////////////////////////////////////////////////
-function enviarDatosEstablecimiento()
-{
-	//window.location.href = "/apptivity/index.html";
-	//window.location="https://www.google.com.mx/"; 
-	//return true;
-	//window.location.replace("/apptivity/index.html");
-	var res=ValidarRegistroEstablecimiento();
-	//var res=true;
-	if(res!=false)
-	{
-		valores= new Array();
-		var cont=0;
-		var dias="";
-		$('#tabla tbody tr').each(function () {
-		var id=$(this).find('td').eq(0).html();
-		var hrI=$(this).find('td').eq(2).html();
-		var hrF=$(this).find('td').eq(3).html();
-		var idT="#dias"+cont+" option";
-	 	
-	 	//idT=id+cont+" option";
-			$(idT).each(function(){
-		   	dias+=$(this).attr('value')+',';
-			});
-			cont++;
-			if(dias!=""){
-			valor=new Array(id, hrI, hrF, dias);}
-			dias="";
-
-		 //alert(valor);
-		 valores.push(valor);
-		});
-		var formData = new FormData(document.getElementById("RegistroEstablecimiento"));
-		formData.append("valores",JSON.stringify(valores));
-		//alert(formData);
-		$.ajax({
-	                async: false,
-	                    type: "POST",
-	                    url: "lib/registroEstablecimiento.php",
-	                    data: formData,
-	                    cache: false,
-					    contentType: false,
-					    processData: false,
-	                    success: function(data) {
-	              			alert("Enviando datos...");
-	                    	alert(data);
-	                    	$(location).attr('href','/apptivity/index.html');
-	                    	if(data)
-	                    	{
-
-	                    		//window.location.replace("/apptivity/index.html");
-	                    		
-	                    		//window.location.href='https://www.google.com.mx/';
-	                    	}
-	                    },
-	                    error: function(data) {
-	                    alert("Error en la subida");
-	                	}
-                });
-	return true;
-	}else{return false;}
-}
-
-function ValidarEvento()
-{
-	var contador=true;
-	var NombreEvento=document.Evento.NombreEvento.value;
-	var Descripcion=document.Evento.Descripcion.value;
-	var PrecioInferior=document.Evento.PrecioInferior.value;
-	var PrecioSuperior=document.Evento.PrecioSuperior.value;
-	contador=ValidarSoloNumeros(PrecioSuperior, " precio superior ")
-	if(contador==false){ return contador; }
-	contador=ValidarSoloNumeros(PrecioInferior, " precio inferior ")
-	if(contador==false){ return contador; }
-	
-	if(PrecioInferior>PrecioSuperior){
-		alert("El precio inferior no puede ser mayor al superior");
-		return false;
-	}
-	
-	contador=VerificarHorario(HoraInicio, HoraTermino);
-	if(contador==false){ return contador; }
-}
-
 //OJO: hace falta validación de precios
-function ValidarEvento()
+/*function ValidarEvento()
 {
 	var contador=true;
 	var NombrePromocion=document.Promocion.NombrePromocion.value;
@@ -778,8 +607,9 @@ function ValidarEvento()
 	}
 	contador=VerificarHorario(HoraInicio, HoraTermino);
 	if(contador==false){return contador;}
-}
-function EnviarDatosRegistro()
+}*/
+
+/*function EnviarDatosRegistro()
 {
 	try
     {
@@ -816,130 +646,28 @@ function EnviarDatosRegistro()
          failure:  function (response) {
                  alert(response.d);
              }
-      });*/
+      });
     }
     catch (e)
     {
         alert('failed to call web service. Error: ' + e);
     }
-}
-function ValidarRegistroEstablecimiento(){
-	var contador=true;
-	var NombreEstablecimiento=document.RegistroEstablecimiento.NombreEstablecimiento.value;
-	var Descripcion=document.RegistroEstablecimiento.Descripcion.value;
-	var Usuario=document.RegistroEstablecimiento.Usuario.value;
-	var ApellidoMaterno=document.RegistroEstablecimiento.ApellidoMaterno.value;
-	var ApellidoPaterno=document.RegistroEstablecimiento.ApellidoPaterno.value;
-	var Username=document.RegistroEstablecimiento.Username.value;
-	var CorreoElectronico=document.RegistroEstablecimiento.CorreoElectronico.value;
-	var Contrasena=document.RegistroEstablecimiento.Contrasena.value;
-	var ConfirmarContrasena=document.RegistroEstablecimiento.ConfirmarContrasena.value;
-	contador=ValidarTextComun(Usuario, "usuario");
-	if(contador==false){ return contador; }
-	contador=ValidarTextComun(ApellidoPaterno, "apellido paterno");
-	if(contador==false){ return contador; }
-	if(ApellidoMaterno!=""){contador=ValidarTextComun(ApellidoMaterno, "apellido materno");if(contador==false){return contador;}}
-	contador=ValidarCorreo(CorreoElectronico);
-	if(contador==false){ return contador; }
-	contador=ValidarContrasena(Contrasena);
-	if(contador==false){ return contador; }
-	contador=ContrasenasIguales(Contrasena, ConfirmarContrasena);
-	if(contador==false){ return contador; }
-}
+}*/
 
-function ValidarRegistroUsuario(){
-	var contador=true;
-	var Usuario=document.RegistroUsuario.Usuario.value;
-	window.alert("hola");
-	var ApellidoMaterno=document.RegistroUsuario.ApellidoMaterno.value;
-	var ApellidoPaterno=document.RegistroUsuario.ApellidoPaterno.value;
-	var Username=document.RegistroUsuario.Username.value;
-	var CorreoElectronico=document.RegistroUsuario.CorreoElectronico.value;
-	var Contrasena=document.RegistroUsuario.Contrasena.value;
-	var ConfirmarContrasena=document.RegistroUsuario.ConfirmarContrasena.value;
-	contador=ValidarTextComun(Usuario, "usuario");
-	if(contador==false){ return contador; }
-	contador=ValidarTextComun(ApellidoPaterno, "apellido paterno");
-	if(contador==false){ return contador; }
-	if(ApellidoMaterno!=""){contador=ValidarTextComun(ApellidoMaterno, "apellido materno");if(contador==false){return contador;}}
-	contador=ValidarCorreo(CorreoElectronico);
-	if(contador==false){ return contador; }
-	contador=ValidarContrasena(Contrasena);
-	if(contador==false){ return contador; }
-	contador=ContrasenasIguales(Contrasena, ConfirmarContrasena);
-	if(contador==false){ return contador; }
-	if(contador==false){return contador;}
-
-}
-
-function ValidarTextComun(Campo, NombreCampo){
-	var Letras = /^[a-zA-Z]*$/;
-	if(!Campo.search(Letras)){
-	}else{
-		window.alert("El campo "+NombreCampo+" sólo permite caracteres de la A-Z");
-		return false;
-	}
-}
-
-function ValidarSoloNumeros(Campo, NombreCampo){
-	var Numeros= /^[0-9]+([,][0-9]+)?$/;
-	if(Campo.search(Numeros)){
-		window.alert("El campo" +NombreCampo+ "sólo acepta números");
-		return false;
-	}
-}
-
-function ValidarCorreo(Campo){
-	var PatronCorreo=/^[-\w.%+]{1,64}@(?:[A-Z0-9-]{1,63}\.){1,125}[A-Z]{2,63}$/i;
-	if(Campo.search(PatronCorreo)){
-		window.alert("Su correo probablemente tenga un error");
-		return false;
-	}
-}
-
-function ValidarContrasena(Campo){
-	var PatronContrasena=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)([A-Za-z\d]|[^ ]){8,}/;//Busca por lo menos una minuscula, mayúscula, dígito y por lo menos 8 caracteres
-	if(!Campo.search(PatronContrasena)){
-	}else{
-		alert("Su contraseña no coincide con alguno de los requisitos: \nUna mayúscula \nUna minúscula\nUna letra\nPor lo menos 8 caracteres\nSin espacios en blanco");
-		return false;
-	}
-}
-
-function ContrasenasIguales(Contrasena, Contrasena2){
-	if(Contrasena!=Contrasena2){
-		window.alert("Las contraseñas no coinciden");
-		return false;
-	}
-}
-
-function NuevoHorario(){
-	var DiasSeleccionados= new Array();
-	var Registros=new Array();
-	var HoraInicio=document.RegistroEstablecimiento.HoraInicio.value;
-	var HoraTermino=document.RegistroEstablecimiento.HoraTermino.value;
-	VerificarHorario(HoraInicio, HoraTermino);
-	var DiasCheck=document.getElementsByName('diasSemana');
-	for(var i=0; i<7; i++){
-		if(DiasCheck[i].checked){
-			DiasSeleccionados[i]=i+1;
-			window.alert(DiasSeleccionados[i]);
-		}
-	}
-	/*for (var j = 0; j < DiasSeleccionados.length; j++) 
-	{
-		Registros[j]=(HoraInicio+HoraTermino+DiasSeleccionados[j]);
-	}*/
-}
-
-function VerificarHorario(HoraInicio, HoraTermino){
-	if(HoraInicio>=HoraTermino){
-		window.alert("La hora de inicio no puede ser mayor a la hora de termino");
-		return false;
-	}
-}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
+/*$('#r').on("click", function(event){
+	    	resultadoAnio(2018);
+	    });*/
+
+/*$("#diasEvento select[name=dias]").change(function(event){
+		alert("jin");
+    	var id=$(".contenidoSelect select[name=dias] option:selected").val();
+    	//alert("fer");
+    	$("select[name=hora] > option[value="+ id +"]").attr("selected",true)
+    	//$Siguiente=$(this).next(".contenidoHora select[name=hora] option[value="+ id +"]");
+    	//$Siguiente.attr("selected",true);
+	});*/

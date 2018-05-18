@@ -9,11 +9,10 @@
     <link rel="icon" href="img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
     <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
-    <link type="text/css" rel="stylesheet" href="css/slick.css">
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
     <link type="text/css" rel="stylesheet" href="css/jquery-ui.multidatespicker.css">
     <link type="text/css" rel="stylesheet" href="css/multiple-select.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-confirm.min.css">
   </head>
   <body class="inEstablecimiento">
     <?php session_start();?>
@@ -46,15 +45,18 @@
           </div>
         </div>
       </div>
-    </div><?php include 'lib/conexion.php';?>
+    </div><?php include 'webService/conexion.php';?>
+    <?php $promo = $_POST['promocionModificar']; ?>
     <div class="contenedorComun">
-      <h1>Modificar promoción </h1><?php $nombrePromo = mysqli_fetch_array(mysqli_query($conexion, "SELECT promocion.Nombre As nombre, promocion.Descripcion As descripcion FROM promocion WHERE promocion.Establecimiento = 1")); ?>
+      <h1>Modificar promoción </h1><?php $nombrePromo = mysqli_fetch_array(mysqli_query($conexion, "SELECT promocion.Nombre As nombre, promocion.Descripcion As descripcion, promocion.Imagen As imagen FROM promocion WHERE promocion.Establecimiento = '{$_SESSION['establecimiento']}' AND promocion.IdPromocion = '{$promo}'")); ?>
+      <?php $ImagenF='/Imagenes/'.$nombrePromo['imagen']; ?>
+      <?php $nombre = utf8_encode($nombrePromo['nombre']); ?>
       <div class="contenedorformulario">
-        <form method="POST" action="" name="Evento" onsubmit="return ValidarEvento()" enctype="multipart/form-data">
-          <input type="text" value="<?php echo utf8_encode($nombrePromo['nombre']); ?>" name="NombrePromocion" id="NombrePromocion" required>
-          <textarea rows="10" name="DescripcionP" maxlength="1200" required><?php echo utf8_encode($nombrePromo['descripcion']); ?></textarea>
+        <form method="POST" name="ModificarPromocion" id="ModificarPromocion">
+          <input type="text" value="&lt;?php echo $nombre; ?&gt;" name="NombrePromocion" id="NombrePromocion" required>
+          <textarea rows="10" name="DescripcionP" maxlength="1200" required><?php echo utf8_encode($nombrePromo['descripcion']); ?></textarea><?php echo "<input type='hidden' name='NumeroPromocion' id='NumeroPromocion' value=$promo>"; ?>
           <h2>Horario</h2>
-          <div class="muestraHorarioMP"><?php $duracion = mysqli_query($conexion, "SELECT duracionpromocion.Fecha, duracionpromocion.HoraInicio, duracionpromocion.HoraFin FROM duracionpromocion WHERE duracionpromocion.Promocion = 1"); ?>
+          <div class="muestraHorarioMP"><?php $duracion = mysqli_query($conexion, "SELECT duracionpromocion.Fecha, duracionpromocion.HoraInicio, duracionpromocion.HoraFin FROM duracionpromocion WHERE duracionpromocion.Promocion = '{$promo}'"); ?>
             <table>
               <thead>
                 <tr>
@@ -110,7 +112,7 @@
           </div>
           <h2>Imagen del evento</h2>
           <div class="prevImageMP">
-            <div class="showImgMP"><img src="" id="imgExitMP"></div>
+            <div class="showImgMP"><img src="&lt;?php echo $ImagenF;?&gt;" id="imgExitMP"></div>
           </div>
           <div class="ImagenArchivo">
             <input class="inputfile" type="file" name="fileInputMP" id="fileInputMP" value="Examinar" accept="image/png, .jpeg, .jpg, image/gif" required>

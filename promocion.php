@@ -9,11 +9,10 @@
     <link rel="icon" href="img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
     <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
-    <link type="text/css" rel="stylesheet" href="css/slick.css">
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
     <link type="text/css" rel="stylesheet" href="css/jquery-ui.multidatespicker.css">
     <link type="text/css" rel="stylesheet" href="css/multiple-select.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-confirm.min.css">
   </head>
   <body class="outEstablecimiento">
     <?php session_start();?>
@@ -46,7 +45,7 @@
           </div>
         </div>
       </div>
-    </div><?php include 'lib/conexion.php';?>
+    </div><?php include 'webService/conexion.php';?>
     <div class="contenedorComun">
       <div class="submenuEvent">
         <div class="opcionF">
@@ -58,33 +57,32 @@
         <div class="listaEventos">
           <ul>
             <?php
-            	
-            
-            	$obtenerPromociones="SELECT promocion.IdPromocion, promocion.Nombre FROM promocion WHERE Establecimiento='{$_SESSION['establecimiento']}' ORDER BY IdPromocion DESC";
-            	$resultado_obtenerPromociones=mysqli_query($conexion, $obtenerPromociones);
-            	while($promocion = mysqli_fetch_array($resultado_obtenerPromociones))
-            	{		
-            		echo "<div class='eventoTitulo'><h4><li id='$promocion[0]'> $promocion[1]</li></h4></div>";
-            		$id=$promocion[0];
-                       	$obtenerPromocion="SELECT Nombre, Descripcion, Imagen FROM Promocion WHERE IdPromocion=$id";
-                       	$resultado_obtenerPromocion=mysqli_query($conexion, $obtenerPromocion);
-                       	$Promocion = mysqli_fetch_array($resultado_obtenerPromocion);
-                       	$ImagenF='/Imagenes/'.$Promocion[2];
+            $bandera=0;
+            $obtenerPromociones="SELECT Promocion.IdPromocion, Promocion.Nombre FROM Promocion WHERE Establecimiento='{$_SESSION['establecimiento']}' ORDER BY IdPromocion DESC";
+            $resultado_obtenerPromociones=mysqli_query($conexion, $obtenerPromociones);
+            while($Promocion = mysqli_fetch_array($resultado_obtenerPromociones)){
+            	 $id=$Promocion[0];
+            	 $obtenerPromocion="SELECT Nombre, Descripcion, Imagen FROM Promocion WHERE IdPromocion='{$id}' AND (SELECT duracionPromocion.Fecha from duracionPromocion where duracionPromocion.promocion='{$id}' ORDER BY duracionpromocion.Fecha DESC LIMIT 1)>=date(now())";
+            	 $resultado_obtenerpromocion=mysqli_query($conexion, $obtenerPromocion);
+            	 if($Promocion = mysqli_fetch_array($resultado_obtenerpromocion)){ 
+            		 $ImagenF='/Imagenes/'.$Promocion[2];
+            		 $bandera=1;
+            		 $nombre = utf8_encode($Promocion[0]);	
+            		 echo "<div class='eventoTitulo'><h4><li id='$Promocion[0]'>$nombre</li></h4></div>";
             ?>
-            	
             <div class="bloqueEvento">
               <div class="ladear1">
                 <div class="nombre">
                   <h1><?php echo utf8_encode($Promocion[0]); ?></h1>
                 </div>
-                <div class="ilustracion"><img src="&lt;?php echo $ImagenF; ?&gt;"></div>
+                <div class="ilustracion"><img src="<?php echo $ImagenF; ?>"></div>
                 <div class="deleUp"> 
                   <div class="btn updateE">
-                    <form name="ModificararPromocion" method="POST" action="modificaPromocion.php"><?php echo "<input type='hidden' name='promocionModificar' value=$id>"; ?><a>
+                    <form name="ModificaPromo" id="ModificaPromo" action="modificaPromocion.php" method="POST"><?php echo "<input type='hidden' name='promocionModificar' value=$id>"; ?><a>
                         <input type="submit" name="Modificar" value="Modificar"><i class="fa fa-pencil" aria-hidden="true"></i></a></form>
                   </div>
                   <div class="btn deleteE">
-                    <form name="EliminarPromocion" method="POST" action="lib/borrarPromocion.php"><?php echo "<input type='hidden' name='promocionEliminar' value=$id>"; ?><a>
+                    <form name="EliminarPromocion" id="EliminarPromocion" method="POST"><?php echo "<input type='hidden' id='promocionEliminar' name='promocionEliminar' value=$id>"; ?><a>
                         <input type="submit" name="Eliminar" value="Eliminar"><i class="fa fa-trash" aria-hidden="true"></i></a></form>
                   </div>
                 </div>
@@ -92,38 +90,37 @@
               <div class="ladear2 parte2">
                 <div class="informacion">
                   <h1>Descripción</h1>
-                  <div class="contenido desc">
-                    <h2><?php echo utf8_encode($Promocion[1]); ?></h2>
-                  </div>
-                  <div class="informacion">
-                    <h1>Horario:</h1>
-                  </div>
-                  <div class="contenido">
-                    <select name="dias" id="diasPromocion">
-                      <option value="-1">Dias</option><?php 
-                      $obtenerDuracion="SELECT IdDuracionPromocion, Fecha FROM duracionpromocion WHERE promocion='{$id}'";
+                </div>
+                <div class="contenido desc">
+                  <h2><?php echo utf8_encode($Promocion[1]); ?></h2>
+                </div>
+                <div class="informacion">
+                  <h1>Horario:</h1>
+                </div>
+                <div class="muestraHorarioP">
+                  <table id="tabla">
+                    <thead>
+                      <tr>
+                        <th>Día</th>
+                        <th>Horario</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <?php 
+                      $obtenerDuracion="SELECT IdDuracionPromocion, Fecha, HoraInicio, HoraFin FROM duracionPromocion WHERE Promocion='{$id}'";
                       $resultado_obtenerDuracion=mysqli_query($conexion, $obtenerDuracion);
-                      while($dur = mysqli_fetch_array($resultado_obtenerDuracion))
-                      {
-                      	echo "<option value='$dur[0]'>$dur[1]</h3>";
-                      	echo "</div>";
+                      while($dur = mysqli_fetch_array($resultado_obtenerDuracion)){
+                      echo "<tr>";
+                      echo "<th>$dur[1]</th>";
+                      echo "<th>$dur[2]-$dur[3]</th>";
+                      echo "</tr>";
                       }
                       ?>
-                    </select>
-                    <select name="hora" id="horaPromocion">
-                      <option value="-1" selected="">Horario</option><?php
-                      $obtenerDuracion="SELECT IdDuracionPromocion, HoraInicio, HoraFin FROM duracionpromocion WHERE promocion='{$id}'";
-                      $resultado_obtenerDuracion=mysqli_query($conexion, $obtenerDuracion);
-                      while($dur = mysqli_fetch_array($resultado_obtenerDuracion))
-                      {
-                      	echo "<option value='$dur[0]'>$dur[1]-$dur[2]</option>";
-                      }
-                      ?>		
-                    </select>
-                  </div>
+                    </tbody>
+                  </table>
                 </div>
               </div>
-            </div><?php	}?>	
+            </div><?php } } if($bandera==0){echo"<h5>No se encontraron promociones vigentes</h5>";}?>
           </ul>
         </div>
       </div>
@@ -132,5 +129,6 @@
       <script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
     </div>
     <script type="text/javascript" src="js/despliegueEventoProm.js"></script>
+    <script type="text/javascript" src="js/envioDatos.js"></script>
   </body>
 </html>

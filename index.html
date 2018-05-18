@@ -9,11 +9,10 @@
     <link rel="icon" href="img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
     <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
-    <link type="text/css" rel="stylesheet" href="css/slick.css">
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
     <link type="text/css" rel="stylesheet" href="css/jquery-ui.multidatespicker.css">
     <link type="text/css" rel="stylesheet" href="css/multiple-select.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-confirm.min.css">
   </head>
   <body class="home">
     <div class="headerIndex">
@@ -45,7 +44,7 @@
               </div>
             </div>
             <div class="formularioInicio">
-              <form method="POST" action="lib/iniciarSesion.php" name="IniciarSesion">
+              <form method="POST" name="IniciarSesion" id="IniciarSesion">
                 <div class="col11">
                   <input type="text" name="Vcorreo" placeholder="Correo Electrónico" id="Vcorreo">
                 </div>
@@ -72,30 +71,30 @@
               </div>
             </div>
             <div class="formularioUsuario">
-              <form method="POST" action="lib/registroCliente.php" name="RegistroCliente" onsubmit="return ValidarRegistroCliente()">
+              <form method="POST" name="RegistroCliente" id="RegistroCliente">
                 <div class="col11">
-                  <input type="text" name="nombre" placeholder="Nombre" id="Usuario">
+                  <input type="text" name="Cliente" placeholder="Nombre" id="Cliente" required>
                 </div>
                 <div class="col12">
-                  <input type="text" name="app" placeholder="Apellido Paterno">
+                  <input type="text" name="ApellidoPaterno" id="ApellidoPaterno" placeholder="Apellido Paterno" required>
                 </div>
                 <div class="col12">
-                  <input class="right" type="text" name="apm" placeholder="Apellido Materno">
+                  <input class="right" type="text" name="ApellidoMaterno" id="ApellidoMaterno" placeholder="Apellido Materno">
                 </div>
                 <div class="col11">
-                  <input type="text" name="usuario" placeholder="Nombre de Usuario">
+                  <input type="text" name="Username" id="Username" placeholder="Nombre de Usuario" required>
                 </div>
                 <div class="col11">
-                  <input type="email" name="email" placeholder="Correo Electrónico">
+                  <input type="email" name="CorreoElectronico" placeholder="Correo Electrónico" required>
                 </div>
                 <div class="col11">
-                  <input type="password" name="password" placeholder="Contraseña">
+                  <input type="password" name="Contrasena" placeholder="Contraseña" required>
                 </div>
                 <div class="col11">
-                  <input type="password" name="Cpassword" placeholder="Confirmar Contraseña">
+                  <input type="password" name="ConfirmarContrasena" placeholder="Confirmar Contraseña" required>
                 </div>
                 <div class="checka col11">
-                  <input type="checkbox" name="valida">
+                  <input type="checkbox" name="valida" required>
                   <label>Acepto los</label><a href="#Termino">Términos y Condiciones</a>
                 </div>
                 <div class="boton">
@@ -129,5 +128,6 @@
     <div class="footer">
       <script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
     </div>
+    <script type="text/javascript" src="js/envioDatos.js"></script>
   </body>
 </html>

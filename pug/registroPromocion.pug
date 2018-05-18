@@ -7,7 +7,7 @@ html(lang="es")
 		.contenedorComun
 			h1 Agregar promoción
 			.contenedorformulario
-				form(method="POST" action="" name="Promocion" id="Promocion" onsubmit='return enviarDatosPromocion()' enctype="multipart/form-data")
+				form(method="POST" name="PromocionInsertar" id="PromocionInsertar")
 					
 					input(type='text', placeholder='Titulo de la promoción' name='NombrePromocion' id="NombrePromocion" required)
 					textarea(rows="10", placeholder="Descripción", name="DescripcionP", maxlength="1200" required)
@@ -60,3 +60,4 @@ html(lang="es")
 						input(type="submit", value="AGREGAR PROMOCIÓN", id="AgregarEvento", name="AgregarEvento")
 		
 		include include/footer
+		script(type='text/javascript', src='js/envioDatos.js')

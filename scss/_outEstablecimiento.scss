@@ -72,6 +72,11 @@
     			background: $aqua;
     		}
     	}
+
+    	h5{
+    		font-family: 'AYearWithoutRain';
+			font-size: 1.2em;
+    	}
 	}
 	
 	.bloqueEvento{
@@ -91,6 +96,43 @@
 		
 		.parte2{
 			padding-top: 35px;
+		}
+
+		.muestraHorarioP, .muestraHorarioE{
+			@include column(1, $offset: 0, $gutter: 0);
+			text-align: left;
+			padding-top: 10px;
+			
+			table{
+			    border-collapse: collapse;
+			    display: inline-block;
+			    max-width: 100%;
+			}
+
+			td, th {
+			    border: 1px solid $oscuro;
+			    text-align: left;
+			    padding: 8px;
+			}
+
+			thead th{
+				font-family: 'AYearWithoutRain';
+				text-align: center;
+				font-size: 1.2em;
+				background-color: $claro;
+				color: $blanco;
+			}
+
+			tbody th{
+				font-family: 'Roboto-Regular';
+				text-align: center;
+				font-size: 1em;
+				background-color: $blanco;
+				color: $oscuro;
+				padding-left: 25px;
+				padding-right: 25px;
+			}
+
 		}
 
 		.nombre{
@@ -148,6 +190,7 @@
 	        	display: inline-block;
 	        	padding: 5px 10px 5px 10px;
 	        	margin-bottom: 10px;
+	        	margin-right: 5px;
 	        	background-color: $azulclaro;
 	        	font-family: 'Roboto-Regular';
 				font-size: .9em;
@@ -184,16 +227,24 @@
 					@include transition(0.6s);
 					display: inline-block;
 					text-decoration: none;
-					padding: 8px 15px 8px 15px;
+					//padding: 0px 15px 0px 15px;
 					&:hover{
 						@include transition(0.4s);
 						background-color: $gris;
+						border-radius: 3px;
 					}
 				}
 
 				i{
-					padding-left: 10px;
+					margin-left: -28px;
 					color: $blanco;
+				}
+
+				input{
+					padding: 8px 40px 8px 15px;
+				}
+				input:hover{
+					cursor: pointer;
 				}
 
 				border-radius: 3px;
@@ -201,11 +252,16 @@
 
 			.updateE{
 				background-color: $azulclaro;
-
+				&:hover{
+					cursor: pointer;
+				}
 			}
 
 			.deleteE{
 				background-color: $naranja;
+				&:hover{
+					cursor: pointer;
+				}
 			}
 
 		}

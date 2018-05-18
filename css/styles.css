@@ -81,6 +81,12 @@ html {
   min-height: 100%;
   position: relative; }
 
+a, label, ul {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
 img {
   max-width: 100%; }
 
@@ -1382,8 +1388,6 @@ div {
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       resize: none; }
-    .registroEstablecimiento .contenedorformulario textarea {
-      font-family: 'Roboto-Light'; }
     .registroEstablecimiento .contenedorformulario h2 {
       float: left;
       clear: none;
@@ -1506,6 +1510,8 @@ div {
         -webkit-transition: all 0.4s ease-in-out;
         background: #FFFFFF;
         color: #757575;
+        font-family: 'Roboto-Regular';
+        font-size: 1em;
         border: 1px solid #757575;
         border-radius: 5px;
         position: relative;
@@ -2009,6 +2015,9 @@ div {
     .outEstablecimiento .listaEventos .open li {
       color: #FFFFFF;
       background: #16A085; }
+    .outEstablecimiento .listaEventos h5 {
+      font-family: 'AYearWithoutRain';
+      font-size: 1.2em; }
   .outEstablecimiento .bloqueEvento {
     float: left;
     clear: none;
@@ -2054,6 +2063,43 @@ div {
         margin-right: 0%; }
     .outEstablecimiento .bloqueEvento .parte2 {
       padding-top: 35px; }
+    .outEstablecimiento .bloqueEvento .muestraHorarioP, .outEstablecimiento .bloqueEvento .muestraHorarioE {
+      float: left;
+      clear: none;
+      text-align: inherit;
+      width: 100%;
+      margin-left: 0%;
+      margin-right: 0%;
+      text-align: left;
+      padding-top: 10px; }
+      .outEstablecimiento .bloqueEvento .muestraHorarioP::after, .outEstablecimiento .bloqueEvento .muestraHorarioE::after {
+        content: '';
+        display: table;
+        clear: both; }
+      .outEstablecimiento .bloqueEvento .muestraHorarioP:last-child, .outEstablecimiento .bloqueEvento .muestraHorarioE:last-child {
+        margin-right: 0%; }
+      .outEstablecimiento .bloqueEvento .muestraHorarioP table, .outEstablecimiento .bloqueEvento .muestraHorarioE table {
+        border-collapse: collapse;
+        display: inline-block;
+        max-width: 100%; }
+      .outEstablecimiento .bloqueEvento .muestraHorarioP td, .outEstablecimiento .bloqueEvento .muestraHorarioP th, .outEstablecimiento .bloqueEvento .muestraHorarioE td, .outEstablecimiento .bloqueEvento .muestraHorarioE th {
+        border: 1px solid #353535;
+        text-align: left;
+        padding: 8px; }
+      .outEstablecimiento .bloqueEvento .muestraHorarioP thead th, .outEstablecimiento .bloqueEvento .muestraHorarioE thead th {
+        font-family: 'AYearWithoutRain';
+        text-align: center;
+        font-size: 1.2em;
+        background-color: #7F7F7F;
+        color: #FFFFFF; }
+      .outEstablecimiento .bloqueEvento .muestraHorarioP tbody th, .outEstablecimiento .bloqueEvento .muestraHorarioE tbody th {
+        font-family: 'Roboto-Regular';
+        text-align: center;
+        font-size: 1em;
+        background-color: #FFFFFF;
+        color: #353535;
+        padding-left: 25px;
+        padding-right: 25px; }
     .outEstablecimiento .bloqueEvento .nombre h1 {
       font-family: 'AYearWithoutRain';
       font-size: 1.6em;
@@ -2095,6 +2141,7 @@ div {
         display: inline-block;
         padding: 5px 10px 5px 10px;
         margin-bottom: 10px;
+        margin-right: 5px;
         background-color: #1F9995;
         font-family: 'Roboto-Regular';
         font-size: .9em;
@@ -2124,21 +2171,29 @@ div {
           -moz-transition: all 0.6s ease-in-out;
           -webkit-transition: all 0.6s ease-in-out;
           display: inline-block;
-          text-decoration: none;
-          padding: 8px 15px 8px 15px; }
+          text-decoration: none; }
           .outEstablecimiento .bloqueEvento .deleUp .btn a:hover {
             -o-transition: all 0.4s ease-in-out;
             transition: all 0.4s ease-in-out;
             -moz-transition: all 0.4s ease-in-out;
             -webkit-transition: all 0.4s ease-in-out;
-            background-color: #757575; }
+            background-color: #757575;
+            border-radius: 3px; }
         .outEstablecimiento .bloqueEvento .deleUp .btn i {
-          padding-left: 10px;
+          margin-left: -28px;
           color: #FFFFFF; }
+        .outEstablecimiento .bloqueEvento .deleUp .btn input {
+          padding: 8px 40px 8px 15px; }
+        .outEstablecimiento .bloqueEvento .deleUp .btn input:hover {
+          cursor: pointer; }
       .outEstablecimiento .bloqueEvento .deleUp .updateE {
         background-color: #1F9995; }
+        .outEstablecimiento .bloqueEvento .deleUp .updateE:hover {
+          cursor: pointer; }
       .outEstablecimiento .bloqueEvento .deleUp .deleteE {
         background-color: #FD9927; }
+        .outEstablecimiento .bloqueEvento .deleUp .deleteE:hover {
+          cursor: pointer; }
 
 .inEstablecimiento {
   float: left;
@@ -2196,7 +2251,6 @@ div {
       color: #353535;
       display: block;
       font-family: 'Roboto-Regular';
-      letter-spacing: .1em;
       border: none;
       border: solid #7F7F7F 1px;
       background-color: #FFFFFF;
@@ -2209,9 +2263,6 @@ div {
       -webkit-box-sizing: border-box;
       box-sizing: border-box;
       resize: none; }
-    .inEstablecimiento .contenedorformulario textarea {
-      font-family: 'Roboto-Light';
-      letter-spacing: 0em; }
     .inEstablecimiento .contenedorformulario h2 {
       font-family: 'AYearWithoutRain';
       font-size: 1.4em;
@@ -2554,7 +2605,7 @@ div {
       font-family: 'AYearWithoutRain';
       font-size: 1.7em;
       padding-bottom: 10px; }
-  .resultado .contMultiYear, .resultado .contYear {
+  .resultado .contMultiYear, .resultado .contYear, .resultado .contMonth {
     display: none; }
   .resultado .opcion {
     -ms-display: flex;
@@ -2629,7 +2680,7 @@ div {
       clear: both; }
     .resultado .bloqueInY:last-child, .resultado .bloqueInMY:last-child, .resultado .bloqueInYes:last-child, .resultado .bloqueInW:last-child, .resultado .bloqueInM:last-child {
       margin-right: 0%; }
-  .resultado .bloqueInYes, .resultado .bloqueInW, .resultado .bloqueInM {
+  .resultado .bloqueInYes, .resultado .bloqueInW {
     display: none; }
   .resultado .graficas {
     float: left;
@@ -2722,6 +2773,70 @@ div {
       clear: both; }
     .listaEvento .informacionTop:last-child {
       margin-right: 0%; }
+  .listaEvento .miniMenu {
+    float: left;
+    clear: none;
+    text-align: inherit;
+    width: 100%;
+    margin-left: 0%;
+    margin-right: 0%;
+    padding-top: 15px; }
+    .listaEvento .miniMenu::after {
+      content: '';
+      display: table;
+      clear: both; }
+    .listaEvento .miniMenu:last-child {
+      margin-right: 0%; }
+    .listaEvento .miniMenu ul li {
+      display: inline-block; }
+    .listaEvento .miniMenu .seleccionEstado {
+      padding-top: 15px; }
+      .listaEvento .miniMenu .seleccionEstado p, .listaEvento .miniMenu .seleccionEstado select {
+        display: inline-block;
+        color: #353535;
+        font-family: 'AYearWithoutRain';
+        letter-spacing: .1em;
+        font-size: 1.2em; }
+      .listaEvento .miniMenu .seleccionEstado select {
+        padding-left: 5px;
+        border: none; }
+        .listaEvento .miniMenu .seleccionEstado select:hover {
+          cursor: pointer; }
+    .listaEvento .miniMenu .busqueda {
+      float: right; }
+      .listaEvento .miniMenu .busqueda form {
+        position: relative; }
+      .listaEvento .miniMenu .busqueda input {
+        color: #353535;
+        font-family: 'AYearWithoutRain';
+        letter-spacing: .1em;
+        border: 2px solid #7F7F7F;
+        background-color: #FFFFFF;
+        font-size: 1.2em;
+        width: 85%;
+        padding: 5px;
+        padding-left: 10px;
+        margin-top: 0.3em;
+        margin-bottom: 0.3em;
+        border-radius: 5px;
+        padding-right: 35px; }
+      .listaEvento .miniMenu .busqueda button {
+        color: #7F7F7F;
+        position: absolute;
+        background-color: transparent;
+        border: none;
+        top: 5px;
+        right: -10px;
+        bottom: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        border-radius: 5px; }
+        .listaEvento .miniMenu .busqueda button i {
+          font-size: 1.4em; }
+        .listaEvento .miniMenu .busqueda button:hover {
+          cursor: pointer; }
+          .listaEvento .miniMenu .busqueda button:hover i {
+            color: #353535; }
   .listaEvento h1 {
     float: left;
     clear: none;
@@ -2816,7 +2931,9 @@ div {
       transition: all 0.6s ease-in-out;
       -moz-transition: all 0.6s ease-in-out;
       -webkit-transition: all 0.6s ease-in-out;
-      text-decoration: underline; }
+      color: #353535;
+      font-weight: 900;
+      text-shadow: 2px 2px 4px #FFFFFF; }
     .listaEvento .lista ul .cruz {
       float: right; }
     .listaEvento .lista:hover {
@@ -2987,6 +3104,14 @@ div {
     .informaEvento .colMitad .diasE ul li h3, .informaEvento .colMitad .listCatt ul li h3 {
       padding: 0px;
       color: #FFFFFF; }
+  .informaEvento .colMitad .diasE h3, .informaEvento .colMitad .listCatt h3 {
+    padding: 5px 10px 5px 10px;
+    display: inline-block;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    background-color: #1F9995;
+    border-radius: 5px;
+    color: #FFFFFF; }
 
 .footer {
   float: left;

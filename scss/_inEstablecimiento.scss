@@ -19,7 +19,6 @@
 			color: $oscuro;
 			display: block;
 			font-family: 'Roboto-Regular';
-			letter-spacing: .1em;
 			border: none;
 			border: solid $claro 1px;
 			background-color: $blanco;
@@ -31,11 +30,6 @@
 			margin-bottom: 0.3em;
 			box-sizing: border-box;
 			resize: none;
-		}
-
-		textarea{
-			font-family: 'Roboto-Light';
-			letter-spacing: 0em;
 		}
 
 		h2{
@@ -241,7 +235,7 @@
 			}
 		}
 
-		.prevImageMP,.prevImageME{
+		.prevImageMP, .prevImageME{
 			display: block;
 		}
 

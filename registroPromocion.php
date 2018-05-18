@@ -9,11 +9,10 @@
     <link rel="icon" href="img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
     <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
-    <link type="text/css" rel="stylesheet" href="css/slick.css">
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
     <link type="text/css" rel="stylesheet" href="css/jquery-ui.multidatespicker.css">
     <link type="text/css" rel="stylesheet" href="css/multiple-select.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-confirm.min.css">
   </head>
   <body class="inEstablecimiento">
     <?php session_start();?>
@@ -50,7 +49,7 @@
     <div class="contenedorComun">
       <h1>Agregar promoción</h1>
       <div class="contenedorformulario">
-        <form method="POST" action="" name="Promocion" id="Promocion" onsubmit="return enviarDatosPromocion()" enctype="multipart/form-data">
+        <form method="POST" name="PromocionInsertar" id="PromocionInsertar">
           <input type="text" placeholder="Titulo de la promoción" name="NombrePromocion" id="NombrePromocion" required>
           <textarea rows="10" placeholder="Descripción" name="DescripcionP" maxlength="1200" required></textarea>
           <h2>Horario</h2>
@@ -108,5 +107,6 @@
     <div class="footer">
       <script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
     </div>
+    <script type="text/javascript" src="js/envioDatos.js"></script>
   </body>
 </html>

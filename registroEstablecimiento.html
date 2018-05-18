@@ -9,11 +9,10 @@
     <link rel="icon" href="img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
     <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
-    <link type="text/css" rel="stylesheet" href="css/slick.css">
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
     <link type="text/css" rel="stylesheet" href="css/jquery-ui.multidatespicker.css">
     <link type="text/css" rel="stylesheet" href="css/multiple-select.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-confirm.min.css">
   </head>
   <body onload="CargarMapaInicial()">
     <div class="headerRegistro">
@@ -29,10 +28,10 @@
           <div class="vinculo">
             <h3>Si ya tienes cuenta<a class="simple-ajax-popup-align-top" href="iniciarSesion.html">Inicia sesión</a></h3>
           </div>
-          <form method="POST" action="" id="RegistroEstablecimiento" name="RegistroEstablecimiento" onsubmit="return enviarDatosEstablecimiento()">
+          <form method="POST" action="" id="RegistroEstablecimiento" name="RegistroEstablecimiento">
             <input type="text" placeholder="Nombre del establecimiento" name="NombreEstablecimiento" id="NombreEstablecimiento" required>
             <input type="text" placeholder="Teléfono del establecimiento" name="TelefonoEstablecimiento" id="TelefonoEstablecimiento" required>
-            <textarea rows="10" placeholder="Descripción" name="DescripcionE" id="DescripcionE" maxlength="1200" required></textarea>
+            <textarea rows="10" placeholder="Descripción" name="Descripcion" id="Descripcion" maxlength="1200" required></textarea>
             <h2>Operatividad de días y Horario</h2>
             <div class="muestraTime">
               <table id="tabla">
@@ -107,7 +106,7 @@
               <div class="colM15">
                 <h2>o	</h2>
               </div>
-              <div class="colM25"><a class="traducir" name="MapaDir" id="MapaDir" onclick="FindMeByAddress()">Traducir dirección ingresada</a></div>
+              <div class="colM25"><a class="traducir" name="MapaDir" id="MapaDir" onclick="FindMeByAddress()">Obtener la dirección ingresada</a></div>
             </div>
             <h2>Datos del usuario</h2>
             <div class="col11">
@@ -132,7 +131,7 @@
               <input type="password" placeholder="Confirmar contraseña" name="ConfirmarContrasena" id="ConfirmarContrasena" required>
             </div>
             <div class="checka col11">
-              <input type="checkbox" name="valida">
+              <input type="checkbox" name="valida" required>
               <label>Acepto los</label><a href="#Termino">Términos y Condiciones</a>
             </div>
             <div class="boton">
@@ -146,6 +145,7 @@
       <script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
     </div>
     <script type="text/javascript" src="js/mapa.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&amp;key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&amp;callback=initMap&amp;libraries=places"></script>
+    <script type="text/javascript" src="js/envioDatos.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap&libraries=places"></script>
   </body>
 </html>

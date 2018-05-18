@@ -9,11 +9,10 @@
     <link rel="icon" href="img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
     <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
-    <link type="text/css" rel="stylesheet" href="css/slick.css">
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
     <link type="text/css" rel="stylesheet" href="css/jquery-ui.multidatespicker.css">
     <link type="text/css" rel="stylesheet" href="css/multiple-select.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-confirm.min.css">
   </head>
   <body class="inicioUsuario">
     <?php session_start();?>
@@ -28,12 +27,6 @@
           <div class="menuE">
             <ul>
               <li><a href="topEvento.php">Mejores eventos</a></li>
-              <li class="busqueda">
-                <form>
-                  <input type="text" placeholder="Evento" name="buscaEvento" id="buscaEvento" required>
-                  <button type="submit"><i class="fa fa-search"></i></button>
-                </form>
-              </li>
             </ul>
           </div>
           <div class="usuario">
@@ -62,16 +55,16 @@
       <div class="contCont">
         <form method="POST" action="lib/modificarEstablecimiento.php" name="modificarEstablecimiento" onsubmit="return ValidarCambioDatos()" enctype="multipart/form-data">
           <div class="colum infor">
-            <h2>mi23guel36@gmail.com</h2>
+            <h2><?php echo $_SESSION['correo'] ?></h2>
             <div class="formuCamb">
               <div class="col11">
-                <input type="text" name="nombreU" value="<?php echo $_SESSION['nombre']?>" id="nombre">
+                <input type="text" name="nombreU" value="&lt;?php echo $_SESSION['nombre']?&gt;" id="nombre">
               </div>
               <div class="col12">
-                <input type="text" name="appU" value="<?php echo $_SESSION['app']?>" id="app">
+                <input type="text" name="appU" value="&lt;?php echo $_SESSION['app']?&gt;" id="app">
               </div>
               <div class="col12">
-                <input class="right" type="text" name="apmU" value="<?php echo $_SESSION['apm']?>" id="apm">
+                <input class="right" type="text" name="apmU" value="&lt;?php echo $_SESSION['apm']?&gt;" id="apm">
               </div>
               <div class="col11">
                 <input type="password" name="passU" placeholder="Contraseña" id="pass">
@@ -93,5 +86,6 @@
     <div class="footer">
       <script src="minjs/general-dist.js?version=18082016" type="text/javascript"></script>
     </div>
+    <script type="text/javascript" src="js/listaEvento.js"></script>
   </body>
 </html>

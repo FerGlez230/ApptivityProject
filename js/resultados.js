@@ -55,10 +55,14 @@ $(document).ready(function(){
     });
 
     function resultadoAnio(año){
+        var datos = {
+                "año" : año,
+                "tipo" : 3
+        };
     	$.ajax({
     		type: 'POST',
-    		url: 'lib/year.php',
-    		data:'año='+año,
+    		url: 'lib/resultados.php',
+    		data: datos,
     		success:function(data){
     			var valores = eval(data);
 
@@ -183,9 +187,13 @@ $(document).ready(function(){
     });
 
     function resultadoMultiAnio(){
+        var datos = {
+                "tipo" : 4
+        };
     	$.ajax({
     		type: 'POST',
-    		url: 'lib/multiYear.php',
+    		url: 'lib/resultados.php',
+            data: datos,
     		success:function(data){
     			var valores = eval(data);
     			
@@ -247,7 +255,9 @@ $(document).ready(function(){
                                 stacked: true,
                             }],
                         },
-                        showTooltips : false,
+                        sshowTooltips : true,
+                        tooltipFillColor: "rgba(65,170,235,0.8)",
+                        tooltipTitleFontColor: "#1C1C1C",
                         intersect : false,
                         responsive : true,
                         animation : true
@@ -319,10 +329,14 @@ $(document).ready(function(){
     });
 
    function resultadoYesterday(dia){
+        var datos = {
+                "dia" : dia,
+                "tipo" : 0
+        };
         $.ajax({
             type: 'POST',
-            url: 'lib/yesterday.php',
-            data:'dia='+dia,
+            url: 'lib/resultados.php',
+            data: datos,
             success:function(data){
                 var valores = eval(data);
                 
@@ -380,7 +394,9 @@ $(document).ready(function(){
                                 stacked: true,
                             }],
                         },
-                        showTooltips : false,
+                        showTooltips : true,
+                        tooltipFillColor: "rgba(65,170,235,0.8)",
+                        tooltipTitleFontColor: "#1C1C1C",
                         intersect : false,
                         responsive : true,
                         animation : true
@@ -407,7 +423,7 @@ $(document).ready(function(){
                     var sim = '<div class="simboloYes">';
 
                     for(line = 0; line < evento.length-1; line++) {
-                        sim += '<div id="cuadroYes' + valores[0][line] + '"></div>';
+                        sim += '<div id="cuadroYes' + line + '"></div>';
                         sim += '<h1 class="titA">' + valores[0][line] +  '</h1>';
                     }
 
@@ -421,11 +437,11 @@ $(document).ready(function(){
 
                         var tam = $(".titA").height();
 
-                        $('#cuadroYes' + valores[0][line]).css({ 'height': tam + "px" });
-                        $('#cuadroYes' + valores[0][line]).css({ 'width': tam + "px" });
-                        $('#cuadroYes' + valores[0][line]).css({ 'background-color': colorBajo[line] });
-                        $('#cuadroYes' + valores[0][line]).css({ 'border': borde });
-                        $('#cuadroYes' + valores[0][line]).css({ 'display': "inline-block" });
+                        $('#cuadroYes' + line).css({ 'height': tam + "px" });
+                        $('#cuadroYes' + line).css({ 'width': tam + "px" });
+                        $('#cuadroYes' + line).css({ 'background-color': colorBajo[line] });
+                        $('#cuadroYes' + line).css({ 'border': borde });
+                        $('#cuadroYes' + line).css({ 'display': "inline-block" });
                     }
                 }else{
                     $(".yesterday").append(("<p>No se encontraron resultados</p>"));
@@ -451,10 +467,14 @@ $(document).ready(function(){
 
     function resultadoWeek(day){
         //alert(day);
+        var datos = {
+                "dia" : day,
+                "tipo" : 1
+        };
         $.ajax({
             type: 'POST',
-            url: 'lib/week.php',
-            data: 'dia='+day,
+            url: 'lib/resultados.php',
+            data: datos,
             success:function(data){
                 var valores = eval(data);
 
@@ -462,9 +482,13 @@ $(document).ready(function(){
                 var visitas = valores[1];
                 var estrellas = valores[2];
                 var fecha = valores[3];
+                var total = valores[4];
 
-                if((nombres.length-1) >= 1){
+                if(total > 0){
                     $('.bloqueInW').css({ 'display': "flex" });
+
+                    //alert(valores[3]);
+
                     var etiquetas = ['Domingo ' + fecha[0], 'Lunes ' + fecha[1], 'Martes ' + fecha[2], 
                     'Miércoles ' + fecha[3], 'Jueves ' + fecha[4], 'Viernes ' + fecha[5], 'Sábado ' + fecha[6]];
                     
@@ -514,7 +538,9 @@ $(document).ready(function(){
                                 stacked: true,
                             }],
                         },
-                        showTooltips : false,
+                        showTooltips : true,
+                        tooltipFillColor: "rgba(65,170,235,0.8)",
+                        tooltipTitleFontColor: "#1C1C1C",
                         intersect : false,
                         responsive : true,
                         animation : true
@@ -542,7 +568,7 @@ $(document).ready(function(){
                     var sim = '<div class="simboloW">';
 
                     for(line = 0; line < nombres.length-1; line++) {
-                        sim += '<div id="cuadroW' + nombres[line] + '"></div>';
+                        sim += '<div id="cuadroW' + line + '"></div>';
                         sim += '<h1 class="titA">' + nombres[line] +  '</h1>';
                     }
 
@@ -556,11 +582,11 @@ $(document).ready(function(){
 
                         var tam = $(".titA").height();
 
-                        $('#cuadroW' + nombres[line]).css({ 'height': tam + "px" });
-                        $('#cuadroW' + nombres[line]).css({ 'width': tam + "px" });
-                        $('#cuadroW' + nombres[line]).css({ 'background-color': colorBajo[line] });
-                        $('#cuadroW' + nombres[line]).css({ 'border': borde });
-                        $('#cuadroW' + nombres[line]).css({ 'display': "inline-block" });
+                        $('#cuadroW' + line).css({ 'height': tam + "px" });
+                        $('#cuadroW' + line).css({ 'width': tam + "px" });
+                        $('#cuadroW' + line).css({ 'background-color': colorBajo[line] });
+                        $('#cuadroW' + line).css({ 'border': borde });
+                        $('#cuadroW' + line).css({ 'display': "inline-block" });
                     }
                 }else{
                     $(".week").append(("<p>No hay datos suficientes</p>"));
@@ -588,9 +614,13 @@ $(document).ready(function(){
     });
 
     function resultadoMonth(){
+        var datos = {
+                "tipo" : 2
+        };
         $.ajax({
             type: 'POST',
-            url: 'lib/month.php',
+            url: 'lib/resultados.php',
+            data: datos,
             success:function(data){
                 var valores = eval(data);
 
@@ -600,8 +630,7 @@ $(document).ready(function(){
                 var estrellas = valores[3];
 
                 if((nombres.length-1) >= 1){
-                    $('.bloqueInM').css({ 'display': "flex" });
-                    
+                    $('.contMonth').css({ 'display': "block" });
                     var total = 0;
 
                     var colorBajo = new Array();
@@ -623,6 +652,7 @@ $(document).ready(function(){
                         lineChartData.datasets.push({}); //create a new line dataset
                         dataset = lineChartData.datasets[line];
                         dataset.borderWidth = 2,
+                        dataset.tooltipFontColor = '#5ac3d0',
                         dataset.fillColor = colorBajo[line], //Relleno de las lineas
                         dataset.strokeColor = colorAlto[line], //color de la linea
                         dataset.highlightFill = colorBajo[line], //"HOVER" del relleno
@@ -635,6 +665,7 @@ $(document).ready(function(){
                             y.push(visitas[line][x]); //push some data aka generate 4 distinct separate lines
                             if (line === 0){
                                 lineChartData.labels.push(x+1); //adds x axis labels
+                                //pointHoverBackgroundColor: "#fff",
                             }
                             total += parseInt(visitas[line][x]);
                         }
@@ -650,7 +681,12 @@ $(document).ready(function(){
                                 stacked: true,
                             }],
                         },
-                        showTooltips : false,
+                        showTooltips : true,
+                        tooltipFillColor: "rgba(65,170,235,0.8)",
+                        tooltipTitleFontColor: "#1C1C1C",                    
+                        /*tooltips: {
+                            mode: 'x-axis'
+                        },*/
                         intersect : false,
                         responsive : true,
                         animation : true
@@ -678,7 +714,7 @@ $(document).ready(function(){
                     var sim = '<div class="simboloM">';
 
                     for(line = 0; line < nombres.length-1; line++) {
-                        sim += '<div id="cuadroM' + nombres[line] + '"></div>';
+                        sim += '<div id="cuadroM' + line + '"></div>';
                         sim += '<h1 class="titA">' + nombres[line] +  '</h1>';
                     }
 
@@ -692,14 +728,14 @@ $(document).ready(function(){
 
                         var tam = $(".titA").height();
 
-                        $('#cuadroM' + nombres[line]).css({ 'height': tam + "px" });
-                        $('#cuadroM' + nombres[line]).css({ 'width': tam + "px" });
-                        $('#cuadroM' + nombres[line]).css({ 'background-color': colorBajo[line] });
-                        $('#cuadroM' + nombres[line]).css({ 'border': borde });
-                        $('#cuadroM' + nombres[line]).css({ 'display': "inline-block" });
+                        $('#cuadroM' + line).css({ 'height': tam + "px" });
+                        $('#cuadroM' + line).css({ 'width': tam + "px" });
+                        $('#cuadroM' + line).css({ 'background-color': colorBajo[line] });
+                        $('#cuadroM' + line).css({ 'border': borde });
+                        $('#cuadroM' + line).css({ 'display': "inline-block" });
                     }
                 }else{
-                    $(".month").append(("<p>No hay datos suficientes</p>"));
+
                 }
                 
                 

@@ -4,20 +4,25 @@ html(lang="es")
 		include include/head
 	body.inEstablecimiento
 		include include/headerEstablecimiento
-		|<?php include 'lib/conexion.php';?>
+		|<?php include 'webService/conexion.php';?>
+		|<?php $promo = $_POST['promocionModificar']; ?>
 		.contenedorComun
 			h1 Modificar promoción 
-			|<?php $nombrePromo = mysqli_fetch_array(mysqli_query($conexion, "SELECT promocion.Nombre As nombre, promocion.Descripcion As descripcion FROM promocion WHERE promocion.Establecimiento = 1")); ?>
+			|<?php $nombrePromo = mysqli_fetch_array(mysqli_query($conexion, "SELECT promocion.Nombre As nombre, promocion.Descripcion As descripcion, promocion.Imagen As imagen FROM promocion WHERE promocion.Establecimiento = '{$_SESSION['establecimiento']}' AND promocion.IdPromocion = '{$promo}'")); ?>
+			|<?php $ImagenF='/Imagenes/'.$nombrePromo['imagen']; ?>
+			|<?php $nombre = utf8_encode($nombrePromo['nombre']); ?>
 			.contenedorformulario
-				form(method="POST" action="" name="Evento" onsubmit='return ValidarEvento()' enctype="multipart/form-data")
+				form(method="POST" name="ModificarPromocion" id="ModificarPromocion")
 					
-					input(type='text', value="<?php echo utf8_encode($nombrePromo['nombre']); ?>", name='NombrePromocion', id="NombrePromocion" required)
-					textarea(rows="10", name="DescripcionP", maxlength="1200" required)|<?php echo utf8_encode($nombrePromo['descripcion']); ?>
+					input(type='text', value="<?php echo $nombre; ?>", name='NombrePromocion', id="NombrePromocion" required)
+					textarea(rows="10", name="DescripcionP", maxlength="1200" required) <?php echo utf8_encode($nombrePromo['descripcion']); ?>
 					
+					|<?php echo "<input type='hidden' name='NumeroPromocion' id='NumeroPromocion' value=$promo>"; ?>
+
 					h2 Horario
 					
 					.muestraHorarioMP
-						|<?php $duracion = mysqli_query($conexion, "SELECT duracionpromocion.Fecha, duracionpromocion.HoraInicio, duracionpromocion.HoraFin FROM duracionpromocion WHERE duracionpromocion.Promocion = 1"); ?>
+						|<?php $duracion = mysqli_query($conexion, "SELECT duracionpromocion.Fecha, duracionpromocion.HoraInicio, duracionpromocion.HoraFin FROM duracionpromocion WHERE duracionpromocion.Promocion = '{$promo}'"); ?>
 						table
 							thead
 								tr
@@ -67,7 +72,7 @@ html(lang="es")
 					
 					.prevImageMP
 						.showImgMP
-							img(src="", id='imgExitMP')
+							img(src="<?php echo $ImagenF;?>", id='imgExitMP')
 
 					.ImagenArchivo
 						input(type='file', name='fileInputMP', id="fileInputMP", value="Examinar" class="inputfile" accept="image/png, .jpeg, .jpg, image/gif" required)

@@ -9,11 +9,10 @@
     <link rel="icon" href="img/logo.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="css/styles.css?version=18082016">
     <link type="text/css" rel="stylesheet" href="css/FA/font-awesome.css">
-    <link type="text/css" rel="stylesheet" href="css/slick.css">
-    <link type="text/css" rel="stylesheet" href="css/slick-theme.css">
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-ui.css">
     <link type="text/css" rel="stylesheet" href="css/jquery-ui.multidatespicker.css">
     <link type="text/css" rel="stylesheet" href="css/multiple-select.css">
+    <link type="text/css" rel="stylesheet" href="css/jquery-confirm.min.css">
   </head>
   <body class="inEstablecimiento">
     <?php session_start();?>
@@ -52,7 +51,7 @@
       <div class="contenedorformulario">
         <!--form(method="POST" action="lib/insertarEvento.php" name="Evento" onsubmit='return ValidarEvento()' enctype="multipart/form-data")-->
         <form method="POST" name="Evento" id="Evento" enctype="multipart/form-data" onsubmit="return enviarDatosEvento();">
-          <input type="text" value="<?php echo utf8_encode($nombreEven[0]); ?>" name="NombreEvento" id="NombreEvento" required>
+          <input type="text" value="&lt;?php echo utf8_encode($nombreEven[0]); ?&gt;" name="NombreEvento" id="NombreEvento" required>
           <textarea rows="10" placeholder="Descripción" name="Descripcion" maxlength="1200" required><?php echo utf8_encode($nombreEven[1]); ?></textarea>
           <h2>Categorías</h2>
           <div class="listaCategoria"></div>
@@ -85,13 +84,13 @@
             <div class="parte12">
               <div class="izq">
                 <h3>Desde:</h3>
-                <input class="lne" type="text" name="PrecioInferior" value="<?php echo $nombreEven[3] ?>" id="PrecioInferior" required>
+                <input class="lne" type="text" name="PrecioInferior" value="&lt;?php echo $nombreEven[3] ?&gt;" id="PrecioInferior" required>
               </div>
             </div>
             <div class="parte12">
               <div class="der">
                 <h3>Hasta:</h3>
-                <input class="lne" type="text" name="PrecioSuperior" value="<?php echo $nombreEven[2] ?>" id="PrecioSuperior" required>
+                <input class="lne" type="text" name="PrecioSuperior" value="&lt;?php echo $nombreEven[2] ?&gt;" id="PrecioSuperior" required>
               </div>
             </div>
           </div>

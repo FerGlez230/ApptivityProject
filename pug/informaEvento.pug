@@ -4,31 +4,75 @@ html(lang="es")
 		include include/head
 	body.informaEvento
 		include include/headerCliente
+		|<?php include 'lib/conexion.php';?>
+		|<?php $evento = $_POST['eventoId']; ?>
 		.contenedorComun
 			.bloqueInfor
 				.colMitad
+					|<?php
+					| $establecimiento = mysqli_fetch_array(mysqli_query($conexion, "SELECT establecimiento.IdEstablecimiento, establecimiento.Nombre, establecimiento.Descripcion, establecimiento.Telefono FROM establecimiento INNER JOIN (SELECT evento.Establecimiento FROM evento WHERE evento.IdEvento = '{$evento}') AS loca on loca.Establecimiento = establecimiento.IdEstablecimiento"));
+					|?>
 					h1 Establecimiento
 					ul
 						li.encabeza
 							img(src="img/prueba.jpg")
 						li
-							h1 Nombre del establecimiento
+							h1 <?php echo utf8_encode($establecimiento['Nombre']); ?>
 					.descInfo
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						p <?php echo utf8_encode($establecimiento['Descripcion']); ?>
 
 					h2 Horario:
 
+					|<?php
+					| $sql_dia = mysqli_query($conexion, "SELECT horario.Dia, horario.HoraInicio, horario.HoraFin FROM horario WHERE horario.Establecimiento = '{$establecimiento['IdEstablecimiento']}'");
+					|?>
+					
+					|<?php 
+					| $aDia = array();
+					| $aHoraI = array();
+					| $aHoraF = array();
+					|?>
+
+					|<?php While($row_dia = mysqli_fetch_array($sql_dia, MYSQLI_ASSOC)){
+					|  $dia = explode(",", $row_dia['Dia']); 
+					|  for($x=0; $x<count($dia); $x++){ 
+					|   //echo $dia[$x];
+					|   array_push($aDia, $dia[$x]);
+					|   array_push($aHoraI, $row_dia['HoraInicio']);
+					|   array_push($aHoraF, $row_dia['HoraFin']); 
+					|  }
+					| } ?>
+
+					|<?php
+					| $dias = array();
+					| $first = array();
+					| $end = array();
+					| $sql_hora = mysqli_query($conexion, "SELECT DISTINCT horario.HoraInicio, horario.HoraFin FROM horario WHERE horario.Establecimiento = '{$establecimiento['IdEstablecimiento']}'");
+					|?>
+
+					|<?php While($row_hora = mysqli_fetch_array($sql_hora, MYSQLI_ASSOC)){
+					| $day = array();
+					| for($x=0; $x<count($aDia); $x++){
+					|  if($aHoraI[$x] == $row_hora['HoraInicio'] && $aHoraF[$x] == $row_hora['HoraFin']){
+					|     array_push($day, $aDia[$x]);
+					|     //echo "<script>alert('{$aDia[$x]}');</script>";
+					|  }
+					| }
+					| array_push($dias, $day);
+					| array_push($first, $row_hora['HoraInicio']);
+					| array_push($end, $row_hora['HoraFin']);
+					|}?>
+
 					.contendo.blockTime
+						|<?php for($x=0; $x<count($dias); $x++){ ?>
 						.diasE
-							ul
-								li
-									h3 Lunes
-								li 
-									h3 Martes
-								li
-									h3 Miércoles
+							|<?php  for($y=0; $y<count($dias[$x]); $y++){ ?>
+							h3.diaROW <?php echo utf8_encode($dias[$x][$y]); ?>
+							|<?php  } ?>
 						.horasE
-							h3 07:00 - 16:00
+							h3 <?php //echo utf8_encode($first[$x]) . " - " . utf8_encode($end[$x]); ?>
+						|<?php } ?>
+						|<?php ?>
 
 					h2 Ubicación:
 					
@@ -39,15 +83,18 @@ html(lang="es")
 						h3 Juan Aldama, 10, El Briseño
 
 				.colMitad
+					|<?php
+					| $even = mysqli_fetch_array(mysqli_query($conexion, "SELECT evento.Nombre, evento.Descripcion FROM evento WHERE evento.IdEvento = '{$evento}'"));
+					|?>
 					h1 Evento
 					ul
 						li.encabeza
 							img(src="img/prueba.jpg")
 						li
-							h1 Nombre del evento
+							h1 <?php echo utf8_encode($even['Nombre']); ?>
 					
 					.descInfo
-						p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						p <?php echo utf8_encode($even['Descripcion']); ?>
 
 					h2 Horario:
 
@@ -70,3 +117,4 @@ html(lang="es")
 		script(type='text/javascript', src='js/informaEvento.js')
 		script(type='text/javascript', src='js/mapa.js')
 		script(async defer src="https://maps.googleapis.com/maps/api/js?v=3.26&key=AIzaSyD8YRTasiEr2BNxFPo-9TLVVsdxBW-TcQ0&callback=initMap&libraries=places")
+		script(type='text/javascript', src='js/listaEvento.js')

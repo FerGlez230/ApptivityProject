@@ -4,7 +4,7 @@ html(lang="es")
 		include include/head
 	body.outEstablecimiento
 		include include/headerEstablecimiento
-		|<?php include 'lib/conexion.php';?>
+		|<?php include 'webService/conexion.php';?>
 		.contenedorComun
 			.submenuEvent
 				.opcionF
@@ -15,20 +15,19 @@ html(lang="es")
 				.listaEventos
 					ul
 						|<?php
-						| 	
-						|
-						|	$obtenerPromociones="SELECT promocion.IdPromocion, promocion.Nombre FROM promocion WHERE Establecimiento='{$_SESSION['establecimiento']}' ORDER BY IdPromocion DESC";
-						|	$resultado_obtenerPromociones=mysqli_query($conexion, $obtenerPromociones);
-						|	while($promocion = mysqli_fetch_array($resultado_obtenerPromociones))
-						|	{		
-						|		echo "<div class='eventoTitulo'><h4><li id='$promocion[0]'> $promocion[1]</li></h4></div>";
-						|		$id=$promocion[0];
-						|            	$obtenerPromocion="SELECT Nombre, Descripcion, Imagen FROM Promocion WHERE IdPromocion=$id";
-						|            	$resultado_obtenerPromocion=mysqli_query($conexion, $obtenerPromocion);
-						|            	$Promocion = mysqli_fetch_array($resultado_obtenerPromocion);
-						|            	$ImagenF='/Imagenes/'.$Promocion[2];
+						| $bandera=0;
+						| $obtenerPromociones="SELECT Promocion.IdPromocion, Promocion.Nombre FROM Promocion WHERE Establecimiento='{$_SESSION['establecimiento']}' ORDER BY IdPromocion DESC";
+						| $resultado_obtenerPromociones=mysqli_query($conexion, $obtenerPromociones);
+						| while($Promocion = mysqli_fetch_array($resultado_obtenerPromociones)){
+						|	 $id=$Promocion[0];
+						|	 $obtenerPromocion="SELECT Nombre, Descripcion, Imagen FROM Promocion WHERE IdPromocion='{$id}' AND (SELECT duracionPromocion.Fecha from duracionPromocion where duracionPromocion.promocion='{$id}' ORDER BY duracionpromocion.Fecha DESC LIMIT 1)>=date(now())";
+						|	 $resultado_obtenerpromocion=mysqli_query($conexion, $obtenerPromocion);
+						|	 if($Promocion = mysqli_fetch_array($resultado_obtenerpromocion)){ 
+						|		 $ImagenF='/Imagenes/'.$Promocion[2];
+						|		 $bandera=1;
+						|		 $nombre = utf8_encode($Promocion[0]);	
+						|		 echo "<div class='eventoTitulo'><h4><li id='$Promocion[0]'>$nombre</li></h4></div>";
 						|?>
-						|	
 						.bloqueEvento
 							.ladear1
 									.nombre
@@ -39,14 +38,14 @@ html(lang="es")
 
 									.deleUp 
 										.btn.updateE
-											form(name="ModificararPromocion" method="POST" action="modificaPromocion.php")
+											form(name="ModificaPromo" id="ModificaPromo" action="modificaPromocion.php" method="POST")
 												|<?php echo "<input type='hidden' name='promocionModificar' value=$id>"; ?>
 												a
 													input(type="submit" name="Modificar" value="Modificar") 
 													i.fa.fa-pencil(aria-hidden='true')
 										.btn.deleteE
-											form(name="EliminarPromocion" method="POST" action="lib/borrarPromocion.php")
-												|<?php echo "<input type='hidden' name='promocionEliminar' value=$id>"; ?>
+											form(name="EliminarPromocion" id="EliminarPromocion" method="POST")
+												|<?php echo "<input type='hidden' id='promocionEliminar' name='promocionEliminar' value=$id>"; ?>
 												a
 													input(type="submit" name="Eliminar" value="Eliminar") 
 													i.fa.fa-trash(aria-hidden='true')
@@ -55,15 +54,31 @@ html(lang="es")
 									.informacion
 										h1 Descripción
 
-										.contenido.desc
-											h2 <?php echo utf8_encode($Promocion[1]); ?>
+									.contenido.desc
+										h2 <?php echo utf8_encode($Promocion[1]); ?>
 
+									.informacion
+										h1 Horario:
 
-										.informacion
-											h1 Horario:
+									.muestraHorarioP
+										table#tabla
+											thead
+												tr
+													th Día
+													th Horario
+											tbody
+												|<?php 
+												| $obtenerDuracion="SELECT IdDuracionPromocion, Fecha, HoraInicio, HoraFin FROM duracionPromocion WHERE Promocion='{$id}'";
+												| $resultado_obtenerDuracion=mysqli_query($conexion, $obtenerDuracion);
+												| while($dur = mysqli_fetch_array($resultado_obtenerDuracion)){
+												| echo "<tr>";
+												| echo "<th>$dur[1]</th>";
+												| echo "<th>$dur[2]-$dur[3]</th>";
+												| echo "</tr>";
+												| }
+												|?>
 
-
-										.contenido
+										//-.contenido
 												select(name='dias' id="diasPromocion")
 													option(value='-1')
 														|Dias
@@ -87,7 +102,8 @@ html(lang="es")
 													|	echo "<option value='$dur[0]'>$dur[1]-$dur[2]</option>";
 													|}
 													|?>		
-						|<?php	}?>	
+						|<?php } } if($bandera==0){echo"<h5>No se encontraron promociones vigentes</h5>";}?>
 	
 		include include/footer
 		script(type='text/javascript', src='js/despliegueEventoProm.js')
+		script(type='text/javascript', src='js/envioDatos.js')
