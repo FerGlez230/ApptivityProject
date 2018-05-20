@@ -55,7 +55,10 @@
 				var marker = new google.maps.Marker({
 					map: gMap,
 					position: results[0].geometry.location
+				
 				});
+				document.getElementById("lat").value=results[0].geometry.location.lat();
+				document.getElementById("lng").value=results[0].geometry.location.lng();
 				infowindow.setContent(address);
 				infowindow.open(gMap, marker);
 				}else{
@@ -93,6 +96,9 @@
 		function localization(posicion){
 			var latitude= posicion.coords.latitude;
 			var longitude= posicion.coords.longitude;
+
+			document.getElementById("lat").value=latitude;
+			document.getElementById("lng").value=longitude;
 
 			//output.innerHTML="<p> Latitud: "+latitude+"<br> Logitud: "+longitude+"</p>";
 			var gLatLong = new google.maps.LatLng(latitude,longitude);
